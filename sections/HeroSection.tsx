@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import type { hero as HeroDataType } from '@/content/home'
@@ -165,22 +164,23 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
 function PersonPhoto() {
   return (
-    <div className="relative w-full max-w-[480px] aspect-[0.72] select-none">
-      {/* Subtle bottom fade so photo blends into hero background */}
+    <div
+      className="relative self-end select-none flex-shrink-0"
+      style={{ height: 'min(600px, 72vh)' }}
+    >
+      {/* Bottom fade — blends feet into hero bg */}
       <div
         aria-hidden
-        className="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #0B1020 90%)' }}
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 z-10"
+        style={{ background: 'linear-gradient(to bottom, transparent, #0B1020)' }}
       />
-      <Image
+      {/* Plain <img> — preserves WebP alpha channel without Next.js wrapper */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src="/images/hero-person.webp"
         alt=""
         aria-hidden
-        fill
-        unoptimized
-        className="object-contain object-bottom"
-        sizes="(max-width: 1280px) 40vw, 480px"
-        priority
+        className="h-full w-auto object-contain block"
       />
     </div>
   )
