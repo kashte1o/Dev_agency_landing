@@ -27,7 +27,7 @@ export type FormField = {
   label: string
   placeholder?: string
   helperText?: string
-  type: 'text' | 'email' | 'textarea' | 'select' | 'radio'
+  type: 'text' | 'email' | 'tel' | 'textarea' | 'select' | 'radio'
   required: boolean
   badge?: 'Optional'
   options?: Array<{ value: string; label: string }>

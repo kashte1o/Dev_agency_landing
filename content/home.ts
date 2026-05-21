@@ -127,8 +127,8 @@ export const contactSection = {
     },
     {
       icon: '◈',
-      title: 'Clear outcomes',
-      body: "We'll reply with questions, ideas, and a plan.",
+      title: 'Clear reply',
+      body: "We'll respond with questions, ideas, and next steps.",
     },
     {
       icon: '◉',

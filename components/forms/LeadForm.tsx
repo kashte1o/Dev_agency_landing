@@ -3,32 +3,73 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { TextInput, TextareaInput, SelectInput } from './FormField'
-import { leadFormFields, leadFormCta, leadFormSuccess, leadFormError } from '@/content/forms'
+import { leadFormCta, leadFormSuccess, leadFormError } from '@/content/forms'
 import { fadeUp } from '@/lib/motion'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
+type FieldErrors = {
+  name?: string
+  contact?: string   // group error: email or whatsapp required
+  problem?: string
+}
+
+// Field definitions inlined so we can render explicitly with per-field errors
+import { leadFormFields } from '@/content/forms'
+
 export function LeadForm() {
   const [state, setState] = useState<FormState>('idle')
   const [errorMsg, setErrorMsg] = useState(leadFormError)
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+
+  const nameField          = leadFormFields.find((f) => f.id === 'name')!
+  const emailField         = leadFormFields.find((f) => f.id === 'email')!
+  const whatsappField      = leadFormFields.find((f) => f.id === 'whatsapp')!
+  const problemField       = leadFormFields.find((f) => f.id === 'problem')!
+  const industryField      = leadFormFields.find((f) => f.id === 'businessIndustry')!
+  const budgetField        = leadFormFields.find((f) => f.id === 'budget')!
+
+  function validate(formData: FormData): FieldErrors {
+    const errors: FieldErrors = {}
+    const name    = String(formData.get('name') ?? '').trim()
+    const email   = String(formData.get('email') ?? '').trim()
+    const whatsapp = String(formData.get('whatsapp') ?? '').trim()
+    const problem = String(formData.get('problem') ?? '').trim()
+
+    if (!name) errors.name = 'Please enter your name.'
+    if (!email && !whatsapp) errors.contact = 'Please provide an email or WhatsApp number.'
+    if (!problem) errors.problem = 'Please describe what you want to fix or build.'
+
+    return errors
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+
+    const errors = validate(formData)
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
+      return
+    }
+    setFieldErrors({})
     setState('loading')
 
-    const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
 
     try {
       // TODO: replace with real API endpoint
       await new Promise((res) => setTimeout(res, 1200))
-      // Simulate success. Change to: const res = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
+      // const res = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
+      void data
       setState('success')
     } catch {
       setErrorMsg(leadFormError)
       setState('error')
     }
   }
+
+  const disabled = state === 'loading'
 
   return (
     <div className="relative w-full">
@@ -66,19 +107,28 @@ export function LeadForm() {
               </motion.div>
             )}
 
-            {/* Render each field by type */}
-            {leadFormFields.map((field) => {
-              if (field.type === 'text' || field.type === 'email') {
-                return <TextInput key={field.id} field={field} disabled={state === 'loading'} />
-              }
-              if (field.type === 'textarea') {
-                return <TextareaInput key={field.id} field={field} disabled={state === 'loading'} />
-              }
-              if (field.type === 'select') {
-                return <SelectInput key={field.id} field={field} disabled={state === 'loading'} />
-              }
-              return null
-            })}
+            {/* Name */}
+            <TextInput field={nameField} error={fieldErrors.name} disabled={disabled} />
+
+            {/* Contact group — Email + WhatsApp */}
+            <div className="flex flex-col gap-3">
+              <TextInput field={emailField} disabled={disabled} />
+              <TextInput field={whatsappField} disabled={disabled} />
+              {fieldErrors.contact && (
+                <p role="alert" className="text-xs text-red-500">
+                  {fieldErrors.contact}
+                </p>
+              )}
+            </div>
+
+            {/* Problem */}
+            <TextareaInput field={problemField} error={fieldErrors.problem} disabled={disabled} />
+
+            {/* Industry */}
+            <TextInput field={industryField} disabled={disabled} />
+
+            {/* Budget */}
+            <SelectInput field={budgetField} disabled={disabled} />
 
             <Button
               type="submit"
