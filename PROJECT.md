@@ -818,46 +818,46 @@ chaosToStructure: {
 Icons defined as strings in `content/process.ts` — not imported SVGs.
 
 **Progress line:**
-- Horizontal gradient stroke connecting all 4 step nodes (desktop) / vertical line (mobile)
+- Horizontal gradient stroke connecting all 4 step nodes (desktop) / vertical line on left edge (mobile)
 - Gradient: `--text-secondary` (muted, 30%) → `--accent` (#3B82F6, 100%) as line draws through steps
 - Triggered by `whileInView` on the section — one-time, not scroll-linked
 - Line draws left to right (SVG `strokeDashoffset` animation), duration ~1.0s
-- After full completion: soft pulse on the final node (Ship) — CSS `@keyframes` scale 1→1.08→1, once, not infinite
+- After full completion: soft persistent pulse on the final node (Ship) — CSS `@keyframes` scale 1→1.08→1, fires once, not infinite
 
-**Step activation:**
-- As the line reaches each node, the step card activates:
-  - Node: opacity 0.3 → 1.0, scale 0.8 → 1.0
-  - Step number (Geist Mono, large, background): opacity 0.05 → 0.15
-  - Title: opacity 0 → 1, translateY 8px → 0
-  - Body: opacity 0 → 1, 80ms delay after title
+**Step activation sequence (as line reaches each node):**
+- Node: opacity 0.3 → 1.0, scale 0.8 → 1.0
+- Step number (Geist Mono, large, background): opacity 0.05 → 0.15
+- Title: opacity 0 → 1, translateY 8px → 0
+- Body: opacity 0 → 1, 80ms delay after title
 - Stagger: each step activates ~150ms after the previous
+- After all steps complete: lines and nodes reach full brightness → soft pulsation signals system is live
 
-**Hover / focus interaction:**
+**Hover / focus interaction (desktop):**
 - Active/hovered step: card background shifts from transparent to `--bg-surface` with `--border` border
 - Subtle lift: `translateY -2px`
-- Tooltip with microcopy appears above the step icon — short phrase reinforcing the step:
+- Tooltip with microcopy appears above the step icon:
   - Understand: "No assumptions — we map what actually happens"
   - Define: "Scope agreed before a line of code"
   - Build: "Weekly check-ins, no black boxes"
   - Ship: "Deployed and documented"
-- Tooltip: fade-in only, no motion on tooltip itself — `opacity 0 → 1`, 150ms
+- Tooltip: fade-in only, `opacity 0 → 1`, 150ms — keyboard accessible via focus state
 
 **Typography:**
-- Step numbers: Geist Mono, ~5–6rem, `opacity: 0.08–0.15`, positioned behind card content as background layer
+- Step numbers: Geist Mono, ~5–6rem, `opacity: 0.08–0.15`, positioned as background layer behind card content
 - Step titles: medium weight (600), `--text-primary`
 - Body text: regular weight (400), `--text-secondary`
 
 **Background zones:**
-- Process section alternates: light (`--bg-base`) → warm (`--bg-subtle`) → light
-- This creates visual rhythm — the section feels like it breathes between steps
+- Process section background alternates: light (`--bg-base`) → warm (`--bg-subtle`) → light
+- Creates visual rhythm — section breathes between steps
 - Implemented via sub-section backgrounds or gradient within the section
 
 **Mobile:**
-- Vertical stack — steps listed top to bottom
-- Progress line runs vertically on the left edge (like a timeline)
-- Line draws top to bottom on scroll (`whileInView` trigger on each step)
-- No hover tooltips — tooltip text shown as visible microcopy below each step title
-- No lift animation — step cards are static on touch
+- Vertical stack — steps top to bottom
+- Progress line runs vertically on the left edge (timeline style)
+- Line draws top to bottom, scroll-driven: each step reveals as user scrolls to it (`whileInView` per step)
+- No hover tooltips — tooltip microcopy shown as static text below each step title
+- No lift animation — step cards static on touch
 - Step numbers remain as background decoration
 
 **Content source:** `content/process.ts`
@@ -867,15 +867,14 @@ type ProcessStep = {
   icon: string           // emoji string
   title: string
   description: string
-  tooltip: string        // microcopy shown on hover (desktop) or inline (mobile)
+  tooltip: string        // hover (desktop) or inline static text (mobile)
 }
 ```
 
 **Constraints:**
 - One-time trigger per page load — no replay on re-enter viewport
-- No infinite pulsing on nodes except the completion pulse on Ship (fires once)
+- No infinite pulsing except completion pulse on Ship (fires once)
 - Line must not animate faster than 0.8s total — causality must be readable
-- Tooltips: keyboard accessible via focus state (same as hover)
 - `prefers-reduced-motion`: all nodes appear instantly at full opacity, no line draw, no lift
 
 ### Metaphors discussed but not included (v1)
@@ -1031,6 +1030,9 @@ When building, follow this sequence:
 6. `whileInView` animations: `once: true` — never replay on re-enter
 7. All cursor-tracking elements: `pointer-events: none` — never intercept clicks
 8. No WebGL anywhere. No canvas 3D. Effects via CSS + Framer Motion only.
+9. Scroll-linked animations are fully reversible — scroll up returns to previous state naturally
+10. Animation speed is scroll-speed dependent: fast scroll → faster progress, slow scroll → pauses at current frame
+11. Final state always readable regardless of scroll speed — never overshot or incomplete on fast scroll
 
 ### Explicitly NOT animated
 Page transitions, text typing effects, number count-ups, parallax, anything looping except status dot and logo idle pulse, dropdown open/close (CSS only).
