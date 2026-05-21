@@ -231,7 +231,7 @@ function PillarItem({
   return (
     <div
       className="absolute"
-      style={{ top: y, left: '66%', transform: 'translateY(-50%)' }}
+      style={{ top: y, left: '70%', transform: 'translateY(-50%)' }}
     >
       <motion.div style={{ opacity, x }} className="flex items-center gap-3">
         <div
