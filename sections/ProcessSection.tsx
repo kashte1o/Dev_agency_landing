@@ -1,16 +1,17 @@
 'use client'
 import { useState } from 'react'
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { cn } from '@/lib/utils'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import type { ProcessStep } from '@/content/types'
 
 // ─── Timing ─────────────────────────────────────────────────────
 // Line draws for LINE_DUR seconds, starting after LINE_DELAY.
-// Each node activates as the line reaches its position (i+1)/4.
+// Node i activates when the line reaches position (i+1)/4.
 
-const LINE_DUR   = 1.2   // seconds
-const LINE_DELAY = 0.35  // after section heading fades in
+const LINE_DUR   = 1.2   // seconds the line takes to draw
+const LINE_DELAY = 0.35  // seconds after heading fades in
 
 function nodeDelay(i: number): number {
   return LINE_DELAY + LINE_DUR * ((i + 1) / 4)
@@ -32,37 +33,41 @@ const subheadV = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE, delay: 0.13 } },
 }
 
-// Line: scaleX 0→1 from the left
+// Line: scaleX 0→1 from left
 const lineV: Variants = {
   hidden:  { scaleX: 0, opacity: 0 },
   visible: {
     scaleX: 1,
     opacity: 1,
-    transition: { duration: LINE_DUR, ease: [0.4, 0, 0.2, 1] as [number,number,number,number], delay: LINE_DELAY },
+    transition: {
+      duration: LINE_DUR,
+      ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
+      delay: LINE_DELAY,
+    },
   },
 }
 
-// Node circle activates when line arrives
+// Node circle: muted → active as line arrives
 const nodeV = {
-  hidden:  { scale: 0.75, opacity: 0.2 },
+  hidden:  { scale: 0.78, opacity: 0.2 },
   visible: (i: number) => ({
     scale: 1,
     opacity: 1,
-    transition: { delay: nodeDelay(i), duration: 0.32, ease: EASE },
+    transition: { delay: nodeDelay(i), duration: 0.3, ease: EASE },
   }),
 }
 
-// Card content reveals after node
+// Card content reveals after its node
 const cardV = {
-  hidden:  { opacity: 0, y: 8 },
+  hidden:  { opacity: 0, y: 10 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: nodeDelay(i) + 0.09, duration: 0.42, ease: EASE },
+    transition: { delay: nodeDelay(i) + 0.09, duration: 0.4, ease: EASE },
   }),
 }
 
-// Background step number
+// Background step number fades in with card
 const numV = {
   hidden:  { opacity: 0 },
   visible: (i: number) => ({
@@ -71,23 +76,23 @@ const numV = {
   }),
 }
 
-// Ship node ring expands and fades once — fires after line completes
+// Ship ring — one-time completion pulse, fires after line completes
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const shipRingV: Variants = {
   hidden:  { scale: 1, opacity: 0 },
   visible: {
-    scale:   [1, 1.7, 2.2] as any,
-    opacity: [0, 0.5, 0]   as any,
+    scale:   [1, 1.65, 2.1] as any,
+    opacity: [0, 0.4,  0  ] as any,
     transition: {
       delay:    LINE_DELAY + LINE_DUR + 0.12,
-      duration: 0.65,
+      duration: 0.7,
       ease:     'easeOut',
       times:    [0, 0.45, 1],
     } as any,
   },
 }
 
-// Mobile cards fade up
+// Mobile cards stagger in
 const mobileCardV = {
   hidden:  { opacity: 0, y: 10 },
   visible: (i: number) => ({
@@ -124,36 +129,70 @@ function StaticProcess({ heading, subheading, steps }: ProcessSectionProps) {
         </div>
 
         {/* Desktop */}
-        <div className="hidden md:grid md:grid-cols-4 md:gap-5">
-          {steps.map((step) => (
+        <div className="hidden md:block">
+          {/* Static nodes + line */}
+          <div className="relative flex items-center justify-between mb-8">
             <div
-              key={step.number}
-              className="relative flex flex-col rounded-2xl border border-border bg-bg-surface p-6"
-            >
-              <span
-                aria-hidden
-                className="absolute right-4 top-4 select-none font-mono text-[5rem] font-bold leading-none text-text-primary"
-                style={{ opacity: 0.065 }}
+              aria-hidden
+              className="absolute left-5 right-5 top-1/2 h-px -translate-y-1/2"
+              style={{
+                background:
+                  'linear-gradient(to right, rgba(107,114,128,0.35) 0%, #3B82F6 100%)',
+              }}
+            />
+            {steps.map((step) => {
+              const isLast = step.number === steps.length
+              return (
+                <div
+                  key={step.number}
+                  className={cn(
+                    'relative z-10 flex h-10 w-10 items-center justify-center rounded-full border bg-bg-surface shadow-sm',
+                    isLast ? 'border-accent/35' : 'border-border',
+                  )}
+                >
+                  <span
+                    className="font-mono text-[0.6rem] font-semibold text-text-secondary/55 select-none"
+                    aria-hidden
+                  >
+                    {String(step.number).padStart(2, '0')}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-4 gap-5">
+            {steps.map((step) => (
+              <div
+                key={step.number}
+                className="relative flex flex-col rounded-2xl border border-border bg-bg-surface p-6 pt-8"
               >
-                {String(step.number).padStart(2, '0')}
-              </span>
-              <div className="relative z-10 mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-bg-base text-lg">
-                {step.icon}
+                <span
+                  aria-hidden
+                  className="absolute right-4 top-4 select-none font-mono text-[5rem] font-bold leading-none text-text-primary"
+                  style={{ opacity: 0.065 }}
+                >
+                  {String(step.number).padStart(2, '0')}
+                </span>
+                <div className="relative z-10 mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-bg-base text-lg">
+                  {step.icon}
+                </div>
+                <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-text-secondary/40">
+                  {String(step.number).padStart(2, '0')}
+                </p>
+                <h3 className="relative z-10 mb-2 text-[1.0rem] font-semibold text-text-primary">
+                  {step.title}
+                </h3>
+                <p className="relative z-10 text-[0.9rem] leading-[1.6] text-text-secondary">
+                  {step.description}
+                </p>
+                <p className="relative z-10 mt-4 text-[0.76rem] font-medium text-accent">
+                  {step.tooltip}
+                </p>
               </div>
-              <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-text-secondary/40">
-                {String(step.number).padStart(2, '0')}
-              </p>
-              <h3 className="relative z-10 mb-2 text-[1.0rem] font-semibold text-text-primary">
-                {step.title}
-              </h3>
-              <p className="relative z-10 text-[0.9rem] leading-[1.6] text-text-secondary">
-                {step.description}
-              </p>
-              <p className="relative z-10 mt-4 text-[0.76rem] font-medium text-accent">
-                {step.tooltip}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Mobile */}
@@ -187,6 +226,7 @@ function StaticProcess({ heading, subheading, steps }: ProcessSectionProps) {
 // ─── Main export ─────────────────────────────────────────────────
 export function ProcessSection({ heading, subheading, steps }: ProcessSectionProps) {
   const prefersReduced = useReducedMotion()
+  // Track hovered card index to subtly highlight the corresponding node
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
 
   if (prefersReduced) {
@@ -197,15 +237,15 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
     <Section id="process" background="base">
       <Container>
         {/*
-          Outer motion.div: whileInView="visible" triggers all children.
-          All child motion elements inherit "hidden" → "visible" state.
+          Single outer motion.div drives all children: one whileInView="visible"
+          propagates to every child variant without extra wrappers.
         */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT_ONCE}
         >
-          {/* ── Intro ────────────────────────────────────────── */}
+          {/* ── Intro ─────────────────────────────────────── */}
           <div className="mb-16 flex flex-col items-center gap-4 text-center">
             <motion.p
               variants={eyebrowV}
@@ -227,22 +267,22 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
             </motion.p>
           </div>
 
-          {/* ── Desktop ──────────────────────────────────────── */}
+          {/* ── Desktop ───────────────────────────────────── */}
           <div className="hidden md:block">
 
-            {/* Nodes row + animated line */}
+            {/* Progress line + nodes */}
             <div className="relative flex items-center justify-between">
 
-              {/* Static base line — always visible as grey track */}
+              {/* Static grey track — always visible */}
               <div
                 aria-hidden
-                className="absolute left-7 right-7 top-1/2 h-px -translate-y-1/2 bg-border/50"
+                className="absolute left-5 right-5 top-1/2 h-px -translate-y-1/2 bg-border/50"
               />
 
-              {/* Animated gradient line — scaleX 0→1 from left */}
+              {/* Animated gradient fill — scaleX 0→1 from left */}
               <div
                 aria-hidden
-                className="absolute left-7 right-7 top-1/2 h-[1.5px] -translate-y-1/2"
+                className="absolute left-5 right-5 top-1/2 h-[1.5px] -translate-y-1/2"
               >
                 <motion.div
                   variants={lineV}
@@ -255,7 +295,10 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 />
               </div>
 
-              {/* Nodes */}
+              {/*
+                Nodes — step numbers only.
+                Icons live exclusively in the cards below to avoid duplication.
+              */}
               {steps.map((step, i) => {
                 const isLast = i === steps.length - 1
                 return (
@@ -263,9 +306,12 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                     key={step.number}
                     custom={i}
                     variants={nodeV}
-                    className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-border bg-bg-surface text-2xl shadow-sm"
+                    className={cn(
+                      'relative z-10 flex h-10 w-10 items-center justify-center rounded-full border bg-bg-surface shadow-sm transition-colors duration-200',
+                      hoveredIdx === i ? 'border-accent/40' : 'border-border',
+                    )}
                   >
-                    {/* Ship pulse ring — expands and fades once */}
+                    {/* One-time completion ring on the final node */}
                     {isLast && (
                       <motion.div
                         variants={shipRingV}
@@ -273,13 +319,18 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                         className="absolute inset-0 rounded-full border-2 border-accent"
                       />
                     )}
-                    {step.icon}
+                    <span
+                      className="font-mono text-[0.6rem] font-semibold text-text-secondary/55 select-none"
+                      aria-hidden
+                    >
+                      {String(step.number).padStart(2, '0')}
+                    </span>
                   </motion.div>
                 )
               })}
             </div>
 
-            {/* Cards row */}
+            {/* Cards — one per step */}
             <div className="mt-8 grid grid-cols-4 gap-5">
               {steps.map((step, i) => (
                 <motion.div
@@ -293,9 +344,9 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                   onMouseLeave={() => setHoveredIdx(null)}
                   onFocus={() => setHoveredIdx(i)}
                   onBlur={() => setHoveredIdx(null)}
-                  className="group relative flex flex-col rounded-2xl border border-border bg-bg-surface p-6 pt-8 transition-colors transition-shadow duration-200 hover:border-accent/30 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  className="group relative flex flex-col rounded-2xl border border-border bg-bg-surface p-6 pt-8 transition-colors duration-200 hover:border-accent/25 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
-                  {/* Large background step number */}
+                  {/* Large background number */}
                   <motion.span
                     custom={i}
                     variants={numV}
@@ -305,12 +356,12 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                     {String(step.number).padStart(2, '0')}
                   </motion.span>
 
-                  {/* Icon holder */}
+                  {/* Icon holder — icons only here, not in the nodes above */}
                   <div className="relative z-10 mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-bg-base text-lg">
                     {step.icon}
                   </div>
 
-                  {/* Small mono step number */}
+                  {/* Mono step label */}
                   <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-text-secondary/40">
                     {String(step.number).padStart(2, '0')}
                   </p>
@@ -325,7 +376,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                     {step.description}
                   </p>
 
-                  {/* Microcopy tooltip — fades in on hover/focus via CSS */}
+                  {/* Microcopy — fades in on hover/focus, keyboard accessible */}
                   <p className="relative z-10 mt-4 text-[0.76rem] font-medium text-accent opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">
                     {step.tooltip}
                   </p>
@@ -334,7 +385,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
             </div>
           </div>
 
-          {/* ── Mobile ───────────────────────────────────────── */}
+          {/* ── Mobile ────────────────────────────────────── */}
           <div className="flex flex-col gap-0 md:hidden">
             {steps.map((step, i) => (
               <motion.div
@@ -343,7 +394,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 variants={mobileCardV}
                 className="flex gap-5"
               >
-                {/* Left: node + connector line */}
+                {/* Left column: icon + vertical connector */}
                 <div className="flex flex-shrink-0 flex-col items-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-bg-surface text-xl shadow-sm">
                     {step.icon}
@@ -353,7 +404,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                   )}
                 </div>
 
-                {/* Right: content */}
+                {/* Right column: content */}
                 <div className="pb-8 pt-1">
                   <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-text-secondary/40">
                     {String(step.number).padStart(2, '0')}
