@@ -1,6 +1,7 @@
 import type { ProcessStep } from './types'
 
-export const processHeading = 'A clear process from start to finish.'
+export const processHeading    = 'A clear process from start to finish.'
+export const processSubheading = 'A collaborative, transparent approach that turns complex business workflows into clear, reliable software.'
 
 export const processSteps: ProcessStep[] = [
   {

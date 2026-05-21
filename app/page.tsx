@@ -7,7 +7,7 @@ import { CredibilitySection } from '@/sections/CredibilitySection'
 import { ContactSection } from '@/sections/ContactSection'
 
 import { hero, pain, chaosOrder, pillars, credibility, contactSection } from '@/content/home'
-import { processHeading, processSteps } from '@/content/process'
+import { processHeading, processSubheading, processSteps } from '@/content/process'
 import { isAvailable, availableText } from '@/content/siteCopy'
 
 export default function HomePage() {
@@ -21,7 +21,7 @@ export default function HomePage() {
       <PainSection pain={pain} />
       <ChaosTransition chaosOrder={chaosOrder} />
       <PillarsSection pillars={pillars} />
-      <ProcessSection heading={processHeading} steps={processSteps} />
+      <ProcessSection heading={processHeading} subheading={processSubheading} steps={processSteps} />
       <CredibilitySection credibility={credibility} />
       <ContactSection contactSection={contactSection} />
     </>
