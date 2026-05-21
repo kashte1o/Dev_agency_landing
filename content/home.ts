@@ -126,12 +126,12 @@ export const contactSection = {
       body: 'This is just the first step.',
     },
     {
-      icon: '◈',
+      icon: '✓',
       title: 'Clear reply',
       body: "We'll respond with questions, ideas, and next steps.",
     },
     {
-      icon: '◉',
+      icon: '✓',
       title: 'Human response',
       body: "You'll hear from a real person, not an automated reply.",
     },
