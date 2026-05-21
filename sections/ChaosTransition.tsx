@@ -318,7 +318,7 @@ export function ChaosTransition({ chaosOrder }: ChaosTransitionProps) {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start 40%', 'center center'],
+    offset: ['start 60%', 'center center'],
   })
 
   const leftHeadingOpacity  = useTransform(scrollYProgress, [0, 0.15, 0.55, 0.68], [0, 1, 1, 0])
