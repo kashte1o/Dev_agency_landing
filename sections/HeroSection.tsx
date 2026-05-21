@@ -164,21 +164,17 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
 function PersonPhoto() {
   return (
-    <div
-      className="relative mx-auto"
-      style={{ maxWidth: '480px', aspectRatio: '0.72' }}
-    >
+    <div className="relative mx-auto flex h-[min(600px,72vh)] max-w-[480px] select-none items-end justify-center">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/hero-person.webp"
-        alt="Founder"
-        className="block w-auto mx-auto"
-        style={{ maxHeight: '72vh', objectFit: 'contain' }}
+        alt=""
+        aria-hidden="true"
+        className="block h-full w-auto object-contain object-bottom"
       />
 
-      {/* Bottom fade — separate div, never on the img itself */}
       <div
-        aria-hidden
+        aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
         style={{ background: 'linear-gradient(to bottom, transparent, #0B1020)' }}
       />
