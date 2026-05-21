@@ -178,6 +178,7 @@ function PersonPhoto() {
         aria-hidden
         fill
         className="object-contain object-bottom"
+        style={{ filter: 'drop-shadow(0 0 2px #0B1020)' }}
         sizes="(max-width: 1280px) 40vw, 480px"
         priority
       />
