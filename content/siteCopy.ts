@@ -1,7 +1,7 @@
 // ─── Site-wide copy ──────────────────────────────────────────
 // Single place to change the studio name.
 
-export const STUDIO_NAME = 'STUDIO_NAME' // TODO: replace with final brand name
+export const STUDIO_NAME = 'Runmade'
 
 export const isAvailable = true // controls StatusBadge visibility
 
