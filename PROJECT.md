@@ -105,12 +105,14 @@ Mid-to-high. Not bottom of market. Not enterprise. The site signals this through
 Hero
   ↓ "Here's why you need this"
 Pain (3 problems)
+  ↓ "Here's the shift"
+Chaos → Order (standalone section — scroll-linked animation)
   ↓ "Here's what we actually do"
 What we build (3 pillars)
   ↓ "Here's how it works"
-Process (lean, 4 steps)
-  ↓ "Here's why we're different" (lean transition — pending copy approval)
-Credibility / Differentiation
+Process (4 steps)
+  ↓ "Here's why we're different"
+Credibility (4 differentiator cards)
   ↓ "Let's talk"
 Contact / Lead form (#start-project)
 Footer
@@ -125,6 +127,78 @@ Footer
 
 No hero image. No background video. No animated particles. Background: dark with radial gradient in accent color (subtle).
 
+#### Hero object interaction
+
+**What the "object" is:** The studio logomark (top-left). In the absence of a finalised brand mark, this is the `<LogoMark />` component — text or simple shape. The interaction is designed to work with any mark that fits within ~32–40px.
+
+---
+
+**State 1 — Initial / idle**
+- All elements static on page load: H1, subheadline, primary CTA, secondary CTA.
+- LogoMark sits top-left in NavBar, slightly pulses — slow CSS `@keyframes` scale 1→1.04→1, duration 3s, `ease-in-out`, infinite.
+- Pulse is subtle — never distracting, signals "alive" without drawing focus from H1.
+
+---
+
+**State 2 — Cursor interaction (desktop only)**
+
+When the user moves the cursor over the hero section:
+1. LogoMark fades from its NavBar position (`opacity 1→0`, `scale 1→0.6`, duration 400ms)
+2. A glow version of the logomark appears attached to the cursor — follows `mousemove` via `useMotionValue` (x, y) + `useTransform`
+3. Cursor glow: soft radial halo around the cursor, `--accent` (#3B82F6) at 20–30% opacity, radius ~40px. CSS `box-shadow` or `radial-gradient` on a `motion.div` absolutely positioned.
+4. As the cursor nears the primary CTA button, the glow intensifies slightly (opacity 20→40%) — visually pulls attention toward the action.
+5. Animation is smooth, `spring` physics on follow (`stiffness: 150, damping: 20`) — not instant snap, not laggy.
+
+**Implementation direction:**
+- `useMousePosition()` custom hook → `useMotionValue` for x/y
+- Glow `motion.div`: `position: fixed`, `pointer-events: none`, `z-index: 9999`, `border-radius: 50%`, `background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%)`
+- LogoMark opacity driven by `isCursorInHero` boolean state
+- CTA proximity: `useTransform` on distance from CTA center → glow opacity
+- No WebGL. No canvas 3D. CSS `radial-gradient` + Framer Motion only.
+
+---
+
+**State 3 — Idle / inactivity (desktop only)**
+
+If cursor has not moved for **5–7 seconds**:
+1. Glow on cursor fades out (`opacity → 0`, duration 600ms)
+2. LogoMark reappears in NavBar position (`opacity 0→1`, `scale 0.6→1`, duration 400ms)
+3. Hero returns to State 1 — static, logo pulses again
+4. Transition is smooth — no jarring snap
+
+Implementation: `setTimeout` reset on every `mousemove` event. On timeout → trigger idle state. On next `mousemove` → cancel timeout, return to State 2.
+
+---
+
+**State 4 — Mobile**
+- No cursor interaction
+- LogoMark static in NavBar — no follow, no glow
+- Idle pulse (`scale 1→1.04→1`) optionally kept for subtle "alive" signal
+- `prefers-reduced-motion`: pulse disabled, fully static
+
+---
+
+**State 5 — Scroll down**
+- Cursor returns to normal (glow fades)
+- LogoMark already in NavBar position — no change needed
+- Hero content fades + slight slide-up as Pain section enters (see Hero→Pain transition in §12)
+- Fully reversible: scroll back up → hero is static again, cursor interaction resumes on `mousemove`
+
+---
+
+**UX goals:**
+- Effect signals activity and premium craft without distracting from H1 or CTA
+- Glow subtly guides the eye toward primary CTA — not forced, ambient
+- Never blocks text readability
+- Reversible in all directions — scroll, idle, scroll back
+
+**Constraints:**
+- No WebGL
+- No canvas 3D
+- CSS `radial-gradient` + Framer Motion `useMotionValue` / `useTransform` only
+- Glow `motion.div` must have `pointer-events: none` — never intercepts clicks
+- Total JS overhead: one `useMousePosition` hook + two `useMotionValue` instances — negligible
+
 ### Pain section
 
 Three problem cards. Each describes a real operational situation, not a software problem.
@@ -133,17 +207,29 @@ Three problem cards. Each describes a real operational situation, not a software
 2. **"You're managing the business in spreadsheets"** — manual processes that break when the business grows
 3. **"Your clients are getting a worse experience than they deserve"** — customer-facing friction that costs you deals
 
+### Chaos → Order section
+
+**Heading:** "From workflow chaos... ...to clear, connected systems."
+
+Standalone section between Pain and What we build. Contains the scroll-linked animation (see Section 12 for full spec). Left side: chaos words. Lines converge to center. Right side: Organize / Automate / Serve. Fully reversible on scroll-up.
+
 ### What we build section
 
-Three cards, one per pillar:
+**Heading:** "We build custom software around your business."
 
-| Card | Title | Description |
-|------|-------|-------------|
-| Organize | "Internal tools that bring order" | Dashboards, admin panels, internal ops software |
-| Automate | "Automated workflows that scale" | Integration, repetition elimination, business logic |
-| Serve | "Customer-facing software that wins business" | Portals, booking systems, client-side apps |
+Three equal columns, one per pillar:
+
+| Pillar | Title | Description |
+|--------|-------|-------------|
+| Organize | "Organize" | Centralize your data and operations. Admin dashboards and internal tools that give your team clarity and control. |
+| Automate | "Automate" | Connect steps and eliminate busywork. Smart automations and integrations that save time and reduce errors. |
+| Serve | "Serve" | Deliver a better client experience. Client portals and customer-facing systems that build trust and loyalty. |
 
 Each card links to the relevant service page cluster.
+
+**Mockups inside cards:**
+> ⚠️ **v2 by default — revisit before launch.**
+> Storyboard shows UI mockups inside each pillar card (dashboard screenshot, automation flow, client portal). These are planned for v2 when real product screenshots are available. In v1, `MockupFrame` renders a styled placeholder. Decision: review before launch — if good placeholder designs are feasible, may pull into v1.
 
 ### Process section (4 steps)
 
@@ -154,15 +240,29 @@ Each card links to the relevant service page cluster.
 
 ### Credibility section
 
-No testimonials. No logos. No invented metrics. Instead:
-- A short paragraph explaining the studio's philosophy (workflow-first)
-- Optional: 1–2 specific statements about how they work (e.g., "We scope every project before committing to a timeline")
+**Heading:** "How we work is what sets the difference."
 
-The lean transition copy between Pain → Credibility is **still pending approval** (user flagged it as "too heavy" — needs to be rewritten shorter).
+Four differentiator cards — no testimonials, no logos, no invented metrics:
+
+| Card | Title | Body |
+|------|-------|------|
+| 1 | Scope before build | We define the problem, agree on scope, and align on outcomes before writing code. |
+| 2 | Workflow-first approach | We design around your real processes — then build the right solution. |
+| 3 | Internal and customer-facing systems | We build the tools your team uses and the experiences your clients interact with. |
+| 4 | No heavy agency process | Fast communication, lean documentation, practical solutions, no unnecessary layers. |
+
+No testimonials. No logos. No invented metrics. Copy pending final approval.
 
 ### Lead form (#start-project)
 
-See Section 10 (Conversion path and lead form).
+**Split layout:**
+- **Left:** Heading "Ready to scope your project?" + subheading + three trust signals:
+  - No commitment — This is just the first step.
+  - Clear outcomes — We'll reply with questions, ideas, and a plan.
+  - Human response — You'll hear from a real person, not an automated reply.
+- **Right:** Form fields (see Section 10 for full field list)
+
+On mobile: stacked — heading + trust signals above form.
 
 ---
 
@@ -612,26 +712,171 @@ The site's visual narrative mirrors what the studio does for clients: things sta
 - *Where:* Pain section background, possibly credibility section
 - *Decision:* **Include**
 
-### Chaos → Order transition animation (approved concept, implementation TBD)
+### Hero → Pain transition
 
-**Problem identified (Step 16 review):** The Chaos → Structure → Software metaphor — the central narrative — is not visually expressed. Pain section is visually calm and ordered, so the transition to pillars has no contrast. The metaphor exists only in copy, not in design.
+- **Hero on load:** Static — H1 and CTAs already present, no entrance animation.
+- **On scroll down:** Hero text and CTAs fade + slight slide-up (exit animation as section leaves viewport, not entrance). Short, ≤1.2s.
+- **Background shift:** Scroll-linked subtle transition from Hero dark (`--bg-dark`) to Pain warm (`--bg-subtle`). Driven by `useScroll` + `useTransform` on background color interpolation. Creates visual contrast between the two sections — the temperature of the page changes as the problem comes into focus.
+- **Pain cards:** Appear sequentially with `opacity + translateY` as they enter viewport (`whileInView`). Not scroll-linked — standard viewport trigger.
+- **NavBar:** Sticky throughout. Primary CTA "Scope your project" always accessible. Secondary CTAs appear contextually per section.
+- **Mobile:** Hero static. Background shift disabled — static section backgrounds. Pain cards immediately visible in final layout — no entrance animation.
 
-**Approved concept:** Between the pain section and pillars section, a word-scatter animation bridges the two.
+---
 
-- 15–20 words appear scattered across the section — real business pain words in client language: "Excel", "вручную", "звонки", "снова переделывать", "таблицы", "не работает", etc.
-- Words have varying opacity and size — not pure chaos, but visual density and tension
-- Animation: words converge and collapse in 0.8–1.2 seconds into three words: **Organize. Automate. Serve.**
-- Pillar cards then appear (clip-path reveal)
-- The animation IS the metaphor — chaos becoming structure, visually, not just described
+### Chaos → Organize / Automate / Serve (scroll-linked animation)
+
+**What it is:** A visual diagram that animates as the user scrolls through the section. Left side = chaos words. Center = convergence point. Right side = structured output (three pillars). The scroll drives the animation forward and backward — it's a scroll-progress-linked sequence, not a one-shot trigger.
+
+**Layout:**
+```
+[Excel]          ╌╌╌╌╌╌╌╌╌╌╌╌╌╮
+[emails]         ╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+[manual updates] ╌╌╌╌╌╌╌╌╌╌╌╌╌┤→ ●  →  Organize
+[approvals]      ╌╌╌╌╌╌╌╌╌╌╌╌╌┤        Automate
+[documents]      ╌╌╌╌╌╌╌╌╌╌╌╌╌┤        Serve
+[status calls]   ╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+[copy-paste]     ╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+[lost tasks]     ╌╌╌╌╌╌╌╌╌╌╌╌╌╯
+```
+
+**Forward animation (scroll down), driven by `scrollYProgress` 0→1:**
+
+| Progress | What happens |
+|----------|-------------|
+| 0.0–0.3 | Chaos words visible on left, staggered opacity reveal |
+| 0.2–0.5 | Thin/dashed SVG lines emerge from each word toward center convergence point |
+| 0.4–0.6 | Lines fully drawn; energy/discharge pulse travels along each line left→right — each node lights up as the pulse passes through it |
+| 0.5–0.7 | Words converge at center → single flow point; center node becomes bright |
+| 0.6–0.8 | Organize appears on right with its node lighting up |
+| 0.7–0.9 | Automate appears, node lights up |
+| 0.8–1.0 | Serve appears, node lights up |
+| 1.0 (complete) | All lines and nodes at full brightness; soft persistent pulse on the three pillar nodes — signals the system is live, not static |
+
+**Energy/discharge visual:**
+- A small bright point travels along each SVG path from chaos word → center
+- Implemented as a secondary SVG element (circle) with `offsetDistance` animated along the path, or as a `stroke` gradient that sweeps left to right
+- Color: `--accent` (#3B82F6) at 100% opacity for the traveling point; lines remain at 30–40% opacity after the pulse passes
+- Nodes (connection points): start at 0% opacity, reach 100% as pulse arrives, hold at 60% steady-state
+
+**Reverse animation (scroll up):** Fully reversible — pillars retract, nodes dim, center splits back into lines, lines retract, chaos words return to scattered positions. Natural consequence of scroll-linkage, no separate logic needed.
+
+**Scroll speed linkage:**
+- Faster scroll → animation progresses faster
+- Slower scroll → animation slows or pauses at current frame
+- Never overshoots final state
+- Final state always readable regardless of scroll speed
+
+**Technical implementation direction:**
+- `useScroll({ target: sectionRef, offset: ["start end", "end start"] })` → `scrollYProgress`
+- All animated values driven by `useTransform(scrollYProgress, [from, to], [valueA, valueB])`
+- SVG lines: `strokeDasharray` = full path length, `strokeDashoffset` animated via `useTransform`
+- Chaos word positions: `x` values animated via `useTransform`
+- Pillar opacity/x: staggered `useTransform` ranges per pillar
+- No `useState` or re-renders on scroll frames — all `useMotionValue` / `useTransform`
+- Lives in `sections/ChaosTransition.tsx` with `'use client'`
+
+**Content source:** `content/home.ts`
+```typescript
+chaosWords: string[]           // 8 words on desktop, same array sliced to 6 on mobile
+chaosToStructure: {
+  organize: string
+  automate: string
+  serve: string
+}
+```
 
 **Constraints:**
-- Mobile: static — three words already in place, no scatter
-- `prefers-reduced-motion`: static final state only
-- Words must be in client language, not tech jargon
-- Duration hard cap: 1.2s — never delay comprehension
-- Defined in `content/home.ts` as `chaosWords: string[]` array
+- One-time section pass per scroll journey — no looping
+- No overlapping lines that obscure text — lines route to center with spacing
+- Duration at normal scroll: 0.8–1.4s equivalent
+- `prefers-reduced-motion`: static final state (left chaos + arrows + right pillars as diagram)
 
-**Status:** Concept approved. Visual treatment of pain section (making it feel "heavier" before the transition) also to be addressed in implementation — tighter line-height, slightly denser layout, no hover effects on pain cards.
+**Mobile:**
+- Static layout: chaos words (left) + simple arrow indicators + pillars (right) as a readable diagram
+- No scroll-linked animation
+- Same visual structure, just not animated
+
+**Status:** Fully specified. Replaces earlier "word scatter" concept. This version is more meaningful — it shows the flow, not just convergence.
+
+**Visual treatment of Pain section** (prerequisite to this transition):
+- Pain cards feel heavier — tighter line-height, denser padding
+- No hover effects on pain cards (they are not interactive)
+- Slightly darker background than default `--bg-subtle`
+
+### Roadmap / Process block animation
+
+**Steps:** Understand → Define → Build → Ship (4 steps)
+
+**Icons per step:**
+| Step | Icon | Meaning |
+|------|------|---------|
+| Understand | 🔍 Magnifier | We learn the workflow before writing code |
+| Define | 🗺 Map/Blueprint | Exact scope — what to build and why |
+| Build | 🔧 Tools | Transparent build with client in the loop |
+| Ship | 🚀 or ✓ Checkmark | Working software delivered |
+
+Icons defined as strings in `content/process.ts` — not imported SVGs.
+
+**Progress line:**
+- Horizontal gradient stroke connecting all 4 step nodes (desktop) / vertical line (mobile)
+- Gradient: `--text-secondary` (muted, 30%) → `--accent` (#3B82F6, 100%) as line draws through steps
+- Triggered by `whileInView` on the section — one-time, not scroll-linked
+- Line draws left to right (SVG `strokeDashoffset` animation), duration ~1.0s
+- After full completion: soft pulse on the final node (Ship) — CSS `@keyframes` scale 1→1.08→1, once, not infinite
+
+**Step activation:**
+- As the line reaches each node, the step card activates:
+  - Node: opacity 0.3 → 1.0, scale 0.8 → 1.0
+  - Step number (Geist Mono, large, background): opacity 0.05 → 0.15
+  - Title: opacity 0 → 1, translateY 8px → 0
+  - Body: opacity 0 → 1, 80ms delay after title
+- Stagger: each step activates ~150ms after the previous
+
+**Hover / focus interaction:**
+- Active/hovered step: card background shifts from transparent to `--bg-surface` with `--border` border
+- Subtle lift: `translateY -2px`
+- Tooltip with microcopy appears above the step icon — short phrase reinforcing the step:
+  - Understand: "No assumptions — we map what actually happens"
+  - Define: "Scope agreed before a line of code"
+  - Build: "Weekly check-ins, no black boxes"
+  - Ship: "Deployed and documented"
+- Tooltip: fade-in only, no motion on tooltip itself — `opacity 0 → 1`, 150ms
+
+**Typography:**
+- Step numbers: Geist Mono, ~5–6rem, `opacity: 0.08–0.15`, positioned behind card content as background layer
+- Step titles: medium weight (600), `--text-primary`
+- Body text: regular weight (400), `--text-secondary`
+
+**Background zones:**
+- Process section alternates: light (`--bg-base`) → warm (`--bg-subtle`) → light
+- This creates visual rhythm — the section feels like it breathes between steps
+- Implemented via sub-section backgrounds or gradient within the section
+
+**Mobile:**
+- Vertical stack — steps listed top to bottom
+- Progress line runs vertically on the left edge (like a timeline)
+- Line draws top to bottom on scroll (`whileInView` trigger on each step)
+- No hover tooltips — tooltip text shown as visible microcopy below each step title
+- No lift animation — step cards are static on touch
+- Step numbers remain as background decoration
+
+**Content source:** `content/process.ts`
+```typescript
+type ProcessStep = {
+  number: number
+  icon: string           // emoji string
+  title: string
+  description: string
+  tooltip: string        // microcopy shown on hover (desktop) or inline (mobile)
+}
+```
+
+**Constraints:**
+- One-time trigger per page load — no replay on re-enter viewport
+- No infinite pulsing on nodes except the completion pulse on Ship (fires once)
+- Line must not animate faster than 0.8s total — causality must be readable
+- Tooltips: keyboard accessible via focus state (same as hover)
+- `prefers-reduced-motion`: all nodes appear instantly at full opacity, no line draw, no lift
 
 ### Metaphors discussed but not included (v1)
 
@@ -765,18 +1010,30 @@ When building, follow this sequence:
 | ID | Name | Purpose | Mobile | Status |
 |----|------|---------|--------|--------|
 | A | Hero — no animation | Reliable software doesn't wait. H1 is already there. | Same | Approved |
+| A3 | Hero logo cursor-follow | LogoMark leaves NavBar → attaches to cursor as glow. Idle 5–7s → returns. CSS radial-gradient + useMotionValue. No WebGL. Desktop only. | Static logo, optional idle pulse | Approved |
 | A2 | Pain blur→clarity | Text inside pain cards clarifies as you focus — recognition, not arrival | Opacity only | Approved |
 | B2 | Pillar clip-path fill | Cards fill left→right (0.35s each) — output being assembled | Opacity only | Approved |
-| C | Process line draw | SVG line draws through steps, each node activates as line arrives — causality | Static pre-drawn | Approved |
+| C | Process line draw | Gradient SVG stroke left→right, nodes activate as line arrives, completion pulse on Ship node (once). Hover: tooltip microcopy per step. | Vertical line, top→bottom, tooltips shown inline | Approved |
 | D2 | Card border trace | Border animates around perimeter on hover — precision, craftsmanship | Disabled | Approved |
 | E2 | CTA label follows cursor | Label shifts 3px toward cursor direction — "software that responds" | whileTap scale 0.97 | Approved |
 | F2 | Scroll-linked section bg | Background color interpolates between pain and pillars sections | Disabled | Approved |
 | G | Status dot pulse | CSS keyframes, 2s loop — alive, available | Same | Approved (CSS only) |
 | H | Form state transitions | AnimatePresence idle→loading→success/error. Errors appear instantly (no softening) | Same | Approved |
-| — | Chaos→Order word scatter | See Section 12 — bridge animation between pain and pillars | Static | Approved concept |
+| — | Chaos→Order scroll-linked | Left chaos words + SVG lines → center convergence → right pillars. Fully reversible on scroll-up. `useScroll` + `useTransform` — no re-renders. See Section 12. | Static diagram (chaos words + arrows + pillars) | Approved |
+
+### General animation rules
+
+1. One meaningful animation per scroll section — not multiple competing motions
+2. No infinite loops except: status dot pulse (CSS, slow), logo idle pulse (CSS, slow), completion pulse on Process Ship node (fires once)
+3. Animation explains meaning (Chaos → Structure → Software) — never decorates
+4. Minimum visual noise — no overlapping animated elements that obscure text
+5. Every scroll-linked animation uses `useMotionValue` / `useTransform` — no `useState` on scroll frames
+6. `whileInView` animations: `once: true` — never replay on re-enter
+7. All cursor-tracking elements: `pointer-events: none` — never intercept clicks
+8. No WebGL anywhere. No canvas 3D. Effects via CSS + Framer Motion only.
 
 ### Explicitly NOT animated
-Page transitions, text typing effects, number count-ups, parallax, background gradient shifts on scroll, anything looping except status dot, dropdown open/close (CSS only).
+Page transitions, text typing effects, number count-ups, parallax, anything looping except status dot and logo idle pulse, dropdown open/close (CSS only).
 
 ---
 
@@ -1102,7 +1359,13 @@ Page transitions, text typing effects, number count-ups, parallax, background gr
 ---
 
 **Footer**
-- **Purpose:** Site footer with copyright, nav links, optional social links
+- **Purpose:** Site footer — dark background, 4-column nav + tagline + social links
+- **Layout:** Logo + tagline left, then 4 columns: Services / Company / Contact / Legal
+- **Services column:** Internal Tools, Workflow Automation, Client Portals, Integrations, Ongoing Support
+- **Company column:** About, Our Process, Work, Careers
+- **Contact column:** hello@yourstudio.com, phone, Remote · Worldwide
+- **Legal column:** Privacy Policy, Terms of Service
+- **Bottom bar:** © year STUDIO_NAME. All rights reserved. + social icons (LinkedIn, X, GitHub — defined in siteCopy.ts, hidden if empty)
 - **Props:** None — all from `content/siteCopy.ts` and `content/navigation.ts`
 - **Variants:** None
 - **Content source:** `content/siteCopy.ts`
@@ -1375,8 +1638,8 @@ Single env var needed for v1. All others added when integrations are built.
 | ChaosTransition | Static final state only — three words already in place. No scatter. |
 | PillarsSection | Single column. Clip-path → opacity only. No stagger. |
 | ProcessSection | Vertical stack. Line static (pre-drawn). Numbers visible. |
-| ContactSection | Form full-width. All fields stacked. Submit full-width. |
-| Footer | Single column. |
+| ContactSection | Stacked — heading + trust signals above form. Form full-width. Submit full-width. |
+| Footer | Single column. Columns stack vertically. Social icons row at bottom. |
 
 **Tap targets:** minimum 44×44px on all buttons and links.
 **Text:** minimum 16px body, 14px only for badges/labels. Never smaller.
@@ -1447,7 +1710,7 @@ Single env var needed for v1. All others added when integrations are built.
 |------------------|--------|----------------------|
 | Blur reveal | Instant opacity | Instant opacity |
 | Clip-path stagger | Simultaneous opacity | Instant opacity |
-| Chaos word scatter | Static final state | Static final state |
+| Chaos→Order scroll-linked | Static diagram — chaos words + arrows + pillars | Static diagram |
 | Process line draw | Pre-drawn static | Pre-drawn static |
 | Cursor-follow CTA | Disabled | Disabled |
 | Scroll-linked bg | Disabled — static | Disabled — static |
