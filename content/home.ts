@@ -21,17 +21,17 @@ export const pain = {
   heading: 'Most businesses run into the same problems',
   cards: [
     {
-      icon: '⊞',
+      image: '/images/pain-tabs.webp',
       title: 'Too many tabs open',
       description: 'Information is scattered across tools and platforms. Your team spends more time switching than getting work done.',
     },
     {
-      icon: '⊟',
+      image: '/images/pain-spreadsheets.webp',
       title: 'Running the business in spreadsheets',
       description: "Spreadsheets weren't built to run a business. They break, don't scale, and are risky to share and maintain.",
     },
     {
-      icon: '⊗',
+      image: '/images/pain-clients.webp',
       title: 'Clients get a worse experience than they deserve',
       description: 'Slow updates, manual follow-ups, and clunky processes lead to frustration — for your team and your clients.',
     },

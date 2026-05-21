@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { fadeUp, staggerContainer, VIEWPORT } from '@/lib/motion'
@@ -72,7 +73,7 @@ export function PainSection({ pain }: PainSectionProps) {
   - No hover effects (cards are not interactive)
 */
 interface PainCardProps {
-  card: { icon: string; title: string; description: string }
+  card: { image: string; title: string; description: string }
 }
 
 function PainCard({ card }: PainCardProps) {
@@ -80,41 +81,46 @@ function PainCard({ card }: PainCardProps) {
     <motion.div
       variants={fadeUp}
       className="
-        flex flex-col gap-5
+        flex flex-col
         rounded-[16px]
         border border-[#DEDAD2]
         bg-bg-surface
-        p-8 md:p-[38px]
+        overflow-hidden
         shadow-[0_1px_4px_rgba(0,0,0,0.04),0_3px_12px_rgba(0,0,0,0.05)]
       "
       /* No hover effects per PROJECT.md spec */
     >
-      {/* Icon */}
-      <div className="
-        inline-flex h-[52px] w-[52px] flex-shrink-0 items-center justify-center
-        rounded-[10px]
-        bg-text-primary/[0.06]
-        text-[1.5rem]
-      ">
-        <span aria-hidden>{card.icon}</span>
+      {/* Illustration — full-bleed top */}
+      <div className="relative w-full aspect-square bg-[#F5F4F0]">
+        <Image
+          src={card.image}
+          alt=""
+          aria-hidden
+          fill
+          className="object-contain p-8"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
       </div>
 
-      {/* Title */}
-      <h3 className="
-        font-semibold leading-snug text-text-primary
-        text-[1.35rem] md:text-[1.4rem]
-      ">
-        {card.title}
-      </h3>
+      {/* Text content */}
+      <div className="flex flex-col gap-4 p-8 md:p-[38px]">
+        {/* Title */}
+        <h3 className="
+          font-semibold leading-snug text-text-primary
+          text-[1.35rem] md:text-[1.4rem]
+        ">
+          {card.title}
+        </h3>
 
-      {/* Description — tighter line-height per PROJECT.md */}
-      <p className="
-        text-text-secondary
-        text-[1.15rem] md:text-[1.2rem]
-        leading-[1.6]
-      ">
-        {card.description}
-      </p>
+        {/* Description — tighter line-height per PROJECT.md */}
+        <p className="
+          text-text-secondary
+          text-[1.15rem] md:text-[1.2rem]
+          leading-[1.6]
+        ">
+          {card.description}
+        </p>
+      </div>
     </motion.div>
   )
 }

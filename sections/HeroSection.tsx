@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import type { hero as HeroDataType } from '@/content/home'
@@ -142,9 +143,9 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </p>
               </div>
 
-              {/* ── RIGHT: placeholder ────────────────────────── */}
-              <div className="hidden md:flex items-center justify-center">
-                <Placeholder />
+              {/* ── RIGHT: person photo ───────────────────────── */}
+              <div className="hidden md:flex items-end justify-center">
+                <PersonPhoto />
               </div>
 
             </div>
@@ -162,50 +163,24 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
   )
 }
 
-function Placeholder() {
+function PersonPhoto() {
   return (
-    <div
-      className="
-        relative w-full rounded-[22px]
-        border border-white/[0.07]
-        bg-white/[0.018]
-        aspect-[0.9]
-      "
-    >
-      {/* Glow */}
+    <div className="relative w-full max-w-[480px] aspect-[0.72] select-none">
+      {/* Subtle bottom fade so photo blends into hero background */}
       <div
         aria-hidden
-        className="absolute inset-0 rounded-[22px]"
-        style={{
-          background:
-            'radial-gradient(ellipse 72% 55% at 50% 40%, rgba(59,130,246,0.07) 0%, transparent 65%)',
-        }}
+        className="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, transparent, #0B1020 90%)' }}
       />
-
-      {/* Inner dashed frame */}
-      <div
+      <Image
+        src="/images/hero-person.webp"
+        alt=""
         aria-hidden
-        className="absolute inset-[18px] rounded-[14px] border border-dashed border-white/[0.07]"
+        fill
+        className="object-contain object-bottom"
+        sizes="(max-width: 1280px) 40vw, 480px"
+        priority
       />
-
-      {/* Corner accents */}
-      <span aria-hidden className="absolute top-4 left-4   block h-5 w-5 border-t-[1.5px] border-l-[1.5px] border-white/[0.22] rounded-tl-[3px]" />
-      <span aria-hidden className="absolute top-4 right-4  block h-5 w-5 border-t-[1.5px] border-r-[1.5px] border-white/[0.22] rounded-tr-[3px]" />
-      <span aria-hidden className="absolute bottom-4 left-4  block h-5 w-5 border-b-[1.5px] border-l-[1.5px] border-white/[0.22] rounded-bl-[3px]" />
-      <span aria-hidden className="absolute bottom-4 right-4 block h-5 w-5 border-b-[1.5px] border-r-[1.5px] border-white/[0.22] rounded-br-[3px]" />
-
-      {/* Center anchor — future LogoMark cursor attachment point */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-        <div className="relative flex items-center justify-center">
-          <div className="h-[1px] w-8 bg-white/[0.1] absolute" />
-          <div className="h-8 w-[1px] bg-white/[0.1] absolute" />
-          <div className="h-2 w-2 rounded-full bg-accent/35 relative z-10" />
-        </div>
-        <div className="flex flex-col items-center gap-1.5 mt-1">
-          <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-white/15">Reserved</span>
-          <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-white/15">animation space</span>
-        </div>
-      </div>
     </div>
   )
 }
