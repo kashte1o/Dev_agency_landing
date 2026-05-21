@@ -165,22 +165,22 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 function PersonPhoto() {
   return (
     <div
-      className="relative self-end select-none flex-shrink-0"
-      style={{ height: 'min(600px, 72vh)' }}
+      className="relative mx-auto"
+      style={{ maxWidth: '480px', aspectRatio: '0.72' }}
     >
-      {/* Bottom fade — blends feet into hero bg */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 z-10"
-        style={{ background: 'linear-gradient(to bottom, transparent, #0B1020)' }}
-      />
-      {/* Plain <img> — preserves WebP alpha channel without Next.js wrapper */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/hero-person.webp"
-        alt=""
+        alt="Founder"
+        className="block w-auto mx-auto"
+        style={{ maxHeight: '72vh', objectFit: 'contain' }}
+      />
+
+      {/* Bottom fade — separate div, never on the img itself */}
+      <div
         aria-hidden
-        className="h-full w-auto object-contain block"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
+        style={{ background: 'linear-gradient(to bottom, transparent, #0B1020)' }}
       />
     </div>
   )
