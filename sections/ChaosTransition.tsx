@@ -11,25 +11,25 @@ import { LayoutGrid, Zap, Users } from 'lucide-react'
 import type { chaosOrder as ChaosOrderType } from '@/content/home'
 
 // ─── Geometry ────────────────────────────────────────────────────
-// viewBox 0 0 1280 560  (preserveAspectRatio="none" → fills container)
+// viewBox 0 0 1280 700  (preserveAspectRatio="none" → fills container)
 // Left zone  :   0 – 480   (pills right-edge at x=472)
-// Center     : 480 – 800   (node at x=640, y=280)
+// Center     : 480 – 800   (node at x=640, y=350)
 // Right zone : 800 – 1280  (pillars left-edge at x=808)
 
 const VB_W  = 1280
-const VB_H  = 560
+const VB_H  = 700
 const PILL_X   = 488   // line starts here (pill right edge ~480 + 8px gap)
 const CENTER_X = 640
-const CENTER_Y = 280
+const CENTER_Y = 350
 const PILLAR_X = 808   // line ends here (pillar left edge − 4px gap)
 
 // 8 pill y-centres, evenly distributed in the container height
 const PILL_Y: number[] = Array.from({ length: 8 }, (_, i) =>
-  Math.round(56 + i * ((VB_H - 112) / 7)),
-) // [56, 136, 216, 280, 344, 424, 504] approx
+  Math.round(70 + i * ((VB_H - 140) / 7)),
+) // [70, 150, 260, 350, 440, 550, 630] approx
 
 // 3 pillar y-centres
-const PILLAR_Y = [130, 280, 430]
+const PILLAR_Y = [163, 350, 538]
 
 function chaosPath(y: number) {
   const cp1x = PILL_X   + 70
@@ -61,7 +61,7 @@ function ChaosPill({
   progress: MotionValue<number>
 }) {
   const appear   = index * 0.027           // 0, 0.027, 0.054 …
-  const opacity  = useTransform(progress, [appear, appear + 0.1, 0.72, 0.82], [0, 1, 1, 0.2])
+  const opacity  = useTransform(progress, [appear, appear + 0.1, 0.72, 0.82], [0, 1, 1, 0.4])
   const x        = useTransform(progress, [appear, appear + 0.12], [-14, 0])
   const y        = PILL_Y[index] ?? CENTER_Y
 
@@ -103,7 +103,7 @@ function SvgChaosLine({
   const pulseEnd    = pulseStart + 0.13
 
   const dashOffset   = useTransform(progress, [drawStart, drawEnd],               [1, 0])
-  const lineOpacity  = useTransform(progress, [drawStart, drawStart + 0.04, 0.72, 0.82], [0, 0.32, 0.32, 0.14])
+  const lineOpacity  = useTransform(progress, [drawStart, drawStart + 0.04, 0.72, 0.82], [0, 0.32, 0.32, 0.28])
   const pulseOffset  = useTransform(progress, [pulseStart, pulseEnd],             [1.07, -0.07])
   const pulseOpacity = useTransform(
     progress,
