@@ -37,7 +37,7 @@ export function LeadForm() {
     const problem = String(formData.get('problem') ?? '').trim()
 
     if (!name) errors.name = 'Please enter your name.'
-    if (!email && !whatsapp) errors.contact = 'Please provide an email or WhatsApp number.'
+    if (!email && !whatsapp) errors.contact = 'Please leave an email or WhatsApp number.'
     if (!problem) errors.problem = 'Please describe what you want to fix or build.'
 
     return errors
@@ -110,13 +110,28 @@ export function LeadForm() {
             {/* Name */}
             <TextInput field={nameField} error={fieldErrors.name} disabled={disabled} />
 
-            {/* Contact group — Email + WhatsApp */}
-            <div className="flex flex-col gap-3">
-              <TextInput field={emailField} disabled={disabled} />
-              <TextInput field={whatsappField} disabled={disabled} />
-              {fieldErrors.contact && (
+            {/* Contact details group */}
+            <div className="flex flex-col gap-1.5">
+              {/* Group label */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-text-primary">
+                  Contact details
+                  <span className="ml-1 text-accent" aria-hidden>*</span>
+                </span>
+              </div>
+              {/* Individual fields */}
+              <div className="flex flex-col gap-3">
+                <TextInput field={emailField} disabled={disabled} />
+                <TextInput field={whatsappField} disabled={disabled} />
+              </div>
+              {/* Helper / validation */}
+              {fieldErrors.contact ? (
                 <p role="alert" className="text-xs text-red-500">
                   {fieldErrors.contact}
+                </p>
+              ) : (
+                <p className="text-xs text-text-secondary">
+                  Leave at least one: email or WhatsApp.
                 </p>
               )}
             </div>
