@@ -10,10 +10,10 @@ interface LogoMarkProps {
 
 // Width/height pairs — aspect ratio ~5.3:1 matches the logo file
 const sizeMap = {
-  sm: { width: 88,  height: 24 },
-  md: { width: 104, height: 28 },
-  lg: { width: 120, height: 32 },
-  xl: { width: 140, height: 38 },
+  sm: { width: 176, height: 48 },
+  md: { width: 208, height: 56 },
+  lg: { width: 240, height: 64 },
+  xl: { width: 280, height: 76 },
 }
 
 export function LogoMark({
