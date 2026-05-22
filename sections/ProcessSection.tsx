@@ -1,232 +1,218 @@
 'use client'
 import { useState } from 'react'
-import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ScanSearch, Map, Code2, Plug } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import type { ProcessStep } from '@/content/types'
 
-// ─── Timing ─────────────────────────────────────────────────────
-// Line draws for LINE_DUR seconds, starting after LINE_DELAY.
-// Node i activates when the line reaches position (i+1)/4.
+// ─── Wire timing ─────────────────────────────────────────────────
+const LINE_DELAY = 0.5   // seconds after heading settles
+const LINE_DUR   = 1.8   // seconds for wire to fill L→R
 
-const LINE_DUR   = 1.2   // seconds the line takes to draw
-const LINE_DELAY = 0.35  // seconds after heading fades in
-
-function nodeDelay(i: number): number {
+function nodeDelay(i: number) {
   return LINE_DELAY + LINE_DUR * ((i + 1) / 4)
 }
 
-// ─── Variants ────────────────────────────────────────────────────
-const EASE = [0.22, 1, 0.36, 1] as const
+// ─── Icon mapping (step index → Lucide icon) ─────────────────────
+// Intentionally decoupled from content/process.ts emoji strings.
+// Understand → ScanSearch (examine the workflow)
+// Define     → Map        (map the path / scope)
+// Build      → Code2      (write the software)
+// Ship       → Plug       (connect — wire metaphor payoff)
+const STEP_ICONS = [ScanSearch, Map, Code2, Plug] as const
 
-const eyebrowV = {
-  hidden:  { opacity: 0, y: 6 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE } },
-}
-const headingV = {
-  hidden:  { opacity: 0, y: 14 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE, delay: 0.06 } },
-}
-const subheadV = {
-  hidden:  { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE, delay: 0.13 } },
-}
+const EASE_OUT = [0.22, 1, 0.36, 1] as const
 
-// Line: scaleX 0→1 from left
-const lineV: Variants = {
-  hidden:  { scaleX: 0, opacity: 0 },
-  visible: {
-    scaleX: 1,
-    opacity: 1,
-    transition: {
-      duration: LINE_DUR,
-      ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
-      delay: LINE_DELAY,
-    },
-  },
-}
-
-// Node circle: muted → active as line arrives
-const nodeV = {
-  hidden:  { scale: 0.78, opacity: 0.2 },
-  visible: (i: number) => ({
-    scale: 1,
-    opacity: 1,
-    transition: { delay: nodeDelay(i), duration: 0.3, ease: EASE },
-  }),
-}
-
-// Card content reveals after its node
-const cardV = {
-  hidden:  { opacity: 0, y: 10 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: nodeDelay(i) + 0.09, duration: 0.4, ease: EASE },
-  }),
-}
-
-// Background step number fades in with card
-const numV = {
-  hidden:  { opacity: 0 },
-  visible: (i: number) => ({
-    opacity: 0.065,
-    transition: { delay: nodeDelay(i) + 0.07, duration: 0.5 },
-  }),
-}
-
-// Ship ring — one-time completion pulse, fires after line completes
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const shipRingV: Variants = {
-  hidden:  { scale: 1, opacity: 0 },
-  visible: {
-    scale:   [1, 1.65, 2.1] as any,
-    opacity: [0, 0.4,  0  ] as any,
-    transition: {
-      delay:    LINE_DELAY + LINE_DUR + 0.12,
-      duration: 0.7,
-      ease:     'easeOut',
-      times:    [0, 0.45, 1],
-    } as any,
-  },
-}
-
-// Mobile cards stagger in
-const mobileCardV = {
-  hidden:  { opacity: 0, y: 10 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.1 + i * 0.12, duration: 0.42, ease: EASE },
-  }),
-}
-
-const VIEWPORT_ONCE = { once: true, margin: '-60px' }
-
-// ─── Types ───────────────────────────────────────────────────────
-interface ProcessSectionProps {
+// ─── Reduced-motion fallback ─────────────────────────────────────
+function StaticProcess({
+  heading,
+  subheading,
+  steps,
+}: {
   heading: string
   subheading: string
   steps: ProcessStep[]
-}
-
-// ─── Static fallback (reduced motion) ───────────────────────────
-function StaticProcess({ heading, subheading, steps }: ProcessSectionProps) {
+}) {
   return (
-    <Section id="process" background="base">
+    <Section id="process" style={{ backgroundColor: '#080E1E' }}>
       <Container>
-        <div className="flex flex-col items-center text-center gap-4 mb-16">
-          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-text-secondary/45">
+        <div className="flex flex-col items-center gap-4 text-center mb-16">
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white/30">
             Our Process
           </p>
-          <h2 className="max-w-xl text-3xl font-bold tracking-tight text-text-primary md:text-4xl lg:text-[2.75rem]">
+          <h2 className="max-w-xl text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-[2.75rem]">
             {heading}
           </h2>
-          <p className="max-w-xl text-[1.05rem] leading-[1.65] text-text-secondary">
-            {subheading}
-          </p>
+          <p className="max-w-xl text-[1.05rem] leading-[1.65] text-white/50">{subheading}</p>
         </div>
-
-        {/* Desktop */}
-        <div className="hidden md:block">
-          {/* Static nodes + line */}
-          <div className="relative flex items-center justify-between mb-8">
-            <div
-              aria-hidden
-              className="absolute left-5 right-5 top-1/2 h-px -translate-y-1/2"
-              style={{
-                background:
-                  'linear-gradient(to right, rgba(107,114,128,0.35) 0%, #3B82F6 100%)',
-              }}
-            />
-            {steps.map((step) => {
-              const isLast = step.number === steps.length
-              return (
-                <div
-                  key={step.number}
-                  className={cn(
-                    'relative z-10 flex h-10 w-10 items-center justify-center rounded-full border bg-bg-surface shadow-sm',
-                    isLast ? 'border-accent/35' : 'border-border',
-                  )}
-                >
-                  <span
-                    className="font-mono text-[0.6rem] font-semibold text-text-secondary/55 select-none"
-                    aria-hidden
-                  >
-                    {String(step.number).padStart(2, '0')}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* Cards */}
-          <div className="grid grid-cols-4 gap-5">
-            {steps.map((step) => (
+        <div className="hidden md:grid grid-cols-4 gap-5">
+          {steps.map((step, i) => {
+            const Icon = STEP_ICONS[i]!
+            return (
               <div
                 key={step.number}
-                className="relative flex flex-col rounded-2xl border border-border bg-bg-surface p-6 pt-8"
+                className="flex flex-col gap-4 rounded-2xl p-6 pt-8"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(59,130,246,0.2)' }}
               >
-                <span
-                  aria-hidden
-                  className="absolute right-4 top-4 select-none font-mono text-[5rem] font-bold leading-none text-text-primary"
-                  style={{ opacity: 0.065 }}
-                >
-                  {String(step.number).padStart(2, '0')}
-                </span>
-                <div className="relative z-10 mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-bg-base text-lg">
-                  {step.icon}
+                <div className="flex h-10 w-10 items-center justify-center rounded-full" style={{ background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)' }}>
+                  <Icon size={18} className="text-accent" strokeWidth={1.5} />
                 </div>
-                <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-text-secondary/40">
+                <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/30">
                   {String(step.number).padStart(2, '0')}
                 </p>
-                <h3 className="relative z-10 mb-2 text-[1.0rem] font-semibold text-text-primary">
-                  {step.title}
-                </h3>
-                <p className="relative z-10 text-[0.9rem] leading-[1.6] text-text-secondary">
-                  {step.description}
-                </p>
-                <p className="relative z-10 mt-4 text-[0.76rem] font-medium text-accent">
-                  {step.tooltip}
-                </p>
+                <h3 className="text-[1rem] font-semibold text-white">{step.title}</h3>
+                <p className="text-[0.9rem] leading-[1.6] text-white/50">{step.description}</p>
               </div>
-            ))}
-          </div>
+            )
+          })}
         </div>
-
-        {/* Mobile */}
         <div className="flex flex-col gap-0 md:hidden">
-          {steps.map((step, i) => (
-            <div key={step.number} className="flex gap-5">
-              <div className="flex flex-shrink-0 flex-col items-center">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-bg-surface text-xl">
-                  {step.icon}
+          {steps.map((step, i) => {
+            const Icon = STEP_ICONS[i]!
+            return (
+              <div key={step.number} className="flex gap-5">
+                <div className="flex flex-shrink-0 flex-col items-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full" style={{ background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)' }}>
+                    <Icon size={18} className="text-accent" strokeWidth={1.5} />
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div className="mt-1 min-h-[28px] w-px flex-1" style={{ background: 'rgba(59,130,246,0.2)' }} />
+                  )}
                 </div>
-                {i < steps.length - 1 && (
-                  <div className="mt-1 min-h-[28px] w-px flex-1 bg-border" />
-                )}
+                <div className="pb-8 pt-1">
+                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-white/30">
+                    {String(step.number).padStart(2, '0')}
+                  </span>
+                  <h3 className="mt-1 text-[1rem] font-semibold text-white">{step.title}</h3>
+                  <p className="mt-1.5 text-[0.9rem] leading-[1.6] text-white/50">{step.description}</p>
+                </div>
               </div>
-              <div className="pb-8 pt-1">
-                <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-text-secondary/40">
-                  {String(step.number).padStart(2, '0')}
-                </span>
-                <h3 className="mt-1 text-[1.0rem] font-semibold text-text-primary">{step.title}</h3>
-                <p className="mt-1.5 text-[0.9rem] leading-[1.6] text-text-secondary">{step.description}</p>
-                <p className="mt-2 text-[0.78rem] italic text-text-secondary/50">{step.tooltip}</p>
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </Container>
     </Section>
   )
 }
 
+// ─── Wire node ───────────────────────────────────────────────────
+interface WireNodeProps {
+  step: ProcessStep
+  index: number
+  isLast: boolean
+  inView: boolean
+}
+
+function WireNode({ step, index, isLast, inView }: WireNodeProps) {
+  const Icon = STEP_ICONS[index]!
+  const delay = nodeDelay(index)
+
+  return (
+    <div className="relative z-10 flex flex-col items-center">
+      {/* ── Node circle ─────────────────────────────────────── */}
+      <div className="relative flex items-center justify-center" style={{ width: 56, height: 56 }}>
+
+        {/* Spark burst ring — fires once on activation */}
+        <motion.div
+          aria-hidden
+          className="absolute rounded-full border border-accent/70"
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={inView ? { scale: [0.6, 2.4, 3.2], opacity: [0, 0.7, 0] } : {}}
+          transition={{ delay: delay + 0.02, duration: 0.45, ease: 'easeOut' }}
+          style={{ width: 56, height: 56 }}
+        />
+
+        {/* Completion radial pulse — last node only */}
+        {isLast && (
+          <>
+            <motion.div
+              aria-hidden
+              className="absolute rounded-full"
+              initial={{ scale: 0.6, opacity: 0 }}
+              animate={inView ? { scale: [0.6, 4, 6], opacity: [0, 0.35, 0] } : {}}
+              transition={{ delay: delay + 0.2, duration: 0.9, ease: 'easeOut' }}
+              style={{ width: 56, height: 56, background: 'radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%)' }}
+            />
+            <motion.div
+              aria-hidden
+              className="absolute rounded-full border border-accent/50"
+              initial={{ scale: 0.6, opacity: 0 }}
+              animate={inView ? { scale: [0.6, 3.5, 5], opacity: [0, 0.5, 0] } : {}}
+              transition={{ delay: delay + 0.35, duration: 0.7, ease: 'easeOut' }}
+              style={{ width: 56, height: 56 }}
+            />
+          </>
+        )}
+
+        {/* Persistent ambient glow — fades in after spark */}
+        <motion.div
+          aria-hidden
+          className="absolute rounded-full"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: isLast ? 0.55 : 0.35 } : {}}
+          transition={{ delay: delay + 0.3, duration: 0.6 }}
+          style={{
+            width: 56,
+            height: 56,
+            boxShadow: `0 0 ${isLast ? 28 : 18}px ${isLast ? 10 : 6}px rgba(59,130,246,${isLast ? 0.45 : 0.3})`,
+          }}
+        />
+
+        {/* Main node disc */}
+        <motion.div
+          className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full"
+          initial={{ scale: 0.65, opacity: 0.15 }}
+          animate={
+            inView
+              ? { scale: [0.65, 1.28, 1.0], opacity: [0.15, 1, 1] }
+              : {}
+          }
+          transition={{ delay, duration: 0.5, times: [0, 0.38, 1], ease: 'easeOut' }}
+          style={{
+            background: 'linear-gradient(135deg, #131d35 0%, #0a1020 100%)',
+            border: '1.5px solid rgba(59,130,246,0.45)',
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.4 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: delay + 0.12, duration: 0.3, ease: EASE_OUT }}
+          >
+            <Icon
+              size={20}
+              strokeWidth={1.5}
+              className={cn(isLast ? 'text-accent' : 'text-blue-300')}
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Step number label below node */}
+      <motion.span
+        aria-hidden
+        className="mt-3 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white/25"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ delay: delay + 0.18, duration: 0.4 }}
+      >
+        {String(step.number).padStart(2, '0')}
+      </motion.span>
+    </div>
+  )
+}
+
 // ─── Main export ─────────────────────────────────────────────────
+interface ProcessSectionProps {
+  heading: string
+  subheading: string
+  steps: ProcessStep[]
+}
+
 export function ProcessSection({ heading, subheading, steps }: ProcessSectionProps) {
   const prefersReduced = useReducedMotion()
-  // Track hovered card index to subtly highlight the corresponding node
+  const [inView, setInView] = useState(false)
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
 
   if (prefersReduced) {
@@ -234,198 +220,277 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
   }
 
   return (
-    <Section id="process" background="base">
+    <section
+      id="process"
+      className="py-20 md:py-[120px]"
+      style={{ backgroundColor: '#080E1E' }}
+    >
       <Container>
-        {/*
-          Single outer motion.div drives all children: one whileInView="visible"
-          propagates to every child variant without extra wrappers.
-        */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
+          onViewportEnter={() => setInView(true)}
+          viewport={{ once: true, margin: '-80px' }}
         >
-          {/* ── Intro ─────────────────────────────────────── */}
+          {/* ── Heading ─────────────────────────────────────── */}
           <div className="mb-16 flex flex-col items-center gap-4 text-center">
             <motion.p
-              variants={eyebrowV}
-              className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-text-secondary/45"
+              initial={{ opacity: 0, y: 6 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.35, ease: EASE_OUT }}
+              className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white/30"
             >
               Our Process
             </motion.p>
             <motion.h2
-              variants={headingV}
-              className="max-w-xl text-3xl font-bold tracking-tight text-text-primary md:text-4xl lg:text-[2.75rem]"
+              initial={{ opacity: 0, y: 14 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.06 }}
+              className="max-w-xl text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-[2.75rem]"
             >
               {heading}
             </motion.h2>
             <motion.p
-              variants={subheadV}
-              className="max-w-xl text-[1.05rem] leading-[1.65] text-text-secondary"
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.13 }}
+              className="max-w-xl text-[1.05rem] leading-[1.65] text-white/50"
             >
               {subheading}
             </motion.p>
           </div>
 
-          {/* ── Desktop ───────────────────────────────────── */}
+          {/* ── Desktop ───────────────────────────────────────── */}
           <div className="hidden md:block">
 
-            {/* Progress line + nodes */}
-            <div className="relative flex items-center justify-between">
+            {/* Wire + nodes row */}
+            <div className="relative flex items-start justify-between">
 
-              {/* Static grey track — always visible */}
+              {/* ── Wire track (absolute, vertically centered on nodes) ── */}
               <div
                 aria-hidden
-                className="absolute left-5 right-5 top-1/2 h-px -translate-y-1/2 bg-border/50"
-              />
-
-              {/* Animated gradient fill — scaleX 0→1 from left */}
-              <div
-                aria-hidden
-                className="absolute left-5 right-5 top-1/2 h-[1.5px] -translate-y-1/2"
+                className="absolute left-7 right-7 top-7 z-0 -translate-y-1/2"
+                style={{ height: 3 }}
               >
-                <motion.div
-                  variants={lineV}
-                  className="h-full w-full"
-                  style={{
-                    background:
-                      'linear-gradient(to right, rgba(107,114,128,0.3) 0%, #3B82F6 100%)',
-                    originX: 0,
-                  }}
+                {/* Cable insulation */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{ background: 'rgba(255,255,255,0.07)' }}
                 />
+
+                {/* Blue charge fill — scaleX 0 → 1 */}
+                <motion.div
+                  aria-hidden
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'linear-gradient(90deg, rgba(59,130,246,0.4) 0%, #3B82F6 100%)',
+                    originX: 0,
+                    scaleX: 0,
+                  }}
+                  animate={inView ? { scaleX: 1 } : {}}
+                  transition={{ delay: LINE_DELAY, duration: LINE_DUR, ease: [0.4, 0, 0.2, 1] }}
+                />
+
+                {/* Electricity dashes — appear at LINE_DELAY, run until complete */}
+                {inView && (
+                  <motion.div
+                    aria-hidden
+                    className="electricity-flow absolute inset-0 rounded-full overflow-hidden"
+                    style={{
+                      background:
+                        'repeating-linear-gradient(90deg, rgba(147,197,253,0.85) 0px, rgba(147,197,253,0.85) 3px, transparent 3px, transparent 16px)',
+                      backgroundSize: '16px 100%',
+                      animationDelay: `${LINE_DELAY}s`,
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 1, 1, 0] }}
+                    transition={{
+                      delay: LINE_DELAY,
+                      duration: LINE_DUR + 0.3,
+                      times: [0, 0.05, 0.85, 1],
+                    }}
+                  />
+                )}
+
+                {/* Glowing leading point */}
+                {inView && (
+                  <motion.div
+                    aria-hidden
+                    className="absolute top-1/2 -translate-y-1/2"
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: '50%',
+                      background: '#93C5FD',
+                      boxShadow: '0 0 14px 6px rgba(147,197,253,0.8), 0 0 4px 2px #fff',
+                      marginLeft: -5,
+                      left: '0%',
+                    }}
+                    animate={{ left: '100%' }}
+                    transition={{ delay: LINE_DELAY, duration: LINE_DUR, ease: [0.4, 0, 0.2, 1] }}
+                  />
+                )}
               </div>
 
-              {/*
-                Nodes — step numbers only.
-                Icons live exclusively in the cards below to avoid duplication.
-              */}
+              {/* ── Nodes ─────────────────────────────────────── */}
+              {steps.map((step, i) => (
+                <WireNode
+                  key={step.number}
+                  step={step}
+                  index={i}
+                  isLast={i === steps.length - 1}
+                  inView={inView}
+                />
+              ))}
+            </div>
+
+            {/* ── Cards ─────────────────────────────────────── */}
+            <div className="mt-10 grid grid-cols-4 gap-5">
               {steps.map((step, i) => {
-                const isLast = i === steps.length - 1
+                const Icon = STEP_ICONS[i]!
+                const delay = nodeDelay(i) + 0.1
                 return (
                   <motion.div
                     key={step.number}
-                    custom={i}
-                    variants={nodeV}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay, duration: 0.4, ease: EASE_OUT }}
+                    whileHover={{ y: -3, transition: { duration: 0.15 } }}
+                    tabIndex={0}
+                    aria-label={`Step ${step.number}: ${step.title}`}
+                    onMouseEnter={() => setHoveredIdx(i)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                    onFocus={() => setHoveredIdx(i)}
+                    onBlur={() => setHoveredIdx(null)}
                     className={cn(
-                      'relative z-10 flex h-10 w-10 items-center justify-center rounded-full border bg-bg-surface shadow-sm transition-colors duration-200',
-                      hoveredIdx === i ? 'border-accent/40' : 'border-border',
+                      'group relative flex flex-col rounded-2xl p-6 pt-8 transition-all duration-200 cursor-default focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#080E1E]',
+                      hoveredIdx === i
+                        ? 'border border-accent/35'
+                        : 'border border-white/[0.07]',
                     )}
+                    style={{
+                      background:
+                        hoveredIdx === i
+                          ? 'rgba(59,130,246,0.06)'
+                          : 'rgba(255,255,255,0.03)',
+                      boxShadow:
+                        hoveredIdx === i
+                          ? '0 0 24px rgba(59,130,246,0.12)'
+                          : 'none',
+                    }}
                   >
-                    {/* One-time completion ring on the final node */}
-                    {isLast && (
-                      <motion.div
-                        variants={shipRingV}
-                        aria-hidden
-                        className="absolute inset-0 rounded-full border-2 border-accent"
-                      />
-                    )}
-                    <span
-                      className="font-mono text-[0.6rem] font-semibold text-text-secondary/55 select-none"
+                    {/* Background step number */}
+                    <motion.span
                       aria-hidden
+                      initial={{ opacity: 0 }}
+                      animate={inView ? { opacity: 0.06 } : {}}
+                      transition={{ delay: delay + 0.05, duration: 0.5 }}
+                      className="pointer-events-none absolute right-3 top-3 select-none font-mono text-[5rem] font-bold leading-none text-white"
                     >
                       {String(step.number).padStart(2, '0')}
-                    </span>
+                    </motion.span>
+
+                    {/* Icon — small version in card */}
+                    <div
+                      className="relative z-10 mb-4 flex h-9 w-9 items-center justify-center rounded-full"
+                      style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)' }}
+                    >
+                      <Icon size={16} strokeWidth={1.5} className="text-blue-300" />
+                    </div>
+
+                    {/* Mono label */}
+                    <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/25">
+                      {String(step.number).padStart(2, '0')}
+                    </p>
+
+                    {/* Title */}
+                    <h3 className="relative z-10 mb-2 text-[1rem] font-semibold leading-snug text-white">
+                      {step.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="relative z-10 text-[0.9rem] leading-[1.6] text-white/50">
+                      {step.description}
+                    </p>
+
+                    {/* Tooltip microcopy — hover/focus */}
+                    <p className="relative z-10 mt-4 text-[0.76rem] font-medium text-accent opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">
+                      {step.tooltip}
+                    </p>
                   </motion.div>
                 )
               })}
             </div>
-
-            {/* Cards — one per step */}
-            <div className="mt-8 grid grid-cols-4 gap-5">
-              {steps.map((step, i) => (
-                <motion.div
-                  key={step.number}
-                  custom={i}
-                  variants={cardV}
-                  whileHover={{ y: -2, transition: { duration: 0.15, ease: 'easeOut' } }}
-                  tabIndex={0}
-                  aria-label={`Step ${step.number}: ${step.title}`}
-                  onMouseEnter={() => setHoveredIdx(i)}
-                  onMouseLeave={() => setHoveredIdx(null)}
-                  onFocus={() => setHoveredIdx(i)}
-                  onBlur={() => setHoveredIdx(null)}
-                  className="group relative flex flex-col rounded-2xl border border-border bg-bg-surface p-6 pt-8 transition-colors duration-200 hover:border-accent/25 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                >
-                  {/* Large background number */}
-                  <motion.span
-                    custom={i}
-                    variants={numV}
-                    aria-hidden
-                    className="pointer-events-none absolute right-3 top-3 select-none font-mono text-[5rem] font-bold leading-none text-text-primary"
-                  >
-                    {String(step.number).padStart(2, '0')}
-                  </motion.span>
-
-                  {/* Icon holder — icons only here, not in the nodes above */}
-                  <div className="relative z-10 mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-bg-base text-lg">
-                    {step.icon}
-                  </div>
-
-                  {/* Mono step label */}
-                  <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-text-secondary/40">
-                    {String(step.number).padStart(2, '0')}
-                  </p>
-
-                  {/* Title */}
-                  <h3 className="relative z-10 mb-2 text-[1.0rem] font-semibold leading-snug text-text-primary">
-                    {step.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="relative z-10 text-[0.9rem] leading-[1.6] text-text-secondary">
-                    {step.description}
-                  </p>
-
-                  {/* Microcopy — fades in on hover/focus, keyboard accessible */}
-                  <p className="relative z-10 mt-4 text-[0.76rem] font-medium text-accent opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">
-                    {step.tooltip}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
           </div>
 
-          {/* ── Mobile ────────────────────────────────────── */}
+          {/* ── Mobile — vertical wire ────────────────────────── */}
           <div className="flex flex-col gap-0 md:hidden">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.number}
-                custom={i}
-                variants={mobileCardV}
-                className="flex gap-5"
-              >
-                {/* Left column: icon + vertical connector */}
-                <div className="flex flex-shrink-0 flex-col items-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-bg-surface text-xl shadow-sm">
-                    {step.icon}
-                  </div>
-                  {i < steps.length - 1 && (
-                    <div className="mt-1 min-h-[28px] w-px flex-1 bg-border" />
-                  )}
-                </div>
+            {steps.map((step, i) => {
+              const Icon = STEP_ICONS[i]!
+              const isLast = i === steps.length - 1
+              return (
+                <div key={step.number} className="flex gap-5">
+                  {/* Left column: node + vertical wire */}
+                  <div className="flex flex-shrink-0 flex-col items-center">
+                    {/* Node */}
+                    <motion.div
+                      className="relative flex h-12 w-12 items-center justify-center rounded-full"
+                      initial={{ scale: 0.7, opacity: 0.2 }}
+                      animate={inView ? { scale: 1, opacity: 1 } : {}}
+                      transition={{ delay: 0.1 + i * 0.18, duration: 0.4, ease: EASE_OUT }}
+                      style={{
+                        background: 'linear-gradient(135deg, #131d35 0%, #0a1020 100%)',
+                        border: '1.5px solid rgba(59,130,246,0.4)',
+                        boxShadow: '0 0 10px 3px rgba(59,130,246,0.2)',
+                      }}
+                    >
+                      <Icon size={18} strokeWidth={1.5} className="text-blue-300" />
+                    </motion.div>
 
-                {/* Right column: content */}
-                <div className="pb-8 pt-1">
-                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-text-secondary/40">
-                    {String(step.number).padStart(2, '0')}
-                  </span>
-                  <h3 className="mt-1 text-[1.0rem] font-semibold text-text-primary">
-                    {step.title}
-                  </h3>
-                  <p className="mt-1.5 text-[0.9rem] leading-[1.6] text-text-secondary">
-                    {step.description}
-                  </p>
-                  {/* Tooltip shown as static microcopy on mobile */}
-                  <p className="mt-2 text-[0.78rem] italic text-text-secondary/50">
-                    {step.tooltip}
-                  </p>
+                    {/* Vertical wire segment */}
+                    {!isLast && (
+                      <div className="relative mt-1 min-h-[32px] w-[3px] flex-1 overflow-hidden rounded-full" style={{ background: 'rgba(255,255,255,0.07)' }}>
+                        <motion.div
+                          className="absolute inset-0 rounded-full"
+                          style={{ background: '#3B82F6', originY: 0, scaleY: 0 }}
+                          animate={inView ? { scaleY: 1 } : {}}
+                          transition={{ delay: 0.2 + i * 0.18, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                        />
+                        {inView && (
+                          <div
+                            className="electricity-flow absolute inset-0 rounded-full"
+                            style={{
+                              background:
+                                'repeating-linear-gradient(180deg, rgba(147,197,253,0.85) 0px, rgba(147,197,253,0.85) 3px, transparent 3px, transparent 16px)',
+                              backgroundSize: '100% 16px',
+                              animationDelay: `${0.2 + i * 0.18}s`,
+                              animationName: 'electricityFlowV',
+                            }}
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right column: content */}
+                  <motion.div
+                    className="pb-8 pt-1"
+                    initial={{ opacity: 0, x: 8 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.15 + i * 0.18, duration: 0.4, ease: EASE_OUT }}
+                  >
+                    <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-white/25">
+                      {String(step.number).padStart(2, '0')}
+                    </span>
+                    <h3 className="mt-1 text-[1rem] font-semibold text-white">{step.title}</h3>
+                    <p className="mt-1.5 text-[0.9rem] leading-[1.6] text-white/50">{step.description}</p>
+                    <p className="mt-2 text-[0.76rem] font-medium text-accent">{step.tooltip}</p>
+                  </motion.div>
                 </div>
-              </motion.div>
-            ))}
+              )
+            })}
           </div>
 
         </motion.div>
       </Container>
-    </Section>
+    </section>
   )
 }

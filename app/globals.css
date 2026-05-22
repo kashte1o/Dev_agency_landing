@@ -71,6 +71,26 @@ body {
   animation: logoPulse 3s ease-in-out infinite;
 }
 
+/* ─── Process wire — electricity dashes ───────────────────── */
+@keyframes electricityFlow {
+  from { background-position-x: 0px; }
+  to   { background-position-x: -16px; }
+}
+@keyframes electricityFlowV {
+  from { background-position-y: 0px; }
+  to   { background-position-y: 16px; }
+}
+.electricity-flow {
+  animation: electricityFlow 0.18s linear infinite;
+}
+
+/* ─── Process wire — spark burst on node activation ───────── */
+@keyframes sparkOut {
+  0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  60%  { opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
 /* ─── Focus ring ───────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--accent);
