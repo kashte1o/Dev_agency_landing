@@ -8,6 +8,7 @@ import { PillarsSection } from '@/sections/PillarsSection'
 import { ProcessSection } from '@/sections/ProcessSection'
 import { CredibilitySection } from '@/sections/CredibilitySection'
 import { ProofSection } from '@/sections/ProofSection'
+import { FAQSection } from '@/sections/FAQSection'
 import { ContactSection } from '@/sections/ContactSection'
 
 import { hero, pain, chaosOrder, pillars, credibility, contactSection } from '@/content/home'
@@ -31,6 +32,7 @@ export default function HomePage() {
       <ProcessSection heading={processHeading} subheading={processSubheading} steps={processSteps} />
       <CredibilitySection credibility={credibility} />
       <ProofSection />
+      <FAQSection />
       <ContactSection contactSection={contactSection} />
     </>
   )
