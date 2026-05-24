@@ -19,6 +19,7 @@ export const hero = {
 // ─── Pain ────────────────────────────────────────────────────
 export const pain = {
   heading: 'Most businesses run into the same problems',
+  costStatement: 'Every month without a fix costs your team hours, multiplies errors, and shows up in how clients experience your business.',
   cards: [
     {
       image: '/images/pain-tabs.webp',
