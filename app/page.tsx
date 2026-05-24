@@ -20,10 +20,10 @@ export default function HomePage() {
         isAvailable={isAvailable}
       />
       <PainSection pain={pain} />
+      <ProofSection />
       <PillarsSection pillars={pillars} />
       <ProcessSection heading={processHeading} subheading={processSubheading} steps={processSteps} />
       <CredibilitySection credibility={credibility} />
-      <ProofSection />
       <FAQSection />
       <ContactSection contactSection={contactSection} />
     </>
