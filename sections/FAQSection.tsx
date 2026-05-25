@@ -1,20 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
 import { fadeUp, staggerContainer, VIEWPORT } from '@/lib/motion'
 import { homepageFAQ, type FAQItem } from '@/content/faq'
-
-/**
- * FAQSection
- * ──────────
- * Sits between ProofSection and ContactSection.
- * Goal: close objections and qualify leads before the form.
- * Last 2 questions (what we do / don't fit) act as a filter.
- *
- * Content lives in content/faq.ts — replace PLACEHOLDER text there.
- */
 
 const HEADING = 'Common questions'
 const SUBHEADING = "If you're on the fence, the answer is probably here."
@@ -30,7 +19,6 @@ export function FAQSection() {
           viewport={VIEWPORT}
           className="flex flex-col gap-14"
         >
-          {/* Heading */}
           <div className="flex flex-col gap-4">
             <motion.h2
               variants={fadeUp}
@@ -43,20 +31,16 @@ export function FAQSection() {
             </motion.p>
           </div>
 
-          {/* Accordion */}
           <motion.div variants={fadeUp} className="flex flex-col divide-y divide-border">
             {homepageFAQ.map((item) => (
               <FAQAccordionItem key={item.question} item={item} />
             ))}
           </motion.div>
-
         </motion.div>
       </div>
     </Section>
   )
 }
-
-// ── Accordion item ────────────────────────────────────────────────
 
 function FAQAccordionItem({ item }: { item: FAQItem }) {
   const [open, setOpen] = useState(false)
@@ -71,14 +55,12 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
         <span className="text-[1.05rem] font-semibold text-text-primary leading-snug">
           {item.question}
         </span>
-        <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="mt-0.5 flex-shrink-0 text-text-secondary"
+        <span
           aria-hidden
+          className="mt-1 flex-shrink-0 w-4 text-center text-[1rem] font-light leading-none text-text-secondary/60 select-none"
         >
-          <ChevronDown size={20} />
-        </motion.span>
+          {open ? '−' : '+'}
+        </span>
       </button>
 
       <AnimatePresence initial={false}>

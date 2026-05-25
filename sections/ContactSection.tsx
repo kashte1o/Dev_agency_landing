@@ -46,10 +46,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
                   variants={fadeUp}
                   className="flex items-start gap-3"
                 >
-                  <span
-                    aria-hidden
-                    className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-accent/10 text-xs text-accent"
-                  >
+                  <span aria-hidden className="mt-0.5 flex-shrink-0 text-sm text-accent">
                     {signal.icon}
                   </span>
                   <div>
