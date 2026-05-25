@@ -1,5 +1,5 @@
 const logos = [
-  { src: "/images/logos/Logo.d7c8ab34.svg", alt: "Runmade" },
+  { src: "/images/logos/lava.svg", alt: "Lava" },
   { src: "/images/logos/paxful5450.logowik.com.svg", alt: "Paxful" },
   { src: "/images/logos/rwelogo.svg", alt: "RWE" },
 ]
