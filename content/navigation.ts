@@ -21,7 +21,7 @@ export const serviceDropdown: NavItem[] = [
 ]
 
 export const navCta: CTAButton = {
-  label: "Let's scope your project",
+  label: "Let's talk",
   href: '/#start-project',
   variant: 'primary',
 }
