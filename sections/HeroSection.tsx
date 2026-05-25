@@ -164,20 +164,31 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
 function PersonPhoto() {
   return (
-    <div className="relative mx-auto flex h-[min(600px,72vh)] max-w-[480px] select-none items-end justify-center">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/hero-person.webp"
-        alt=""
-        aria-hidden="true"
-        className="block h-full w-auto object-contain object-bottom"
-      />
+    <div className="flex flex-col items-center">
+      <div className="relative mx-auto flex h-[min(600px,72vh)] max-w-[480px] select-none items-end justify-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/hero-person.webp"
+          alt="Aleksandr Sizov"
+          className="block h-full w-auto object-contain object-bottom"
+        />
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
-        style={{ background: 'linear-gradient(to bottom, transparent, #0B1020)' }}
-      />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
+          style={{ background: 'linear-gradient(to bottom, transparent, #0B1020)' }}
+        />
+      </div>
+
+      {/* Caption */}
+      <div className="text-center pt-1 pb-4">
+        <p className="text-[0.875rem] font-semibold leading-snug text-white/80 tracking-[-0.01em]">
+          Aleksandr Sizov
+        </p>
+        <p className="mt-[3px] text-[0.75rem] text-white/35 tracking-[0.025em]">
+          Founder &amp; CEO of Runmade
+        </p>
+      </div>
     </div>
   )
 }
