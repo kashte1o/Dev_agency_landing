@@ -168,7 +168,7 @@ function PersonPhoto() {
         <p className="text-[1.75rem] font-semibold leading-snug text-white/80 tracking-[-0.01em]">
           Aleksandr Sizov
         </p>
-        <p className="mt-3 text-[0.875rem] leading-[1.6] text-white/50 italic">
+        <p className="mt-3 text-[1.125rem] leading-[1.6] text-white/50 italic">
           &ldquo;I approach every project from the client&apos;s side: business first, budget protected, and software delivered fast.&rdquo;
         </p>
         <p className="mt-3 text-[1.5rem] text-white/35 tracking-[0.025em]">
