@@ -182,10 +182,10 @@ function PersonPhoto() {
 
       {/* Caption */}
       <div className="text-center pt-1 pb-4">
-        <p className="text-[0.875rem] font-semibold leading-snug text-white/80 tracking-[-0.01em]">
+        <p className="text-[1.75rem] font-semibold leading-snug text-white/80 tracking-[-0.01em]">
           Aleksandr Sizov
         </p>
-        <p className="mt-[3px] text-[0.75rem] text-white/35 tracking-[0.025em]">
+        <p className="mt-[3px] text-[1.5rem] text-white/35 tracking-[0.025em]">
           Founder &amp; CEO of Runmade
         </p>
       </div>
