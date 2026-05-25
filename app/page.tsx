@@ -1,4 +1,5 @@
 import { HeroSection } from '@/sections/HeroSection'
+import { LogoStrip } from '@/sections/LogoStrip'
 import { PainSection } from '@/sections/PainSection'
 import { PillarsSection } from '@/sections/PillarsSection'
 import { ProcessSection } from '@/sections/ProcessSection'
@@ -19,6 +20,7 @@ export default function HomePage() {
         availableText={availableText}
         isAvailable={isAvailable}
       />
+      <LogoStrip />
       <PainSection pain={pain} />
       <ProofSection />
       <PillarsSection pillars={pillars} />
