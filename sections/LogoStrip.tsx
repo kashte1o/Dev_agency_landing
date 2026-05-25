@@ -1,7 +1,7 @@
 const logos = [
-  { src: "/images/logos/lava.svg", alt: "Lava", maxW: "max-w-[110px]" },
-  { src: "/images/logos/paxful5450.logowik.com.svg", alt: "Paxful", maxW: "max-w-[100px]" },
-  { src: "/images/logos/rwelogo.svg", alt: "RWE", maxW: "max-w-[72px]" },
+  { src: "/images/logos/lava.svg", alt: "Lava", maxH: "28px", maxW: "120px" },
+  { src: "/images/logos/paxful5450.logowik.com.svg", alt: "Paxful", maxH: "26px", maxW: "120px" },
+  { src: "/images/logos/rwelogo.svg", alt: "RWE", maxH: "18px", maxW: "64px" },
 ]
 
 export function LogoStrip() {
@@ -15,18 +15,15 @@ export function LogoStrip() {
           <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-text-secondary/60">
             Trusted by great companies
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+          <div className="flex items-center justify-center gap-10 md:gap-16">
             {logos.map((logo) => (
-              <div
+              <img
                 key={logo.alt}
-                className={`flex h-9 items-center justify-center ${logo.maxW} w-full`}
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-full w-full object-contain opacity-35 grayscale"
-                />
-              </div>
+                src={logo.src}
+                alt={logo.alt}
+                style={{ maxHeight: logo.maxH, maxWidth: logo.maxW }}
+                className="h-auto w-auto opacity-40 grayscale"
+              />
             ))}
           </div>
         </div>
