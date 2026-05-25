@@ -5,7 +5,7 @@ export const STUDIO_NAME = 'Runmade'
 
 export const isAvailable = true // controls StatusBadge visibility
 
-export const availableText = 'Currently taking new projects'
+export const availableText = 'Available for selected custom software projects'
 
 export const footerTagline = 'Custom software that helps businesses run better.'
 
