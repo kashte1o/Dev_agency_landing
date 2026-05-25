@@ -16,7 +16,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full overflow-hidden bg-[#0B1020] flex flex-col"
+      className="relative min-h-screen w-full overflow-hidden bg-[#070A12] flex flex-col"
       aria-label="Hero"
     >
 
@@ -26,7 +26,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            'radial-gradient(ellipse 85% 52% at 50% -6%, rgba(59,130,246,0.13) 0%, transparent 62%)',
+            'radial-gradient(ellipse 50% 28% at 50% -4%, rgba(59,130,246,0.055) 0%, transparent 100%)',
         }}
       />
 
@@ -139,7 +139,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
       <div
         aria-hidden
         className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 z-10"
-        style={{ background: 'linear-gradient(to bottom, transparent, rgba(11,16,32,0.75))' }}
+        style={{ background: 'linear-gradient(to bottom, transparent, rgba(7,10,18,0.75))' }}
       />
     </section>
   )
@@ -159,7 +159,7 @@ function PersonPhoto() {
         <div
           aria-hidden="true"
           className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
-          style={{ background: 'linear-gradient(to bottom, transparent, #0B1020)' }}
+          style={{ background: 'linear-gradient(to bottom, transparent, #070A12)' }}
         />
       </div>
 

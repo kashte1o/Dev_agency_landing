@@ -23,7 +23,7 @@ const variants: Record<ButtonVariant, string> = {
   ghost:
     'rounded-[var(--radius-btn)] text-text-secondary hover:text-text-primary hover:bg-bg-subtle px-4 py-2 duration-150',
   'ghost-dark':
-    'rounded-[var(--radius-btn)] border border-white/25 text-white/80 hover:bg-white/10 hover:border-white/40 hover:text-white px-5 py-2.5 duration-150',
+    'rounded-[var(--radius-btn)] border border-white/12 text-white/50 hover:bg-white/[0.06] hover:border-white/20 hover:text-white/70 px-5 py-2.5 duration-150',
 }
 
 function PrimaryButton({
