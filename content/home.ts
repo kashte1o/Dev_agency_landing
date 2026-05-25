@@ -5,7 +5,7 @@ export const hero = {
   heading:    'Software that makes your business easier to run.',
   subheading: 'We build custom tools shaped around how your business actually works — so your team spends less time fighting systems and more time doing the work.',
   primaryCta: {
-    label:   'Scope your project',
+    label:   "Let's scope your project",
     href:    '/#start-project',
     variant: 'primary',
   } satisfies CTAButton,
