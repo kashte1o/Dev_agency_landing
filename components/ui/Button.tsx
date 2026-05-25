@@ -17,13 +17,13 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'rounded-[var(--radius-btn)] bg-accent text-white px-5 py-2.5 relative overflow-hidden duration-[250ms] ease-in-out hover:bg-[#60A5FA] hover:scale-105 hover:shadow-[0_0_20px_rgba(59,130,246,0.35)]',
+    'rounded-[var(--radius-btn)] bg-accent text-white px-5 py-2.5 relative overflow-hidden duration-[200ms] ease-in-out hover:bg-[#60A5FA]',
   secondary:
     'rounded-[var(--radius-btn)] border border-border bg-bg-surface text-text-primary hover:bg-bg-subtle px-5 py-2.5 duration-150',
   ghost:
     'rounded-[var(--radius-btn)] text-text-secondary hover:text-text-primary hover:bg-bg-subtle px-4 py-2 duration-150',
   'ghost-dark':
-    'rounded-[var(--radius-btn)] border border-white/25 text-white/80 hover:bg-white/10 hover:border-white/40 hover:text-white px-5 py-2.5 duration-150',
+    'rounded-[var(--radius-btn)] border border-white/12 text-white/50 hover:bg-white/[0.06] hover:border-white/20 hover:text-white/70 px-5 py-2.5 duration-150',
 }
 
 function PrimaryButton({

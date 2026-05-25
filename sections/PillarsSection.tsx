@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
-import { Button } from '@/components/ui/Button'
 import { staggerContainer, clipReveal, fadeUp, VIEWPORT } from '@/lib/motion'
 import type { pillars as PillarsType } from '@/content/home'
 
@@ -34,29 +33,19 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
                 key={card.title}
                 variants={clipReveal}
                 custom={i}
-                className="group flex flex-col gap-4 rounded-[var(--radius-frame)] border border-border bg-bg-surface p-8 transition-shadow hover:shadow-md"
+                className="group flex flex-col gap-5 rounded-[var(--radius-frame)] border border-border bg-bg-surface p-8"
               >
-                <span aria-hidden className="text-3xl">{card.icon}</span>
-                <div>
+                <span
+                  aria-hidden
+                  className="font-mono text-[0.68rem] font-semibold tracking-[0.12em] text-text-secondary/40"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="flex flex-col gap-1.5">
                   <h3 className="text-xl font-bold text-text-primary">{card.title}</h3>
-                  <p className="mt-1 text-sm font-medium text-accent">{card.description}</p>
+                  <p className="text-sm font-medium text-accent">{card.description}</p>
                 </div>
                 <p className="flex-1 text-sm leading-relaxed text-text-secondary">{card.body}</p>
-
-                {/* v2: placeholder for mockup */}
-                <div
-                  aria-hidden
-                  className="mt-2 h-28 w-full rounded-[var(--radius-card)] border border-dashed border-border bg-bg-subtle flex items-center justify-center text-xs text-text-secondary/50"
-                >
-                  Visual mockup — v2
-                </div>
-
-                <a
-                  href={card.href}
-                  className="mt-2 text-sm font-medium text-accent hover:underline"
-                >
-                  Learn more →
-                </a>
               </motion.div>
             ))}
           </div>

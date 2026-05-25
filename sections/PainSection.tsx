@@ -61,6 +61,24 @@ export function PainSection({ pain }: PainSectionProps) {
           ))}
         </motion.div>
 
+        {/* ── Cost callout ─────────────────────────────────────── */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          className="
+            mt-10 md:mt-14
+            rounded-xl border border-[#DEDAD2] bg-bg-surface
+            px-8 py-6
+            text-center
+            text-[1.05rem] md:text-[1.15rem]
+            text-text-secondary leading-relaxed
+          "
+        >
+          {pain.costStatement}
+        </motion.p>
+
       </div>
     </Section>
   )

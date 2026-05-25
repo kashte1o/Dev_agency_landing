@@ -27,14 +27,13 @@ export function CredibilitySection({ credibility }: CredibilitySectionProps) {
             {credibility.heading}
           </motion.h2>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-x-16 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {credibility.cards.map((card) => (
               <motion.div
                 key={card.title}
                 variants={fadeUp}
-                className="flex flex-col gap-3 rounded-[var(--radius-card)] border border-border bg-bg-surface p-6"
+                className="flex flex-col gap-2 border-t border-border pt-6"
               >
-                <span aria-hidden className="text-2xl">{card.icon}</span>
                 <h3 className="font-semibold text-text-primary">{card.title}</h3>
                 <p className="text-sm leading-relaxed text-text-secondary">{card.body}</p>
               </motion.div>
