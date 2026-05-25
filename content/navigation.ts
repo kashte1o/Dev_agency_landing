@@ -5,6 +5,7 @@ export const navLinks: NavItem[] = [
   { label: 'Process',   href: '/#process' },
   { label: 'Work',      href: '/case-studies' },
   { label: 'About',     href: '/#about' },
+  { label: 'FAQ',       href: '/#faq' },
   { label: 'Resources', href: '/resources' },
 ]
 
@@ -20,7 +21,7 @@ export const serviceDropdown: NavItem[] = [
 ]
 
 export const navCta: CTAButton = {
-  label: 'Scope your project',
+  label: "Let's talk",
   href: '/#start-project',
   variant: 'primary',
 }

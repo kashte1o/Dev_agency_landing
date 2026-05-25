@@ -97,7 +97,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             <Button
               href={navCta.href}
               variant="primary"
-              className="px-8 py-[15px] text-[1rem] font-semibold"
+              className="px-6 py-[10px] text-[0.875rem] font-medium"
             >
               {navCta.label}
             </Button>
