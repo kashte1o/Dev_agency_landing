@@ -1,3 +1,9 @@
+const logos = [
+  { src: "/images/logos/Logo.d7c8ab34.svg", alt: "Runmade" },
+  { src: "/images/logos/paxful5450.logowik.com.svg", alt: "Paxful" },
+  { src: "/images/logos/rwelogo.svg", alt: "RWE" },
+]
+
 export function LogoStrip() {
   return (
     <section
@@ -10,33 +16,17 @@ export function LogoStrip() {
             Trusted by great companies
           </p>
           <div className="flex flex-wrap items-center justify-center gap-14 md:gap-20">
-            <PaxfulLogo />
+            {logos.map((logo) => (
+              <img
+                key={logo.alt}
+                src={logo.src}
+                alt={logo.alt}
+                className="h-8 w-auto opacity-25 grayscale"
+              />
+            ))}
           </div>
         </div>
       </div>
     </section>
-  )
-}
-
-function PaxfulLogo() {
-  return (
-    <svg
-      viewBox="0 0 152 32"
-      className="h-7 w-auto text-text-primary/[0.22]"
-      fill="currentColor"
-      aria-label="Paxful"
-      role="img"
-    >
-      <text
-        x="0"
-        y="25"
-        fontFamily="'Arial Black', 'Arial', Helvetica, sans-serif"
-        fontWeight="900"
-        fontSize="24"
-        letterSpacing="5"
-      >
-        PAXFUL
-      </text>
-    </svg>
   )
 }
