@@ -158,6 +158,26 @@ img, svg, video {
   }
 }
 
+/* ─── Trusted-by logo marquee ──────────────────────────────
+   Track contains the logos twice; translating from 0 to -50%
+   advances exactly one full set, so the second half lands on
+   the first half's pixels — no visible jump. Per-item
+   margin-right (instead of CSS gap) makes the -50% offset
+   correspond to a whole-set width including trailing gap.
+*/
+@keyframes logoMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.logo-marquee-track {
+  animation: logoMarquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee-track { animation: none; }
+}
+
 /* ─── Process wire — electricity dashes ───────────────────── */
 @keyframes electricityFlow {
   from { background-position-x: 0px; }

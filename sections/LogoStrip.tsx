@@ -4,7 +4,16 @@ const logos = [
   { src: "/images/logos/rwelogo.svg", alt: "RWE" },
 ]
 
+// Item box and right-gap kept in sync via clamp; per-item margin (not CSS `gap`)
+// guarantees the duplicate set lines up exactly at -50% for a jump-free loop.
+const ITEM_HEIGHT = 'clamp(56px, 9vw, 120px)'
+const ITEM_WIDTH  = 'clamp(88px, 17vw, 240px)'
+const ITEM_GAP    = 'clamp(24px, 5vw, 80px)'
+
 export function LogoStrip() {
+  // Duplicate the list so translateX(-50%) yields a seamless loop.
+  const track = [...logos, ...logos]
+
   return (
     <section
       aria-label="Trusted by great companies"
@@ -12,26 +21,41 @@ export function LogoStrip() {
     >
       <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20 py-12 md:py-16 lg:py-20">
         <div className="flex flex-col items-center gap-8 md:gap-12">
-          <p className="text-[0.75rem] md:text-[0.875rem] font-bold uppercase tracking-[0.18em] text-text-secondary/60 text-center">
+          <p className="text-[1.5rem] md:text-[1.75rem] font-bold uppercase tracking-[0.18em] text-text-secondary/60 text-center">
             Trusted by great companies
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14 lg:gap-20 w-full">
-            {logos.map((logo) => (
-              <div
-                key={logo.alt}
-                className="flex items-center justify-center"
-                style={{
-                  height: 'clamp(56px, 9vw, 120px)',
-                  width: 'clamp(88px, 17vw, 240px)',
-                }}
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="max-h-full max-w-full object-contain opacity-40 grayscale"
-                />
-              </div>
-            ))}
+
+          {/* Marquee viewport: edge fade via gradient mask (~30% on each side),
+              center fully opaque. Overflow hidden clips the looping track. */}
+          <div
+            className="logo-marquee w-full overflow-hidden"
+            style={{
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)',
+              maskImage:
+                'linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)',
+            }}
+          >
+            <div className="logo-marquee-track flex items-center w-max will-change-transform">
+              {track.map((logo, i) => (
+                <div
+                  key={i}
+                  aria-hidden={i >= logos.length || undefined}
+                  className="flex shrink-0 items-center justify-center"
+                  style={{
+                    height: ITEM_HEIGHT,
+                    width: ITEM_WIDTH,
+                    marginRight: ITEM_GAP,
+                  }}
+                >
+                  <img
+                    src={logo.src}
+                    alt={i < logos.length ? logo.alt : ''}
+                    className="max-h-full max-w-full object-contain opacity-40 grayscale"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
