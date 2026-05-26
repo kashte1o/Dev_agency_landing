@@ -57,11 +57,14 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
         {/*
-          Desktop: CSS grid [1fr | auto | 1fr]
-            - Col 1 (1fr): Logo — left-aligned, can never overlap nav
-            - Col 2 (auto): Nav links — centered by equal-width side columns
-            - Col 3 (1fr): CTA — right-aligned, can never overlap nav
-          Mobile: flex justify-between (logo + hamburger only)
+          Desktop layout:
+            - Logo: flex-left, CTA: flex-right (inside max-width container)
+            - Nav links: positioned ABSOLUTELY at viewport center,
+              independent of logo/CTA widths — guarantees visual center
+              on the viewport center line.
+          Mobile: flex justify-between (logo + hamburger only).
+          `position: fixed` on the header already establishes a containing
+          block for the absolutely-positioned nav.
         */}
         <div
           className="
@@ -69,7 +72,6 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
             flex items-center justify-between
-            md:grid md:grid-cols-[1fr_auto_1fr] md:justify-normal md:gap-10 lg:gap-14
           "
         >
           {/* Left — Logo */}
@@ -85,27 +87,6 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               className="inline-flex md:hidden"
             />
           </div>
-
-          {/* Center — Nav links in grid middle column, guaranteed not to overlap logo/CTA */}
-          <nav
-            className="hidden md:flex items-center justify-center gap-8 lg:gap-9 whitespace-nowrap"
-            aria-label="Main navigation"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'text-[1rem] font-medium tracking-[0.005em] transition-colors duration-150',
-                  isDark
-                    ? 'text-white/60 hover:text-white'
-                    : 'text-text-secondary hover:text-text-primary',
-                )}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
 
           {/* Right — CTA on desktop, hamburger on mobile */}
           <div className="flex items-center justify-end">
@@ -149,6 +130,36 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             </button>
           </div>
         </div>
+
+        {/*
+          Center — Nav links pinned to the EXACT viewport center.
+          `position: absolute` inside the fixed header (which is viewport-wide
+          via left-0 right-0), so left:50% = viewport center. Translate-x:-50%
+          centers the group itself. Logo/CTA widths cannot shift it.
+        */}
+        <nav
+          className="
+            hidden md:flex items-center gap-8 lg:gap-9
+            absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+            whitespace-nowrap pointer-events-auto
+          "
+          aria-label="Main navigation"
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={cn(
+                'text-[1rem] font-medium tracking-[0.005em] transition-colors duration-150',
+                isDark
+                  ? 'text-white/60 hover:text-white'
+                  : 'text-text-secondary hover:text-text-primary',
+              )}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
       </motion.header>
 
       {/* Mobile drawer */}
