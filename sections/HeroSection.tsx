@@ -1,3 +1,4 @@
+import { HeroCta } from '@/components/ui/HeroCta'
 import { Button } from '@/components/ui/Button'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import type { hero as HeroDataType } from '@/content/home'
@@ -97,16 +98,9 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
                 {/* CTAs */}
                 <div className="flex flex-wrap items-center gap-4 md:gap-5 pt-2">
-                  <Button
-                    href={hero.primaryCta.href}
-                    variant="primary"
-                    className="
-                      px-7 py-[14px] text-[0.95rem]
-                      md:px-12 md:py-[26px] md:text-[1.1rem] md:font-semibold md:rounded-[10px]
-                    "
-                  >
+                  <HeroCta href={hero.primaryCta.href}>
                     {hero.primaryCta.label}
-                  </Button>
+                  </HeroCta>
                   <Button
                     href={hero.secondaryCta.href}
                     variant="ghost-dark"
