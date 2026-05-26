@@ -15,7 +15,7 @@ export function HeroCta({ href, children, className }: HeroCtaProps) {
       className={cn(
         'hero-cta',
         'relative inline-flex items-center gap-3 select-none cursor-pointer',
-        'bg-[#2563EB] text-white font-semibold',
+        'bg-[#0057FF] text-white font-semibold',
         'rounded-[var(--radius-btn)] md:rounded-[10px]',
         'px-7 py-[14px] text-[0.95rem]',
         'md:px-12 md:py-[26px] md:text-[1.1rem] md:font-semibold',
