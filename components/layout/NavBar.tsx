@@ -114,10 +114,10 @@ export function NavBar({ heroDark = true }: NavBarProps) {
                 'nav-cta',
                 'hidden md:inline-flex items-center px-[22px] py-[10px] text-[1rem] font-medium rounded-[var(--radius-btn)] select-none cursor-pointer',
                 isDark
-                  // over dark hero: light pill → invert to dark on hover (max contrast)
-                  ? 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#0F172A] hover:text-[#F8FAFC]'
-                  // scrolled light navbar: dark pill → invert to light on hover
-                  : 'bg-[#0F172A] text-[#F8FAFC] hover:bg-[#F8FAFC] hover:text-[#0F172A]',
+                  // over dark hero: stay in light family (dark hover would merge with hero)
+                  ? 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#CBD5E1] hover:text-[#0F172A]'
+                  // scrolled light navbar: dark pill, slightly lighter on hover
+                  : 'bg-[#0F172A] text-[#F8FAFC] hover:bg-[#334155] hover:text-[#F8FAFC]',
               )}
             >
               <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>

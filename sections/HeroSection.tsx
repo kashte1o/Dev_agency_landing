@@ -114,7 +114,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </div>
 
                 {/* Microcopy */}
-                <p className="text-[0.92rem] tracking-[0.04em] text-white/22">
+                <p className="text-[1.84rem] tracking-[0.04em] text-white/22">
                   <span className="sm:hidden">
                     Talk with technology experts&nbsp;&nbsp;·&nbsp;&nbsp;No commitment
                   </span>
