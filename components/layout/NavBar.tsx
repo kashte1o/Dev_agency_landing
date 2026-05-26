@@ -66,7 +66,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
             flex items-center justify-between
-            md:grid md:grid-cols-[1fr_auto_1fr] md:items-center
+            md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:justify-normal
           "
         >
           {/* Left — Logo */}
