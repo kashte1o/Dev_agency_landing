@@ -74,8 +74,8 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             className="inline-flex md:hidden"
           />
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-9" aria-label="Main navigation">
+          {/* Desktop nav + CTA grouped together */}
+          <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -90,18 +90,14 @@ export function NavBar({ heroDark = true }: NavBarProps) {
                 {link.label}
               </a>
             ))}
-          </nav>
-
-          {/* CTA — larger on desktop */}
-          <div className="hidden md:flex">
             <Button
               href={navCta.href}
-              variant="primary"
-              className="px-6 py-[10px] text-[0.875rem] font-medium"
+              variant={isDark ? 'ghost-dark' : 'secondary'}
+              className="px-5 py-[8px] text-[0.875rem] font-medium"
             >
               {navCta.label}
             </Button>
-          </div>
+          </nav>
 
           {/* Mobile hamburger */}
           <button
