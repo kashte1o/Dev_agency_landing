@@ -1,6 +1,6 @@
 const logos = [
   { src: "/images/logos/lava.svg", alt: "Lava", maxH: "28px", maxW: "120px" },
-  { src: "/images/logos/paxful5450.logowik.com.svg", alt: "Paxful", maxH: "26px", maxW: "120px" },
+  { src: "/images/logos/paxful5450.logowik.com.svg", alt: "Paxful", maxH: "26px", maxW: "130px" },
   { src: "/images/logos/rwelogo.svg", alt: "RWE", maxH: "18px", maxW: "64px" },
 ]
 
