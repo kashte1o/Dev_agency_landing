@@ -47,12 +47,12 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         animate={{
           backgroundColor: scrolled
             ? 'rgba(247,248,250,0.97)'
-            : 'rgba(11,16,32,0)',
-          backdropFilter: scrolled ? 'blur(18px)' : 'blur(0px)',
-          // subtle separator: faint white line over hero, faint dark line when scrolled
+            // Muted band over hero: semi-opaque dark + blur to feel "blanched"
+            : 'rgba(11,16,32,0.55)',
+          backdropFilter: scrolled ? 'blur(18px)' : 'blur(10px)',
           borderBottomColor: scrolled
             ? 'rgba(0,0,0,0.07)'
-            : 'rgba(255,255,255,0.05)',
+            : 'rgba(255,255,255,0.06)',
         }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
@@ -107,20 +107,29 @@ export function NavBar({ heroDark = true }: NavBarProps) {
 
           {/* Right — CTA on desktop, hamburger on mobile */}
           <div className="flex items-center justify-end">
-            <Button
+            {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
+            <a
               href={navCta.href}
-              variant="ghost"
               className={cn(
-                'hidden md:inline-flex px-[22px] py-[10px] text-[1rem] font-medium rounded-[var(--radius-btn)] transition-colors duration-200',
+                'nav-cta',
+                'hidden md:inline-flex items-center px-[22px] py-[10px] text-[1rem] font-medium rounded-[var(--radius-btn)] select-none cursor-pointer',
                 isDark
-                  // over dark hero: light filled pill (slate-50 → slate-200)
-                  ? 'bg-[#F8FAFC] text-[#0F172A] border-transparent hover:bg-[#E2E8F0] hover:text-[#0F172A]'
-                  // scrolled light navbar: dark pill
-                  : 'bg-[#111827] text-white border-transparent hover:bg-[#1F2937] hover:text-white',
+                  // over dark hero: light pill → invert to dark on hover (max contrast)
+                  ? 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#0F172A] hover:text-[#F8FAFC]'
+                  // scrolled light navbar: dark pill → invert to light on hover
+                  : 'bg-[#0F172A] text-[#F8FAFC] hover:bg-[#F8FAFC] hover:text-[#0F172A]',
               )}
             >
-              {navCta.label}
-            </Button>
+              <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>
+                <span
+                  className="nav-cta-text-group"
+                  style={{ display: 'flex', flexDirection: 'column' }}
+                >
+                  <span style={{ display: 'block', lineHeight: '1.25em' }}>{navCta.label}</span>
+                  <span style={{ display: 'block', lineHeight: '1.25em' }} aria-hidden="true">{navCta.label}</span>
+                </span>
+              </span>
+            </a>
 
             {/* Mobile hamburger */}
             <button

@@ -128,3 +128,16 @@ body {
 .hero-cta:active {
   transform: scale(0.98);
 }
+
+/* ─── Navbar CTA — masked text scroll (same easing as hero CTA, no arrow) ─ */
+.nav-cta-text-group {
+  transform: translateY(0);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-cta:hover .nav-cta-text-group {
+  transform: translateY(-50%);
+}
+.nav-cta {
+  transition: background-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
