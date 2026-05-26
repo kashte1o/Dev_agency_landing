@@ -3,6 +3,10 @@ import { Button } from '@/components/ui/Button'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import type { hero as HeroDataType } from '@/content/home'
 
+// Must stay in sync with NavBar.tsx NAV_H_MOBILE / NAV_H_DESKTOP
+const NAV_H_MOBILE  = 80
+const NAV_H_DESKTOP = 130
+
 interface HeroSectionProps {
   hero: typeof HeroDataType
   availableText: string
@@ -13,15 +17,10 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-[#070A12] flex flex-col"
+      className="relative min-h-screen w-full overflow-hidden bg-[#070A12] flex flex-col"
       aria-label="Hero"
-      style={{
-        // Fits below the fixed header without leaving large empty space.
-        // Uses svh (small viewport height) so mobile browser chrome doesn't shift the fold.
-        minHeight: 'calc(100svh - var(--header-h))',
-        marginTop: 'var(--header-h)',
-      }}
     >
+
       {/* ── Ambient top glow ──────────────────────────────────── */}
       <div
         aria-hidden
@@ -43,80 +42,78 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         }}
       />
 
-      {/* ── Content — vertically centered between header and bottom ─ */}
-      <div className="relative z-10 flex flex-1 items-center w-full">
+      {/* ── Content — pushes below navbar ────────────────────── */}
+      <div
+        className="relative z-10 flex flex-1 items-center pt-[80px] md:pt-[130px]"
+      >
         <div
-          className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20"
-          style={{
-            paddingTop: 'clamp(32px, 4vh, 72px)',
-            paddingBottom: 'clamp(32px, 4vh, 72px)',
-          }}
+          className="w-full"
+          style={{}}
         >
           <div
-            className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(320px,0.9fr)] items-center"
-            style={{ columnGap: 'clamp(40px, 5vw, 96px)', rowGap: 'clamp(40px, 6vw, 80px)' }}
+            className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20 py-12 md:py-0"
+            style={
+              {} as React.CSSProperties
+            }
           >
-            {/* ── LEFT: headline + body + CTAs ───────────────── */}
-            <div className="flex flex-col" style={{ gap: 'clamp(20px, 2.2vw, 36px)' }}>
-              {isAvailable && availableText && (
-                <div>
-                  <StatusBadge label={availableText} />
-                </div>
-              )}
+            <div className="
+              grid grid-cols-1 items-center
+              gap-10 md:gap-12 lg:gap-16
+              md:grid-cols-[3fr_2fr]
+            ">
 
-              <h1
-                className="font-bold text-white tracking-[-0.025em]"
-                style={{
-                  fontSize: 'clamp(2.25rem, 4.6vw, 5rem)',
-                  lineHeight: 1.05,
-                }}
-              >
-                {hero.heading}
-              </h1>
+              {/* ── LEFT ──────────────────────────────────────── */}
+              <div className="flex flex-col gap-7 md:gap-8">
 
-              <div
-                className="flex flex-col max-w-[640px]"
-                style={{ gap: 'clamp(12px, 1.2vw, 20px)' }}
-              >
-                {hero.bodyParagraphs.map((para, i) => (
-                  <p
-                    key={i}
-                    className="text-white/55"
-                    style={{
-                      fontSize: 'clamp(1rem, 1.1vw, 1.32rem)',
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {para}
-                  </p>
-                ))}
-              </div>
+                {isAvailable && (
+                  <div>
+                    <StatusBadge label={availableText} />
+                  </div>
+                )}
 
-              <div
-                className="flex flex-wrap items-center"
-                style={{ gap: 'clamp(12px, 1.2vw, 20px)', marginTop: 'clamp(4px, 0.5vw, 8px)' }}
-              >
-                <HeroCta href={hero.primaryCta.href}>
-                  {hero.primaryCta.label}
-                </HeroCta>
-                <Button
-                  href={hero.secondaryCta.href}
-                  variant="ghost-dark"
-                  className="md:rounded-[10px]"
-                  style={{
-                    paddingInline: 'clamp(20px, 2.2vw, 48px)',
-                    paddingBlock: 'clamp(12px, 1.5vw, 26px)',
-                    fontSize: 'clamp(0.95rem, 0.95vw, 1.1rem)',
-                  }}
+                <h1
+                  className="font-bold text-white tracking-[-0.025em] leading-[1.05]"
+                  style={{ fontSize: 'clamp(2.5rem, 4.2vw, 5.125rem)' }}
                 >
-                  {hero.secondaryCta.label}
-                </Button>
-              </div>
-            </div>
+                  {hero.heading}
+                </h1>
 
-            {/* ── RIGHT: portrait + caption as ONE vertical group ─ */}
-            <div className="hidden md:block">
-              <PersonPhoto />
+                {/* Body paragraphs (replaces former subheading) */}
+                <div className="flex flex-col gap-5 max-w-[680px]">
+                  {hero.bodyParagraphs.map((para, i) => (
+                    <p
+                      key={i}
+                      className="leading-[1.65] text-white/55"
+                      style={{ fontSize: 'clamp(1.2rem, 1.2vw, 1.38rem)' }}
+                    >
+                      {para}
+                    </p>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className="flex flex-wrap items-center gap-4 md:gap-5 pt-2">
+                  <HeroCta href={hero.primaryCta.href}>
+                    {hero.primaryCta.label}
+                  </HeroCta>
+                  <Button
+                    href={hero.secondaryCta.href}
+                    variant="ghost-dark"
+                    className="
+                      px-7 py-[14px] text-[0.95rem]
+                      md:px-12 md:py-[26px] md:text-[1.1rem] md:rounded-[10px]
+                    "
+                  >
+                    {hero.secondaryCta.label}
+                  </Button>
+                </div>
+              </div>
+
+              {/* ── RIGHT: person photo ───────────────────────── */}
+              <div className="hidden md:flex items-end justify-center">
+                <PersonPhoto />
+              </div>
+
             </div>
           </div>
         </div>
@@ -125,11 +122,8 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
       {/* ── Bottom fade ──────────────────────────────────────── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 right-0 z-10"
-        style={{
-          height: 'clamp(80px, 12vh, 160px)',
-          background: 'linear-gradient(to bottom, transparent, rgba(7,10,18,0.75))',
-        }}
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 z-10"
+        style={{ background: 'linear-gradient(to bottom, transparent, rgba(7,10,18,0.75))' }}
       />
     </section>
   )
@@ -137,11 +131,14 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
 function PersonPhoto() {
   return (
-    <div className="flex flex-col items-center mx-auto" style={{ maxWidth: 'clamp(300px, 30vw, 480px)' }}>
-      {/* Portrait — height scales with viewport width, image keeps aspect ratio */}
+    <div className="flex flex-col items-center">
       <div
-        className="relative select-none flex items-end justify-center w-full"
-        style={{ height: 'clamp(360px, 36vw, 540px)' }}
+        className="relative mx-auto flex max-w-[480px] select-none items-end justify-center"
+        style={{
+          // Width-based scaling (was 72vh) so portrait doesn't drift with viewport height.
+          // min() with svh as a safety cap on short-viewport monitors.
+          height: 'min(clamp(340px, 30vw, 520px), 58svh)',
+        }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -149,45 +146,23 @@ function PersonPhoto() {
           alt="Aleksandr Sizov"
           className="block h-full w-auto object-contain object-bottom"
         />
+
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-0 right-0"
-          style={{
-            height: 'clamp(64px, 8vw, 120px)',
-            background: 'linear-gradient(to bottom, transparent, #070A12)',
-          }}
+          className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
+          style={{ background: 'linear-gradient(to bottom, transparent, #070A12)' }}
         />
       </div>
 
-      {/* Caption — locked to portrait, fluid spacing */}
-      <div
-        className="text-center max-w-[380px]"
-        style={{ marginTop: 'clamp(8px, 0.8vw, 16px)' }}
-      >
-        <p
-          className="font-semibold text-white/80 tracking-[-0.01em]"
-          style={{ fontSize: 'clamp(1.25rem, 1.55vw, 1.75rem)', lineHeight: 1.25 }}
-        >
+      {/* Caption — kept directly attached to the portrait as one block */}
+      <div className="text-center pt-1 pb-4 max-w-[380px]">
+        <p className="text-[1.75rem] font-semibold leading-snug text-white/80 tracking-[-0.01em]">
           Aleksandr Sizov
         </p>
-        <p
-          className="text-white/50 italic"
-          style={{
-            marginTop: 'clamp(8px, 0.8vw, 14px)',
-            fontSize: 'clamp(0.95rem, 1vw, 1.125rem)',
-            lineHeight: 1.55,
-          }}
-        >
+        <p className="mt-3 text-[1.125rem] leading-[1.6] text-white/50 italic">
           &ldquo;I approach every project from the client&apos;s side: business first, budget protected, and software delivered fast.&rdquo;
         </p>
-        <p
-          className="text-white/35 tracking-[0.025em]"
-          style={{
-            marginTop: 'clamp(8px, 0.8vw, 14px)',
-            fontSize: 'clamp(1.05rem, 1.25vw, 1.5rem)',
-            lineHeight: 1.3,
-          }}
-        >
+        <p className="mt-3 text-[1.5rem] text-white/35 tracking-[0.025em]">
           Founder &amp; CEO of Runmade
         </p>
       </div>
