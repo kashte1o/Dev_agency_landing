@@ -44,8 +44,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
       {/* ── Content — pushes below navbar ────────────────────── */}
       <div
-        className="relative z-10 flex flex-1 items-center"
-        style={{ paddingTop: `${NAV_H_MOBILE}px` }}
+        className="relative z-10 flex flex-1 items-center pt-[80px] md:pt-[130px]"
       >
         <div
           className="w-full"

@@ -57,17 +57,19 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
         {/*
-          Symmetric layout:
-            - Logo at container's left padding edge
-            - CTA at container's right padding edge (same distance from edge)
-            - Nav links ABSOLUTELY centered in navbar — independent of logo/CTA widths
+          Desktop: CSS grid [1fr | auto | 1fr]
+            - Col 1 (1fr): Logo — left-aligned, can never overlap nav
+            - Col 2 (auto): Nav links — centered by equal-width side columns
+            - Col 3 (1fr): CTA — right-aligned, can never overlap nav
+          Mobile: flex justify-between (logo + hamburger only)
         */}
         <div
           className="
-            relative mx-auto w-full max-w-[1440px]
+            mx-auto w-full max-w-[1440px]
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
             flex items-center justify-between
+            md:grid md:grid-cols-[1fr_auto_1fr] md:justify-normal
           "
         >
           {/* Left — Logo */}
@@ -84,9 +86,9 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
           </div>
 
-          {/* Center — Nav links absolutely centered in the navbar */}
+          {/* Center — Nav links in grid middle column, guaranteed not to overlap logo/CTA */}
           <nav
-            className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2"
+            className="hidden md:flex items-center gap-9"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (
