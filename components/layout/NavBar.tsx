@@ -90,8 +90,9 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
           </div>
 
-          {/* Right — CTA on desktop, hamburger on mobile */}
-          <div className="flex items-center justify-end">
+          {/* Right — CTA on desktop, hamburger on mobile.
+              `md:mr-[15%]` shifts the Let's talk CTA inward from the right edge on desktop. */}
+          <div className="flex items-center justify-end md:mr-[15%]">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}

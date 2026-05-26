@@ -13,7 +13,7 @@ export const hero = {
     variant: 'primary',
   } satisfies CTAButton,
   secondaryCta: {
-    label:   'See what we build',
+    label:   'See client results',
     href:    '/#what-we-build',
     variant: 'ghost',
   } satisfies CTAButton,

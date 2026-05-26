@@ -1,6 +1,6 @@
 import { HeroCta } from '@/components/ui/HeroCta'
-import { Button } from '@/components/ui/Button'
 import { StatusBadge } from '@/components/ui/StatusBadge'
+import { cn } from '@/lib/utils'
 import type { hero as HeroDataType } from '@/content/home'
 
 // Must stay in sync with NavBar.tsx NAV_H_MOBILE / NAV_H_DESKTOP
@@ -96,16 +96,33 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                   <HeroCta href={hero.primaryCta.href}>
                     {hero.primaryCta.label}
                   </HeroCta>
-                  <Button
+                  {/* Secondary CTA — ghost-dark style + masked text-scroll hover (same as nav Let's talk) */}
+                  <a
                     href={hero.secondaryCta.href}
-                    variant="ghost-dark"
-                    className="
-                      px-7 py-[14px] text-[0.95rem]
-                      md:px-12 md:py-[26px] md:text-[1.1rem] md:rounded-[10px]
-                    "
+                    className={cn(
+                      'nav-cta',
+                      'inline-flex items-center justify-center gap-2 font-medium select-none cursor-pointer',
+                      'rounded-[var(--radius-btn)] border border-white/12 text-white/50',
+                      'hover:bg-white/[0.06] hover:border-white/20 hover:text-white/70',
+                      'transition-colors duration-[350ms]',
+                      'px-7 py-[14px] text-[0.95rem]',
+                      'md:px-12 md:py-[26px] md:text-[1.1rem] md:rounded-[10px]',
+                    )}
                   >
-                    {hero.secondaryCta.label}
-                  </Button>
+                    <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>
+                      <span
+                        className="nav-cta-text-group"
+                        style={{ display: 'flex', flexDirection: 'column' }}
+                      >
+                        <span style={{ display: 'block', lineHeight: '1.25em' }}>
+                          {hero.secondaryCta.label}
+                        </span>
+                        <span style={{ display: 'block', lineHeight: '1.25em' }} aria-hidden="true">
+                          {hero.secondaryCta.label}
+                        </span>
+                      </span>
+                    </span>
+                  </a>
                 </div>
               </div>
 
