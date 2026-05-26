@@ -44,6 +44,14 @@ html {
   overflow-x: hidden;
 }
 
+/* ─── Header height tokens (consumed by Hero min-height calc) ─ */
+:root {
+  --header-h: 80px;
+}
+@media (min-width: 768px) {
+  :root { --header-h: 130px; }
+}
+
 body {
   background: var(--bg-base);
   color: var(--text-primary);
