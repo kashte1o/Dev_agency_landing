@@ -112,8 +112,8 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               className={cn(
                 'hidden md:inline-flex px-5 py-[9px] text-[0.875rem] font-medium rounded-[var(--radius-btn)] transition-colors duration-200',
                 isDark
-                  // over dark hero: frosted pill
-                  ? 'bg-white/[0.09] text-white border border-white/[0.14] hover:bg-white/[0.16] hover:text-white hover:border-white/[0.22]'
+                  // over dark hero: light filled pill (slate-50 → slate-200)
+                  ? 'bg-[#F8FAFC] text-[#0F172A] border-transparent hover:bg-[#E2E8F0] hover:text-[#0F172A]'
                   // scrolled light navbar: dark pill
                   : 'bg-[#111827] text-white border-transparent hover:bg-[#1F2937] hover:text-white',
               )}
