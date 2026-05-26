@@ -83,17 +83,23 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                   {hero.heading}
                 </h1>
 
-                {/* Subheadline */}
-                <p className="
-                  leading-[1.65] text-white/55
-                  text-[1.2rem]
-                  md:text-[1.26rem]
-                  lg:text-[1.32rem]
-                  xl:text-[1.38rem]
-                  max-w-[680px]
-                ">
-                  {hero.subheading}
-                </p>
+                {/* Body paragraphs (replaces former subheading) */}
+                <div className="flex flex-col gap-5 max-w-[680px]">
+                  {hero.bodyParagraphs.map((para, i) => (
+                    <p
+                      key={i}
+                      className="
+                        leading-[1.65] text-white/55
+                        text-[1.2rem]
+                        md:text-[1.26rem]
+                        lg:text-[1.32rem]
+                        xl:text-[1.38rem]
+                      "
+                    >
+                      {para}
+                    </p>
+                  ))}
+                </div>
 
                 {/* CTAs */}
                 <div className="flex flex-wrap items-center gap-4 md:gap-5 pt-2">
@@ -110,23 +116,6 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                   >
                     {hero.secondaryCta.label}
                   </Button>
-                </div>
-
-                {/* Body paragraphs */}
-                <div className="flex flex-col gap-4 max-w-[680px] pt-1">
-                  {hero.bodyParagraphs.map((para, i) => (
-                    <p
-                      key={i}
-                      className="
-                        leading-[1.65] text-white/50
-                        text-[1.05rem]
-                        md:text-[1.1rem]
-                        lg:text-[1.15rem]
-                      "
-                    >
-                      {para}
-                    </p>
-                  ))}
                 </div>
               </div>
 
