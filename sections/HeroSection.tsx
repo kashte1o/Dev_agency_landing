@@ -112,15 +112,22 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                   </Button>
                 </div>
 
-                {/* Microcopy */}
-                <p className="text-[1.84rem] tracking-[0.04em] text-white/22">
-                  <span className="sm:hidden">
-                    Talk with technology experts&nbsp;&nbsp;·&nbsp;&nbsp;No commitment
-                  </span>
-                  <span className="hidden sm:inline">
-                    Talk directly with technology experts&nbsp;&nbsp;·&nbsp;&nbsp;No commitment&nbsp;&nbsp;·&nbsp;&nbsp;Response within 1 business day
-                  </span>
-                </p>
+                {/* Body paragraphs */}
+                <div className="flex flex-col gap-4 max-w-[680px] pt-1">
+                  {hero.bodyParagraphs.map((para, i) => (
+                    <p
+                      key={i}
+                      className="
+                        leading-[1.65] text-white/50
+                        text-[1.05rem]
+                        md:text-[1.1rem]
+                        lg:text-[1.15rem]
+                      "
+                    >
+                      {para}
+                    </p>
+                  ))}
+                </div>
               </div>
 
               {/* ── RIGHT: person photo ───────────────────────── */}

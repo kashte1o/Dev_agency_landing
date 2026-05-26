@@ -69,14 +69,14 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
             flex items-center justify-between
-            md:grid md:grid-cols-[1fr_auto_1fr] md:justify-normal
+            md:grid md:grid-cols-[1fr_auto_1fr] md:justify-normal md:gap-10 lg:gap-14
           "
         >
           {/* Left — Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center justify-start min-w-0">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
-              size="xl"
+              size="lg"
               className="hidden md:inline-flex"
             />
             <LogoMark
@@ -88,7 +88,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
 
           {/* Center — Nav links in grid middle column, guaranteed not to overlap logo/CTA */}
           <nav
-            className="hidden md:flex items-center gap-9"
+            className="hidden md:flex items-center justify-center gap-8 lg:gap-9 whitespace-nowrap"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (
@@ -118,8 +118,8 @@ export function NavBar({ heroDark = true }: NavBarProps) {
                 isDark
                   // over dark hero: stay in light family (dark hover would merge with hero)
                   ? 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#CBD5E1] hover:text-[#0F172A]'
-                  // scrolled light navbar: dark pill, slightly lighter on hover
-                  : 'bg-[#0F172A] text-[#F8FAFC] hover:bg-[#334155] hover:text-[#F8FAFC]',
+                  // scrolled white navbar: brand blue pill (matches hero CTA family, darker on hover)
+                  : 'bg-[#2563EB] text-white hover:bg-[#1D4ED8] hover:text-white',
               )}
             >
               <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>

@@ -2,8 +2,12 @@ import type { CTAButton } from './types'
 
 // ─── Hero ────────────────────────────────────────────────────
 export const hero = {
-  heading:    'Software that makes your business easier to run.',
-  subheading: 'We build custom tools shaped around how your business actually works — so your team spends less time fighting systems and more time doing the work.',
+  heading:    'Custom software built to improve business performance',
+  subheading: 'We design and build internal tools, customer-facing platforms, and AI automation systems that streamline operations, reduce manual work, and deliver measurable ROI within 6–12 weeks of deployment.',
+  bodyParagraphs: [
+    'We build custom software for the systems your team uses internally and the digital products your customers interact with.',
+    'We help companies replace manual workflows, reduce operational friction, and improve business performance within 6–12 weeks of deployment.',
+  ],
   primaryCta: {
     label:   "Let's scope your project",
     href:    '/#start-project',
