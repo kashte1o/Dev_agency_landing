@@ -110,7 +110,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               href={navCta.href}
               variant="ghost"
               className={cn(
-                'hidden md:inline-flex px-5 py-[9px] text-[0.875rem] font-medium rounded-[var(--radius-btn)] transition-colors duration-200',
+                'hidden md:inline-flex px-[30px] py-[14px] text-[1.3rem] font-medium rounded-[var(--radius-btn)] transition-colors duration-200',
                 isDark
                   // over dark hero: light filled pill (slate-50 → slate-200)
                   ? 'bg-[#F8FAFC] text-[#0F172A] border-transparent hover:bg-[#E2E8F0] hover:text-[#0F172A]'
