@@ -17,7 +17,6 @@ export function HeroCta({ href, children, className }: HeroCtaProps) {
         'relative inline-flex items-center gap-3 select-none cursor-pointer',
         'bg-accent text-white font-semibold',
         'rounded-[var(--radius-btn)] md:rounded-[10px]',
-        // restore original hero button sizing
         'px-7 py-[14px] text-[0.95rem]',
         'md:px-12 md:py-[26px] md:text-[1.1rem] md:font-semibold',
         'outline-none',
@@ -25,21 +24,37 @@ export function HeroCta({ href, children, className }: HeroCtaProps) {
         className,
       )}
     >
-      {/* Text — exits up on hover, duplicate enters from below */}
-      <span className="overflow-hidden" style={{ height: '1.25em' }}>
-        <span className="hero-cta-text-group flex flex-col">
-          <span className="block" style={{ lineHeight: '1.25em' }}>{children}</span>
-          <span className="block" style={{ lineHeight: '1.25em' }} aria-hidden="true">{children}</span>
+      {/* Text — exits up, duplicate enters from below */}
+      <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>
+        <span
+          className="hero-cta-text-group"
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          <span style={{ display: 'block', lineHeight: '1.25em' }}>{children}</span>
+          <span style={{ display: 'block', lineHeight: '1.25em' }} aria-hidden="true">{children}</span>
         </span>
       </span>
 
-      {/* Arrow — [new (hidden left)][visible] horizontal pair.
-          Group starts at translateX(-16px) so "visible" fills wrapper.
-          On hover slides right: visible exits right, new enters from left. */}
-      <span className="overflow-hidden flex-shrink-0" style={{ width: '16px', height: '16px' }}>
-        <span className="hero-cta-arrow-group flex">
-          <ArrowRight size={16} strokeWidth={2} className="flex-shrink-0" aria-hidden="true" />
-          <ArrowRight size={16} strokeWidth={2} className="flex-shrink-0" />
+      {/* Arrow AFTER text.
+          Group layout: [new arrow][visible arrow]
+          Default translateX(-16px) → visible arrow fills wrapper.
+          Hover translateX(0) → visible exits right, new enters from left. */}
+      <span
+        style={{
+          display: 'inline-block',
+          overflow: 'hidden',
+          width: '16px',
+          height: '16px',
+          flexShrink: 0,
+          position: 'relative',
+        }}
+      >
+        <span
+          className="hero-cta-arrow-group"
+          style={{ display: 'flex' }}
+        >
+          <ArrowRight size={16} strokeWidth={2} style={{ flexShrink: 0, display: 'block' }} aria-hidden={true} />
+          <ArrowRight size={16} strokeWidth={2} style={{ flexShrink: 0, display: 'block' }} />
         </span>
       </span>
     </a>
