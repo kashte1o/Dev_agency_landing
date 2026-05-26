@@ -57,16 +57,17 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
         {/*
-          Mobile:  flex justify-between → [logo] [hamburger]
-          Desktop: grid 1fr auto 1fr   → [logo] [nav center] [cta right]
+          Symmetric layout:
+            - Logo at container's left padding edge
+            - CTA at container's right padding edge (same distance from edge)
+            - Nav links ABSOLUTELY centered in navbar — independent of logo/CTA widths
         */}
         <div
           className="
-            mx-auto w-full max-w-[1440px]
+            relative mx-auto w-full max-w-[1440px]
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
             flex items-center justify-between
-            md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:justify-normal
           "
         >
           {/* Left — Logo */}
@@ -83,9 +84,9 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
           </div>
 
-          {/* Center — Nav links */}
+          {/* Center — Nav links absolutely centered in the navbar */}
           <nav
-            className="hidden md:flex items-center gap-9"
+            className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (
@@ -110,7 +111,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               href={navCta.href}
               variant="ghost"
               className={cn(
-                'hidden md:inline-flex px-[30px] py-[14px] text-[1.3rem] font-medium rounded-[var(--radius-btn)] transition-colors duration-200',
+                'hidden md:inline-flex px-[22px] py-[10px] text-[1rem] font-medium rounded-[var(--radius-btn)] transition-colors duration-200',
                 isDark
                   // over dark hero: light filled pill (slate-50 → slate-200)
                   ? 'bg-[#F8FAFC] text-[#0F172A] border-transparent hover:bg-[#E2E8F0] hover:text-[#0F172A]'
