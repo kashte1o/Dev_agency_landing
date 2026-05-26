@@ -43,39 +43,51 @@ export function NavBar({ heroDark = true }: NavBarProps) {
   return (
     <>
       <motion.header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50',
-          scrolled && 'shadow-[0_1px_0_rgba(0,0,0,0.06)]',
-        )}
+        className="fixed top-0 left-0 right-0 z-50 border-b"
         animate={{
           backgroundColor: scrolled
             ? 'rgba(247,248,250,0.97)'
             : 'rgba(11,16,32,0)',
           backdropFilter: scrolled ? 'blur(18px)' : 'blur(0px)',
+          // subtle separator: faint white line over hero, faint dark line when scrolled
+          borderBottomColor: scrolled
+            ? 'rgba(0,0,0,0.07)'
+            : 'rgba(255,255,255,0.05)',
         }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
+        {/*
+          Mobile:  flex justify-between → [logo] [hamburger]
+          Desktop: grid 1fr auto 1fr   → [logo] [nav center] [cta right]
+        */}
         <div
           className="
-            mx-auto flex w-full max-w-[1440px] items-center justify-between
+            mx-auto w-full max-w-[1440px]
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
+            flex items-center justify-between
+            md:grid md:grid-cols-[1fr_auto_1fr] md:items-center
           "
         >
-          {/* Logo — lg size on desktop */}
-          <LogoMark
-            variant={isDark ? 'light' : 'dark'}
-            size="xl"
-            className="hidden md:inline-flex"
-          />
-          <LogoMark
-            variant={isDark ? 'light' : 'dark'}
-            size="sm"
-            className="inline-flex md:hidden"
-          />
+          {/* Left — Logo */}
+          <div className="flex items-center">
+            <LogoMark
+              variant={isDark ? 'light' : 'dark'}
+              size="xl"
+              className="hidden md:inline-flex"
+            />
+            <LogoMark
+              variant={isDark ? 'light' : 'dark'}
+              size="sm"
+              className="inline-flex md:hidden"
+            />
+          </div>
 
-          {/* Desktop nav + CTA grouped together */}
-          <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+          {/* Center — Nav links */}
+          <nav
+            className="hidden md:flex items-center gap-9"
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -90,29 +102,40 @@ export function NavBar({ heroDark = true }: NavBarProps) {
                 {link.label}
               </a>
             ))}
+          </nav>
+
+          {/* Right — CTA on desktop, hamburger on mobile */}
+          <div className="flex items-center justify-end">
             <Button
               href={navCta.href}
-              variant={isDark ? 'ghost-dark' : 'secondary'}
-              className="px-5 py-[8px] text-[0.875rem] font-medium"
+              variant="ghost"
+              className={cn(
+                'hidden md:inline-flex px-5 py-[9px] text-[0.875rem] font-medium rounded-[var(--radius-btn)] transition-colors duration-200',
+                isDark
+                  // over dark hero: frosted pill
+                  ? 'bg-white/[0.09] text-white border border-white/[0.14] hover:bg-white/[0.16] hover:text-white hover:border-white/[0.22]'
+                  // scrolled light navbar: dark pill
+                  : 'bg-[#111827] text-white border-transparent hover:bg-[#1F2937] hover:text-white',
+              )}
             >
               {navCta.label}
             </Button>
-          </nav>
 
-          {/* Mobile hamburger */}
-          <button
-            className={cn(
-              'flex md:hidden items-center justify-center rounded-md p-2 transition-colors',
-              isDark
-                ? 'text-white/70 hover:text-white hover:bg-white/10'
-                : 'text-text-secondary hover:text-text-primary hover:bg-bg-subtle',
-            )}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            {/* Mobile hamburger */}
+            <button
+              className={cn(
+                'flex md:hidden items-center justify-center rounded-md p-2 transition-colors',
+                isDark
+                  ? 'text-white/70 hover:text-white hover:bg-white/10'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-subtle',
+              )}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </motion.header>
 
