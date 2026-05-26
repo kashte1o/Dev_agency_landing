@@ -74,16 +74,18 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             flex items-center justify-between
           "
         >
-          {/* Left — Logo */}
+          {/* Left — Logo (intro animation plays once on initial mount) */}
           <div className="flex items-center justify-start min-w-0">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="lg"
+              intro
               className="hidden md:inline-flex"
             />
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="sm"
+              intro
               className="inline-flex md:hidden"
             />
           </div>

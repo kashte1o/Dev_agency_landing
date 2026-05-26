@@ -6,6 +6,7 @@ interface LogoMarkProps {
   size?: 'sm' | 'md' | 'lg' | 'xl'
   className?: string
   pulse?: boolean
+  intro?: boolean
 }
 
 // Width/height pairs — aspect ratio ~5.3:1 matches the logo file
@@ -19,6 +20,7 @@ const sizeMap = {
 export function LogoMark({
   size = 'sm',
   pulse = false,
+  intro = false,
   className,
 }: LogoMarkProps) {
   const { width, height } = sizeMap[size]
@@ -28,10 +30,11 @@ export function LogoMark({
       href="/"
       aria-label="Runmade — home"
       className={cn(
-        'inline-flex items-center select-none',
+        'relative inline-flex items-center select-none',
         pulse && 'logo-pulse',
         className,
       )}
+      style={{ width, height }}
     >
       <Image
         src="/images/logo.png"
@@ -39,8 +42,14 @@ export function LogoMark({
         width={width}
         height={height}
         priority
-        className="object-contain"
+        className="object-contain relative z-[1]"
       />
+      {intro && (
+        <>
+          <span aria-hidden className="logo-intro-sweep" />
+          <span aria-hidden className="logo-intro-flash" />
+        </>
+      )}
     </a>
   )
 }
