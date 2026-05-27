@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="bg-bg-dark text-white/70">
       <div className="mx-auto w-full max-w-[1100px] px-6">
-        <div aria-hidden className="mx-auto h-px w-full max-w-[480px] bg-white/10" />
+        <div aria-hidden className="mx-auto h-px w-full max-w-[960px] bg-white/10" />
         {/* Top grid */}
         <div className="grid grid-cols-2 gap-8 py-16 md:grid-cols-4">
           {/* Brand col */}
