@@ -13,14 +13,15 @@ interface ContactSectionProps {
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
     <Section id="start-project" background="dark" className="relative">
-      {/* Accent bar — visual "new chapter" marker at the dark transition.
-          Glow intentionally extends past the top edge to bridge the FAQ fade. */}
+      {/* Full-width accent hairline marking the start of the dark CTA section.
+          Tight, contained glow that doesn't overpower the FAQ fade above. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 h-[3px] w-[220px] rounded-full bg-accent z-10"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px z-10"
         style={{
-          boxShadow:
-            '0 0 32px 4px rgba(59,130,246,0.75), 0 0 80px 8px rgba(59,130,246,0.35)',
+          background:
+            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.55) 30%, rgba(59,130,246,0.55) 70%, transparent 100%)',
+          boxShadow: '0 0 8px 0 rgba(59,130,246,0.25)',
         }}
       />
       <Container>
