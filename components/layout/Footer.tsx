@@ -13,7 +13,7 @@ export function Footer() {
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
             <LogoMark variant="light" />
-            <p className="text-sm leading-relaxed text-white/50 max-w-[200px]">
+            <p className="text-sm leading-relaxed text-white/50 max-w-[200px] self-center text-center">
               {footerTagline}
             </p>
             {socialLinks.length > 0 && (
