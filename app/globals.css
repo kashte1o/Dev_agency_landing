@@ -171,7 +171,7 @@ img, svg, video {
 }
 
 .logo-marquee-track {
-  animation: logoMarquee 10s linear infinite;
+  animation: logoMarquee 13.5s linear infinite;
 }
 
 /* Note: we intentionally do NOT gate this on prefers-reduced-motion.
