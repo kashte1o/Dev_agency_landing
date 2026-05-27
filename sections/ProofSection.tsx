@@ -52,7 +52,7 @@ const CASES = [
 
 export function ProofSection() {
   return (
-    <Section id="proof" background="subtle" className="py-20 md:py-28 lg:py-32">
+    <Section id="proof" background="base" className="py-20 md:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
         <motion.div
           variants={staggerContainer}

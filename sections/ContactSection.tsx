@@ -12,7 +12,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="subtle">
+    <Section id="start-project" background="dark">
       <Container>
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-20">
           {/* Left: heading + trust signals */}
@@ -26,13 +26,13 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl"
+                className="text-3xl font-bold tracking-tight text-white md:text-4xl"
               >
                 {contactSection.heading}
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="mt-4 text-base leading-relaxed text-text-secondary"
+                className="mt-4 text-base leading-relaxed text-white/60"
               >
                 {contactSection.subheading}
               </motion.p>
@@ -50,8 +50,8 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
                     {signal.icon}
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-text-primary">{signal.title}</p>
-                    <p className="text-sm text-text-secondary">{signal.body}</p>
+                    <p className="text-sm font-semibold text-white">{signal.title}</p>
+                    <p className="text-sm text-white/60">{signal.body}</p>
                   </div>
                 </motion.div>
               ))}

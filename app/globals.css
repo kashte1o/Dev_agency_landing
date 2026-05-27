@@ -4,13 +4,15 @@
 :root {
   --bg-base:          #F7F8FA;
   --bg-surface:       #FFFFFF;
-  --bg-subtle:        #F3F1EC;
+  --bg-subtle:        #F1F5F9;
   --bg-dark:          #070A12;
+  --bg-dark-soft:     #080E1E;
   --text-primary:     #111827;
   --text-secondary:   #6B7280;
   --accent:           #3B82F6;
   --accent-green:     #A3E635;
   --border-color:     #E5E7EB;
+  --border-subtle:    #E2E8F0;
 }
 
 /* ─── Tailwind v4 theme ─────────────────────────────────────── */
@@ -24,11 +26,13 @@
   --color-bg-surface:     var(--bg-surface);
   --color-bg-subtle:      var(--bg-subtle);
   --color-bg-dark:        var(--bg-dark);
+  --color-bg-dark-soft:   var(--bg-dark-soft);
   --color-text-primary:   var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-accent:         var(--accent);
   --color-accent-green:   var(--accent-green);
   --color-border:         var(--border-color);
+  --color-border-subtle:  var(--border-subtle);
 
   /* Radius */
   --radius-badge:  4px;

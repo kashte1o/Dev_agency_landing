@@ -36,7 +36,7 @@ function StaticProcess({
   steps: ProcessStep[]
 }) {
   return (
-    <Section id="process" style={{ backgroundColor: '#080E1E' }}>
+    <Section id="process" style={{ backgroundColor: 'var(--bg-dark-soft)' }}>
       <Container>
         <div className="flex flex-col items-center gap-4 text-center mb-16">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white/30">
@@ -223,7 +223,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
     <section
       id="process"
       className="py-20 md:py-[120px]"
-      style={{ backgroundColor: '#080E1E' }}
+      style={{ backgroundColor: 'var(--bg-dark-soft)' }}
     >
       <Container>
         <motion.div

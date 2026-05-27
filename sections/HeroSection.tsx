@@ -17,7 +17,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full overflow-hidden bg-[#070A12] flex flex-col"
+      className="relative min-h-screen w-full overflow-hidden bg-bg-dark flex flex-col"
       aria-label="Hero"
     >
 

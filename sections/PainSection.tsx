@@ -11,15 +11,10 @@ interface PainSectionProps {
 
 export function PainSection({ pain }: PainSectionProps) {
   return (
-    /*
-      Background: slightly darker than --bg-subtle (#F3F1EC) per PROJECT.md spec.
-      Using inline style override so Section's bg class doesn't conflict.
-    */
     <Section
       id="pain"
       background="subtle"
       className="py-20 md:py-28 lg:py-32"
-      style={{ backgroundColor: '#ECEAE3' } as React.CSSProperties}
     >
       {/* Container aligns left edge with hero headline */}
       <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
@@ -69,7 +64,7 @@ export function PainSection({ pain }: PainSectionProps) {
           viewport={VIEWPORT}
           className="
             mt-10 md:mt-14
-            rounded-xl border border-[#DEDAD2] bg-bg-surface
+            rounded-xl border border-[#E2E8F0] bg-bg-surface
             px-8 py-6
             text-center
             text-[1.05rem] md:text-[1.15rem]
@@ -101,7 +96,7 @@ function PainCard({ card }: PainCardProps) {
       className="
         flex flex-col
         rounded-[16px]
-        border border-[#DEDAD2]
+        border border-[#E2E8F0]
         bg-bg-surface
         overflow-hidden
         shadow-[0_1px_4px_rgba(0,0,0,0.04),0_3px_12px_rgba(0,0,0,0.05)]
@@ -109,7 +104,7 @@ function PainCard({ card }: PainCardProps) {
       /* No hover effects per PROJECT.md spec */
     >
       {/* Illustration — full-bleed top */}
-      <div className="relative w-full aspect-square bg-[#F5F4F0]">
+      <div className="relative w-full aspect-square bg-[#F8FAFC]">
         <Image
           src={card.image}
           alt=""
