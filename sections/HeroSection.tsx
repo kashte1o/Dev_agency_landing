@@ -91,10 +91,15 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-4 md:gap-5 pt-2">
-                <HeroCta href={hero.primaryCta.href}>
-                  {hero.primaryCta.label}
-                </HeroCta>
+              <div className="flex flex-wrap items-start gap-4 md:gap-5 pt-2">
+                <div className="flex flex-col items-start gap-[10px]">
+                  <HeroCta href={hero.primaryCta.href}>
+                    {hero.primaryCta.label}
+                  </HeroCta>
+                  <p className="text-[13px] text-white/35">
+                    Talk directly with our software team
+                  </p>
+                </div>
                 {/* Secondary CTA — ghost-dark style + masked text-scroll hover (same as nav Let's talk) */}
                 <a
                   href={hero.secondaryCta.href}
