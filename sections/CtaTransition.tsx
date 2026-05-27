@@ -1,14 +1,18 @@
 import { Section } from '@/components/ui/Section'
-import { HeroCta } from '@/components/ui/HeroCta'
 
 export function CtaTransition() {
   return (
-    <Section background="base" className="py-16 md:py-20 lg:py-24">
-      <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-8 px-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
+    <Section background="base" className="py-6 md:py-7 border-y border-border">
+      <div className="mx-auto flex w-full max-w-[720px] flex-col items-center gap-4 px-6 text-center md:flex-row md:justify-between md:gap-6 md:text-left">
+        <p className="text-lg font-semibold tracking-tight text-text-primary md:text-xl">
           Enough theory. Let&apos;s discuss your case.
-        </h2>
-        <HeroCta href="/#start-project">Let&apos;s scope your project</HeroCta>
+        </p>
+        <a
+          href="/#start-project"
+          className="inline-flex shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-[#0057FF] px-6 py-2.5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-[#1E40AF]"
+        >
+          Let&apos;s scope your project
+        </a>
       </div>
     </Section>
   )
