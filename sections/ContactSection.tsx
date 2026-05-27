@@ -12,12 +12,16 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="dark" className="relative overflow-hidden">
-      {/* Accent bar — visual "new chapter" marker at the dark transition */}
+    <Section id="start-project" background="dark" className="relative">
+      {/* Accent bar — visual "new chapter" marker at the dark transition.
+          Glow intentionally extends past the top edge to bridge the FAQ fade. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 h-[2px] w-[140px] bg-accent"
-        style={{ boxShadow: '0 0 24px rgba(59,130,246,0.55)' }}
+        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 h-[3px] w-[220px] rounded-full bg-accent z-10"
+        style={{
+          boxShadow:
+            '0 0 32px 4px rgba(59,130,246,0.75), 0 0 80px 8px rgba(59,130,246,0.35)',
+        }}
       />
       <Container>
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-20">
