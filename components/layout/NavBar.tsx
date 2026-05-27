@@ -50,9 +50,18 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             // Muted band over hero: semi-opaque dark + blur to feel "blanched"
             : 'rgba(11,16,32,0.55)',
           backdropFilter: scrolled ? 'blur(18px)' : 'blur(10px)',
+          // Slate-tinted hairline (cool blue-gray) — reads as machined edge
+          // rather than a drawn line. Same visual weight as the previous
+          // pure white/black border, just temperature-shifted toward steel.
           borderBottomColor: scrolled
-            ? 'rgba(0,0,0,0.07)'
-            : 'rgba(255,255,255,0.06)',
+            ? 'rgba(71,85,105,0.10)'
+            : 'rgba(148,163,184,0.10)',
+          // Inset 1px highlight stacked just above the border = dual-edge bevel.
+          // Kept under 5% opacity so it never reads as a visible line, only as
+          // a subtle reflective lip when light catches the navbar edge.
+          boxShadow: scrolled
+            ? 'inset 0 -1px 0 0 rgba(15,23,42,0.025)'
+            : 'inset 0 -1px 0 0 rgba(203,213,225,0.04)',
         }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
