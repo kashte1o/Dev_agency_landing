@@ -1,7 +1,14 @@
 const logos = [
-  { src: "/images/logos/lava.svg", alt: "Lava" },
-  { src: "/images/logos/paxful5450.logowik.com.svg", alt: "Paxful" },
-  { src: "/images/logos/rwelogo.svg", alt: "RWE" },
+  { src: "/images/logos/lava.svg",                   alt: "Lava" },
+  { src: "/images/logos/Gymshark_idjQqXJS_o_1.svg",  alt: "Gymshark" },
+  { src: "/images/logos/Huel_idf70Rt9LQ_0.svg",      alt: "Huel" },
+  { src: "/images/logos/hubspot.svg",                alt: "HubSpot" },
+  { src: "/images/logos/monzo-logo.svg",             alt: "Monzo" },
+  { src: "/images/logos/shopify-2.svg",              alt: "Shopify" },
+  { src: "/images/logos/trustpilot-1.svg",           alt: "Trustpilot" },
+  { src: "/images/logos/rwelogo.svg",                alt: "RWE" },
+  { src: "/images/logos/Symbol.svg",                 alt: "Symbol" },
+  { src: "/images/logos/idBbC2W5qu_logos.svg",       alt: "Partner" },
 ]
 
 // Item box and right-gap kept in sync via clamp; per-item margin (not CSS `gap`)
