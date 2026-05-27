@@ -17,16 +17,8 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-[#070A12] flex flex-col"
+      className="relative min-h-screen w-full overflow-hidden bg-[#070A12] flex flex-col"
       aria-label="Hero"
-      style={{
-        // Fills the area below the fixed header. Using svh keeps mobile chrome
-        // shift out of the equation and stops `min-h-screen` from inflating the
-        // section beyond the viewport, which previously pushed the CTA against
-        // the bottom fade and pulled the founder block toward the edges.
-        minHeight: 'calc(100svh - var(--header-h))',
-        marginTop: 'var(--header-h)',
-      }}
     >
 
       {/* ── Ambient top glow ──────────────────────────────────── */}
@@ -50,14 +42,17 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         }}
       />
 
-      {/* ── Content — vertically centered between header and bottom ─ */}
-      <div className="relative z-10 flex flex-1 items-center w-full">
+      {/* ── Content — vertically centered between header and bottom.
+          The section keeps `min-h-screen` so the dark fill extends from y=0
+          and the fixed navbar's 55% tint sits over `#070A12`, not over the
+          light body bg. The inner pt-[130px] clears the navbar visually. */}
+      <div className="relative z-10 flex flex-1 items-center w-full pt-[80px] md:pt-[130px]">
         <div
           className="mx-auto w-full max-w-[1320px]"
           style={{
             paddingLeft: 'clamp(24px, 4vw, 80px)',
             paddingRight: 'clamp(24px, 4vw, 80px)',
-            paddingTop: 'clamp(32px, 4vh, 80px)',
+            paddingTop: 'clamp(24px, 3vh, 64px)',
             paddingBottom: 'clamp(40px, 6vh, 96px)',
           }}
         >
