@@ -17,11 +17,11 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
           Tight, contained glow that doesn't overpower the FAQ fade above. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px z-10"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[2px] z-10"
         style={{
           background:
-            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.55) 30%, rgba(59,130,246,0.55) 70%, transparent 100%)',
-          boxShadow: '0 0 8px 0 rgba(59,130,246,0.25)',
+            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.95) 25%, rgba(59,130,246,0.95) 75%, transparent 100%)',
+          boxShadow: '0 0 14px 1px rgba(59,130,246,0.5)',
         }}
       />
       <Container>
