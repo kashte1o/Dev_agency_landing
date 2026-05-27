@@ -17,8 +17,16 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full overflow-hidden bg-[#070A12] flex flex-col"
+      className="relative w-full overflow-hidden bg-[#070A12] flex flex-col"
       aria-label="Hero"
+      style={{
+        // Fills the area below the fixed header. Using svh keeps mobile chrome
+        // shift out of the equation and stops `min-h-screen` from inflating the
+        // section beyond the viewport, which previously pushed the CTA against
+        // the bottom fade and pulled the founder block toward the edges.
+        minHeight: 'calc(100svh - var(--header-h))',
+        marginTop: 'var(--header-h)',
+      }}
     >
 
       {/* ── Ambient top glow ──────────────────────────────────── */}
@@ -42,96 +50,91 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         }}
       />
 
-      {/* ── Content — pushes below navbar ────────────────────── */}
-      <div
-        className="relative z-10 flex flex-1 items-center pt-[80px] md:pt-[130px]"
-      >
+      {/* ── Content — vertically centered between header and bottom ─ */}
+      <div className="relative z-10 flex flex-1 items-center w-full">
         <div
-          className="w-full"
-          style={{}}
+          className="mx-auto w-full max-w-[1320px]"
+          style={{
+            paddingLeft: 'clamp(24px, 4vw, 80px)',
+            paddingRight: 'clamp(24px, 4vw, 80px)',
+            paddingTop: 'clamp(32px, 4vh, 80px)',
+            paddingBottom: 'clamp(40px, 6vh, 96px)',
+          }}
         >
           <div
-            className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20 py-12 md:py-0"
-            style={
-              {} as React.CSSProperties
-            }
+            className="grid grid-cols-1 items-center md:grid-cols-[1.35fr_1fr]"
+            style={{ columnGap: 'clamp(40px, 5vw, 96px)', rowGap: 'clamp(32px, 5vw, 64px)' }}
           >
-            <div className="
-              grid grid-cols-1 items-center
-              gap-10 md:gap-12 lg:gap-16
-              md:grid-cols-[3fr_2fr]
-            ">
 
-              {/* ── LEFT ──────────────────────────────────────── */}
-              <div className="flex flex-col gap-7 md:gap-8">
+            {/* ── LEFT ──────────────────────────────────────── */}
+            <div className="flex flex-col gap-7 md:gap-8">
 
-                {isAvailable && (
-                  <div>
-                    <StatusBadge label={availableText} />
-                  </div>
-                )}
-
-                <h1
-                  className="font-bold text-white tracking-[-0.025em] leading-[1.05]"
-                  style={{ fontSize: 'clamp(2.5rem, 4.2vw, 5.125rem)' }}
-                >
-                  {hero.heading}
-                </h1>
-
-                {/* Body paragraphs (replaces former subheading) */}
-                <div className="flex flex-col gap-5 max-w-[680px]">
-                  {hero.bodyParagraphs.map((para, i) => (
-                    <p
-                      key={i}
-                      className="leading-[1.65] text-white/55"
-                      style={{ fontSize: 'clamp(1.2rem, 1.2vw, 1.38rem)' }}
-                    >
-                      {para}
-                    </p>
-                  ))}
+              {isAvailable && availableText && (
+                <div>
+                  <StatusBadge label={availableText} />
                 </div>
+              )}
 
-                {/* CTAs */}
-                <div className="flex flex-wrap items-center gap-4 md:gap-5 pt-2">
-                  <HeroCta href={hero.primaryCta.href}>
-                    {hero.primaryCta.label}
-                  </HeroCta>
-                  {/* Secondary CTA — ghost-dark style + masked text-scroll hover (same as nav Let's talk) */}
-                  <a
-                    href={hero.secondaryCta.href}
-                    className={cn(
-                      'nav-cta',
-                      'inline-flex items-center justify-center gap-2 font-medium select-none cursor-pointer',
-                      'rounded-[var(--radius-btn)] border border-white/12 text-white/50',
-                      'hover:bg-white/[0.06] hover:border-white/20 hover:text-white/70',
-                      'transition-colors duration-[350ms]',
-                      'px-7 py-[14px] text-[0.95rem]',
-                      'md:px-12 md:py-[26px] md:text-[1.1rem] md:rounded-[10px]',
-                    )}
+              <h1
+                className="font-bold text-white tracking-[-0.025em] leading-[1.05]"
+                style={{ fontSize: 'clamp(2.5rem, 3.6vw, 4.5rem)' }}
+              >
+                {hero.heading}
+              </h1>
+
+              {/* Body paragraphs (replaces former subheading) */}
+              <div className="flex flex-col gap-5 max-w-[640px]">
+                {hero.bodyParagraphs.map((para, i) => (
+                  <p
+                    key={i}
+                    className="leading-[1.65] text-white/55"
+                    style={{ fontSize: 'clamp(1.1rem, 1.05vw, 1.3rem)' }}
                   >
-                    <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>
-                      <span
-                        className="nav-cta-text-group"
-                        style={{ display: 'flex', flexDirection: 'column' }}
-                      >
-                        <span style={{ display: 'block', lineHeight: '1.25em' }}>
-                          {hero.secondaryCta.label}
-                        </span>
-                        <span style={{ display: 'block', lineHeight: '1.25em' }} aria-hidden="true">
-                          {hero.secondaryCta.label}
-                        </span>
+                    {para}
+                  </p>
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-4 md:gap-5 pt-2">
+                <HeroCta href={hero.primaryCta.href}>
+                  {hero.primaryCta.label}
+                </HeroCta>
+                {/* Secondary CTA — ghost-dark style + masked text-scroll hover (same as nav Let's talk) */}
+                <a
+                  href={hero.secondaryCta.href}
+                  className={cn(
+                    'nav-cta',
+                    'inline-flex items-center justify-center gap-2 font-medium select-none cursor-pointer',
+                    'rounded-[var(--radius-btn)] border border-white/12 text-white/50',
+                    'hover:bg-white/[0.06] hover:border-white/20 hover:text-white/70',
+                    'transition-colors duration-[350ms]',
+                    'px-7 py-[14px] text-[0.95rem]',
+                    'md:px-12 md:py-[26px] md:text-[1.1rem] md:rounded-[10px]',
+                  )}
+                >
+                  <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>
+                    <span
+                      className="nav-cta-text-group"
+                      style={{ display: 'flex', flexDirection: 'column' }}
+                    >
+                      <span style={{ display: 'block', lineHeight: '1.25em' }}>
+                        {hero.secondaryCta.label}
+                      </span>
+                      <span style={{ display: 'block', lineHeight: '1.25em' }} aria-hidden="true">
+                        {hero.secondaryCta.label}
                       </span>
                     </span>
-                  </a>
-                </div>
+                  </span>
+                </a>
               </div>
-
-              {/* ── RIGHT: person photo ───────────────────────── */}
-              <div className="hidden md:flex items-end justify-center">
-                <PersonPhoto />
-              </div>
-
             </div>
+
+            {/* ── RIGHT: portrait + caption as one connected block ───── */}
+            <div className="hidden md:block">
+              <PersonPhoto />
+            </div>
+
           </div>
         </div>
       </div>
@@ -139,8 +142,11 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
       {/* ── Bottom fade ──────────────────────────────────────── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 z-10"
-        style={{ background: 'linear-gradient(to bottom, transparent, rgba(7,10,18,0.75))' }}
+        className="pointer-events-none absolute bottom-0 left-0 right-0 z-10"
+        style={{
+          height: 'clamp(72px, 10vh, 140px)',
+          background: 'linear-gradient(to bottom, transparent, rgba(7,10,18,0.75))',
+        }}
       />
     </section>
   )
@@ -148,38 +154,67 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
 function PersonPhoto() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mx-auto" style={{ maxWidth: '440px' }}>
+      {/* Portrait — width-scaled height with a hard cap; no svh dependency that
+          drifts the head off-screen on shorter monitors */}
       <div
-        className="relative mx-auto flex max-w-[480px] select-none items-end justify-center"
+        className="relative w-full select-none flex items-center justify-center"
         style={{
-          // Width-based scaling (was 72vh) so portrait doesn't drift with viewport height.
-          // min() with svh as a safety cap on short-viewport monitors.
-          height: 'min(clamp(340px, 30vw, 520px), 58svh)',
+          height: 'clamp(320px, 24vw, 460px)',
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/hero-person.webp"
           alt="Aleksandr Sizov"
-          className="block h-full w-auto object-contain object-bottom"
+          className="block h-full w-auto"
+          style={{
+            objectFit: 'contain',
+            objectPosition: 'center bottom',
+            maxHeight: '100%',
+            maxWidth: '100%',
+          }}
         />
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
-          style={{ background: 'linear-gradient(to bottom, transparent, #070A12)' }}
+          className="pointer-events-none absolute bottom-0 left-0 right-0"
+          style={{
+            height: 'clamp(56px, 7vw, 96px)',
+            background: 'linear-gradient(to bottom, transparent, #070A12)',
+          }}
         />
       </div>
 
-      {/* Caption — kept directly attached to the portrait as one block */}
-      <div className="text-center pt-1 pb-4 max-w-[380px]">
-        <p className="text-[1.75rem] font-semibold leading-snug text-white/80 tracking-[-0.01em]">
+      {/* Caption — explicit gap keeps portrait + name + quote + role as one unit */}
+      <div
+        className="text-center max-w-[380px]"
+        style={{ marginTop: 'clamp(8px, 1vw, 18px)', paddingBottom: 'clamp(0px, 0.5vw, 8px)' }}
+      >
+        <p
+          className="font-semibold text-white/80 tracking-[-0.01em]"
+          style={{ fontSize: 'clamp(1.2rem, 1.35vw, 1.6rem)', lineHeight: 1.25 }}
+        >
           Aleksandr Sizov
         </p>
-        <p className="mt-3 text-[1.125rem] leading-[1.6] text-white/50 italic">
+        <p
+          className="text-white/50 italic"
+          style={{
+            marginTop: 'clamp(8px, 0.7vw, 14px)',
+            fontSize: 'clamp(0.95rem, 0.95vw, 1.1rem)',
+            lineHeight: 1.55,
+          }}
+        >
           &ldquo;I approach every project from the client&apos;s side: business first, budget protected, and software delivered fast.&rdquo;
         </p>
-        <p className="mt-3 text-[1.5rem] text-white/35 tracking-[0.025em]">
+        <p
+          className="text-white/35 tracking-[0.025em]"
+          style={{
+            marginTop: 'clamp(8px, 0.7vw, 14px)',
+            fontSize: 'clamp(1.05rem, 1.15vw, 1.4rem)',
+            lineHeight: 1.3,
+          }}
+        >
           Founder &amp; CEO of Runmade
         </p>
       </div>
