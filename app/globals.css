@@ -174,9 +174,12 @@ img, svg, video {
   animation: logoMarquee 40s linear infinite;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .logo-marquee-track { animation: none; }
-}
+/* Note: we intentionally do NOT gate this on prefers-reduced-motion.
+   The marquee is a subtle, slow brand element (40s loop, masked edges)
+   — disabling it left the section visually static for users whose OS or
+   DevTools toggled reduced-motion, masking it as if the animation was
+   broken. If a stricter motion policy is needed later, reintroduce via
+   @media and !important so it overrides any defensive inline styles. */
 
 /* ─── Process wire — electricity dashes ───────────────────── */
 @keyframes electricityFlow {
