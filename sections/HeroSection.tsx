@@ -96,7 +96,10 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                   <HeroCta href={hero.primaryCta.href}>
                     {hero.primaryCta.label}
                   </HeroCta>
-                  <p className="text-[13px] text-white/35">
+                  <p
+                    className="text-white/35 underline"
+                    style={{ fontSize: 'clamp(1.05rem, 1.15vw, 1.4rem)', lineHeight: 1.3 }}
+                  >
                     Talk directly with our software team
                   </p>
                 </div>
