@@ -5,6 +5,7 @@ import { PillarsSection } from '@/sections/PillarsSection'
 import { ProcessSection } from '@/sections/ProcessSection'
 import { CredibilitySection } from '@/sections/CredibilitySection'
 import { ProofSection } from '@/sections/ProofSection'
+import { CtaTransition } from '@/sections/CtaTransition'
 import { FAQSection } from '@/sections/FAQSection'
 import { ContactSection } from '@/sections/ContactSection'
 
@@ -26,6 +27,7 @@ export default function HomePage() {
       <PillarsSection pillars={pillars} />
       <ProcessSection heading={processHeading} subheading={processSubheading} steps={processSteps} />
       <CredibilitySection credibility={credibility} />
+      <CtaTransition />
       <FAQSection />
       <ContactSection contactSection={contactSection} />
     </>
