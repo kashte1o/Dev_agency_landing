@@ -14,9 +14,9 @@ export function FAQSection() {
       {/* Bottom fade — softens transition into dark Contact section */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-48 z-0"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 z-[5]"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(7,10,18,0.10) 40%, rgba(7,10,18,0.38) 100%)',
+          background: 'linear-gradient(to bottom, rgba(7,10,18,0) 0%, rgba(7,10,18,0.15) 35%, rgba(7,10,18,0.55) 100%)',
         }}
       />
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
