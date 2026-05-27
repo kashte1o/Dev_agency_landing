@@ -12,16 +12,23 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="dark" className="relative">
-      {/* Full-width accent hairline marking the start of the dark CTA section.
-          Tight, contained glow that doesn't overpower the FAQ fade above. */}
+    <Section id="start-project" background="dark" className="relative pt-14 md:pt-20 pb-20 md:pb-[120px]">
+      {/* Edge-light: 1px hairline with pale blue-white center, fading to transparent at the edges */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[4px] z-50"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px z-20"
         style={{
           background:
-            'linear-gradient(to right, rgba(59,130,246,0) 0%, rgba(59,130,246,1) 20%, rgba(59,130,246,1) 80%, rgba(59,130,246,0) 100%)',
-          boxShadow: '0 0 18px 2px rgba(59,130,246,0.6)',
+            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.35) 22%, rgba(220,235,255,0.85) 50%, rgba(59,130,246,0.35) 78%, transparent 100%)',
+        }}
+      />
+      {/* Soft downward halo — light catching a glass/metal edge, only below the line */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-px h-5 z-10"
+        style={{
+          background:
+            'radial-gradient(ellipse 45% 100% at 50% 0%, rgba(59,130,246,0.30) 0%, rgba(59,130,246,0.10) 45%, transparent 85%)',
         }}
       />
       <Container>

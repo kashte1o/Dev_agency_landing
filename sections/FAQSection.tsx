@@ -10,16 +10,8 @@ const SUBHEADING = "If you're on the fence, the answer is probably here."
 
 export function FAQSection() {
   return (
-    <Section id="faq" background="base" className="relative overflow-hidden py-20 md:py-28 lg:py-32">
-      {/* Bottom fade — softens transition into dark Contact section */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 z-[5]"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(7,10,18,0) 0%, rgba(7,10,18,0.15) 35%, rgba(7,10,18,0.55) 100%)',
-        }}
-      />
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
+    <Section id="faq" background="base" className="py-20 md:py-28 lg:py-32">
+      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
