@@ -26,7 +26,7 @@ export function LogoStrip() {
       aria-label="Trusted by great companies"
       className="border-b border-border bg-bg-base"
     >
-      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20 py-12 md:py-16 lg:py-20">
+      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20 pt-6 pb-12 md:pt-8 md:pb-16 lg:pt-10 lg:pb-20">
         <div className="flex flex-col items-center gap-8 md:gap-12">
           <p className="text-[1.5rem] md:text-[1.75rem] font-bold uppercase tracking-[0.18em] text-text-secondary/60 text-center">
             Trusted by great companies
