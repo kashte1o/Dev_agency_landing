@@ -243,6 +243,20 @@ img, svg, video {
   transform: scale(0.98);
 }
 
+/* ─── Trust microcopy — cyclic underline replace on hover ─────
+   Two stacked bars inside an overflow:hidden mask; on hover the
+   track translates -50% so bar1 exits left while bar2 enters from
+   right. Hold periods at start and end so each line lingers a moment
+   before being replaced — feels like a deliberate refresh, not a
+   continuous scroll. */
+@keyframes trustUnderlineLoop {
+  0%, 30%   { transform: translate3d(0, 0, 0); }
+  70%, 100% { transform: translate3d(-50%, 0, 0); }
+}
+.trust-link:hover .trust-underline-track {
+  animation: trustUnderlineLoop 1.4s ease-in-out infinite;
+}
+
 /* ─── Navbar CTA — masked text scroll (same easing as hero CTA, no arrow) ─ */
 .nav-cta-text-group {
   transform: translateY(0);

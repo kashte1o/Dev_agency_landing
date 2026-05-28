@@ -124,9 +124,21 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                     </span>
                   </a>
                 </div>
-                <p className="text-[14px] leading-[1.3] text-white/35 underline">
+                <a
+                  href={hero.primaryCta.href}
+                  className="trust-link group relative inline-block self-start text-[21px] leading-[1.3] text-white/35 transition-colors duration-200 hover:text-white/55"
+                >
                   Talk directly with our software team
-                </p>
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute left-0 right-0 -bottom-2 h-px overflow-hidden"
+                  >
+                    <span className="trust-underline-track flex h-full w-[200%]">
+                      <span className="block h-full w-1/2 bg-current" />
+                      <span className="block h-full w-1/2 bg-current" />
+                    </span>
+                  </span>
+                </a>
               </div>
             </div>
 
