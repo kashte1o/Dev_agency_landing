@@ -2,7 +2,7 @@ import { Section } from '@/components/ui/Section'
 
 export function CtaTransition() {
   return (
-    <Section background="base" className="py-6 md:py-7 border-y border-border">
+    <Section background="base" className="py-6 md:py-7">
       <div className="mx-auto flex w-full max-w-[720px] flex-col items-center gap-4 px-6 text-center md:flex-row md:justify-between md:gap-6 md:text-left">
         <p className="text-lg font-semibold tracking-tight text-text-primary md:text-xl">
           Enough theory. Let&apos;s discuss your case.

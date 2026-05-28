@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
+import { Container } from '@/components/ui/Container'
 import { fadeUp, staggerContainer, VIEWPORT } from '@/lib/motion'
 import { homepageFAQ, type FAQItem } from '@/content/faq'
 
@@ -11,7 +12,7 @@ const SUBHEADING = "If you're on the fence, the answer is probably here."
 export function FAQSection() {
   return (
     <Section id="faq" background="base" className="py-20 md:py-28 lg:py-32">
-      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
+      <Container>
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -37,7 +38,7 @@ export function FAQSection() {
             ))}
           </motion.div>
         </motion.div>
-      </div>
+      </Container>
     </Section>
   )
 }
