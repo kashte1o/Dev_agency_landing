@@ -126,7 +126,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </div>
                 <a
                   href={hero.primaryCta.href}
-                  className="trust-link group relative inline-block self-start text-[21px] leading-[1.3] text-white/35 transition-colors duration-200 hover:text-white/55"
+                  className="trust-link group relative inline-block self-start text-[21px] leading-[1.3] text-white/35 no-underline transition-colors duration-200 hover:text-white/55"
                 >
                   Talk directly with our software team
                   <span
