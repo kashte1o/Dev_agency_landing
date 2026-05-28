@@ -11,7 +11,7 @@ const SUBHEADING = "If you're on the fence, the answer is probably here."
 
 export function FAQSection() {
   return (
-    <Section id="faq" background="base" className="py-20 md:py-28 lg:py-32">
+    <Section id="faq" background="base" className="pt-10 md:pt-14 lg:pt-16 pb-20 md:pb-28 lg:pb-32">
       <Container>
         <motion.div
           variants={staggerContainer}

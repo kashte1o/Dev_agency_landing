@@ -11,7 +11,7 @@ interface CredibilitySectionProps {
 
 export function CredibilitySection({ credibility }: CredibilitySectionProps) {
   return (
-    <Section id="about" background="base">
+    <Section id="about" background="base" className="pt-20 md:pt-[120px] pb-10 md:pb-16">
       <Container>
         <motion.div
           variants={staggerContainer}

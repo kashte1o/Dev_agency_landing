@@ -91,45 +91,42 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-start gap-4 md:gap-5 pt-2">
-                <div className="flex flex-col items-start gap-[10px]">
+              <div className="flex flex-col gap-3 pt-2">
+                <div className="flex flex-wrap items-center gap-4 md:gap-5">
                   <HeroCta href={hero.primaryCta.href}>
                     {hero.primaryCta.label}
                   </HeroCta>
-                  <p
-                    className="text-white/35 underline"
-                    style={{ fontSize: 'clamp(1.05rem, 1.15vw, 1.4rem)', lineHeight: 1.3 }}
+                  {/* Secondary CTA — ghost-dark style + masked text-scroll hover (same as nav Let's talk) */}
+                  <a
+                    href={hero.secondaryCta.href}
+                    className={cn(
+                      'nav-cta',
+                      'inline-flex items-center justify-center gap-2 font-medium select-none cursor-pointer',
+                      'rounded-[var(--radius-btn)] border border-white/12 text-white/50',
+                      'hover:bg-white/[0.06] hover:border-white/20 hover:text-white/70',
+                      'transition-colors duration-[350ms]',
+                      'px-7 py-[14px] text-[0.95rem]',
+                      'md:px-12 md:py-[26px] md:text-[1.1rem] md:rounded-[10px]',
+                    )}
                   >
-                    Talk directly with our software team
-                  </p>
-                </div>
-                {/* Secondary CTA — ghost-dark style + masked text-scroll hover (same as nav Let's talk) */}
-                <a
-                  href={hero.secondaryCta.href}
-                  className={cn(
-                    'nav-cta',
-                    'inline-flex items-center justify-center gap-2 font-medium select-none cursor-pointer',
-                    'rounded-[var(--radius-btn)] border border-white/12 text-white/50',
-                    'hover:bg-white/[0.06] hover:border-white/20 hover:text-white/70',
-                    'transition-colors duration-[350ms]',
-                    'px-7 py-[14px] text-[0.95rem]',
-                    'md:px-12 md:py-[26px] md:text-[1.1rem] md:rounded-[10px]',
-                  )}
-                >
-                  <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>
-                    <span
-                      className="nav-cta-text-group"
-                      style={{ display: 'flex', flexDirection: 'column' }}
-                    >
-                      <span style={{ display: 'block', lineHeight: '1.25em' }}>
-                        {hero.secondaryCta.label}
-                      </span>
-                      <span style={{ display: 'block', lineHeight: '1.25em' }} aria-hidden="true">
-                        {hero.secondaryCta.label}
+                    <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>
+                      <span
+                        className="nav-cta-text-group"
+                        style={{ display: 'flex', flexDirection: 'column' }}
+                      >
+                        <span style={{ display: 'block', lineHeight: '1.25em' }}>
+                          {hero.secondaryCta.label}
+                        </span>
+                        <span style={{ display: 'block', lineHeight: '1.25em' }} aria-hidden="true">
+                          {hero.secondaryCta.label}
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </a>
+                  </a>
+                </div>
+                <p className="text-[14px] leading-[1.3] text-white/35 underline">
+                  Talk directly with our software team
+                </p>
               </div>
             </div>
 
