@@ -19,16 +19,16 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
         className="pointer-events-none absolute inset-x-0 top-0 h-px z-20"
         style={{
           background:
-            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.35) 22%, rgba(220,235,255,0.85) 50%, rgba(59,130,246,0.35) 78%, transparent 100%)',
+            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.55) 18%, rgba(230,240,255,1) 50%, rgba(59,130,246,0.55) 82%, transparent 100%)',
         }}
       />
       {/* Soft downward halo — light catching a glass/metal edge, only below the line */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-px h-5 z-10"
+        className="pointer-events-none absolute inset-x-0 top-px h-8 z-10"
         style={{
           background:
-            'radial-gradient(ellipse 45% 100% at 50% 0%, rgba(59,130,246,0.30) 0%, rgba(59,130,246,0.10) 45%, transparent 85%)',
+            'radial-gradient(ellipse 50% 100% at 50% 0%, rgba(59,130,246,0.45) 0%, rgba(59,130,246,0.18) 45%, transparent 85%)',
         }}
       />
       <Container>
