@@ -85,27 +85,27 @@ export const whyDifferent = {
 
 // ─── Pillars ─────────────────────────────────────────────────
 export const pillars = {
-  heading: 'We build custom software around your business.',
+  heading: 'What we build.',
   cards: [
     {
       icon: '⊞',
-      title: 'Organize',
-      description: 'Centralize your data and operations.',
-      body: 'Admin dashboards and internal tools that give your team clarity and control.',
+      title: 'Internal tools & dashboards',
+      description: 'One place for your team to run the business.',
+      body: 'Job tracking, approval workflows, operational dashboards — built around how your team actually works, not around a generic SaaS template.',
       href: '/internal-tools',
     },
     {
       icon: '⚡',
-      title: 'Automate',
-      description: 'Connect steps and eliminate busywork.',
-      body: 'Smart automations and integrations that save time and reduce errors.',
+      title: 'Workflow automation',
+      description: 'Cut the manual work out of your operations.',
+      body: 'Connect your tools, automate repetitive steps, and free your team from copy-paste tasks, status updates, and manual handoffs.',
       href: '/workflow-automation',
     },
     {
       icon: '◎',
-      title: 'Serve',
-      description: 'Deliver a better client experience.',
-      body: 'Client portals and customer-facing systems that build trust and loyalty.',
+      title: 'Client portals & web apps',
+      description: 'A better way for clients to interact with you.',
+      body: 'Self-serve portals, order systems, and customer-facing apps that reduce support load and give clients the visibility they keep asking for.',
       href: '/client-portals',
     },
   ],
