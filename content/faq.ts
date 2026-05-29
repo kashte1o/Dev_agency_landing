@@ -5,7 +5,7 @@ export type FAQItem = {
 
 export const homepageFAQ: FAQItem[] = [
   {
-    question: 'How much will our project cost?',
+    question: 'How much will a project cost?',
     answer: '[PLACEHOLDER]',
   },
   {
