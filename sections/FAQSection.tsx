@@ -33,9 +33,13 @@ export function FAQSection() {
           </div>
 
           <motion.div variants={fadeUp} className="flex flex-col divide-y divide-border">
-            {homepageFAQ.map((item) => (
-              <FAQAccordionItem key={item.question} item={item} />
-            ))}
+            {homepageFAQ.map((item) =>
+              item.cta ? (
+                <FAQCtaItem key={item.question} question={item.question} />
+              ) : (
+                <FAQAccordionItem key={item.question} item={item} />
+              )
+            )}
           </motion.div>
         </motion.div>
       </Container>
@@ -81,5 +85,24 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+function FAQCtaItem({ question }: { question: string }) {
+  return (
+    <a
+      href="#start-project"
+      className="flex w-full items-center justify-between gap-6 py-6 text-left group"
+    >
+      <span className="text-[1.05rem] font-semibold text-text-primary leading-snug group-hover:text-accent transition-colors duration-200">
+        {question}
+      </span>
+      <span
+        aria-hidden
+        className="flex-shrink-0 text-[1rem] font-light text-text-secondary/60 group-hover:text-accent transition-colors duration-200"
+      >
+        →
+      </span>
+    </a>
   )
 }
