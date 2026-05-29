@@ -29,9 +29,9 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
         className="pointer-events-none absolute inset-x-0 z-20"
         style={{
           top: '1px',
-          height: '52px',
+          height: '100px',
           background:
-            'radial-gradient(ellipse 55% 100% at 50% 0%, rgba(120,180,255,0.50) 0%, rgba(80,140,240,0.20) 40%, transparent 80%)',
+            'radial-gradient(ellipse 60% 100% at 50% 0%, rgba(120,180,255,0.50) 0%, rgba(80,140,240,0.22) 45%, transparent 85%)',
         }}
       />
       {/* Layer 3 — Outer halo: diffuse scattering fading deep into the dark */}
@@ -40,9 +40,9 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
         className="pointer-events-none absolute inset-x-0 z-10"
         style={{
           top: '1px',
-          height: '170px',
+          height: '280px',
           background:
-            'radial-gradient(ellipse 75% 100% at 50% 0%, rgba(59,130,246,0.17) 0%, rgba(59,130,246,0.06) 35%, transparent 72%)',
+            'radial-gradient(ellipse 80% 100% at 50% 0%, rgba(59,130,246,0.18) 0%, rgba(59,130,246,0.07) 40%, transparent 75%)',
         }}
       />
       <Container>
