@@ -249,17 +249,14 @@ img, svg, video {
    right. Hold periods at start and end so each line lingers a moment
    before being replaced — feels like a deliberate refresh, not a
    continuous scroll. */
-/* At rest: track sits at -50% so the right bar (current line) is visible.
-   On hover: slide to 0 — current bar exits right, incoming bar enters from left. */
+/* At rest: -50% shows right bar (current line).
+   Hover: slide to 0 — current bar exits right, new bar enters from left. */
 .trust-underline-track {
   transform: translateX(-50%);
-}
-@keyframes trustUnderlineSlide {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .trust-link:hover .trust-underline-track {
-  animation: trustUnderlineSlide 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateX(0);
 }
 
 /* ─── Navbar CTA — masked text scroll (same easing as hero CTA, no arrow) ─ */
