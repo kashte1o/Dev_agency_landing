@@ -134,8 +134,8 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                     className="pointer-events-none absolute left-0 right-0 -bottom-2 h-px overflow-hidden"
                   >
                     <span className="trust-underline-track flex h-full w-[200%]">
-                      <span className="block h-full w-1/2 bg-current" />
-                      <span className="block h-full w-1/2 bg-current" />
+                      <span className="block h-full w-1/2 bg-current" />{/* incoming (from left) */}
+                      <span className="block h-full w-1/2 bg-current" />{/* current (exits right) */}
                     </span>
                   </span>
                 </a>

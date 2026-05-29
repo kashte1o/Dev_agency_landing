@@ -7,7 +7,7 @@ export const isAvailable = false // controls StatusBadge visibility
 
 export const availableText = ''
 
-export const footerTagline = 'Custom software that helps businesses run better.'
+export const footerTagline = 'Custom software that helps businesses run better'
 
 export const footerCopyright = `© ${new Date().getFullYear()} ${STUDIO_NAME}. All rights reserved.`
 
