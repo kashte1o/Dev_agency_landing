@@ -243,19 +243,21 @@ img, svg, video {
   transform: scale(0.98);
 }
 
-/* ─── Trust microcopy — cyclic underline replace on hover ─────
-   Two stacked bars inside an overflow:hidden mask; on hover the
-   track translates -50% so bar1 exits left while bar2 enters from
-   right. Hold periods at start and end so each line lingers a moment
-   before being replaced — feels like a deliberate refresh, not a
-   continuous scroll. */
-/* At rest: -50% shows right bar (current line).
-   Hover: slide to 0 — current bar exits right, new bar enters from left. */
-.trust-underline-track {
-  transform: translateX(-50%);
+/* ─── Trust microcopy — underline swap on hover ───────────────
+   On hover: current line (exit) slides right and vanishes,
+   new line (enter) slides in from the left. */
+.trust-underline-exit {
+  transform: translateX(0);
   transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.trust-link:hover .trust-underline-track {
+.trust-link:hover .trust-underline-exit {
+  transform: translateX(110%);
+}
+.trust-underline-enter {
+  transform: translateX(-110%);
+  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.trust-link:hover .trust-underline-enter {
   transform: translateX(0);
 }
 
