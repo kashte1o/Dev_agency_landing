@@ -11,29 +11,31 @@ interface WhyDifferentSectionProps {
 
 export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) {
   return (
-    <Section id="why-different" background="base" className="py-20 md:py-28 lg:py-32">
+    <Section id="why-different" background="base">
       <Container>
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          className="flex flex-col gap-16 md:gap-20"
+          className="flex flex-col gap-12"
         >
           <motion.h2
             variants={fadeUp}
-            className="text-[2.25rem] font-bold tracking-tight text-text-primary sm:text-[2.75rem] md:text-[3.25rem]"
+            className="max-w-2xl text-3xl font-bold tracking-tight text-text-primary md:text-4xl"
           >
             {whyDifferent.heading}
           </motion.h2>
 
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+          <div className="grid gap-x-16 gap-y-8 sm:grid-cols-3">
             {whyDifferent.cards.map((card) => (
-              <motion.div key={card.title} variants={fadeUp} className="flex flex-col gap-4">
-                <h3 className="border-b border-text-primary pb-3 text-[1.2rem] font-semibold tracking-tight text-text-primary">
-                  {card.title}
-                </h3>
-                <p className="text-[0.95rem] leading-relaxed text-text-secondary">{card.body}</p>
+              <motion.div
+                key={card.title}
+                variants={fadeUp}
+                className="flex flex-col gap-2 border-t border-border pt-6"
+              >
+                <h3 className="font-semibold text-text-primary">{card.title}</h3>
+                <p className="text-sm leading-relaxed text-text-secondary">{card.body}</p>
               </motion.div>
             ))}
           </div>
