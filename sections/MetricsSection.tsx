@@ -6,19 +6,19 @@ import { staggerContainer, fadeUp, VIEWPORT } from '@/lib/motion'
 
 const metrics = [
   {
-    value: 'X wks',
+    value: '5 weeks',
     label: 'Average time from brief to launch',
   },
   {
-    value: 'X×',
+    value: '200%',
     label: 'Average return on development investment within the first year',
   },
   {
-    value: 'X days',
+    value: '7 days',
     label: 'Average team onboarding time to a new system',
   },
   {
-    value: 'X%',
+    value: '98%',
     label: 'Projects delivered on time and on budget',
   },
 ]
