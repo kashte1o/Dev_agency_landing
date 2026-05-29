@@ -13,22 +13,31 @@ interface ContactSectionProps {
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
     <Section id="start-project" background="dark" className="relative pt-14 md:pt-20 pb-20 md:pb-[120px]">
-      {/* Edge-light: 1px hairline with pale blue-white center, fading to transparent at the edges */}
+      {/* Horizon edge — thin bright atmospheric line catching sunlight */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px z-20"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px z-30"
         style={{
           background:
-            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.55) 18%, rgba(230,240,255,1) 50%, rgba(59,130,246,0.55) 82%, transparent 100%)',
+            'linear-gradient(to right, transparent 0%, rgba(120,180,255,0.7) 14%, rgba(240,248,255,1) 50%, rgba(120,180,255,0.7) 86%, transparent 100%)',
         }}
       />
-      {/* Soft downward halo — light catching a glass/metal edge, only below the line */}
+      {/* Inner halo — dense atmospheric glow right below the horizon */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-px h-8 z-10"
+        className="pointer-events-none absolute inset-x-0 top-px h-14 z-20"
         style={{
           background:
-            'radial-gradient(ellipse 50% 100% at 50% 0%, rgba(59,130,246,0.45) 0%, rgba(59,130,246,0.18) 45%, transparent 85%)',
+            'radial-gradient(ellipse 55% 100% at 50% 0%, rgba(120,180,255,0.55) 0%, rgba(80,140,240,0.22) 40%, transparent 80%)',
+        }}
+      />
+      {/* Outer halo — soft dispersed scattering fading deep into space */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-px h-40 z-10"
+        style={{
+          background:
+            'radial-gradient(ellipse 75% 100% at 50% 0%, rgba(59,130,246,0.18) 0%, rgba(59,130,246,0.06) 35%, transparent 72%)',
         }}
       />
       <Container>
