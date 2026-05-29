@@ -244,18 +244,18 @@ img, svg, video {
 }
 
 /* ─── Trust microcopy — underline swap on hover ───────────────
-   On hover: current line (exit) slides right and vanishes,
-   new line (enter) slides in from the left. */
+   Exit fires immediately; enter is delayed so there's a visible
+   gap where no line is shown before the new one slides in. */
 .trust-underline-exit {
   transform: translateX(0);
-  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .trust-link:hover .trust-underline-exit {
   transform: translateX(110%);
 }
 .trust-underline-enter {
   transform: translateX(-110%);
-  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1) 320ms;
 }
 .trust-link:hover .trust-underline-enter {
   transform: translateX(0);
