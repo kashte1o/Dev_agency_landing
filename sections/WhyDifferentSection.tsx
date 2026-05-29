@@ -35,7 +35,7 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
                 className="flex flex-col gap-2 border-t border-border pt-6"
               >
                 <h3 className="font-semibold text-accent">{card.title}</h3>
-                <p className="text-sm leading-relaxed text-text-secondary">{card.body}</p>
+                <p className="leading-[1.65] text-text-secondary" style={{ fontSize: 'clamp(1.1rem, 1.05vw, 1.3rem)' }}>{card.body}</p>
               </motion.div>
             ))}
           </div>
