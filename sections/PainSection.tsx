@@ -14,7 +14,7 @@ export function PainSection({ pain }: PainSectionProps) {
     <Section
       id="pain"
       background="subtle"
-      className="py-20 md:py-28 lg:py-32"
+      className="pt-10 pb-20 md:pt-14 md:pb-28 lg:pt-16 lg:pb-32"
     >
       {/* Container aligns left edge with hero headline */}
       <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
