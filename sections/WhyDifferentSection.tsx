@@ -34,7 +34,7 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
                 variants={fadeUp}
                 className="flex flex-col gap-2 border-t border-border pt-6"
               >
-                <h3 className="font-semibold text-text-primary">{card.title}</h3>
+                <h3 className="font-semibold text-accent">{card.title}</h3>
                 <p className="text-sm leading-relaxed text-text-secondary">{card.body}</p>
               </motion.div>
             ))}
