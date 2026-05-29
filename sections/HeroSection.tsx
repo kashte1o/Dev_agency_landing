@@ -131,7 +131,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                   Talk directly with our software team
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute left-0 right-0 -bottom-2 h-px overflow-hidden"
+                    className="pointer-events-none absolute left-0 right-0 -bottom-6 h-px overflow-hidden"
                   >
                     <span className="trust-underline-exit absolute inset-0 bg-current" />
                     <span className="trust-underline-enter absolute inset-0 bg-current" />
