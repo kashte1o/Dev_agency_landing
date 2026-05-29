@@ -12,23 +12,37 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="dark" className="relative pt-14 md:pt-20 pb-20 md:pb-[120px]">
-      {/* Edge-light: 1px hairline with pale blue-white center, fading to transparent at the edges */}
+    <Section id="start-project" background="dark" className="relative pt-28 md:pt-36 pb-20 md:pb-[120px]">
+      {/* Layer 1 — Horizon edge: surgical 1px line, cool blue-white core */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px z-20"
+        className="pointer-events-none absolute inset-x-0 top-0 z-30"
         style={{
+          height: '1px',
           background:
-            'linear-gradient(to right, transparent 0%, rgba(59,130,246,0.55) 18%, rgba(230,240,255,1) 50%, rgba(59,130,246,0.55) 82%, transparent 100%)',
+            'linear-gradient(to right, transparent 0%, rgba(180,210,255,0.65) 14%, rgba(240,248,255,1) 50%, rgba(180,210,255,0.65) 86%, transparent 100%)',
         }}
       />
-      {/* Soft downward halo — light catching a glass/metal edge, only below the line */}
+      {/* Layer 2 — Inner halo: dense atmospheric dome hugging the horizon */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-px h-8 z-10"
+        className="pointer-events-none absolute inset-x-0 z-20"
         style={{
+          top: '1px',
+          height: '52px',
           background:
-            'radial-gradient(ellipse 50% 100% at 50% 0%, rgba(59,130,246,0.45) 0%, rgba(59,130,246,0.18) 45%, transparent 85%)',
+            'radial-gradient(ellipse 55% 100% at 50% 0%, rgba(120,180,255,0.50) 0%, rgba(80,140,240,0.20) 40%, transparent 80%)',
+        }}
+      />
+      {/* Layer 3 — Outer halo: diffuse scattering fading deep into the dark */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 z-10"
+        style={{
+          top: '1px',
+          height: '170px',
+          background:
+            'radial-gradient(ellipse 75% 100% at 50% 0%, rgba(59,130,246,0.17) 0%, rgba(59,130,246,0.06) 35%, transparent 72%)',
         }}
       />
       <Container>
