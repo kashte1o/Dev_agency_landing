@@ -1,6 +1,6 @@
 import { HeroSection } from '@/sections/HeroSection'
 import { LogoStrip } from '@/sections/LogoStrip'
-import { PainSection } from '@/sections/PainSection'
+import { WhyDifferentSection } from '@/sections/WhyDifferentSection'
 import { PillarsSection } from '@/sections/PillarsSection'
 import { ProcessSection } from '@/sections/ProcessSection'
 import { CredibilitySection } from '@/sections/CredibilitySection'
@@ -9,7 +9,7 @@ import { CtaTransition } from '@/sections/CtaTransition'
 import { FAQSection } from '@/sections/FAQSection'
 import { ContactSection } from '@/sections/ContactSection'
 
-import { hero, pain, pillars, credibility, contactSection } from '@/content/home'
+import { hero, whyDifferent, pillars, credibility, contactSection } from '@/content/home'
 import { processHeading, processSubheading, processSteps } from '@/content/process'
 import { isAvailable, availableText } from '@/content/siteCopy'
 
@@ -22,7 +22,7 @@ export default function HomePage() {
         isAvailable={isAvailable}
       />
       <LogoStrip />
-      <PainSection pain={pain} />
+      <WhyDifferentSection whyDifferent={whyDifferent} />
       <ProofSection />
       <PillarsSection pillars={pillars} />
       <ProcessSection heading={processHeading} subheading={processSubheading} steps={processSteps} />

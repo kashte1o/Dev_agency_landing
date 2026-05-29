@@ -64,6 +64,25 @@ export const chaosOrder = {
   },
 }
 
+// ─── Why Different ───────────────────────────────────────────
+export const whyDifferent = {
+  heading: 'What makes us different',
+  cards: [
+    {
+      title: 'Product-minded',
+      body: 'Our senior teams focus on your business outcomes. We think about the "why" not just the "how," and that ultimately leads to a better product.',
+    },
+    {
+      title: '1 Project — 1 Team',
+      body: 'Once we assign a team to you, their focus is only on your project. That means faster development and no context switching.',
+    },
+    {
+      title: 'Assembled for you',
+      body: 'We draw from a broad network of specialists and technologies, selecting the exact combination your project requires — not a fixed template, but a setup built around your needs.',
+    },
+  ],
+}
+
 // ─── Pillars ─────────────────────────────────────────────────
 export const pillars = {
   heading: 'We build custom software around your business.',
