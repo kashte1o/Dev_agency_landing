@@ -94,14 +94,14 @@ export function LeadForm() {
             exit={{ opacity: 0 }}
             onSubmit={handleSubmit}
             noValidate
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-3.5"
           >
             {state === 'error' && (
               <motion.div
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
-                className="rounded-[var(--radius-input)] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                className="rounded-[var(--radius-input)] border border-red-200 bg-red-50 px-4 py-3 text-[0.95rem] text-red-700"
               >
                 {errorMsg}
               </motion.div>
@@ -111,26 +111,26 @@ export function LeadForm() {
             <TextInput field={nameField} error={fieldErrors.name} disabled={disabled} />
 
             {/* Contact details group */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               {/* Group label */}
               <div className="flex items-center gap-2">
-                <span className="text-[0.95rem] font-medium text-text-primary">
+                <span className="text-[1.15rem] font-medium text-text-primary">
                   Contact details
                   <span className="ml-1 text-accent" aria-hidden>*</span>
                 </span>
               </div>
               {/* Individual fields */}
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1.5">
                 <TextInput field={emailField} disabled={disabled} />
                 <TextInput field={whatsappField} disabled={disabled} />
               </div>
               {/* Helper / validation */}
               {fieldErrors.contact ? (
-                <p role="alert" className="text-[0.85rem] text-red-500">
+                <p role="alert" className="text-[1.05rem] text-red-500">
                   {fieldErrors.contact}
                 </p>
               ) : (
-                <p className="text-[0.85rem] leading-snug text-text-primary/70">
+                <p className="text-[1.05rem] leading-snug text-text-primary/70">
                   Leave either email or WhatsApp. One contact method is enough.
                 </p>
               )}
@@ -149,7 +149,7 @@ export function LeadForm() {
               type="submit"
               variant="primary"
               loading={state === 'loading'}
-              className="mt-2 w-full justify-center py-3 text-base"
+              className="mt-2 w-full justify-center py-2.5 text-[1.2rem]"
             >
               {leadFormCta}
             </Button>
