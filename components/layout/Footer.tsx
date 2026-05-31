@@ -13,7 +13,7 @@ export function Footer() {
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
             <LogoMark variant="light" className="self-center" />
-            <p className="text-sm leading-relaxed text-white/50 max-w-[200px] self-center text-center">
+            <p className="text-[1.1rem] leading-relaxed text-white/60 max-w-[220px] self-center text-center">
               {footerTagline}
             </p>
             {socialLinks.length > 0 && (
@@ -24,7 +24,7 @@ export function Footer() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-white/40 hover:text-white transition-colors"
+                    className="text-[0.9rem] text-white/55 hover:text-white transition-colors"
                   >
                     {s.platform}
                   </a>
@@ -53,13 +53,13 @@ export function Footer() {
               {contact.email && (
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-sm text-white/50 hover:text-white transition-colors"
+                  className="text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
                 >
                   {contact.email}
                 </a>
               )}
               {contact.location && (
-                <span className="text-sm text-white/40">{contact.location}</span>
+                <span className="text-[1.1rem] leading-relaxed text-white/55">{contact.location}</span>
               )}
             </FooterColumn>
 
@@ -72,7 +72,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 py-6 text-xs text-white/30">
+        <div className="border-t border-white/10 py-6 text-[0.9rem] text-white/45">
           {footerCopyright}
         </div>
       </div>
@@ -89,10 +89,10 @@ function FooterColumn({
 }) {
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-xs font-semibold uppercase tracking-wider text-white/40">
+      <p className="text-[0.95rem] font-semibold uppercase tracking-wider text-white/60">
         {heading}
       </p>
-      <div className="flex flex-col gap-2">{children}</div>
+      <div className="flex flex-col gap-1.5">{children}</div>
     </div>
   )
 }
@@ -101,7 +101,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <a
       href={href}
-      className="text-sm text-white/50 hover:text-white transition-colors"
+      className="text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
     >
       {children}
     </a>
