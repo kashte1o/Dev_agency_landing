@@ -10,12 +10,12 @@ const metrics = [
     label: 'Average time from brief to launch',
   },
   {
-    value: '200%',
+    value: '180%+',
     label: 'Average return on development investment within the first year',
   },
   {
     value: '7 days',
-    label: 'Average team onboarding time to a new system',
+    label: 'Average time until your team uses the system effectively',
   },
   {
     value: '98%',

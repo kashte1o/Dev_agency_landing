@@ -82,7 +82,7 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
               <motion.li
                 key={card.title}
                 variants={fadeUp}
-                className="group relative grid grid-cols-1 gap-6 rounded-[24px] border border-border bg-bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:min-h-[280px] md:grid-cols-12 md:gap-8 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group relative grid grid-cols-1 gap-5 rounded-[24px] border border-border bg-bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:min-h-[240px] md:grid-cols-12 md:items-center md:gap-8 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Number */}
                 <div className="md:col-span-2">
@@ -95,8 +95,8 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
                 </div>
 
                 {/* Title + value line */}
-                <div className="flex flex-col gap-3 md:col-span-3">
-                  <h3 className="text-2xl font-bold leading-tight tracking-tight text-text-primary md:text-[34px]">
+                <div className="flex flex-col gap-3 md:col-span-4">
+                  <h3 className="text-2xl font-bold leading-tight tracking-tight text-text-primary md:text-[32px]">
                     {card.title}
                   </h3>
                   <p className="text-lg font-medium leading-snug text-accent md:text-[19px]">
@@ -104,28 +104,16 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
                   </p>
                 </div>
 
-                {/* Body + chips */}
-                <div className="flex flex-col gap-5 md:col-span-5">
+                {/* Body */}
+                <div className="md:col-span-5">
                   <p className="text-[17px] leading-[1.6] text-text-primary/85 md:text-[18px]">
                     {card.body}
                   </p>
-                  {card.chips && card.chips.length > 0 && (
-                    <ul className="flex flex-wrap gap-2">
-                      {card.chips.map((chip) => (
-                        <li
-                          key={chip}
-                          className="rounded-full border border-border-subtle bg-bg-base px-3 py-1 text-xs font-medium text-text-secondary"
-                        >
-                          {chip}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
 
                 {/* Visual accent */}
-                <div className="hidden items-center justify-end md:col-span-2 md:flex">
-                  <div className="h-24 w-24 lg:h-28 lg:w-28">
+                <div className="hidden items-center justify-end md:col-span-1 md:flex">
+                  <div className="h-20 w-20 lg:h-24 lg:w-24">
                     <CardVisual kind={card.visual} />
                   </div>
                 </div>
