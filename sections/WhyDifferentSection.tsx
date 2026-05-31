@@ -22,7 +22,7 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
         >
           <motion.h2
             variants={fadeUp}
-            className="max-w-2xl text-3xl font-bold tracking-tight text-text-primary md:text-4xl"
+            className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-text-primary md:text-4xl"
           >
             {whyDifferent.heading}
           </motion.h2>
