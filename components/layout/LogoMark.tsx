@@ -13,7 +13,7 @@ interface LogoMarkProps {
 const sizeMap = {
   sm: { width: 264, height: 72 },
   md: { width: 312, height: 84 },
-  lg: { width: 360, height: 96 },
+  lg: { width: 468, height: 125 },
   xl: { width: 420, height: 114 },
 }
 

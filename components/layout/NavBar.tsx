@@ -108,7 +108,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'text-[1rem] font-medium tracking-[0.005em] transition-colors duration-150',
+                  'text-[1.3rem] font-medium tracking-[0.005em] transition-colors duration-150',
                   isDark
                     ? 'text-white/60 hover:text-white'
                     : 'text-text-secondary hover:text-text-primary',
@@ -127,7 +127,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               href={navCta.href}
               className={cn(
                 'nav-cta',
-                'hidden md:inline-flex items-center px-[22px] py-[10px] text-[1rem] font-medium rounded-[var(--radius-btn)] select-none cursor-pointer',
+                'hidden md:inline-flex items-center px-[22px] py-[10px] text-[1.3rem] font-medium rounded-[var(--radius-btn)] select-none cursor-pointer',
                 isDark
                   // over dark hero: stay in light family (dark hover would merge with hero)
                   ? 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#CBD5E1] hover:text-[#0F172A]'
