@@ -81,8 +81,12 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-between
           "
         >
-          {/* Left — Logo (intro animation plays once on initial mount) */}
-          <div className="flex items-center min-w-0 md:justify-self-start">
+          {/* Left — Logo (intro animation plays once on initial mount).
+              `justify-self-end + mr-[var(--nav-side-gap)]` anchors the logo's
+              right edge to the inner edge of the left column, then pushes it
+              leftward by the shared gap token. Result: gap(logo→nav) equals
+              gap(nav→CTA) exactly. */}
+          <div className="flex items-center min-w-0 md:justify-self-end md:mr-[var(--nav-side-gap)]">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="lg"
@@ -118,8 +122,10 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             ))}
           </nav>
 
-          {/* Right — CTA on desktop, hamburger on mobile. */}
-          <div className="flex items-center justify-end md:justify-self-end">
+          {/* Right — CTA on desktop, hamburger on mobile.
+              Mirror of the logo: `justify-self-start + ml-[var(--nav-side-gap)]`
+              gives the same gap on the right side of the nav. */}
+          <div className="flex items-center justify-end md:justify-self-start md:ml-[var(--nav-side-gap)]">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
