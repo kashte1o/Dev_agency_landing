@@ -120,18 +120,18 @@ export function LeadForm() {
                 </span>
               </div>
               {/* Individual fields */}
-              <div className="flex flex-col gap-2.5">
+              <div className="flex flex-col gap-2">
                 <TextInput field={emailField} disabled={disabled} />
                 <TextInput field={whatsappField} disabled={disabled} />
               </div>
               {/* Helper / validation */}
               {fieldErrors.contact ? (
-                <p role="alert" className="text-xs text-red-500">
+                <p role="alert" className="text-[0.85rem] text-red-500">
                   {fieldErrors.contact}
                 </p>
               ) : (
-                <p className="text-xs text-text-secondary">
-                  Leave at least one: email or WhatsApp.
+                <p className="text-[0.85rem] leading-snug text-text-primary/70">
+                  Leave either email or WhatsApp. One contact method is enough.
                 </p>
               )}
             </div>
