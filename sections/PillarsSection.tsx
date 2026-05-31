@@ -9,52 +9,6 @@ interface PillarsSectionProps {
   pillars: typeof PillarsType
 }
 
-type VisualKey = 'dashboard' | 'app' | 'nodes'
-
-function CardVisual({ kind }: { kind: VisualKey }) {
-  const common =
-    'h-full w-full text-accent/40 transition-colors duration-300 group-hover:text-accent/70'
-  if (kind === 'dashboard') {
-    return (
-      <svg viewBox="0 0 120 120" fill="none" className={common} aria-hidden>
-        <rect x="8" y="14" width="104" height="92" rx="10" stroke="currentColor" strokeWidth="1.5" />
-        <line x1="8" y1="34" x2="112" y2="34" stroke="currentColor" strokeWidth="1.5" />
-        <rect x="18" y="46" width="38" height="22" rx="4" stroke="currentColor" strokeWidth="1.5" />
-        <rect x="64" y="46" width="38" height="22" rx="4" stroke="currentColor" strokeWidth="1.5" />
-        <rect x="18" y="76" width="84" height="20" rx="4" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="16" cy="24" r="2" fill="currentColor" />
-        <circle cx="24" cy="24" r="2" fill="currentColor" />
-      </svg>
-    )
-  }
-  if (kind === 'app') {
-    return (
-      <svg viewBox="0 0 120 120" fill="none" className={common} aria-hidden>
-        <rect x="34" y="8" width="52" height="104" rx="10" stroke="currentColor" strokeWidth="1.5" />
-        <line x1="34" y1="24" x2="86" y2="24" stroke="currentColor" strokeWidth="1.5" />
-        <line x1="34" y1="98" x2="86" y2="98" stroke="currentColor" strokeWidth="1.5" />
-        <rect x="42" y="34" width="36" height="14" rx="3" stroke="currentColor" strokeWidth="1.5" />
-        <rect x="42" y="54" width="36" height="14" rx="3" stroke="currentColor" strokeWidth="1.5" />
-        <rect x="42" y="74" width="36" height="14" rx="3" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="60" cy="105" r="2.5" fill="currentColor" />
-      </svg>
-    )
-  }
-  return (
-    <svg viewBox="0 0 120 120" fill="none" className={common} aria-hidden>
-      <circle cx="22" cy="30" r="6" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="22" cy="90" r="6" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="60" cy="60" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="98" cy="30" r="6" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="98" cy="90" r="6" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M28 30 L53 60" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M28 90 L53 60" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M67 60 L92 30" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M67 60 L92 90" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  )
-}
-
 export function PillarsSection({ pillars }: PillarsSectionProps) {
   return (
     <Section id="what-we-build" background="base">
@@ -82,7 +36,7 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
               <motion.li
                 key={card.title}
                 variants={fadeUp}
-                className="group relative grid grid-cols-1 gap-5 rounded-[24px] border border-border bg-bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:min-h-[240px] md:grid-cols-12 md:items-center md:gap-8 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group relative grid grid-cols-1 gap-5 rounded-[24px] border border-border bg-bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:min-h-[220px] md:grid-cols-12 md:items-center md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Number */}
                 <div className="md:col-span-2">
@@ -105,17 +59,10 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
                 </div>
 
                 {/* Body */}
-                <div className="md:col-span-5">
+                <div className="md:col-span-6">
                   <p className="text-[17px] leading-[1.6] text-text-primary/85 md:text-[18px]">
                     {card.body}
                   </p>
-                </div>
-
-                {/* Visual accent */}
-                <div className="hidden items-center justify-end md:col-span-1 md:flex">
-                  <div className="h-20 w-20 lg:h-24 lg:w-24">
-                    <CardVisual kind={card.visual} />
-                  </div>
                 </div>
               </motion.li>
             ))}
