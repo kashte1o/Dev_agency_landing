@@ -51,13 +51,22 @@ export const stillHaveQuestionsPopup = {
   body: 'Send your question. A real person will reply quickly.',
   questionLabel: 'Your question',
   questionPlaceholder: 'What would you like to clarify?',
-  contactLabel: 'Email or WhatsApp',
-  contactPlaceholder: 'Where should we reply?',
+  emailLabel: 'Email',
+  emailPlaceholder: 'you@example.com',
+  messengerLabel: 'WhatsApp or Telegram',
+  messengerPlaceholder: '+971 XX XXX XXXX or @username',
+  contactHint: 'You only need to fill in one contact method.',
   submitLabel: 'Send question',
   note: 'No automated replies. No sales pressure.',
   closeLabel: 'Close',
-  successTitle: 'Question sent',
-  successBody: "Thanks — we'll get back to you shortly.",
+  successTitle: 'Thanks',
+  successBody: "We'll reply directly.",
+  errors: {
+    question: 'Please enter your question.',
+    contactRequired: 'Please leave an email or WhatsApp/Telegram so we can reply.',
+    emailFormat: 'Please enter a valid email address.',
+    messengerFormat: 'Please enter a valid WhatsApp number or Telegram username.',
+  },
 }
 
 export const socialLinks: Array<{ platform: string; href: string }> = [

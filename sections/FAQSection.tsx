@@ -135,11 +135,30 @@ const FAQContactTrigger = ({
   )
 }
 
+type PopupErrors = {
+  question?: string
+  email?: string
+  messenger?: string
+  contact?: string
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const TELEGRAM_RE = /^@[A-Za-z0-9_]{5,}$/
+
+function validateMessenger(raw: string): boolean {
+  const v = raw.trim()
+  if (v.startsWith('@')) return TELEGRAM_RE.test(v)
+  const normalized = v.replace(/[\s()\-]/g, '')
+  return /^\+?\d{8,15}$/.test(normalized)
+}
+
 function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void }) {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
   const questionRef = useRef<HTMLTextAreaElement | null>(null)
   const [question, setQuestion] = useState('')
-  const [contact, setContact] = useState('')
+  const [email, setEmail] = useState('')
+  const [messenger, setMessenger] = useState('')
+  const [errors, setErrors] = useState<PopupErrors>({})
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
@@ -165,12 +184,32 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
     if (!open) {
       setSubmitted(false)
       setQuestion('')
-      setContact('')
+      setEmail('')
+      setMessenger('')
+      setErrors({})
     }
   }, [open])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    const next: PopupErrors = {}
+    const q = question.trim()
+    const em = email.trim()
+    const ms = messenger.trim()
+
+    if (!q) next.question = stillHaveQuestionsPopup.errors.question
+
+    if (!em && !ms) {
+      next.contact = stillHaveQuestionsPopup.errors.contactRequired
+    } else {
+      if (em && !EMAIL_RE.test(em)) next.email = stillHaveQuestionsPopup.errors.emailFormat
+      if (ms && !validateMessenger(ms)) next.messenger = stillHaveQuestionsPopup.errors.messengerFormat
+    }
+
+    setErrors(next)
+    if (Object.keys(next).length > 0) return
+
     // TODO: wire up to backend
     setSubmitted(true)
   }
@@ -200,7 +239,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative z-10 w-full max-w-md rounded-xl border border-border bg-bg-surface p-6 shadow-lg sm:p-8 max-h-[calc(100dvh-2rem)] overflow-y-auto"
+            className="relative z-10 w-full max-w-lg rounded-xl border border-border bg-bg-surface p-6 shadow-lg sm:p-8 max-h-[calc(100dvh-2rem)] overflow-y-auto"
           >
             <button
               ref={closeBtnRef}
@@ -224,7 +263,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
             </p>
 
             {!submitted && (
-              <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-4">
+              <form onSubmit={handleSubmit} noValidate className="mt-5 flex flex-col gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label
                     htmlFor="popup-question"
@@ -235,31 +274,79 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                   <textarea
                     ref={questionRef}
                     id="popup-question"
-                    required
                     rows={4}
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
                     placeholder={stillHaveQuestionsPopup.questionPlaceholder}
+                    aria-invalid={errors.question ? true : undefined}
+                    aria-describedby={errors.question ? 'popup-question-error' : undefined}
                     className="resize-none rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                   />
+                  {errors.question && (
+                    <p id="popup-question-error" role="alert" className="text-xs text-red-500">
+                      {errors.question}
+                    </p>
+                  )}
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor="popup-contact"
-                    className="text-sm font-medium text-text-primary"
-                  >
-                    {stillHaveQuestionsPopup.contactLabel}
-                  </label>
-                  <input
-                    id="popup-contact"
-                    type="text"
-                    required
-                    value={contact}
-                    onChange={(e) => setContact(e.target.value)}
-                    placeholder={stillHaveQuestionsPopup.contactPlaceholder}
-                    className="rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
-                  />
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor="popup-email"
+                      className="text-sm font-medium text-text-primary"
+                    >
+                      {stillHaveQuestionsPopup.emailLabel}
+                    </label>
+                    <input
+                      id="popup-email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={stillHaveQuestionsPopup.emailPlaceholder}
+                      aria-invalid={errors.email ? true : undefined}
+                      aria-describedby={errors.email ? 'popup-email-error' : undefined}
+                      className="rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                    />
+                    {errors.email && (
+                      <p id="popup-email-error" role="alert" className="text-xs text-red-500">
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor="popup-messenger"
+                      className="text-sm font-medium text-text-primary"
+                    >
+                      {stillHaveQuestionsPopup.messengerLabel}
+                    </label>
+                    <input
+                      id="popup-messenger"
+                      type="text"
+                      value={messenger}
+                      onChange={(e) => setMessenger(e.target.value)}
+                      placeholder={stillHaveQuestionsPopup.messengerPlaceholder}
+                      aria-invalid={errors.messenger ? true : undefined}
+                      aria-describedby={errors.messenger ? 'popup-messenger-error' : undefined}
+                      className="rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                    />
+                    {errors.messenger && (
+                      <p id="popup-messenger-error" role="alert" className="text-xs text-red-500">
+                        {errors.messenger}
+                      </p>
+                    )}
+                  </div>
+
+                  {errors.contact ? (
+                    <p role="alert" className="text-xs text-red-500">
+                      {errors.contact}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-text-secondary">
+                      {stillHaveQuestionsPopup.contactHint}
+                    </p>
+                  )}
                 </div>
 
                 <button
