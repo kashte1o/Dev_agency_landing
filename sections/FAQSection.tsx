@@ -239,7 +239,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative z-10 w-full max-w-lg rounded-xl border border-border bg-bg-surface p-6 shadow-lg sm:p-8 max-h-[calc(100dvh-2rem)] overflow-y-auto"
+            className={`relative z-10 w-full rounded-xl border border-border bg-bg-surface shadow-lg max-h-[calc(100dvh-2rem)] overflow-y-auto ${submitted ? 'max-w-xl p-8 sm:p-12' : 'max-w-lg p-6 sm:p-8'}`}
           >
             <button
               ref={closeBtnRef}
@@ -251,16 +251,19 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
               <span aria-hidden className="text-xl leading-none">×</span>
             </button>
 
-            <h3
-              id="contact-popup-title"
-              className="pr-8 text-xl font-semibold text-text-primary"
-            >
-              {submitted ? stillHaveQuestionsPopup.successTitle : stillHaveQuestionsPopup.title}
-            </h3>
-
-            <p className="mt-3 text-[0.95rem] leading-relaxed text-text-secondary">
-              {submitted ? stillHaveQuestionsPopup.successBody : stillHaveQuestionsPopup.body}
-            </p>
+            {!submitted && (
+              <>
+                <h3
+                  id="contact-popup-title"
+                  className="pr-8 text-xl font-semibold text-text-primary"
+                >
+                  {stillHaveQuestionsPopup.title}
+                </h3>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-text-secondary">
+                  {stillHaveQuestionsPopup.body}
+                </p>
+              </>
+            )}
 
             {!submitted && (
               <form onSubmit={handleSubmit} noValidate className="mt-5 flex flex-col gap-4">
@@ -363,11 +366,39 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
             )}
 
             {submitted && (
-              <div className="mt-6 flex justify-end">
+              <div className="flex flex-col items-center text-center py-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex h-24 w-24 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200"
+                >
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <motion.path
+                      d="M5 12.5l4.5 4.5L19 7.5"
+                      stroke="#10B981"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                    />
+                  </svg>
+                </motion.div>
+                <h3
+                  id="contact-popup-title"
+                  className="mt-8 text-3xl font-semibold tracking-tight text-text-primary"
+                >
+                  {stillHaveQuestionsPopup.successTitle}
+                </h3>
+                <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-text-secondary">
+                  {stillHaveQuestionsPopup.successBody}
+                </p>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-primary hover:bg-bg-base focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="mt-10 rounded-lg border border-border px-6 py-2.5 text-sm font-medium text-text-secondary hover:bg-bg-base hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   {stillHaveQuestionsPopup.closeLabel}
                 </button>

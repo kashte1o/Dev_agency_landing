@@ -60,7 +60,7 @@ export const stillHaveQuestionsPopup = {
   note: 'No automated replies. No sales pressure.',
   closeLabel: 'Close',
   successTitle: 'Thanks',
-  successBody: "We'll reply directly.",
+  successBody: "We'll get back to you within 24 hours.",
   errors: {
     question: 'Please enter your question.',
     contactRequired: 'Please leave an email or WhatsApp/Telegram so we can reply.',
