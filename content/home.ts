@@ -86,29 +86,40 @@ export const whyDifferent = {
 // ─── Pillars ─────────────────────────────────────────────────
 export const pillars = {
   heading: 'What we build.',
+  subline:
+    'We build the internal systems, customer platforms, and connective workflows that make your business easier to run.',
   cards: [
     {
-      icon: '⊞',
+      visual: 'dashboard' as const,
       title: 'Internal tools & product systems',
       description: 'Software behind how your product, service, or operation works.',
       body: 'Internal portals, custom business logic, product-side software modules, control panels, quoting engines, pricing logic, planning tools, operational dashboards, and back-office systems built to support the real mechanics of your business.',
+      chips: ['Product logic', 'Internal portals', 'Control panels'],
       href: '/internal-tools',
     },
     {
-      icon: '◎',
+      visual: 'app' as const,
       title: 'Customer-facing platforms',
       description: 'Digital products your customers use to take action.',
       body: 'Web platforms, mobile apps, client portals, booking systems, order flows, self-service products, and customer dashboards that help customers request, book, approve, pay, track, and come back without extra friction.',
+      chips: ['Web platforms', 'Mobile apps', 'Client portals'],
       href: '/client-portals',
     },
     {
-      icon: '⚡',
+      visual: 'nodes' as const,
       title: 'Automation & integrations',
       description: 'The connective layer between your systems.',
       body: 'We connect your CRM, website, spreadsheets, messengers, payment tools, internal software, and third-party platforms so data moves automatically and your team stops chasing updates by hand.',
+      chips: ['CRM sync', 'Payment tools', 'Data flows'],
       href: '/workflow-automation',
     },
   ],
+  cta: {
+    title: 'Not sure where your project fits?',
+    body: 'We’ll help you figure it out and scope the right solution.',
+    buttonLabel: 'Let’s scope your project →',
+    buttonHref: '#start-project',
+  },
 }
 
 // ─── Credibility ─────────────────────────────────────────────
