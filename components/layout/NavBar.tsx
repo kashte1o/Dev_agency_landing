@@ -66,25 +66,24 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
         {/*
-          Desktop layout:
-            - Logo: flex-left, CTA: flex-right (inside max-width container)
-            - Nav links: positioned ABSOLUTELY at viewport center,
-              independent of logo/CTA widths — guarantees visual center
-              on the viewport center line.
-          Mobile: flex justify-between (logo + hamburger only).
-          `position: fixed` on the header already establishes a containing
-          block for the absolutely-positioned nav.
+          Desktop: 3-column grid [1fr | auto | 1fr].
+            - Left col: logo (justify-self: start)
+            - Center col: nav links (justify-self: center) — true viewport center
+              because the wrapper is mx-auto with symmetric horizontal padding
+            - Right col: CTA (justify-self: end)
+          Mobile: flex justify-between (logo + hamburger only). The hidden nav
+          is display:none on mobile, so flex layout is unaffected.
         */}
         <div
           className="
             mx-auto w-full max-w-[1440px]
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
-            flex items-center justify-between
+            flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between
           "
         >
           {/* Left — Logo (intro animation plays once on initial mount) */}
-          <div className="flex items-center justify-start min-w-0">
+          <div className="flex items-center min-w-0 md:justify-self-start">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="lg"
@@ -99,9 +98,30 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
           </div>
 
+          {/* Center — Nav links (desktop only), in their own grid column */}
+          <nav
+            className="hidden md:flex items-center gap-8 lg:gap-9 whitespace-nowrap md:justify-self-center"
+            aria-label="Main navigation"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  'text-[1rem] font-medium tracking-[0.005em] transition-colors duration-150',
+                  isDark
+                    ? 'text-white/60 hover:text-white'
+                    : 'text-text-secondary hover:text-text-primary',
+                )}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
           {/* Right — CTA on desktop, hamburger on mobile.
               `md:mr-[15%]` shifts the Let's talk CTA inward from the right edge on desktop. */}
-          <div className="flex items-center justify-end md:mr-[15%]">
+          <div className="flex items-center justify-end md:justify-self-end md:mr-[15%]">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
@@ -143,35 +163,6 @@ export function NavBar({ heroDark = true }: NavBarProps) {
           </div>
         </div>
 
-        {/*
-          Center — Nav links pinned to the EXACT viewport center.
-          `position: absolute` inside the fixed header (which is viewport-wide
-          via left-0 right-0), so left:50% = viewport center. Translate-x:-50%
-          centers the group itself. Logo/CTA widths cannot shift it.
-        */}
-        <nav
-          className="
-            hidden md:flex items-center gap-8 lg:gap-9
-            absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-            whitespace-nowrap pointer-events-auto
-          "
-          aria-label="Main navigation"
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={cn(
-                'text-[1rem] font-medium tracking-[0.005em] transition-colors duration-150',
-                isDark
-                  ? 'text-white/60 hover:text-white'
-                  : 'text-text-secondary hover:text-text-primary',
-              )}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
       </motion.header>
 
       {/* Mobile drawer */}
