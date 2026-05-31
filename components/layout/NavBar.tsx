@@ -123,9 +123,13 @@ export function NavBar({ heroDark = true }: NavBarProps) {
           </nav>
 
           {/* Right — CTA on desktop, hamburger on mobile.
-              Mirror of the logo: `justify-self-start + ml-[var(--nav-side-gap)]`
-              gives the same gap on the right side of the nav. */}
-          <div className="flex items-center justify-end md:justify-self-start md:ml-[var(--nav-side-gap)]">
+              Mirror of the logo at the box level. The logo PNG has visible
+              transparent space on its right edge, so a strictly symmetric
+              ml value leaves the visual gap on the right looking smaller
+              than on the left. Bumping the CTA's left margin compensates
+              for the logo's visual padding so RUNMADE→Approach reads
+              equal to FAQ→Let's talk. */}
+          <div className="flex items-center justify-end md:justify-self-start md:ml-[calc(var(--nav-side-gap)+40px)]">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
