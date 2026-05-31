@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+/* ─── Anchor scroll offset ──────────────────────────────────── */
+/* Fixed navbar is 80px on mobile, 130px on md+ (see NavBar.tsx).
+   Compensate so anchor jumps land below the navbar with breathing room. */
+html {
+  scroll-padding-top: 96px;
+}
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 150px;
+  }
+}
+[id] {
+  scroll-margin-top: 96px;
+}
+@media (min-width: 768px) {
+  [id] {
+    scroll-margin-top: 150px;
+  }
+}
+
 /* ─── Design tokens ─────────────────────────────────────────── */
 :root {
   --bg-base:          #F7F8FA;
