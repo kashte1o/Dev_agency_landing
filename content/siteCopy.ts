@@ -46,6 +46,20 @@ export const footerColumns = {
   },
 }
 
+export const contactDetails = {
+  email: 'hello@runmade.com',
+  whatsapp: '+971 XX XXX XXXX',
+}
+
+export const stillHaveQuestionsPopup = {
+  title: 'Get a direct answer from a real person',
+  body: 'Still unsure about the process, timeline, budget, or whether custom software makes sense for your case? Send us a quick message. A real person from our team will reply directly and help you understand the next step.',
+  emailLabel: 'Email',
+  whatsappLabel: 'WhatsApp',
+  note: 'No automated sales sequence. No pressure to book a call. Just a clear answer.',
+  closeLabel: 'Close',
+}
+
 export const socialLinks: Array<{ platform: string; href: string }> = [
   // TODO: add real links
   // { platform: 'LinkedIn', href: 'https://linkedin.com/company/...' },
