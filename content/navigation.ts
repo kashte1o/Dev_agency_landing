@@ -1,12 +1,11 @@
 import type { NavItem, CTAButton } from './types'
 
 export const navLinks: NavItem[] = [
-  { label: 'Services',  href: '/#what-we-build' },
-  { label: 'Process',   href: '/#process' },
-  { label: 'Work',      href: '/case-studies' },
-  { label: 'About',     href: '/#about' },
-  { label: 'FAQ',       href: '/#faq' },
-  { label: 'Resources', href: '/resources' },
+  { label: 'Approach', href: '/#why-different' },
+  { label: 'Work',     href: '/#proof' },
+  { label: 'Services', href: '/#what-we-build' },
+  { label: 'Process',  href: '/#process' },
+  { label: 'FAQ',      href: '/#faq' },
 ]
 
 export const serviceDropdown: NavItem[] = [
