@@ -5,7 +5,7 @@ import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { fadeUp, staggerContainer, VIEWPORT } from '@/lib/motion'
 import { homepageFAQ, type FAQItem } from '@/content/faq'
-import { contactDetails, stillHaveQuestionsPopup } from '@/content/siteCopy'
+import { stillHaveQuestionsPopup } from '@/content/siteCopy'
 
 const HEADING = 'Common questions'
 const SUBHEADING = "If you're on the fence, the answer is probably here."
@@ -136,8 +136,11 @@ const FAQContactTrigger = ({
 }
 
 function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const dialogRef = useRef<HTMLDivElement | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
+  const questionRef = useRef<HTMLTextAreaElement | null>(null)
+  const [question, setQuestion] = useState('')
+  const [contact, setContact] = useState('')
+  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
     if (!open) return
@@ -150,7 +153,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
 
-    closeBtnRef.current?.focus()
+    questionRef.current?.focus()
 
     return () => {
       document.removeEventListener('keydown', onKey)
@@ -158,7 +161,19 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
     }
   }, [open, onClose])
 
-  const whatsappHref = `https://wa.me/${contactDetails.whatsapp.replace(/\D/g, '')}`
+  useEffect(() => {
+    if (!open) {
+      setSubmitted(false)
+      setQuestion('')
+      setContact('')
+    }
+  }, [open])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // TODO: wire up to backend
+    setSubmitted(true)
+  }
 
   return (
     <AnimatePresence>
@@ -178,7 +193,6 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
           />
 
           <motion.div
-            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-popup-title"
@@ -202,57 +216,76 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
               id="contact-popup-title"
               className="pr-8 text-xl font-semibold text-text-primary"
             >
-              {stillHaveQuestionsPopup.title}
+              {submitted ? stillHaveQuestionsPopup.successTitle : stillHaveQuestionsPopup.title}
             </h3>
 
             <p className="mt-3 text-[0.95rem] leading-relaxed text-text-secondary">
-              {stillHaveQuestionsPopup.body}
+              {submitted ? stillHaveQuestionsPopup.successBody : stillHaveQuestionsPopup.body}
             </p>
 
-            <dl className="mt-6 space-y-3 border-t border-border pt-5 text-sm">
-              <div className="flex flex-wrap items-baseline gap-x-3">
-                <dt className="font-medium text-text-primary">
-                  {stillHaveQuestionsPopup.emailLabel}:
-                </dt>
-                <dd>
-                  <a
-                    href={`mailto:${contactDetails.email}`}
-                    className="text-accent hover:underline break-all"
+            {!submitted && (
+              <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="popup-question"
+                    className="text-sm font-medium text-text-primary"
                   >
-                    {contactDetails.email}
-                  </a>
-                </dd>
-              </div>
-              <div className="flex flex-wrap items-baseline gap-x-3">
-                <dt className="font-medium text-text-primary">
-                  {stillHaveQuestionsPopup.whatsappLabel}:
-                </dt>
-                <dd>
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-accent hover:underline"
+                    {stillHaveQuestionsPopup.questionLabel}
+                  </label>
+                  <textarea
+                    ref={questionRef}
+                    id="popup-question"
+                    required
+                    rows={4}
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)}
+                    placeholder={stillHaveQuestionsPopup.questionPlaceholder}
+                    className="resize-none rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="popup-contact"
+                    className="text-sm font-medium text-text-primary"
                   >
-                    {contactDetails.whatsapp}
-                  </a>
-                </dd>
+                    {stillHaveQuestionsPopup.contactLabel}
+                  </label>
+                  <input
+                    id="popup-contact"
+                    type="text"
+                    required
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    placeholder={stillHaveQuestionsPopup.contactPlaceholder}
+                    className="rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-1 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                >
+                  {stillHaveQuestionsPopup.submitLabel}
+                </button>
+
+                <p className="text-xs leading-relaxed text-text-secondary">
+                  {stillHaveQuestionsPopup.note}
+                </p>
+              </form>
+            )}
+
+            {submitted && (
+              <div className="mt-6 flex justify-end">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-primary hover:bg-bg-base focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  {stillHaveQuestionsPopup.closeLabel}
+                </button>
               </div>
-            </dl>
-
-            <p className="mt-5 text-xs leading-relaxed text-text-secondary">
-              {stillHaveQuestionsPopup.note}
-            </p>
-
-            <div className="mt-6 flex justify-end">
-              <button
-                type="button"
-                onClick={onClose}
-                className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-primary hover:bg-bg-base focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                {stillHaveQuestionsPopup.closeLabel}
-              </button>
-            </div>
+            )}
           </motion.div>
         </motion.div>
       )}

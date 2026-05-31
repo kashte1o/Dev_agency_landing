@@ -46,18 +46,18 @@ export const footerColumns = {
   },
 }
 
-export const contactDetails = {
-  email: 'hello@runmade.com',
-  whatsapp: '+971 XX XXX XXXX',
-}
-
 export const stillHaveQuestionsPopup = {
-  title: 'Get a direct answer from a real person',
-  body: 'Still unsure about the process, timeline, budget, or whether custom software makes sense for your case? Send us a quick message. A real person from our team will reply directly and help you understand the next step.',
-  emailLabel: 'Email',
-  whatsappLabel: 'WhatsApp',
-  note: 'No automated sales sequence. No pressure to book a call. Just a clear answer.',
+  title: 'Ask us directly',
+  body: 'Send your question. A real person will reply quickly.',
+  questionLabel: 'Your question',
+  questionPlaceholder: 'What would you like to clarify?',
+  contactLabel: 'Email or WhatsApp',
+  contactPlaceholder: 'Where should we reply?',
+  submitLabel: 'Send question',
+  note: 'No automated replies. No sales pressure.',
   closeLabel: 'Close',
+  successTitle: 'Question sent',
+  successBody: "Thanks — we'll get back to you shortly.",
 }
 
 export const socialLinks: Array<{ platform: string; href: string }> = [
