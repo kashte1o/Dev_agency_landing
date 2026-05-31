@@ -94,7 +94,7 @@ export function LeadForm() {
             exit={{ opacity: 0 }}
             onSubmit={handleSubmit}
             noValidate
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-4"
           >
             {state === 'error' && (
               <motion.div
@@ -114,13 +114,13 @@ export function LeadForm() {
             <div className="flex flex-col gap-1.5">
               {/* Group label */}
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-text-primary">
+                <span className="text-[0.95rem] font-medium text-text-primary">
                   Contact details
                   <span className="ml-1 text-accent" aria-hidden>*</span>
                 </span>
               </div>
               {/* Individual fields */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2.5">
                 <TextInput field={emailField} disabled={disabled} />
                 <TextInput field={whatsappField} disabled={disabled} />
               </div>

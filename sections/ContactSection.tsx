@@ -58,32 +58,32 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="text-3xl font-bold tracking-tight text-white md:text-4xl"
+                className="text-[2.4rem] font-bold tracking-tight text-white md:text-[2.9rem]"
               >
                 {contactSection.heading}
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="mt-4 text-base leading-relaxed text-white/60"
+                className="mt-5 text-[1.3rem] leading-relaxed text-white/65"
               >
                 {contactSection.subheading}
               </motion.p>
             </div>
 
             {/* Trust signals */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
               {contactSection.trustSignals.map((signal) => (
                 <motion.div
                   key={signal.title}
                   variants={fadeUp}
-                  className="flex items-start gap-3"
+                  className="flex items-start gap-4"
                 >
-                  <span aria-hidden className="mt-0.5 flex-shrink-0 text-sm text-accent">
+                  <span aria-hidden className="mt-1 flex-shrink-0 text-[1.1rem] text-accent">
                     {signal.icon}
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-white">{signal.title}</p>
-                    <p className="text-sm text-white/60">{signal.body}</p>
+                    <p className="text-[1.15rem] font-semibold text-white">{signal.title}</p>
+                    <p className="text-[1.05rem] leading-relaxed text-white/65">{signal.body}</p>
                   </div>
                 </motion.div>
               ))}
