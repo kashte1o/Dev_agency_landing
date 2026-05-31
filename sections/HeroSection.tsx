@@ -211,7 +211,7 @@ function PersonPhoto() {
           className="text-white/50 italic"
           style={{
             marginTop: 'clamp(8px, 0.7vw, 14px)',
-            fontSize: 'clamp(0.95rem, 0.95vw, 1.1rem)',
+            fontSize: 'clamp(1.14rem, 1.14vw, 1.32rem)',
             lineHeight: 1.55,
           }}
         >
