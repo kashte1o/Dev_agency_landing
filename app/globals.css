@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* ─── NavBar spacing token ──────────────────────────────────── */
+/* Minimum breathing room on each side of the centered nav links group.
+   The flex-1 spacers around the nav distribute remaining space equally,
+   so logo→nav and nav→CTA gaps are always identical. This token only
+   acts as a safety floor on narrower viewports. */
+:root {
+  --nav-side-gap: 48px;
+}
+
 /* ─── Anchor scroll offset ──────────────────────────────────── */
 /* Fixed navbar is 80px on mobile, 130px on md+ (see NavBar.tsx).
    Offset is intentionally smaller than navbar height — sections have

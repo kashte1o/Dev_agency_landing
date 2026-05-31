@@ -66,29 +66,29 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
         {/*
-          Desktop: 3-column grid [1fr | auto | 1fr].
-            - Left col: logo (justify-self: start)
-            - Center col: nav links (justify-self: center) — true viewport center
-              because the wrapper is mx-auto with symmetric horizontal padding
-            - Right col: CTA (justify-self: end)
-          Mobile: flex justify-between (logo + hamburger only). The hidden nav
-          is display:none on mobile, so flex layout is unaffected.
+          Desktop: flex with two equal flex-1 spacers around the centered nav.
+          Spacers share remaining horizontal space equally, so gap(logo→nav)
+          == gap(nav→CTA) regardless of viewport width. Each spacer has a
+          min-width of `--nav-side-gap` (defined in globals.css) to guarantee
+          breathing room even on narrower viewports.
+          Mobile: spacers and nav are hidden — flex justify-between pushes
+          logo to the left and the hamburger cluster to the right.
         */}
         <div
           className="
             mx-auto w-full max-w-[1440px]
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
-            flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-between
+            flex items-center justify-between
           "
         >
           {/* Left — Logo (intro animation plays once on initial mount) */}
-          <div className="flex items-center min-w-0 md:justify-self-start">
+          <div className="flex items-center min-w-0">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="lg"
               intro
-              className="hidden md:inline-flex"
+              className="hidden md:inline-flex md:-translate-y-[2px]"
             />
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
@@ -98,9 +98,16 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
           </div>
 
-          {/* Center — Nav links (desktop only), in their own grid column */}
+          {/* Desktop spacer — left of nav */}
+          <div
+            aria-hidden
+            className="hidden md:block flex-1"
+            style={{ minWidth: 'var(--nav-side-gap)' }}
+          />
+
+          {/* Center — Nav links (desktop only) */}
           <nav
-            className="hidden md:flex items-center gap-8 lg:gap-9 whitespace-nowrap md:justify-self-center"
+            className="hidden md:flex items-center gap-8 lg:gap-9 whitespace-nowrap"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (
@@ -119,9 +126,15 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             ))}
           </nav>
 
-          {/* Right — CTA on desktop, hamburger on mobile.
-              `md:mr-[25%]` shifts the Let's talk CTA inward from the right edge on desktop. */}
-          <div className="flex items-center justify-end md:justify-self-end md:mr-[25%]">
+          {/* Desktop spacer — right of nav */}
+          <div
+            aria-hidden
+            className="hidden md:block flex-1"
+            style={{ minWidth: 'var(--nav-side-gap)' }}
+          />
+
+          {/* Right — CTA on desktop, hamburger on mobile. */}
+          <div className="flex items-center">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
