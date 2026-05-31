@@ -79,7 +79,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             mx-auto w-full max-w-[1440px]
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
-            flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between
+            flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-between
           "
         >
           {/* Left — Logo (intro animation plays once on initial mount) */}
@@ -119,9 +119,8 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             ))}
           </nav>
 
-          {/* Right — CTA on desktop, hamburger on mobile.
-              `md:mr-[15%]` shifts the Let's talk CTA inward from the right edge on desktop. */}
-          <div className="flex items-center justify-end md:justify-self-end md:mr-[15%]">
+          {/* Right — CTA on desktop, hamburger on mobile. */}
+          <div className="flex items-center justify-end md:justify-self-end">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
