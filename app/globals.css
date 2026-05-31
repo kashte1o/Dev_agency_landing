@@ -2,21 +2,23 @@
 
 /* ─── Anchor scroll offset ──────────────────────────────────── */
 /* Fixed navbar is 80px on mobile, 130px on md+ (see NavBar.tsx).
-   Compensate so anchor jumps land below the navbar with breathing room. */
+   Offset is intentionally smaller than navbar height — sections have
+   their own internal top padding which provides the visual breathing
+   room below the navbar. Larger values push headings too far down. */
 html {
-  scroll-padding-top: 96px;
+  scroll-padding-top: 80px;
 }
 @media (min-width: 768px) {
   html {
-    scroll-padding-top: 150px;
+    scroll-padding-top: 100px;
   }
 }
 [id] {
-  scroll-margin-top: 96px;
+  scroll-margin-top: 80px;
 }
 @media (min-width: 768px) {
   [id] {
-    scroll-margin-top: 150px;
+    scroll-margin-top: 100px;
   }
 }
 
