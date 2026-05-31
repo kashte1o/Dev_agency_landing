@@ -66,24 +66,23 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
         {/*
-          Desktop: flex with two equal flex-1 spacers around the centered nav.
-          Spacers share remaining horizontal space equally, so gap(logo→nav)
-          == gap(nav→CTA) regardless of viewport width. Each spacer has a
-          min-width of `--nav-side-gap` (defined in globals.css) to guarantee
-          breathing room even on narrower viewports.
-          Mobile: spacers and nav are hidden — flex justify-between pushes
-          logo to the left and the hamburger cluster to the right.
+          Desktop: 3-column grid [1fr | auto | 1fr] with minmax(0,1fr)
+          to lock side columns to equal width. Nav links live in the
+          centered `auto` column → they sit at the exact center of the
+          container regardless of logo / CTA widths.
+          Mobile: flex justify-between (logo + hamburger only). Hidden
+          desktop nav doesn't affect mobile layout.
         */}
         <div
           className="
             mx-auto w-full max-w-[1440px]
             px-10 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
-            flex items-center justify-between
+            flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-between
           "
         >
           {/* Left — Logo (intro animation plays once on initial mount) */}
-          <div className="flex items-center min-w-0">
+          <div className="flex items-center min-w-0 md:justify-self-start">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="lg"
@@ -98,16 +97,9 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
           </div>
 
-          {/* Desktop spacer — left of nav */}
-          <div
-            aria-hidden
-            className="hidden md:block flex-1"
-            style={{ minWidth: 'var(--nav-side-gap)' }}
-          />
-
-          {/* Center — Nav links (desktop only) */}
+          {/* Center — Nav links (desktop only), centered in the auto column */}
           <nav
-            className="hidden md:flex items-center gap-8 lg:gap-9 whitespace-nowrap"
+            className="hidden md:flex items-center gap-8 lg:gap-9 whitespace-nowrap md:justify-self-center"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (
@@ -126,15 +118,8 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             ))}
           </nav>
 
-          {/* Desktop spacer — right of nav */}
-          <div
-            aria-hidden
-            className="hidden md:block flex-1"
-            style={{ minWidth: 'var(--nav-side-gap)' }}
-          />
-
           {/* Right — CTA on desktop, hamburger on mobile. */}
-          <div className="flex items-center">
+          <div className="flex items-center justify-end md:justify-self-end">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
