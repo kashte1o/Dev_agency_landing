@@ -59,7 +59,7 @@ const EXAMPLES = [
 export function BeforeAfterSection() {
   return (
     <Section id="before-after" background="base" className="py-20 md:py-28 lg:py-32">
-      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-20">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

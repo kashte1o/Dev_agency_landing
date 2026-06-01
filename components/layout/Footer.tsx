@@ -53,13 +53,13 @@ export function Footer() {
               {contact.email && (
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
+                  className="text-[0.95rem] md:text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
                 >
                   {contact.email}
                 </a>
               )}
               {contact.location && (
-                <span className="text-[1.1rem] leading-relaxed text-white/55">{contact.location}</span>
+                <span className="text-[0.95rem] md:text-[1.1rem] leading-relaxed text-white/55">{contact.location}</span>
               )}
             </FooterColumn>
 
@@ -101,7 +101,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <a
       href={href}
-      className="text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
+      className="text-[0.95rem] md:text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
     >
       {children}
     </a>

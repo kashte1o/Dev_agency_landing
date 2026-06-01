@@ -41,7 +41,7 @@ const ITEMS = [
 export function CostOfInaction() {
   return (
     <Section id="cost-of-inaction" background="subtle" className="py-20 md:py-28 lg:py-32">
-      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-20">
 
         {/* Heading */}
         <motion.div

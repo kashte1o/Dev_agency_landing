@@ -17,7 +17,7 @@ export function PainSection({ pain }: PainSectionProps) {
       className="pt-10 pb-20 md:pt-14 md:pb-28 lg:pt-16 lg:pb-32"
     >
       {/* Container aligns left edge with hero headline */}
-      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-20">
 
         {/* ── Heading ─────────────────────────────────────────── */}
         <motion.h2

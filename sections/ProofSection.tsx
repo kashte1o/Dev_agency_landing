@@ -49,7 +49,7 @@ const CASES = [
 export function ProofSection() {
   return (
     <Section id="proof" background="base" className="!pt-8 md:!pt-12 !pb-10 md:!pb-14">
-      <div className="mx-auto w-full max-w-[1440px] px-10 md:px-16 lg:px-20">
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-20">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -71,7 +71,7 @@ export function ProofSection() {
           </div>
 
           {/* Case cards */}
-          <div className="-mx-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-10 pb-2 md:-mx-16 md:px-16 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
+          <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:-mx-16 md:px-16 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
             {CASES.map((c, i) => (
               <motion.div
                 key={i}

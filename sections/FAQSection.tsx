@@ -74,7 +74,7 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
         aria-expanded={open}
         className="flex w-full items-start justify-between gap-6 py-5 text-left"
       >
-        <span className="text-[1.35rem] font-semibold text-text-primary leading-snug">
+        <span className="text-[1.05rem] md:text-[1.35rem] font-semibold text-text-primary leading-snug">
           {item.question}
         </span>
         <span
@@ -95,7 +95,7 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-[1.25rem] leading-relaxed text-text-secondary">
+            <p className="pb-5 text-[1rem] md:text-[1.25rem] leading-relaxed text-text-secondary">
               {item.answer}
             </p>
           </motion.div>
@@ -122,7 +122,7 @@ const FAQContactTrigger = ({
       onClick={onClick}
       className="flex w-full items-center justify-between gap-6 py-5 text-left group"
     >
-      <span className="text-[1.35rem] font-semibold text-text-primary leading-snug group-hover:text-accent transition-colors duration-200">
+      <span className="text-[1.05rem] md:text-[1.35rem] font-semibold text-text-primary leading-snug group-hover:text-accent transition-colors duration-200">
         {question}
       </span>
       <span

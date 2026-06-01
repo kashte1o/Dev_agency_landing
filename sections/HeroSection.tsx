@@ -72,8 +72,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               )}
 
               <h1
-                className="font-bold text-white tracking-[-0.025em] leading-[1.05]"
-                style={{ fontSize: 'clamp(2.5rem, 3.6vw, 4.5rem)' }}
+                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[2rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
               >
                 {hero.heading}
               </h1>
@@ -127,7 +126,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </div>
                 <a
                   href={hero.primaryCta.href}
-                  className="trust-link group relative inline-block self-start text-[21px] leading-[1.3] text-white/35 no-underline transition-colors duration-200 hover:text-white/55"
+                  className="trust-link group relative inline-block self-start text-[16px] md:text-[21px] leading-[1.3] text-white/35 no-underline transition-colors duration-200 hover:text-white/55"
                 >
                   Talk directly with our software team
                   <span

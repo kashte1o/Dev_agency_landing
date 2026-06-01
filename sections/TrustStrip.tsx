@@ -34,7 +34,7 @@ export function TrustStrip() {
       aria-label="Trust signals"
       className="border-y border-white/[0.08] bg-[#0D1117]"
     >
-      <div className="mx-auto w-full max-w-[1440px] px-10 py-6 md:px-16 lg:px-20">
+      <div className="mx-auto w-full max-w-[1440px] px-6 py-6 md:px-16 lg:px-20">
         <motion.ul
           variants={{
             hidden: {},

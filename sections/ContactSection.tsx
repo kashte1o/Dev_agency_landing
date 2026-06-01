@@ -64,7 +64,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="mt-5 text-[1.3rem] leading-relaxed text-white/65"
+                className="mt-5 text-[1.05rem] md:text-[1.3rem] leading-relaxed text-white/65"
               >
                 {contactSection.subheading}
               </motion.p>

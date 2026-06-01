@@ -349,7 +349,7 @@ export function ChaosTransition({ chaosOrder }: ChaosTransitionProps) {
 
       <div
         ref={ref}
-        className="relative z-10 mx-auto w-full max-w-[1440px] px-10 py-24 md:px-16 md:py-32 lg:px-20"
+        className="relative z-10 mx-auto w-full max-w-[1440px] px-6 py-24 md:px-16 md:py-32 lg:px-20"
       >
 
         {/* ── Headings (desktop only, scroll-animated) ───────── */}

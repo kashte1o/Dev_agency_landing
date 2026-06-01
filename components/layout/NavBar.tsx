@@ -76,7 +76,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         <div
           className="
             mx-auto w-full max-w-[1440px]
-            px-10 md:px-16 lg:px-20
+            px-6 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
             flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-between
           "
