@@ -11,7 +11,7 @@ interface PillarsSectionProps {
 
 export function PillarsSection({ pillars }: PillarsSectionProps) {
   return (
-    <Section id="what-we-build" background="base">
+    <Section id="what-we-build" background="base" className="!pt-10 md:!pt-[60px]">
       <Container>
         <motion.div
           variants={staggerContainer}
