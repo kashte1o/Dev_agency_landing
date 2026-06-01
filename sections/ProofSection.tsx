@@ -6,49 +6,45 @@ import { fadeUp, staggerContainer, VIEWPORT } from '@/lib/motion'
 /**
  * ProofSection
  * ─────────────
- * Sits between CredibilitySection and ContactSection.
- * Goal: close the trust gap before asking for a lead.
- * Format: 2–3 anonymised mini case studies.
- * Structure per card: situation → what was built → what changed.
- *
- * PLACEHOLDER — replace CASES with real project stories when available.
- * No client logos or names needed. Industry + company size is enough.
+ * Real anonymised mini case studies.
+ * Structure per card: tag → title → body → outcome bullets.
  */
 
-// ── PLACEHOLDER DATA ──────────────────────────────────────────────
 const HEADING = "Projects we've worked on"
 const SUBHEADING = 'A few examples of what we built and why it mattered.'
 
 const CASES = [
   {
-    tag: '[PLACEHOLDER — e.g. "Logistics · 40 people"]',
-    situation:
-      '[PLACEHOLDER] One sentence: what was the operational problem. Example: "Job requests arrived by email, WhatsApp and phone — no one had a single view of what was happening."',
-    built:
-      '[PLACEHOLDER] One sentence: what we built. Example: "Internal job management system with real-time status, automatic client updates and a dispatcher dashboard."',
-    outcome:
-      '[PLACEHOLDER] One or two sentences: what changed for the business. Avoid technical metrics. Focus on time, errors, client experience. Example: "Team spends 4 hours less per day on status calls. Clients see job progress without calling in."',
+    tag: 'Manufacturing · Internal system',
+    title: 'From specialist-only calculations to regulator-ready reports',
+    body: 'We built a guided wind-flow calculation system for a production facility where routine reports depended on engineering staff. Non-specialist employees can now enter facility data, run calculations, and prepare regulator-ready reports through a clear internal workflow.',
+    outcomes: [
+      'Regulatory review passed',
+      '60% less manual calculation work',
+      'Reports prepared in under one working day',
+    ],
   },
   {
-    tag: '[PLACEHOLDER — e.g. "Professional services · 15 people"]',
-    situation:
-      '[PLACEHOLDER] Describe the broken process: scattered approvals, manual invoicing, lost documents, slow client onboarding.',
-    built:
-      '[PLACEHOLDER] Describe the solution: client portal, approval workflow, document hub, or similar.',
-    outcome:
-      '[PLACEHOLDER] Describe the outcome in business terms: faster onboarding, fewer errors, clients self-serve instead of calling.',
+    tag: 'Logistics · Customer platform',
+    title: 'From status calls to self-service shipment tracking',
+    body: 'We built a customer platform, mobile app, and mini app for a logistics company whose clients had to call managers or use an outdated website to track shipments. Customers can now see delivery status, documents, and key order events without contacting support.',
+    outcomes: [
+      '45% fewer status-related support calls',
+      '1.5× higher customer retention',
+      '25% revenue growth one month after launch',
+    ],
   },
   {
-    tag: '[PLACEHOLDER — e.g. "Retail B2B · 3 locations"]',
-    situation:
-      '[PLACEHOLDER] Describe what the client experience looked like before: how clients placed orders, checked availability, got updates.',
-    built:
-      '[PLACEHOLDER] Describe the customer-facing product: order portal, booking system, account dashboard.',
-    outcome:
-      '[PLACEHOLDER] Describe what changed: repeat orders increased, support requests dropped, clients stopped asking "where is my order?".',
+    tag: 'Real estate · Automation',
+    title: 'From scattered operations to visible lead flow',
+    body: 'We built an automation system for a real estate agency where leads, viewings, documents, and follow-ups were spread across disconnected tools. The team now manages lead intake, property matching, task assignment, document flow, and manager dashboards in one place.',
+    outcomes: [
+      '30% faster lead processing',
+      '40% fewer manual follow-ups',
+      'Clear lead statuses across the team',
+    ],
   },
 ]
-// ──────────────────────────────────────────────────────────────────
 
 export function ProofSection() {
   return (
@@ -80,46 +76,54 @@ export function ProofSection() {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="flex flex-col gap-5 rounded-2xl border border-dashed border-border bg-bg-surface p-6 md:p-8"
+                className="group flex h-full flex-col gap-6 rounded-2xl border border-border bg-bg-surface p-7 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:p-8 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Tag */}
-                <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-text-secondary">
-                  {c.tag}
+                <div className="flex items-baseline gap-3">
+                  <span
+                    aria-hidden
+                    className="font-mono text-[0.95rem] font-semibold text-accent"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-mono text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-text-secondary">
+                    {c.tag}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-[22px] font-bold leading-tight tracking-tight text-text-primary [text-wrap:balance] md:text-[24px]">
+                  {c.title}
+                </h3>
+
+                {/* Body */}
+                <p className="text-[15.5px] leading-[1.65] text-text-primary/80">
+                  {c.body}
                 </p>
 
-                {/* Situation */}
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[0.7rem] font-bold uppercase tracking-widest text-accent">
-                    Situation
+                {/* Outcomes — pinned to bottom across cards */}
+                <div className="mt-auto flex flex-col gap-3 border-t border-border pt-5">
+                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-text-secondary/70">
+                    Outcomes
                   </span>
-                  <p className="text-[0.95rem] leading-relaxed text-text-secondary">
-                    {c.situation}
-                  </p>
-                </div>
-
-                {/* What we built */}
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[0.7rem] font-bold uppercase tracking-widest text-accent">
-                    What we built
-                  </span>
-                  <p className="text-[0.95rem] leading-relaxed text-text-secondary">
-                    {c.built}
-                  </p>
-                </div>
-
-                {/* Outcome */}
-                <div className="flex flex-col gap-1.5 rounded-lg bg-bg-subtle p-4">
-                  <span className="text-[0.7rem] font-bold uppercase tracking-widest text-accent">
-                    Outcome
-                  </span>
-                  <p className="text-[0.95rem] font-medium leading-relaxed text-text-primary">
-                    {c.outcome}
-                  </p>
+                  <ul className="flex flex-col gap-2.5">
+                    {c.outcomes.map((o) => (
+                      <li
+                        key={o}
+                        className="flex items-start gap-3 text-[15px] font-medium leading-snug text-text-primary"
+                      >
+                        <span
+                          aria-hidden
+                          className="mt-[8px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"
+                        />
+                        <span>{o}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </motion.div>
             ))}
           </div>
-
         </motion.div>
       </div>
     </Section>

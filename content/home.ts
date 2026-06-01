@@ -83,45 +83,6 @@ export const whyDifferent = {
   ],
 }
 
-// ─── Projects ───────────────────────────────────────────────
-export const projects = {
-  heading: "Projects we've worked on",
-  subline: 'A few examples of what we built and why it mattered.',
-  outcomesLabel: 'Outcomes',
-  cases: [
-    {
-      tag: 'Manufacturing · Internal system',
-      title: 'From specialist-only calculations to regulator-ready reports',
-      body: 'We built a guided wind-flow calculation system for a production facility where routine reports depended on engineering staff. Non-specialist employees can now enter facility data, run calculations, and prepare regulator-ready reports through a clear internal workflow.',
-      outcomes: [
-        'Regulatory review passed',
-        '60% less manual calculation work',
-        'Reports prepared in under one working day',
-      ],
-    },
-    {
-      tag: 'Logistics · Customer platform',
-      title: 'From status calls to self-service shipment tracking',
-      body: 'We built a customer platform, mobile app, and mini app for a logistics company whose clients had to call managers or use an outdated website to track shipments. Customers can now see delivery status, documents, and key order events without contacting support.',
-      outcomes: [
-        '45% fewer status-related support calls',
-        '1.5× higher customer retention',
-        '25% revenue growth one month after launch',
-      ],
-    },
-    {
-      tag: 'Real estate · Automation',
-      title: 'From scattered operations to visible lead flow',
-      body: 'We built an automation system for a real estate agency where leads, viewings, documents, and follow-ups were spread across disconnected tools. The team now manages lead intake, property matching, task assignment, document flow, and manager dashboards in one place.',
-      outcomes: [
-        '30% faster lead processing',
-        '40% fewer manual follow-ups',
-        'Clear lead statuses across the team',
-      ],
-    },
-  ],
-}
-
 // ─── Pillars ─────────────────────────────────────────────────
 export const pillars = {
   heading: 'What we build',
