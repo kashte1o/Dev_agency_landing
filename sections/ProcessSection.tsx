@@ -92,11 +92,11 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 </p>
 
                 {/* Outcome — pinned to bottom across all cards */}
-                <div className="mt-auto flex flex-col gap-1 border-t border-white/10 pt-6">
-                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/50">
+                <div className="mt-10 flex flex-col gap-1.5 border-t border-white/10 pt-6">
+                  <span className="font-mono text-[1.02rem] font-semibold uppercase tracking-[0.12em] text-white/50">
                     Outcome
                   </span>
-                  <span className="text-[15.5px] font-medium leading-snug text-white/95">
+                  <span className="text-[23px] font-medium leading-snug text-white/95">
                     {step.tooltip.replace(/^Outcome:\s*/i, '')}
                   </span>
                 </div>
