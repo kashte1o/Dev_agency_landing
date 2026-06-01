@@ -58,13 +58,13 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="text-[2.4rem] font-bold tracking-tight text-white md:text-[2.9rem]"
+                className="text-[1.95rem] font-bold tracking-tight text-white md:text-[2.9rem]"
               >
                 {contactSection.heading}
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="mt-5 text-[1.05rem] md:text-[1.3rem] leading-relaxed text-white/65"
+                className="mt-5 text-[0.875rem] md:text-[1.3rem] leading-relaxed text-white/65"
               >
                 {contactSection.subheading}
               </motion.p>
@@ -82,8 +82,8 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
                     {signal.icon}
                   </span>
                   <div>
-                    <p className="text-[1.15rem] font-semibold text-white">{signal.title}</p>
-                    <p className="text-[1.05rem] leading-relaxed text-white/65">{signal.body}</p>
+                    <p className="text-[0.95rem] md:text-[1.15rem] font-semibold text-white">{signal.title}</p>
+                    <p className="text-[0.875rem] md:text-[1.05rem] leading-relaxed text-white/65">{signal.body}</p>
                   </div>
                 </motion.div>
               ))}

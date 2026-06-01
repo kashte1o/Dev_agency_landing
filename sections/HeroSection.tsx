@@ -72,7 +72,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               )}
 
               <h1
-                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[2rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
+                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[1.625rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
               >
                 {hero.heading}
               </h1>
@@ -82,8 +82,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 {hero.bodyParagraphs.map((para, i) => (
                   <p
                     key={i}
-                    className="leading-[1.65] text-white/55"
-                    style={{ fontSize: 'clamp(1.1rem, 1.05vw, 1.3rem)' }}
+                    className="leading-[1.65] text-white/55 text-[0.9rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
                   >
                     {para}
                   </p>
@@ -126,7 +125,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </div>
                 <a
                   href={hero.primaryCta.href}
-                  className="trust-link group relative inline-block self-start text-[16px] md:text-[21px] leading-[1.3] text-white/35 no-underline transition-colors duration-200 hover:text-white/55"
+                  className="trust-link group relative inline-block self-start text-[13px] md:text-[21px] leading-[1.3] text-white/35 no-underline transition-colors duration-200 hover:text-white/55"
                 >
                   Talk directly with our software team
                   <span

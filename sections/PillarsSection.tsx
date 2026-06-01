@@ -21,11 +21,11 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
           className="flex flex-col gap-10 md:gap-14"
         >
           <motion.div variants={fadeUp} className="flex flex-col gap-4 max-w-3xl">
-            <h2 className="text-[1.7rem] font-bold tracking-tight text-text-primary md:text-5xl">
+            <h2 className="text-[1.35rem] font-bold tracking-tight text-text-primary md:text-5xl">
               {pillars.heading}
             </h2>
             {pillars.subline && (
-              <p className="text-[15px] leading-relaxed text-text-secondary md:text-xl">
+              <p className="text-[12px] md:text-xl leading-relaxed text-text-secondary">
                 {pillars.subline}
               </p>
             )}
@@ -42,7 +42,7 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
                 <div className="md:col-span-2">
                   <span
                     aria-hidden
-                    className="font-mono text-4xl font-semibold leading-none text-accent md:text-[72px]"
+                    className="font-mono text-3xl md:text-[72px] font-semibold leading-none text-accent"
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -50,17 +50,17 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
 
                 {/* Title + value line */}
                 <div className="flex flex-col gap-2.5 md:col-span-4 md:gap-3">
-                  <h3 className="text-[20px] font-bold leading-tight tracking-tight text-text-primary md:text-[32px]">
+                  <h3 className="text-[16px] md:text-[32px] font-bold leading-tight tracking-tight text-text-primary">
                     {card.title}
                   </h3>
-                  <p className="text-[15px] font-medium leading-snug text-accent md:text-[19px]">
+                  <p className="text-[12px] md:text-[19px] font-medium leading-snug text-accent">
                     {card.description}
                   </p>
                 </div>
 
                 {/* Body */}
                 <div className="md:col-span-6">
-                  <p className="text-[14.5px] leading-[1.6] text-text-primary/85 md:text-[18px]">
+                  <p className="text-[12px] md:text-[18px] leading-[1.6] text-text-primary/85">
                     {card.body}
                   </p>
                 </div>

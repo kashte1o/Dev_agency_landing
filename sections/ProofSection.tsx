@@ -61,11 +61,11 @@ export function ProofSection() {
           <div className="flex flex-col gap-4">
             <motion.h2
               variants={fadeUp}
-              className="max-w-2xl text-[1.6rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
+              className="max-w-2xl text-[1.3rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
             >
               {HEADING}
             </motion.h2>
-            <motion.p variants={fadeUp} className="max-w-xl text-[0.95rem] text-text-secondary md:text-[1.1rem]">
+            <motion.p variants={fadeUp} className="max-w-xl text-[0.8rem] text-text-secondary md:text-[1.1rem]">
               {SUBHEADING}
             </motion.p>
           </div>

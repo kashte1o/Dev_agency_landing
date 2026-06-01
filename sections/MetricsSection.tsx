@@ -42,7 +42,7 @@ export function MetricsSection() {
           <div className="grid grid-cols-2 gap-x-12 gap-y-10 lg:grid-cols-4">
             {metrics.map((m) => (
               <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-3">
-                <span className="text-[2rem] md:text-[2.5rem] font-bold leading-none tracking-tight text-accent">
+                <span className="text-[1.625rem] md:text-[2.5rem] font-bold leading-none tracking-tight text-accent">
                   {m.value}
                 </span>
                 <p className="text-sm leading-relaxed text-text-secondary">{m.label}</p>

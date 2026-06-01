@@ -22,7 +22,7 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
         >
           <motion.h2
             variants={fadeUp}
-            className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-text-primary md:text-4xl"
+            className="mx-auto max-w-2xl text-center text-2xl font-bold tracking-tight text-text-primary md:text-4xl"
           >
             {whyDifferent.heading}
           </motion.h2>
@@ -34,15 +34,15 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
                 variants={fadeUp}
                 className="flex flex-col gap-2 border-t border-border pt-6"
               >
-                <h3 className="text-2xl font-bold tracking-tight text-accent md:text-3xl">{card.title}</h3>
-                <p className="leading-[1.65] text-text-secondary" style={{ fontSize: 'clamp(1.1rem, 1.05vw, 1.3rem)' }}>{card.body}</p>
+                <h3 className="text-xl font-bold tracking-tight text-accent md:text-3xl">{card.title}</h3>
+                <p className="leading-[1.65] text-text-secondary text-[0.875rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]">{card.body}</p>
               </motion.div>
             ))}
           </div>
 
           <motion.p
             variants={fadeUp}
-            className="mx-auto max-w-3xl text-center text-2xl font-bold tracking-tight text-text-primary md:text-[2rem]"
+            className="mx-auto max-w-3xl text-center text-xl font-bold tracking-tight text-text-primary md:text-[2rem]"
           >
             Senior-level work.{' '}
             <span className="text-accent">Without senior-agency pricing.</span>

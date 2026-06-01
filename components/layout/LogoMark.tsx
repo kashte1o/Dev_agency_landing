@@ -11,7 +11,7 @@ interface LogoMarkProps {
 
 // Width/height pairs — aspect ratio ~5.3:1 matches the logo file
 const sizeMap = {
-  sm: { width: 264, height: 72 },
+  sm: { width: 180, height: 49 },
   md: { width: 312, height: 84 },
   lg: { width: 468, height: 125 },
   xl: { width: 420, height: 114 },
@@ -42,7 +42,7 @@ export function LogoMark({
         width={width}
         height={height}
         priority
-        className="object-contain relative z-[1]"
+        className="object-contain object-left relative z-[1]"
       />
       {intro && (
         <>

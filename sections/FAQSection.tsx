@@ -27,11 +27,11 @@ export function FAQSection() {
           <div className="flex flex-col gap-4">
             <motion.h2
               variants={fadeUp}
-              className="max-w-2xl text-[1.9rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
+              className="max-w-2xl text-[1.5rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
             >
               {HEADING}
             </motion.h2>
-            <motion.p variants={fadeUp} className="max-w-xl text-[1.1rem] text-text-secondary">
+            <motion.p variants={fadeUp} className="max-w-xl text-[0.875rem] md:text-[1.1rem] text-text-secondary">
               {SUBHEADING}
             </motion.p>
           </div>
@@ -74,12 +74,12 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
         aria-expanded={open}
         className="flex w-full items-start justify-between gap-6 py-5 text-left"
       >
-        <span className="text-[1.05rem] md:text-[1.35rem] font-semibold text-text-primary leading-snug">
+        <span className="text-[0.875rem] md:text-[1.35rem] font-semibold text-text-primary leading-snug">
           {item.question}
         </span>
         <span
           aria-hidden
-          className="mt-1 flex-shrink-0 w-5 text-center text-[1.3rem] font-light leading-none text-text-secondary/60 select-none"
+          className="mt-1 flex-shrink-0 w-5 text-center text-[1.05rem] md:text-[1.3rem] font-light leading-none text-text-secondary/60 select-none"
         >
           {open ? '−' : '+'}
         </span>
@@ -95,7 +95,7 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-[1rem] md:text-[1.25rem] leading-relaxed text-text-secondary">
+            <p className="pb-5 text-[0.875rem] md:text-[1.25rem] leading-relaxed text-text-secondary">
               {item.answer}
             </p>
           </motion.div>
@@ -122,12 +122,12 @@ const FAQContactTrigger = ({
       onClick={onClick}
       className="flex w-full items-center justify-between gap-6 py-5 text-left group"
     >
-      <span className="text-[1.05rem] md:text-[1.35rem] font-semibold text-text-primary leading-snug group-hover:text-accent transition-colors duration-200">
+      <span className="text-[0.875rem] md:text-[1.35rem] font-semibold text-text-primary leading-snug group-hover:text-accent transition-colors duration-200">
         {question}
       </span>
       <span
         aria-hidden
-        className="flex-shrink-0 text-[1.3rem] font-light text-text-secondary/60 group-hover:text-accent transition-colors duration-200"
+        className="flex-shrink-0 text-[1.05rem] md:text-[1.3rem] font-light text-text-secondary/60 group-hover:text-accent transition-colors duration-200"
       >
         →
       </span>

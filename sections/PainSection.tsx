@@ -28,7 +28,7 @@ export function PainSection({ pain }: PainSectionProps) {
           className="
             w-full text-center
             font-bold text-text-primary tracking-[-0.022em] leading-[1.1]
-            text-[1.9rem]
+            text-[1.5rem]
             sm:text-[2.25rem]
             md:text-[2.75rem]
             lg:text-[3.125rem]
@@ -67,7 +67,7 @@ export function PainSection({ pain }: PainSectionProps) {
             rounded-xl border border-[#E2E8F0] bg-bg-surface
             px-8 py-6
             text-center
-            text-[1.05rem] md:text-[1.15rem]
+            text-[0.85rem] md:text-[1.15rem]
             text-text-secondary leading-relaxed
           "
         >
@@ -120,7 +120,7 @@ function PainCard({ card }: PainCardProps) {
         {/* Title */}
         <h3 className="
           font-semibold leading-snug text-text-primary
-          text-[1.35rem] md:text-[1.4rem]
+          text-[1.1rem] md:text-[1.4rem]
         ">
           {card.title}
         </h3>
@@ -128,7 +128,7 @@ function PainCard({ card }: PainCardProps) {
         {/* Description — tighter line-height per PROJECT.md */}
         <p className="
           text-text-secondary
-          text-[1.15rem] md:text-[1.2rem]
+          text-[0.95rem] md:text-[1.2rem]
           leading-[1.6]
         ">
           {card.description}

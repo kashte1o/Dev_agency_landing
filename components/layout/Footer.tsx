@@ -13,7 +13,7 @@ export function Footer() {
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
             <LogoMark variant="light" className="self-center" />
-            <p className="text-[1.05rem] leading-snug text-white/60 max-w-[260px] self-center text-center">
+            <p className="text-[0.85rem] md:text-[1.05rem] leading-snug text-white/60 max-w-[260px] self-center text-center">
               {footerTagline}
             </p>
             {socialLinks.length > 0 && (
@@ -53,13 +53,13 @@ export function Footer() {
               {contact.email && (
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-[0.95rem] md:text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
+                  className="text-[0.8rem] md:text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
                 >
                   {contact.email}
                 </a>
               )}
               {contact.location && (
-                <span className="text-[0.95rem] md:text-[1.1rem] leading-relaxed text-white/55">{contact.location}</span>
+                <span className="text-[0.8rem] md:text-[1.1rem] leading-relaxed text-white/55">{contact.location}</span>
               )}
             </FooterColumn>
 
@@ -101,7 +101,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <a
       href={href}
-      className="text-[0.95rem] md:text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
+      className="text-[0.8rem] md:text-[1.1rem] leading-relaxed text-white/65 hover:text-white transition-colors"
     >
       {children}
     </a>

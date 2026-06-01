@@ -72,11 +72,11 @@ export function BeforeAfterSection() {
           <div className="flex flex-col gap-4">
             <motion.h2
               variants={fadeUp}
-              className="max-w-2xl text-[1.9rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
+              className="max-w-2xl text-[1.5rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
             >
               {HEADING}
             </motion.h2>
-            <motion.p variants={fadeUp} className="max-w-xl text-[1.1rem] text-text-secondary">
+            <motion.p variants={fadeUp} className="max-w-xl text-[0.875rem] md:text-[1.1rem] text-text-secondary">
               {SUBHEADING}
             </motion.p>
           </div>
