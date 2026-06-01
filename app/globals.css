@@ -34,24 +34,24 @@ html {
 /* ─── Per-anchor scroll-margin overrides (nav link landing positions) ─ */
 /* Approach — small peek above */
 #why-different { scroll-margin-top: 140px; }
-/* Work — larger peek (intentionally show the section transition) */
-#proof         { scroll-margin-top: 210px; }
+/* Work — scroll well past, minimal peek above */
+#proof         { scroll-margin-top: 60px; }
 /* Services — same as Work */
-#what-we-build { scroll-margin-top: 210px; }
-/* Process — sit flush under nav, only dark-blue screen visible */
-#process       { scroll-margin-top: 100px; }
+#what-we-build { scroll-margin-top: 60px; }
+/* Process — moderate scroll, only blue screen visible */
+#process       { scroll-margin-top: 80px; }
 /* FAQ — small peek above */
 #faq           { scroll-margin-top: 140px; }
-/* Let's talk / contact — sit flush, no white peek above */
-#start-project { scroll-margin-top: 100px; }
+/* Let's talk / contact — scroll well past, no white peek */
+#start-project { scroll-margin-top: 60px; }
 
 @media (min-width: 768px) {
   #why-different { scroll-margin-top: 170px; }
-  #proof         { scroll-margin-top: 260px; }
-  #what-we-build { scroll-margin-top: 260px; }
-  #process       { scroll-margin-top: 130px; }
+  #proof         { scroll-margin-top: 80px; }
+  #what-we-build { scroll-margin-top: 80px; }
+  #process       { scroll-margin-top: 110px; }
   #faq           { scroll-margin-top: 170px; }
-  #start-project { scroll-margin-top: 130px; }
+  #start-project { scroll-margin-top: 80px; }
 }
 
 /* ─── Design tokens ─────────────────────────────────────────── */
