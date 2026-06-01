@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 const SITE_URL = 'https://dev-agency-landing.aleksandrkashtelo.workers.dev'
 const SITE_TITLE = `${STUDIO_NAME} — Custom Software for Growing Businesses`
 const SITE_DESCRIPTION =
-  'We build custom software shaped around how your business actually works — internal tools, workflow automation, and client portals for SMBs.'
+  'We build custom software shaped around how your business actually works — internal tools, workflow automation, and client portals for SMBs. Free consultation and prototype preview.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -55,10 +55,10 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/images/hero-person.webp',
+        url: '/og.png',
         width: 1200,
         height: 630,
-        alt: STUDIO_NAME,
+        alt: `${STUDIO_NAME} — Custom software for growing businesses`,
       },
     ],
   },
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ['/images/hero-person.webp'],
+    images: ['/og.png'],
   },
   icons: {
     icon: '/favicon.ico',
