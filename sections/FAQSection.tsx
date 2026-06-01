@@ -15,7 +15,7 @@ export function FAQSection() {
   const triggerRef = useRef<HTMLButtonElement | null>(null)
 
   return (
-    <Section id="faq" background="base" className="pt-10 md:pt-14 lg:pt-16 pb-20 md:pb-28 lg:pb-32">
+    <Section id="faq" background="base" className="pt-5 md:pt-7 lg:pt-8 pb-20 md:pb-28 lg:pb-32">
       <Container>
         <motion.div
           variants={staggerContainer}

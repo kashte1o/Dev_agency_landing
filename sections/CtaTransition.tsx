@@ -3,7 +3,7 @@ import { Container } from '@/components/ui/Container'
 
 export function CtaTransition() {
   return (
-    <Section background="base" className="py-10 md:py-14">
+    <Section background="base" className="pt-10 md:pt-14 pb-5 md:pb-7">
       <Container>
         <div className="flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:gap-10 md:text-left">
           <div className="flex max-w-xl flex-col gap-2.5">
