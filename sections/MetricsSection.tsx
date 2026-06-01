@@ -35,7 +35,7 @@ export function MetricsSection() {
         >
           <motion.p
             variants={fadeUp}
-            className="mb-10 text-xs font-medium uppercase tracking-[0.18em] text-text-secondary"
+            className="mb-10 text-xs font-medium uppercase tracking-[0.18em] text-text-primary"
           >
             Measured delivery outcomes
           </motion.p>

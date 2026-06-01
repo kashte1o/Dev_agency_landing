@@ -36,7 +36,7 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
               <motion.li
                 key={card.title}
                 variants={fadeUp}
-                className="group relative grid grid-cols-1 gap-5 rounded-[24px] border border-border bg-bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:min-h-[220px] md:grid-cols-12 md:items-center md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group relative grid grid-cols-1 gap-5 rounded-[24px] border border-border bg-bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:min-h-[220px] md:grid-cols-12 md:items-start md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Number */}
                 <div className="md:col-span-2">
