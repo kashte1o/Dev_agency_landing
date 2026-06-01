@@ -239,7 +239,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className={`relative z-10 w-full rounded-xl border border-border bg-bg-surface shadow-lg max-h-[calc(100dvh-2rem)] overflow-y-auto ${submitted ? 'max-w-xl p-8 sm:p-12' : 'max-w-lg p-6 sm:p-8'}`}
+            className={`relative z-10 w-full rounded-xl border border-border bg-bg-surface shadow-lg max-h-[calc(100dvh-2rem)] overflow-y-auto ${submitted ? 'max-w-2xl p-9 sm:p-14' : 'max-w-[39rem] p-7 sm:p-10'}`}
           >
             <button
               ref={closeBtnRef}
@@ -255,11 +255,11 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
               <>
                 <h3
                   id="contact-popup-title"
-                  className="pr-8 text-xl font-semibold text-text-primary"
+                  className="pr-8 text-2xl font-semibold text-text-primary"
                 >
                   {stillHaveQuestionsPopup.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-text-secondary">
+                <p className="mt-3 text-[1.1rem] leading-relaxed text-text-secondary">
                   {stillHaveQuestionsPopup.body}
                 </p>
               </>
@@ -270,7 +270,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                 <div className="flex flex-col gap-1.5">
                   <label
                     htmlFor="popup-question"
-                    className="text-sm font-medium text-text-primary"
+                    className="text-[0.95rem] font-medium text-text-primary"
                   >
                     {stillHaveQuestionsPopup.questionLabel}
                   </label>
@@ -283,7 +283,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                     placeholder={stillHaveQuestionsPopup.questionPlaceholder}
                     aria-invalid={errors.question ? true : undefined}
                     aria-describedby={errors.question ? 'popup-question-error' : undefined}
-                    className="resize-none rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                    className="resize-none rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-[0.95rem] text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                   />
                   {errors.question && (
                     <p id="popup-question-error" role="alert" className="text-xs text-red-500">
@@ -296,7 +296,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                   <div className="flex flex-col gap-1.5">
                     <label
                       htmlFor="popup-email"
-                      className="text-sm font-medium text-text-primary"
+                      className="text-[0.95rem] font-medium text-text-primary"
                     >
                       {stillHaveQuestionsPopup.emailLabel}
                     </label>
@@ -308,7 +308,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                       placeholder={stillHaveQuestionsPopup.emailPlaceholder}
                       aria-invalid={errors.email ? true : undefined}
                       aria-describedby={errors.email ? 'popup-email-error' : undefined}
-                      className="rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                      className="rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-[0.95rem] text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                     />
                     {errors.email && (
                       <p id="popup-email-error" role="alert" className="text-xs text-red-500">
@@ -320,7 +320,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                   <div className="flex flex-col gap-1.5">
                     <label
                       htmlFor="popup-messenger"
-                      className="text-sm font-medium text-text-primary"
+                      className="text-[0.95rem] font-medium text-text-primary"
                     >
                       {stillHaveQuestionsPopup.messengerLabel}
                     </label>
@@ -332,7 +332,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                       placeholder={stillHaveQuestionsPopup.messengerPlaceholder}
                       aria-invalid={errors.messenger ? true : undefined}
                       aria-describedby={errors.messenger ? 'popup-messenger-error' : undefined}
-                      className="rounded-md border border-border bg-bg-base px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                      className="rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-[0.95rem] text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                     />
                     {errors.messenger && (
                       <p id="popup-messenger-error" role="alert" className="text-xs text-red-500">
@@ -342,11 +342,11 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                   </div>
 
                   {errors.contact ? (
-                    <p role="alert" className="text-xs text-red-500">
+                    <p role="alert" className="text-[0.8rem] text-red-500">
                       {errors.contact}
                     </p>
                   ) : (
-                    <p className="text-xs text-text-secondary">
+                    <p className="text-[0.8rem] text-text-secondary">
                       {stillHaveQuestionsPopup.contactHint}
                     </p>
                   )}
@@ -354,12 +354,12 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
 
                 <button
                   type="submit"
-                  className="mt-1 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  className="mt-1 rounded-lg bg-accent px-5 py-3 text-[0.95rem] font-medium text-white transition-opacity hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
                   {stillHaveQuestionsPopup.submitLabel}
                 </button>
 
-                <p className="text-xs leading-relaxed text-text-secondary">
+                <p className="text-[0.8rem] leading-relaxed text-text-secondary">
                   {stillHaveQuestionsPopup.note}
                 </p>
               </form>
