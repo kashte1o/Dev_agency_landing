@@ -25,7 +25,7 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <Section id="metrics" background="surface" className="!py-12 md:!py-[72px]">
+    <Section id="metrics" background="surface" className="!pt-6 md:!pt-9 !pb-12 md:!pb-[72px]">
       <Container>
         <motion.div
           variants={staggerContainer}

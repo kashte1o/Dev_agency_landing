@@ -11,7 +11,7 @@ interface WhyDifferentSectionProps {
 
 export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) {
   return (
-    <Section id="why-different" background="base" className="pt-10 md:pt-[60px]">
+    <Section id="why-different" background="base" className="pt-10 md:pt-[60px] pb-10 md:pb-[60px]">
       <Container>
         <motion.div
           variants={staggerContainer}
