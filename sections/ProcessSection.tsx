@@ -10,178 +10,44 @@ const TRACE_GLOW =
   '0 0 6px rgba(96,165,250,0.7), 0 0 14px rgba(59,130,246,0.45), 0 0 26px rgba(59,130,246,0.18)'
 const DOT_GLOW = '0 0 10px 3px rgba(96,165,250,0.7), 0 0 22px 6px rgba(59,130,246,0.35)'
 
-interface CardRowProps {
-  pair: ProcessStep[]
-  startIndex: number
-  prefersReduced: boolean | null
+// Trace timing (seconds) — path:
+// 1. TL → TR  (top edge)
+// 2. TR → mid-R  (right edge, top half)
+// 3. mid-R → mid-L  (middle row gap, right → left)
+// 4. mid-L → BL  (left edge, bottom half)
+// 5. BL → BR  (bottom edge)
+const SEG = {
+  top:    { delay: 0.3, dur: 0.7 },
+  right:  { delay: 1.0, dur: 0.3 },
+  middle: { delay: 1.3, dur: 0.7 },
+  left:   { delay: 2.0, dur: 0.3 },
+  bottom: { delay: 2.3, dur: 0.7 },
 }
+const DRAW_END = SEG.bottom.delay + SEG.bottom.dur  // 3.0
+const HOLD = 1.0
+const FADE = 0.7
+const FADE_START = DRAW_END + HOLD                  // 4.0
+const TRACE_TOTAL = FADE_START + FADE               // 4.7
+const DOT_DUR = DRAW_END - SEG.top.delay            // 2.7
+const T = (t: number) => t / DOT_DUR
 
-function CardRow({ pair, startIndex, prefersReduced }: CardRowProps) {
-  const rowRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(rowRef, { once: true, margin: '-80px' })
+// Card reveal timing — moment the pulse touches each card's defining corner
+const CARD_DELAYS_ANIMATED = [
+  0,                                          // 01 — TL of grid (pulse starts)
+  SEG.top.delay + SEG.top.dur,                // 02 — TR (end of seg1) = 1.0
+  SEG.left.delay + SEG.left.dur,              // 03 — BL (end of seg4) = 2.3
+  SEG.bottom.delay + SEG.bottom.dur * 0.5,    // 04 — mid-bottom (mid of seg5) = 2.65
+]
+const CARD_DELAYS_REDUCED = [0, 0.08, 0.16, 0.24]
 
-  // Row timing
-  const CARD_DUR = 0.6
-  const FIRST_DELAY = 0
-  const TRACE_DELAY = 0.4
-  const TRACE_DUR = 0.9        // line drawing time
-  const HOLD = 1.0             // line stays fully visible after draw
-  const FADE = 0.7             // smooth fade-out duration
-  const LINE_TOTAL = TRACE_DUR + HOLD + FADE
-  const SECOND_DELAY = TRACE_DELAY + TRACE_DUR * 0.55
-
-  // Ionised-air particles travel with slight vertical drift + opacity flicker
-  const PARTICLES = [
-    { y: -3, size: 4, delayOffset: 0.00, dur: 1.0 },
-    { y:  2, size: 3, delayOffset: 0.12, dur: 1.1 },
-    { y: -1, size: 3, delayOffset: 0.22, dur: 1.0 },
-    { y:  3, size: 2, delayOffset: 0.34, dur: 1.2 },
-    { y: -2, size: 4, delayOffset: 0.46, dur: 1.0 },
-  ]
-
-  return (
-    <div ref={rowRef} className="relative grid gap-5 md:grid-cols-2 md:gap-6">
-      {/* Energy trace — uniform line drawn via width, holds, then fades */}
-      {!prefersReduced && (
-        <>
-          <motion.span
-            aria-hidden
-            className="pointer-events-none absolute left-0 top-1/2 z-10 hidden h-[1.5px] -translate-y-1/2 rounded-full bg-accent md:block"
-            style={{ boxShadow: TRACE_GLOW }}
-            initial={{ width: '0%', opacity: 0 }}
-            animate={inView ? { width: '100%', opacity: [0, 1, 1, 0] } : {}}
-            transition={{
-              width:   { delay: TRACE_DELAY, duration: TRACE_DUR, ease: EASE_OUT },
-              opacity: {
-                delay: TRACE_DELAY,
-                duration: LINE_TOTAL,
-                times: [0, 0.12 / LINE_TOTAL, (TRACE_DUR + HOLD) / LINE_TOTAL, 1],
-                ease: 'linear',
-              },
-            }}
-          />
-
-          {/* Leading head dot — bright pulse at the line tip */}
-          <motion.span
-            aria-hidden
-            className="pointer-events-none absolute top-1/2 z-20 hidden h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white md:block"
-            style={{ boxShadow: DOT_GLOW }}
-            initial={{ left: '0%', opacity: 0 }}
-            animate={inView ? { left: '100%', opacity: [0, 1, 1, 0] } : {}}
-            transition={{
-              delay: TRACE_DELAY,
-              duration: TRACE_DUR + 0.15,
-              times: [0, 0.15, 0.85, 1],
-              ease: EASE_OUT,
-            }}
-          />
-
-          {/* Ionised-air particles — drift across with vertical jitter and flicker */}
-          {PARTICLES.map((p, idx) => (
-            <motion.span
-              key={idx}
-              aria-hidden
-              className="pointer-events-none absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent md:block"
-              style={{
-                top: `calc(50% + ${p.y}px)`,
-                height: p.size,
-                width: p.size,
-                boxShadow: '0 0 6px 1.5px rgba(96,165,250,0.7)',
-              }}
-              initial={{ left: '0%', opacity: 0 }}
-              animate={
-                inView
-                  ? {
-                      left: '100%',
-                      opacity: [0, 0.9, 0.6, 0.9, 0],
-                    }
-                  : {}
-              }
-              transition={{
-                delay: TRACE_DELAY + p.delayOffset,
-                duration: p.dur,
-                times: [0, 0.18, 0.5, 0.8, 1],
-                ease: 'easeOut',
-              }}
-            />
-          ))}
-
-          {/* Electric discharge sparks — short flashes along the path */}
-          {[0.2, 0.5, 0.78].map((pos, idx) => (
-            <motion.span
-              key={`spark-${idx}`}
-              aria-hidden
-              className="pointer-events-none absolute top-1/2 z-30 hidden h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white md:block"
-              style={{
-                left: `${pos * 100}%`,
-                boxShadow:
-                  '0 0 6px 2px rgba(255,255,255,0.9), 0 0 14px 4px rgba(96,165,250,0.6)',
-              }}
-              initial={{ opacity: 0, scale: 0.4 }}
-              animate={
-                inView
-                  ? { opacity: [0, 1, 0], scale: [0.4, 1.4, 0.4] }
-                  : {}
-              }
-              transition={{
-                delay: TRACE_DELAY + 0.05 + pos * TRACE_DUR,
-                duration: 0.35,
-                times: [0, 0.45, 1],
-                ease: 'easeOut',
-              }}
-            />
-          ))}
-        </>
-      )}
-
-      {pair.map((step, i) => {
-        const delay = prefersReduced
-          ? i * 0.12
-          : i === 0
-            ? FIRST_DELAY
-            : SECOND_DELAY
-        return (
-          <motion.div
-            key={step.number}
-            initial={{ opacity: 0, y: prefersReduced ? 0 : 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              delay,
-              duration: prefersReduced ? 0.3 : CARD_DUR,
-              ease: EASE_OUT,
-            }}
-            className="group flex h-full flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 transition-all duration-200 hover:border-accent/35 hover:bg-[rgba(59,130,246,0.05)] md:p-10 motion-reduce:transition-none"
-          >
-            {/* Mono label */}
-            <p className="mb-5 font-mono text-[1.08rem] font-semibold uppercase tracking-[0.14em] text-accent/80">
-              {String(startIndex + i + 1).padStart(2, '0')} · {step.label}
-            </p>
-
-            {/* Title */}
-            <h3 className="mb-4 min-h-[3.25rem] text-[22px] font-semibold leading-snug text-white [text-wrap:balance] md:min-h-[5rem] md:text-[26px]">
-              {step.title}
-            </h3>
-
-            {/* Description */}
-            <p className="flex-1 text-[15.5px] leading-[1.65] text-white/75 md:text-base">
-              {step.description}
-            </p>
-
-            {/* Outcome */}
-            <div className="mt-10 flex flex-col gap-1.5 border-t border-white/10 pt-6">
-              <span className="font-mono text-[1.02rem] font-semibold uppercase tracking-[0.12em] text-white/50">
-                Outcome
-              </span>
-              <span className="text-[23px] font-medium leading-snug text-white/95">
-                {step.tooltip.replace(/^Outcome:\s*/i, '')}
-              </span>
-            </div>
-          </motion.div>
-        )
-      })}
-    </div>
-  )
-}
+// Spark flashes at corner junctions (path waypoints)
+const SPARKS = [
+  { left: '100%', top: '0%',   at: SEG.top.delay + SEG.top.dur },
+  { left: '100%', top: '50%',  at: SEG.right.delay + SEG.right.dur },
+  { left: '0%',   top: '50%',  at: SEG.middle.delay + SEG.middle.dur },
+  { left: '0%',   top: '100%', at: SEG.left.delay + SEG.left.dur },
+  { left: '100%', top: '100%', at: SEG.bottom.delay + SEG.bottom.dur },
+]
 
 interface ProcessSectionProps {
   heading: string
@@ -191,7 +57,9 @@ interface ProcessSectionProps {
 
 export function ProcessSection({ heading, subheading, steps }: ProcessSectionProps) {
   const prefersReduced = useReducedMotion()
-  const rows = [steps.slice(0, 2), steps.slice(2, 4)]
+  const gridRef = useRef<HTMLDivElement>(null)
+  const inView = useInView(gridRef, { once: true, margin: '-80px' })
+  const cardDelays = prefersReduced ? CARD_DELAYS_REDUCED : CARD_DELAYS_ANIMATED
 
   return (
     <section
@@ -240,16 +108,192 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
           </motion.p>
         </motion.div>
 
-        {/* Two independent rows — each triggers on its own viewport entry */}
-        <div className="flex flex-col gap-5 md:gap-6">
-          {rows.map((pair, idx) => (
-            <CardRow
-              key={idx}
-              pair={pair}
-              startIndex={idx * 2}
-              prefersReduced={prefersReduced}
-            />
-          ))}
+        {/* Grid with corner-to-corner energy trace */}
+        <div ref={gridRef} className="relative">
+          {/* Trace wrapper — collective fade-out after the path finishes */}
+          {!prefersReduced && (
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-10 hidden md:block"
+              initial={{ opacity: 1 }}
+              animate={inView ? { opacity: [1, 1, 0] } : {}}
+              transition={{
+                duration: TRACE_TOTAL,
+                times: [0, FADE_START / TRACE_TOTAL, 1],
+                ease: 'easeOut',
+              }}
+            >
+              {/* 1. Top edge — TL → TR */}
+              <motion.span
+                className="absolute -top-px left-0 h-[1.5px] rounded-full bg-accent"
+                style={{ boxShadow: TRACE_GLOW }}
+                initial={{ width: '0%' }}
+                animate={inView ? { width: '100%' } : {}}
+                transition={{ delay: SEG.top.delay, duration: SEG.top.dur, ease: EASE_OUT }}
+              />
+              {/* 2. Right edge top half — TR → mid-R */}
+              <motion.span
+                className="absolute -right-px top-0 w-[1.5px] rounded-full bg-accent"
+                style={{ boxShadow: TRACE_GLOW }}
+                initial={{ height: '0%' }}
+                animate={inView ? { height: '50%' } : {}}
+                transition={{ delay: SEG.right.delay, duration: SEG.right.dur, ease: EASE_OUT }}
+              />
+              {/* 3. Middle row gap — mid-R → mid-L (anchored right, grows leftward) */}
+              <motion.span
+                className="absolute right-0 top-1/2 h-[1.5px] -translate-y-1/2 rounded-full bg-accent"
+                style={{ boxShadow: TRACE_GLOW }}
+                initial={{ width: '0%' }}
+                animate={inView ? { width: '100%' } : {}}
+                transition={{ delay: SEG.middle.delay, duration: SEG.middle.dur, ease: EASE_OUT }}
+              />
+              {/* 4. Left edge bottom half — mid-L → BL */}
+              <motion.span
+                className="absolute -left-px top-1/2 w-[1.5px] rounded-full bg-accent"
+                style={{ boxShadow: TRACE_GLOW }}
+                initial={{ height: '0%' }}
+                animate={inView ? { height: '50%' } : {}}
+                transition={{ delay: SEG.left.delay, duration: SEG.left.dur, ease: EASE_OUT }}
+              />
+              {/* 5. Bottom edge — BL → BR */}
+              <motion.span
+                className="absolute -bottom-px left-0 h-[1.5px] rounded-full bg-accent"
+                style={{ boxShadow: TRACE_GLOW }}
+                initial={{ width: '0%' }}
+                animate={inView ? { width: '100%' } : {}}
+                transition={{ delay: SEG.bottom.delay, duration: SEG.bottom.dur, ease: EASE_OUT }}
+              />
+
+              {/* Head dot — travels through all 5 segments */}
+              <motion.span
+                className="absolute z-20 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
+                style={{ boxShadow: DOT_GLOW }}
+                initial={{ left: '0%', top: '0%', opacity: 0 }}
+                animate={
+                  inView
+                    ? {
+                        left: ['0%', '100%', '100%', '0%',  '0%',   '100%'],
+                        top:  ['0%', '0%',   '50%',  '50%', '100%', '100%'],
+                        opacity: 1,
+                      }
+                    : {}
+                }
+                transition={{
+                  left: {
+                    delay: SEG.top.delay,
+                    duration: DOT_DUR,
+                    times: [
+                      0,
+                      T(SEG.top.dur),
+                      T(SEG.top.dur + SEG.right.dur),
+                      T(SEG.top.dur + SEG.right.dur + SEG.middle.dur),
+                      T(SEG.top.dur + SEG.right.dur + SEG.middle.dur + SEG.left.dur),
+                      1,
+                    ],
+                    ease: 'linear',
+                  },
+                  top: {
+                    delay: SEG.top.delay,
+                    duration: DOT_DUR,
+                    times: [
+                      0,
+                      T(SEG.top.dur),
+                      T(SEG.top.dur + SEG.right.dur),
+                      T(SEG.top.dur + SEG.right.dur + SEG.middle.dur),
+                      T(SEG.top.dur + SEG.right.dur + SEG.middle.dur + SEG.left.dur),
+                      1,
+                    ],
+                    ease: 'linear',
+                  },
+                  opacity: { delay: SEG.top.delay, duration: 0.18, ease: 'easeOut' },
+                }}
+              />
+
+              {/* Trailing ionised particle — same path, slightly delayed and smaller */}
+              <motion.span
+                className="absolute z-20 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
+                style={{ boxShadow: '0 0 6px 1.5px rgba(96,165,250,0.7)' }}
+                initial={{ left: '0%', top: '0%', opacity: 0 }}
+                animate={
+                  inView
+                    ? {
+                        left: ['0%', '100%', '100%', '0%',  '0%',   '100%'],
+                        top:  ['0%', '0%',   '50%',  '50%', '100%', '100%'],
+                        opacity: [0, 0.85, 0.85, 0],
+                      }
+                    : {}
+                }
+                transition={{
+                  left:  { delay: SEG.top.delay + 0.18, duration: DOT_DUR, times: [0, T(SEG.top.dur), T(SEG.top.dur + SEG.right.dur), T(SEG.top.dur + SEG.right.dur + SEG.middle.dur), T(SEG.top.dur + SEG.right.dur + SEG.middle.dur + SEG.left.dur), 1], ease: 'linear' },
+                  top:   { delay: SEG.top.delay + 0.18, duration: DOT_DUR, times: [0, T(SEG.top.dur), T(SEG.top.dur + SEG.right.dur), T(SEG.top.dur + SEG.right.dur + SEG.middle.dur), T(SEG.top.dur + SEG.right.dur + SEG.middle.dur + SEG.left.dur), 1], ease: 'linear' },
+                  opacity: { delay: SEG.top.delay + 0.18, duration: DOT_DUR, times: [0, 0.1, 0.9, 1], ease: 'easeOut' },
+                }}
+              />
+
+              {/* Spark flashes at every corner junction */}
+              {SPARKS.map((s, i) => (
+                <motion.span
+                  key={i}
+                  className="absolute z-30 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
+                  style={{
+                    left: s.left,
+                    top: s.top,
+                    boxShadow:
+                      '0 0 6px 2px rgba(255,255,255,0.9), 0 0 14px 4px rgba(96,165,250,0.6)',
+                  }}
+                  initial={{ opacity: 0, scale: 0.4 }}
+                  animate={inView ? { opacity: [0, 1, 0], scale: [0.4, 1.4, 0.4] } : {}}
+                  transition={{
+                    delay: s.at,
+                    duration: 0.35,
+                    times: [0, 0.45, 1],
+                    ease: 'easeOut',
+                  }}
+                />
+              ))}
+            </motion.div>
+          )}
+
+          <div className="grid gap-5 md:grid-cols-2 md:gap-6">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: prefersReduced ? 0 : 10 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  delay: cardDelays[i],
+                  duration: prefersReduced ? 0.3 : 0.55,
+                  ease: EASE_OUT,
+                }}
+                className="group flex h-full flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 transition-all duration-200 hover:border-accent/35 hover:bg-[rgba(59,130,246,0.05)] md:p-10 motion-reduce:transition-none"
+              >
+                {/* Mono label */}
+                <p className="mb-5 font-mono text-[1.08rem] font-semibold uppercase tracking-[0.14em] text-accent/80">
+                  {String(i + 1).padStart(2, '0')} · {step.label}
+                </p>
+
+                {/* Title */}
+                <h3 className="mb-4 min-h-[3.25rem] text-[22px] font-semibold leading-snug text-white [text-wrap:balance] md:min-h-[5rem] md:text-[26px]">
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p className="flex-1 text-[15.5px] leading-[1.65] text-white/75 md:text-base">
+                  {step.description}
+                </p>
+
+                {/* Outcome */}
+                <div className="mt-10 flex flex-col gap-1.5 border-t border-white/10 pt-6">
+                  <span className="font-mono text-[1.02rem] font-semibold uppercase tracking-[0.12em] text-white/50">
+                    Outcome
+                  </span>
+                  <span className="text-[23px] font-medium leading-snug text-white/95">
+                    {step.tooltip.replace(/^Outcome:\s*/i, '')}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </Container>
     </section>
