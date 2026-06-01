@@ -67,7 +67,9 @@ export function LogoStrip() {
             </div>
           </div>
 
-          <ProofLine />
+          <div className="mt-4 md:mt-8">
+            <ProofLine />
+          </div>
         </div>
       </div>
     </section>
