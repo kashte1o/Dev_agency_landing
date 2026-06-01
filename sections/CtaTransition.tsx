@@ -9,20 +9,22 @@ export function CtaTransition() {
           <p className="max-w-xl text-2xl font-bold tracking-tight text-text-primary md:text-3xl">
             Enough theory. Let&apos;s discuss your case.
           </p>
-          <div className="flex flex-col items-center gap-2.5 md:items-end">
+          <div className="flex flex-col items-center gap-2">
             <a
               href="/#start-project"
               className="inline-flex shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-[#0057FF] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-[#1E40AF]"
             >
               Let&apos;s scope your project
             </a>
-            <p className="inline-flex items-center gap-2 whitespace-nowrap text-[14px] font-medium text-text-secondary md:text-[15px]">
+            <div className="flex flex-col items-center gap-1.5">
+              <p className="whitespace-nowrap text-center text-[14px] font-medium text-text-secondary md:text-[15px]">
+                Free consultation + prototype preview
+              </p>
               <span
                 aria-hidden
-                className="status-pulse inline-block h-1.5 w-1.5 rounded-full bg-accent"
+                className="status-pulse block h-[2px] w-12 rounded-full bg-accent/70"
               />
-              Free consultation + prototype preview
-            </p>
+            </div>
           </div>
         </div>
       </Container>
