@@ -85,9 +85,9 @@ export const whyDifferent = {
 
 // ─── Pillars ─────────────────────────────────────────────────
 export const pillars = {
-  heading: 'What we build.',
+  heading: 'What we build',
   subline:
-    'We build the internal systems, customer platforms, and connective workflows that make your business easier to run.',
+    'We build the internal systems, customer platforms, and connective workflows that make your business easier to run',
   cards: [
     {
       title: 'Internal tools & product systems',

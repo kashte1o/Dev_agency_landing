@@ -10,7 +10,7 @@ const metrics = [
     label: 'Average time from brief to launch',
   },
   {
-    value: '+180%',
+    value: '180%+',
     label: 'Average return on development investment within the first year',
   },
   {
