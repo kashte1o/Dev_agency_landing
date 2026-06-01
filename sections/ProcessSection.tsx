@@ -59,11 +59,12 @@ function StaticProcess({
                 <div className="flex h-10 w-10 items-center justify-center rounded-full" style={{ background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)' }}>
                   <Icon size={18} className="text-accent" strokeWidth={1.5} />
                 </div>
-                <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/30">
-                  {String(step.number).padStart(2, '0')}
+                <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/40">
+                  {String(step.number).padStart(2, '0')} · {step.label}
                 </p>
                 <h3 className="text-[1rem] font-semibold text-white">{step.title}</h3>
                 <p className="text-[0.9rem] leading-[1.6] text-white/50">{step.description}</p>
+                <span className="inline-flex w-fit items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[0.72rem] font-medium text-accent">{step.tooltip}</span>
               </div>
             )
           })}
@@ -82,11 +83,12 @@ function StaticProcess({
                   )}
                 </div>
                 <div className="pb-8 pt-1">
-                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-white/30">
-                    {String(step.number).padStart(2, '0')}
+                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-white/40">
+                    {String(step.number).padStart(2, '0')} · {step.label}
                   </span>
                   <h3 className="mt-1 text-[1rem] font-semibold text-white">{step.title}</h3>
                   <p className="mt-1.5 text-[0.9rem] leading-[1.6] text-white/50">{step.description}</p>
+                  <span className="mt-2 inline-flex w-fit items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[0.72rem] font-medium text-accent">{step.tooltip}</span>
                 </div>
               </div>
             )
@@ -397,8 +399,8 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                     </div>
 
                     {/* Mono label */}
-                    <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/25">
-                      {String(step.number).padStart(2, '0')}
+                    <p className="relative z-10 mb-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/40">
+                      {String(step.number).padStart(2, '0')} · {step.label}
                     </p>
 
                     {/* Title */}
@@ -411,10 +413,10 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                       {step.description}
                     </p>
 
-                    {/* Tooltip microcopy — hover/focus */}
-                    <p className="relative z-10 mt-4 text-[0.76rem] font-medium text-accent opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">
+                    {/* Outcome pill */}
+                    <span className="relative z-10 mt-4 inline-flex w-fit items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[0.72rem] font-medium text-accent">
                       {step.tooltip}
-                    </p>
+                    </span>
                   </motion.div>
                 )
               })}
@@ -477,12 +479,12 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.15 + i * 0.18, duration: 0.4, ease: EASE_OUT }}
                   >
-                    <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-white/25">
-                      {String(step.number).padStart(2, '0')}
+                    <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-white/40">
+                      {String(step.number).padStart(2, '0')} · {step.label}
                     </span>
                     <h3 className="mt-1 text-[1rem] font-semibold text-white">{step.title}</h3>
                     <p className="mt-1.5 text-[0.9rem] leading-[1.6] text-white/50">{step.description}</p>
-                    <p className="mt-2 text-[0.76rem] font-medium text-accent">{step.tooltip}</p>
+                    <span className="mt-2 inline-flex w-fit items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[0.72rem] font-medium text-accent">{step.tooltip}</span>
                   </motion.div>
                 </div>
               )

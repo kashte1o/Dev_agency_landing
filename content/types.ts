@@ -16,9 +16,10 @@ export type FAQItem = {
 export type ProcessStep = {
   number: number
   icon: string        // emoji string — never an imported SVG
+  label: string       // short eyebrow (e.g. "Discover")
   title: string
   description: string
-  tooltip: string     // microcopy: desktop hover, mobile inline
+  tooltip: string     // outcome pill text
 }
 
 export type FormField = {
