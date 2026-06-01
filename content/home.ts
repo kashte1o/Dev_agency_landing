@@ -109,6 +109,7 @@ export const pillars = {
     },
   ],
   cta: {
+    hidden: true,
     title: 'Not sure where your project fits?',
     body: 'We’ll help you figure it out and scope the right solution.',
     buttonLabel: 'Let’s scope your project →',

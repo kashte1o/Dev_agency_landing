@@ -69,7 +69,7 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
           </ul>
 
           {/* CTA strip */}
-          {pillars.cta && (
+          {pillars.cta && !pillars.cta.hidden && (
             <motion.div
               variants={fadeUp}
               className="flex flex-col items-start justify-between gap-6 rounded-[20px] border border-border bg-bg-surface px-8 py-7 md:flex-row md:items-center md:px-10"
