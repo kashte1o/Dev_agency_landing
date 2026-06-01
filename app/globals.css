@@ -39,19 +39,19 @@ html {
 /* Services — scroll slightly further down */
 #what-we-build { scroll-margin-top: 35px; }
 /* Process — moderate scroll, capture "Our Process" eyebrow */
-#process       { scroll-margin-top: 60px; }
+#process       { scroll-margin-top: 20px; }
 /* FAQ — small peek above */
 #faq           { scroll-margin-top: 140px; }
 /* Let's talk / contact — scroll well past, no white peek */
-#start-project { scroll-margin-top: 30px; }
+#start-project { scroll-margin-top: 15px; }
 
 @media (min-width: 768px) {
   #why-different { scroll-margin-top: 170px; }
   #proof         { scroll-margin-top: 0px; }
   #what-we-build { scroll-margin-top: 50px; }
-  #process       { scroll-margin-top: 80px; }
+  #process       { scroll-margin-top: 40px; }
   #faq           { scroll-margin-top: 170px; }
-  #start-project { scroll-margin-top: 50px; }
+  #start-project { scroll-margin-top: 30px; }
 }
 
 /* ─── Design tokens ─────────────────────────────────────────── */
