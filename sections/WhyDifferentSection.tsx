@@ -39,6 +39,14 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
               </motion.div>
             ))}
           </div>
+
+          <motion.p
+            variants={fadeUp}
+            className="mx-auto max-w-3xl text-center text-2xl font-bold tracking-tight text-text-primary md:text-[2rem]"
+          >
+            Senior-level work.{' '}
+            <span className="text-accent">Without senior-agency pricing.</span>
+          </motion.p>
         </motion.div>
       </Container>
     </Section>
