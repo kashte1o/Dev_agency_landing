@@ -6,20 +6,27 @@ import type { ProcessStep } from '@/content/types'
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const
 
-// Perimeter trace timing (seconds) — pulse travels TL→TR→BR→BL→TL
+// Trace path through the 2×2 grid:
+//   TL → TR (top)           ─►
+//   TR → mid-R (right ½)    ▼
+//   mid-R → mid-L (middle)  ◄─
+//   mid-L → BL (left ½)     ▼
+//   BL → BR (bottom)        ─►
 const TRACE = {
-  top:    { delay: 0.0, duration: 0.9 },
-  right:  { delay: 0.9, duration: 0.6 },
-  bottom: { delay: 1.5, duration: 0.9 },
-  left:   { delay: 2.4, duration: 0.6 },
+  top:    { delay: 0.0, duration: 0.7 },
+  right:  { delay: 0.7, duration: 0.3 },
+  middle: { delay: 1.0, duration: 0.7 },
+  left:   { delay: 1.7, duration: 0.3 },
+  bottom: { delay: 2.0, duration: 0.8 },
 }
 
-// Card reveal delays in source order (01, 02, 03, 04).
-// Pulse reaches: 01 at start, 02 at top end, 04 at right end, 03 at bottom end.
-const CARD_DELAYS_ANIMATED = [0.05, 0.9, 2.4, 1.5]
-const CARD_DELAYS_REDUCED  = [0,    0.08, 0.16, 0.24]
+// Card reveal — pulse arrival times (source order: 01, 02, 03, 04)
+const CARD_DELAYS_ANIMATED = [0.05, TRACE.top.delay + TRACE.top.duration, TRACE.left.delay + TRACE.left.duration, TRACE.bottom.delay + TRACE.bottom.duration / 2]
+const CARD_DELAYS_REDUCED  = [0, 0.08, 0.16, 0.24]
 
-const TRACE_GLOW = '0 0 8px rgba(59,130,246,0.55)'
+// Layered halo for the "charged air" feel
+const TRACE_GLOW =
+  '0 0 6px rgba(96,165,250,0.7), 0 0 14px rgba(59,130,246,0.45), 0 0 26px rgba(59,130,246,0.18)'
 
 interface ProcessSectionProps {
   heading: string
@@ -80,47 +87,56 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
           </motion.p>
         </motion.div>
 
-        {/* Grid + perimeter trace */}
+        {/* Grid + charged-air trace */}
         <div ref={gridRef} className="relative">
           {!prefersReduced && (
-            <>
-              {/* Top edge — left → right */}
+            <div className="pointer-events-none absolute inset-0 z-10 hidden md:block">
+              {/* 1. Top edge — left → right */}
               <motion.span
                 aria-hidden
-                className="pointer-events-none absolute -top-px left-0 right-0 z-10 h-[2px] origin-left rounded-full bg-gradient-to-r from-transparent via-accent/30 to-accent"
-                style={{ boxShadow: TRACE_GLOW }}
+                className="absolute -top-px left-0 right-0 h-[1.5px] origin-left rounded-full bg-gradient-to-r from-transparent via-accent/25 to-accent"
+                style={{ boxShadow: TRACE_GLOW, filter: 'blur(0.2px)' }}
                 initial={{ scaleX: 0 }}
                 animate={inView ? { scaleX: 1 } : {}}
                 transition={{ delay: TRACE.top.delay, duration: TRACE.top.duration, ease: EASE_OUT }}
               />
-              {/* Right edge — top → bottom */}
+              {/* 2. Right edge — top → mid (bottom corner of top-right card) */}
               <motion.span
                 aria-hidden
-                className="pointer-events-none absolute -right-px bottom-0 top-0 z-10 w-[2px] origin-top rounded-full bg-gradient-to-b from-transparent via-accent/30 to-accent"
-                style={{ boxShadow: TRACE_GLOW }}
+                className="absolute -right-px top-0 h-1/2 w-[1.5px] origin-top rounded-full bg-gradient-to-b from-transparent via-accent/25 to-accent"
+                style={{ boxShadow: TRACE_GLOW, filter: 'blur(0.2px)' }}
                 initial={{ scaleY: 0 }}
                 animate={inView ? { scaleY: 1 } : {}}
                 transition={{ delay: TRACE.right.delay, duration: TRACE.right.duration, ease: EASE_OUT }}
               />
-              {/* Bottom edge — right → left */}
+              {/* 3. Middle row gap — right → left */}
               <motion.span
                 aria-hidden
-                className="pointer-events-none absolute -bottom-px left-0 right-0 z-10 h-[2px] origin-right rounded-full bg-gradient-to-l from-transparent via-accent/30 to-accent"
-                style={{ boxShadow: TRACE_GLOW }}
+                className="absolute left-0 right-0 top-1/2 h-[1.5px] -translate-y-1/2 origin-right rounded-full bg-gradient-to-l from-transparent via-accent/25 to-accent"
+                style={{ boxShadow: TRACE_GLOW, filter: 'blur(0.2px)' }}
                 initial={{ scaleX: 0 }}
                 animate={inView ? { scaleX: 1 } : {}}
-                transition={{ delay: TRACE.bottom.delay, duration: TRACE.bottom.duration, ease: EASE_OUT }}
+                transition={{ delay: TRACE.middle.delay, duration: TRACE.middle.duration, ease: EASE_OUT }}
               />
-              {/* Left edge — bottom → top */}
+              {/* 4. Left edge — mid → bottom (bottom-left of bottom-left card) */}
               <motion.span
                 aria-hidden
-                className="pointer-events-none absolute -left-px bottom-0 top-0 z-10 w-[2px] origin-bottom rounded-full bg-gradient-to-t from-transparent via-accent/30 to-accent"
-                style={{ boxShadow: TRACE_GLOW }}
+                className="absolute -left-px top-1/2 bottom-0 w-[1.5px] origin-top rounded-full bg-gradient-to-b from-transparent via-accent/25 to-accent"
+                style={{ boxShadow: TRACE_GLOW, filter: 'blur(0.2px)' }}
                 initial={{ scaleY: 0 }}
                 animate={inView ? { scaleY: 1 } : {}}
                 transition={{ delay: TRACE.left.delay, duration: TRACE.left.duration, ease: EASE_OUT }}
               />
-            </>
+              {/* 5. Bottom edge — left → right (through mid-bottom to BR of grid) */}
+              <motion.span
+                aria-hidden
+                className="absolute -bottom-px left-0 right-0 h-[1.5px] origin-left rounded-full bg-gradient-to-r from-transparent via-accent/25 to-accent"
+                style={{ boxShadow: TRACE_GLOW, filter: 'blur(0.2px)' }}
+                initial={{ scaleX: 0 }}
+                animate={inView ? { scaleX: 1 } : {}}
+                transition={{ delay: TRACE.bottom.delay, duration: TRACE.bottom.duration, ease: EASE_OUT }}
+              />
+            </div>
           )}
 
           <div className="grid gap-5 md:grid-cols-2 md:gap-6">
