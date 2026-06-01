@@ -43,7 +43,7 @@ html {
 /* FAQ — small peek above */
 #faq           { scroll-margin-top: 140px; }
 /* Let's talk / contact — scroll well past, no white peek */
-#start-project { scroll-margin-top: 60px; }
+#start-project { scroll-margin-top: 20px; }
 
 @media (min-width: 768px) {
   #why-different { scroll-margin-top: 170px; }
@@ -51,7 +51,7 @@ html {
   #what-we-build { scroll-margin-top: 50px; }
   #process       { scroll-margin-top: -50px; }
   #faq           { scroll-margin-top: 170px; }
-  #start-project { scroll-margin-top: 80px; }
+  #start-project { scroll-margin-top: 30px; }
 }
 
 /* ─── Design tokens ─────────────────────────────────────────── */
