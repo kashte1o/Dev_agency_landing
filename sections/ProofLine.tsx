@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { animate, useInView, useReducedMotion } from 'framer-motion'
 
 const TARGET = 4.3
+const TAIL = 'in additional revenue generated through custom software we built'
+const TYPE_SPEED_MS = 28
 
 export function ProofLine() {
   const ref = useRef<HTMLDivElement>(null)
@@ -10,12 +12,14 @@ export function ProofLine() {
   const reduce = useReducedMotion()
   const [val, setVal] = useState(reduce ? TARGET : 0)
   const [revealed, setRevealed] = useState(false)
+  const [typed, setTyped] = useState(reduce ? TAIL.length : 0)
 
   useEffect(() => {
     if (!inView) return
     if (reduce) {
       setVal(TARGET)
       setRevealed(true)
+      setTyped(TAIL.length)
       return
     }
     const controls = animate(0, TARGET, {
@@ -26,6 +30,15 @@ export function ProofLine() {
     })
     return () => controls.stop()
   }, [inView, reduce])
+
+  useEffect(() => {
+    if (!revealed || reduce) return
+    if (typed >= TAIL.length) return
+    const id = window.setTimeout(() => setTyped((n) => n + 1), TYPE_SPEED_MS)
+    return () => window.clearTimeout(id)
+  }, [revealed, typed, reduce])
+
+  const typingDone = typed >= TAIL.length
 
   return (
     <div
@@ -47,8 +60,14 @@ export function ProofLine() {
             ${val.toFixed(1)}M
           </span>
         </span>
-        <span className="leading-snug">
-          in additional revenue generated through custom software we built
+        <span className="leading-snug" aria-label={TAIL}>
+          <span aria-hidden>{TAIL.slice(0, typed)}</span>
+          {!typingDone && (
+            <span
+              aria-hidden
+              className="ml-0.5 inline-block h-[1em] w-[1px] translate-y-[2px] animate-pulse bg-text-primary/60 align-middle"
+            />
+          )}
         </span>
       </p>
     </div>
