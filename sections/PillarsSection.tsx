@@ -21,46 +21,46 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
           className="flex flex-col gap-10 md:gap-14"
         >
           <motion.div variants={fadeUp} className="flex flex-col gap-4 max-w-3xl">
-            <h2 className="text-3xl font-bold tracking-tight text-text-primary md:text-5xl">
+            <h2 className="text-[1.7rem] font-bold tracking-tight text-text-primary md:text-5xl">
               {pillars.heading}
             </h2>
             {pillars.subline && (
-              <p className="text-lg leading-relaxed text-text-secondary md:text-xl">
+              <p className="text-[15px] leading-relaxed text-text-secondary md:text-xl">
                 {pillars.subline}
               </p>
             )}
           </motion.div>
 
-          <ul className="flex flex-col gap-5 md:gap-6">
+          <ul className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:flex-col md:gap-6 md:overflow-visible md:px-0 md:pb-0">
             {pillars.cards.map((card, i) => (
               <motion.li
                 key={card.title}
                 variants={fadeUp}
-                className="group relative grid grid-cols-1 gap-5 rounded-[24px] border border-border bg-bg-surface p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:min-h-[220px] md:grid-cols-12 md:items-start md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group relative grid w-[82vw] min-w-[82vw] flex-shrink-0 snap-center grid-cols-1 gap-4 rounded-[20px] border border-border bg-bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-auto md:min-w-0 md:flex-shrink md:gap-5 md:rounded-[24px] md:p-8 md:min-h-[220px] md:grid-cols-12 md:items-start md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Number */}
                 <div className="md:col-span-2">
                   <span
                     aria-hidden
-                    className="font-mono text-5xl font-semibold leading-none text-accent md:text-[72px]"
+                    className="font-mono text-4xl font-semibold leading-none text-accent md:text-[72px]"
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </div>
 
                 {/* Title + value line */}
-                <div className="flex flex-col gap-3 md:col-span-4">
-                  <h3 className="text-2xl font-bold leading-tight tracking-tight text-text-primary md:text-[32px]">
+                <div className="flex flex-col gap-2.5 md:col-span-4 md:gap-3">
+                  <h3 className="text-[20px] font-bold leading-tight tracking-tight text-text-primary md:text-[32px]">
                     {card.title}
                   </h3>
-                  <p className="text-lg font-medium leading-snug text-accent md:text-[19px]">
+                  <p className="text-[15px] font-medium leading-snug text-accent md:text-[19px]">
                     {card.description}
                   </p>
                 </div>
 
                 {/* Body */}
                 <div className="md:col-span-6">
-                  <p className="text-[17px] leading-[1.6] text-text-primary/85 md:text-[18px]">
+                  <p className="text-[14.5px] leading-[1.6] text-text-primary/85 md:text-[18px]">
                     {card.body}
                   </p>
                 </div>

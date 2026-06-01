@@ -61,52 +61,52 @@ export function ProofSection() {
           <div className="flex flex-col gap-4">
             <motion.h2
               variants={fadeUp}
-              className="max-w-2xl text-[1.9rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
+              className="max-w-2xl text-[1.6rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
             >
               {HEADING}
             </motion.h2>
-            <motion.p variants={fadeUp} className="max-w-xl text-[1.1rem] text-text-secondary">
+            <motion.p variants={fadeUp} className="max-w-xl text-[0.95rem] text-text-secondary md:text-[1.1rem]">
               {SUBHEADING}
             </motion.p>
           </div>
 
           {/* Case cards */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="-mx-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-10 pb-2 md:-mx-16 md:px-16 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
             {CASES.map((c, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="group flex h-full flex-col gap-6 rounded-2xl border border-border bg-bg-surface p-7 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:p-8 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group flex h-full w-[82vw] min-w-[82vw] flex-shrink-0 snap-center flex-col gap-5 rounded-2xl border border-border bg-bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-[60vw] md:min-w-[60vw] md:gap-6 md:p-7 lg:w-auto lg:min-w-0 lg:flex-shrink lg:p-8 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Tag */}
-                <p className="font-mono text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-text-secondary">
+                <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-secondary md:text-[0.78rem]">
                   {c.tag}
                 </p>
 
                 {/* Title */}
-                <h3 className="text-[22px] font-bold leading-tight tracking-tight text-text-primary [text-wrap:balance] md:text-[24px]">
+                <h3 className="text-[18px] font-bold leading-tight tracking-tight text-text-primary [text-wrap:balance] md:text-[24px]">
                   {c.title}
                 </h3>
 
                 {/* Body */}
-                <p className="text-[15.5px] leading-[1.65] text-text-primary/80">
+                <p className="text-[14px] leading-[1.6] text-text-primary/80 md:text-[15.5px] md:leading-[1.65]">
                   {c.body}
                 </p>
 
                 {/* Outcomes — pinned to bottom across cards */}
-                <div className="mt-auto flex flex-col gap-3 border-t border-border pt-5">
-                  <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-text-secondary/70">
+                <div className="mt-auto flex flex-col gap-2.5 border-t border-border pt-4 md:gap-3 md:pt-5">
+                  <span className="font-mono text-[0.64rem] font-semibold uppercase tracking-[0.14em] text-text-secondary/70 md:text-[0.68rem]">
                     Outcomes
                   </span>
-                  <ul className="flex flex-col gap-2.5">
+                  <ul className="flex flex-col gap-2 md:gap-2.5">
                     {c.outcomes.map((o) => (
                       <li
                         key={o}
-                        className="flex items-start gap-3 text-[15px] font-medium leading-snug text-text-primary"
+                        className="flex items-start gap-2.5 text-[13.5px] font-medium leading-snug text-text-primary md:gap-3 md:text-[15px]"
                       >
                         <span
                           aria-hidden
-                          className="mt-[8px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"
+                          className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"
                         />
                         <span>{o}</span>
                       </li>
