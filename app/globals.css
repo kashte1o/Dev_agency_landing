@@ -32,23 +32,23 @@ html {
 }
 
 /* ─── Per-anchor scroll-margin overrides (nav link landing positions) ─ */
-/* Approach — land a bit higher so the $4.3M proof line is partially visible */
-#why-different { scroll-margin-top: 200px; }
-/* Work — drop closer to top so Metrics ("Measured delivery outcomes") is hidden */
-#proof         { scroll-margin-top: 40px; }
-/* Services — drop closer so previous section doesn't peek above */
-#what-we-build { scroll-margin-top: 40px; }
-/* Process — drop closer so the white section above doesn't show */
-#process       { scroll-margin-top: 40px; }
-/* FAQ — land higher so the "Enough theory" CTA line is captured above */
-#faq           { scroll-margin-top: 220px; }
+/* All nav anchors land with a tiny sliver of the previous section visible above. */
+#why-different,
+#proof,
+#what-we-build,
+#process,
+#faq {
+  scroll-margin-top: 110px;
+}
 
 @media (min-width: 768px) {
-  #why-different { scroll-margin-top: 260px; }
-  #proof         { scroll-margin-top: 60px; }
-  #what-we-build { scroll-margin-top: 60px; }
-  #process       { scroll-margin-top: 60px; }
-  #faq           { scroll-margin-top: 280px; }
+  #why-different,
+  #proof,
+  #what-we-build,
+  #process,
+  #faq {
+    scroll-margin-top: 140px;
+  }
 }
 
 /* ─── Design tokens ─────────────────────────────────────────── */
