@@ -76,37 +76,37 @@ export function ProofSection() {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="group flex h-full w-[82vw] min-w-[82vw] flex-shrink-0 snap-center flex-col gap-5 rounded-2xl border border-border bg-bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-[60vw] md:min-w-[60vw] md:gap-6 md:p-7 lg:w-auto lg:min-w-0 lg:flex-shrink lg:p-8 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group flex h-full w-[86vw] min-w-[86vw] flex-shrink-0 snap-center flex-col gap-5 rounded-2xl border border-border bg-bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-[62vw] md:min-w-[62vw] md:gap-6 md:p-8 lg:w-auto lg:min-w-0 lg:flex-shrink lg:p-9 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Tag */}
-                <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-secondary md:text-[0.78rem]">
+                <p className="font-mono text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-text-secondary md:text-[0.9rem]">
                   {c.tag}
                 </p>
 
                 {/* Title */}
-                <h3 className="text-[18px] font-bold leading-tight tracking-tight text-text-primary [text-wrap:balance] md:text-[24px]">
+                <h3 className="text-[21px] font-bold leading-tight tracking-tight text-text-primary [text-wrap:balance] md:text-[28px]">
                   {c.title}
                 </h3>
 
                 {/* Body */}
-                <p className="text-[14px] leading-[1.6] text-text-primary/80 md:text-[15.5px] md:leading-[1.65]">
+                <p className="text-[16px] leading-[1.6] text-text-primary/80 md:text-[18px] md:leading-[1.65]">
                   {c.body}
                 </p>
 
                 {/* Outcomes — pinned to bottom across cards */}
                 <div className="mt-auto flex flex-col gap-2.5 border-t border-border pt-4 md:gap-3 md:pt-5">
-                  <span className="font-mono text-[0.64rem] font-semibold uppercase tracking-[0.14em] text-text-secondary/70 md:text-[0.68rem]">
+                  <span className="font-mono text-[0.74rem] font-semibold uppercase tracking-[0.14em] text-text-secondary/70 md:text-[0.78rem]">
                     Outcomes
                   </span>
                   <ul className="flex flex-col gap-2 md:gap-2.5">
                     {c.outcomes.map((o) => (
                       <li
                         key={o}
-                        className="flex items-start gap-2.5 text-[13.5px] font-medium leading-snug text-text-primary md:gap-3 md:text-[15px]"
+                        className="flex items-start gap-2.5 text-[15.5px] font-medium leading-snug text-text-primary md:gap-3 md:text-[17px]"
                       >
                         <span
                           aria-hidden
-                          className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"
+                          className="mt-[8px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"
                         />
                         <span>{o}</span>
                       </li>
