@@ -32,9 +32,6 @@ export function ProofLine() {
       ref={ref}
       className="flex w-full max-w-3xl flex-col items-center gap-2.5 text-center"
     >
-      <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-text-secondary/70">
-        Measured client impact
-      </p>
       <p className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-[15px] text-text-primary/75 md:text-[17px]">
         <span className="relative inline-flex items-baseline">
           <span
