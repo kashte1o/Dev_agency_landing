@@ -113,6 +113,17 @@ img, svg, video {
   animation: statusPulse 2s ease-in-out infinite;
 }
 
+/* ─── CTA bar pulse (max width = parent width) ──────────────── */
+@keyframes ctaBarPulse {
+  0%, 100% { transform: scaleX(0.35); opacity: 0.5; }
+  50%      { transform: scaleX(1);    opacity: 1;   }
+}
+
+.cta-bar-pulse {
+  transform-origin: center;
+  animation: ctaBarPulse 2.4s ease-in-out infinite;
+}
+
 /* ─── Logo idle pulse ──────────────────────────────────────── */
 @keyframes logoPulse {
   0%, 100% { transform: scale(1); }

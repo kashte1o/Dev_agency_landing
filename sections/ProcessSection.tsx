@@ -74,25 +74,25 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                         visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE_OUT } },
                       }
                 }
-                className="group flex flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 transition-all duration-200 hover:border-accent/35 hover:bg-[rgba(59,130,246,0.05)] md:p-10 motion-reduce:transition-none"
+                className="group flex h-full flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 transition-all duration-200 hover:border-accent/35 hover:bg-[rgba(59,130,246,0.05)] md:p-10 motion-reduce:transition-none"
               >
                 {/* Mono label */}
                 <p className="mb-5 font-mono text-[1.08rem] font-semibold uppercase tracking-[0.14em] text-accent/80">
                   {String(step.number).padStart(2, '0')} · {step.label}
                 </p>
 
-                {/* Title */}
-                <h3 className="mb-4 text-[22px] font-semibold leading-snug text-white [text-wrap:balance] md:text-[26px]">
+                {/* Title — fixed min-height keeps body baseline aligned */}
+                <h3 className="mb-4 min-h-[3.25rem] text-[22px] font-semibold leading-snug text-white [text-wrap:balance] md:min-h-[5rem] md:text-[26px]">
                   {step.title}
                 </h3>
 
-                {/* Description */}
-                <p className="text-[15.5px] leading-[1.65] text-white/75 md:text-base">
+                {/* Description — flexes to absorb height differences */}
+                <p className="flex-1 text-[15.5px] leading-[1.65] text-white/75 md:text-base">
                   {step.description}
                 </p>
 
-                {/* Outcome line */}
-                <div className="mt-auto flex flex-col gap-1 border-t border-white/[0.1] pt-5">
+                {/* Outcome — pinned to bottom across all cards */}
+                <div className="mt-auto flex flex-col gap-1 border-t border-white/10 pt-6">
                   <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/50">
                     Outcome
                   </span>

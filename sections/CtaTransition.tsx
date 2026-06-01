@@ -22,7 +22,7 @@ export function CtaTransition() {
               </p>
               <span
                 aria-hidden
-                className="status-pulse block h-[2px] w-12 rounded-full bg-accent/70"
+                className="cta-bar-pulse block h-[2px] w-full rounded-full bg-accent/70"
               />
             </div>
           </div>
