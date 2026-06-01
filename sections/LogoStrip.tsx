@@ -1,3 +1,5 @@
+import { ProofLine } from './ProofLine'
+
 const logos = [
   { src: "/images/logos/lava.svg",                   alt: "Lava" },
   { src: "/images/logos/Gymshark_idjQqXJS_o_1.svg",  alt: "Gymshark" },
@@ -64,6 +66,8 @@ export function LogoStrip() {
               ))}
             </div>
           </div>
+
+          <ProofLine />
         </div>
       </div>
     </section>
