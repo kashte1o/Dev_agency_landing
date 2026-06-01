@@ -79,17 +79,9 @@ export function ProofSection() {
                 className="group flex h-full flex-col gap-6 rounded-2xl border border-border bg-bg-surface p-7 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:p-8 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Tag */}
-                <div className="flex items-baseline gap-3">
-                  <span
-                    aria-hidden
-                    className="font-mono text-[0.95rem] font-semibold text-accent"
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-mono text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-text-secondary">
-                    {c.tag}
-                  </span>
-                </div>
+                <p className="font-mono text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-text-secondary">
+                  {c.tag}
+                </p>
 
                 {/* Title */}
                 <h3 className="text-[22px] font-bold leading-tight tracking-tight text-text-primary [text-wrap:balance] md:text-[24px]">
