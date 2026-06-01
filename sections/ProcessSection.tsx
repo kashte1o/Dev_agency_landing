@@ -31,7 +31,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
           }}
         >
           {/* Heading */}
-          <div className="mb-14 flex flex-col items-center gap-5 text-center md:mb-20">
+          <div className="mb-12 flex flex-col items-center gap-5 text-center md:mb-14">
             <motion.p
               variants={{
                 hidden: { opacity: 0, y: 6 },
@@ -55,7 +55,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 hidden: { opacity: 0, y: 10 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE_OUT } },
               }}
-              className="max-w-2xl text-[1.05rem] leading-[1.65] text-white/60"
+              className="max-w-3xl text-[1.05rem] leading-[1.65] text-white/60 [text-wrap:balance]"
             >
               {subheading}
             </motion.p>
@@ -82,7 +82,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 </p>
 
                 {/* Title */}
-                <h3 className="mb-4 text-[22px] font-semibold leading-snug text-white md:text-[26px]">
+                <h3 className="mb-4 text-[22px] font-semibold leading-snug text-white [text-wrap:balance] md:text-[26px]">
                   {step.title}
                 </h3>
 
@@ -92,13 +92,24 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 </p>
 
                 {/* Outcome line */}
-                <div className="mt-7 flex items-baseline gap-2 border-t border-white/[0.07] pt-5">
-                  <span className="text-[13px] font-semibold uppercase tracking-[0.1em] text-white/40">
-                    Outcome
-                  </span>
-                  <span className="text-[15px] leading-snug text-white/85">
-                    {step.tooltip.replace(/^Outcome:\s*/i, '')}
-                  </span>
+                <div className="mt-auto flex items-start gap-3 pt-7">
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 20 20"
+                    className="mt-0.5 h-[18px] w-[18px] flex-shrink-0 text-accent"
+                    fill="none"
+                  >
+                    <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+                    <path d="M6 10.5l2.6 2.5L14 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/50">
+                      Outcome
+                    </span>
+                    <span className="text-[15.5px] font-medium leading-snug text-white/95">
+                      {step.tooltip.replace(/^Outcome:\s*/i, '')}
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             ))}
