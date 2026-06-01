@@ -24,41 +24,113 @@ function CardRow({ pair, startIndex, prefersReduced }: CardRowProps) {
   const CARD_DUR = 0.6
   const FIRST_DELAY = 0
   const TRACE_DELAY = 0.4
-  const TRACE_DUR = 0.9
+  const TRACE_DUR = 0.9        // line drawing time
+  const HOLD = 1.0             // line stays fully visible after draw
+  const FADE = 0.7             // smooth fade-out duration
+  const LINE_TOTAL = TRACE_DUR + HOLD + FADE
   const SECOND_DELAY = TRACE_DELAY + TRACE_DUR * 0.55
+
+  // Ionised-air particles travel with slight vertical drift + opacity flicker
+  const PARTICLES = [
+    { y: -3, size: 4, delayOffset: 0.00, dur: 1.0 },
+    { y:  2, size: 3, delayOffset: 0.12, dur: 1.1 },
+    { y: -1, size: 3, delayOffset: 0.22, dur: 1.0 },
+    { y:  3, size: 2, delayOffset: 0.34, dur: 1.2 },
+    { y: -2, size: 4, delayOffset: 0.46, dur: 1.0 },
+  ]
 
   return (
     <div ref={rowRef} className="relative grid gap-5 md:grid-cols-2 md:gap-6">
-      {/* Energy trace — horizontal line through row middle, draws then fades */}
+      {/* Energy trace — uniform line drawn via width, holds, then fades */}
       {!prefersReduced && (
         <>
           <motion.span
             aria-hidden
-            className="pointer-events-none absolute left-0 right-0 top-1/2 z-10 hidden h-[1.5px] origin-left -translate-y-1/2 rounded-full bg-gradient-to-r from-transparent via-accent/30 to-accent md:block"
-            style={{ boxShadow: TRACE_GLOW, filter: 'blur(0.2px)' }}
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={inView ? { scaleX: 1, opacity: [0, 1, 1, 0] } : {}}
+            className="pointer-events-none absolute left-0 top-1/2 z-10 hidden h-[1.5px] -translate-y-1/2 rounded-full bg-accent md:block"
+            style={{ boxShadow: TRACE_GLOW }}
+            initial={{ width: '0%', opacity: 0 }}
+            animate={inView ? { width: '100%', opacity: [0, 1, 1, 0] } : {}}
             transition={{
-              delay: TRACE_DELAY,
-              duration: TRACE_DUR + 0.3,
-              times: [0, 0.15, 0.7, 1],
-              ease: EASE_OUT,
+              width:   { delay: TRACE_DELAY, duration: TRACE_DUR, ease: EASE_OUT },
+              opacity: {
+                delay: TRACE_DELAY,
+                duration: LINE_TOTAL,
+                times: [0, 0.12 / LINE_TOTAL, (TRACE_DUR + HOLD) / LINE_TOTAL, 1],
+                ease: 'linear',
+              },
             }}
           />
-          {/* Leading head dot — travels across the row */}
+
+          {/* Leading head dot — bright pulse at the line tip */}
           <motion.span
             aria-hidden
-            className="pointer-events-none absolute top-1/2 z-20 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent md:block"
+            className="pointer-events-none absolute top-1/2 z-20 hidden h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white md:block"
             style={{ boxShadow: DOT_GLOW }}
             initial={{ left: '0%', opacity: 0 }}
             animate={inView ? { left: '100%', opacity: [0, 1, 1, 0] } : {}}
             transition={{
               delay: TRACE_DELAY,
-              duration: TRACE_DUR + 0.2,
+              duration: TRACE_DUR + 0.15,
               times: [0, 0.15, 0.85, 1],
               ease: EASE_OUT,
             }}
           />
+
+          {/* Ionised-air particles — drift across with vertical jitter and flicker */}
+          {PARTICLES.map((p, idx) => (
+            <motion.span
+              key={idx}
+              aria-hidden
+              className="pointer-events-none absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent md:block"
+              style={{
+                top: `calc(50% + ${p.y}px)`,
+                height: p.size,
+                width: p.size,
+                boxShadow: '0 0 6px 1.5px rgba(96,165,250,0.7)',
+              }}
+              initial={{ left: '0%', opacity: 0 }}
+              animate={
+                inView
+                  ? {
+                      left: '100%',
+                      opacity: [0, 0.9, 0.6, 0.9, 0],
+                    }
+                  : {}
+              }
+              transition={{
+                delay: TRACE_DELAY + p.delayOffset,
+                duration: p.dur,
+                times: [0, 0.18, 0.5, 0.8, 1],
+                ease: 'easeOut',
+              }}
+            />
+          ))}
+
+          {/* Electric discharge sparks — short flashes along the path */}
+          {[0.2, 0.5, 0.78].map((pos, idx) => (
+            <motion.span
+              key={`spark-${idx}`}
+              aria-hidden
+              className="pointer-events-none absolute top-1/2 z-30 hidden h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white md:block"
+              style={{
+                left: `${pos * 100}%`,
+                boxShadow:
+                  '0 0 6px 2px rgba(255,255,255,0.9), 0 0 14px 4px rgba(96,165,250,0.6)',
+              }}
+              initial={{ opacity: 0, scale: 0.4 }}
+              animate={
+                inView
+                  ? { opacity: [0, 1, 0], scale: [0.4, 1.4, 0.4] }
+                  : {}
+              }
+              transition={{
+                delay: TRACE_DELAY + 0.05 + pos * TRACE_DUR,
+                duration: 0.35,
+                times: [0, 0.45, 1],
+                ease: 'easeOut',
+              }}
+            />
+          ))}
         </>
       )}
 
