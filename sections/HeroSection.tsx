@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { HeroCta } from '@/components/ui/HeroCta'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { cn } from '@/lib/utils'
@@ -173,16 +174,16 @@ function PersonPhoto() {
           height: 'clamp(320px, 24vw, 460px)',
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/images/hero-person.webp"
           alt="Aleksandr Sizov"
-          className="block h-full w-auto"
+          fill
+          priority
+          sizes="(min-width: 768px) 440px, 0px"
+          className="block"
           style={{
             objectFit: 'contain',
             objectPosition: 'center bottom',
-            maxHeight: '100%',
-            maxWidth: '100%',
           }}
         />
 
