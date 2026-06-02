@@ -44,8 +44,8 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
             variants={fadeUp}
             className="mx-auto max-w-3xl text-center text-xl font-bold tracking-tight text-text-primary md:text-[2rem]"
           >
-            Senior-level work.{' '}
-            <span className="text-accent">Without senior-agency pricing.</span>
+            You pay for two senior engineers building your project.{' '}
+            <span className="text-accent">Not account managers, not coordinators, not agency overhead.</span>
           </motion.p>
         </motion.div>
       </Container>
