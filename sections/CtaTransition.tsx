@@ -12,7 +12,7 @@ export function CtaTransition() {
           <div className="flex flex-col items-center gap-2">
             <a
               href="/#start-project"
-              className="inline-flex shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-[#0057FF] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-[#1E40AF]"
+              className="inline-flex shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-cta px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-cta-hover"
             >
               Let&apos;s scope your project
             </a>
