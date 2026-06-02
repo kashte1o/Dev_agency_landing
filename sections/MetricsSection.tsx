@@ -33,12 +33,6 @@ export function MetricsSection() {
           whileInView="visible"
           viewport={VIEWPORT}
         >
-          <motion.p
-            variants={fadeUp}
-            className="mb-10 text-xs font-medium uppercase tracking-[0.18em] text-text-primary"
-          >
-            Measured delivery outcomes
-          </motion.p>
           <div className="grid grid-cols-2 gap-x-12 gap-y-10 lg:grid-cols-4">
             {metrics.map((m) => (
               <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-3">

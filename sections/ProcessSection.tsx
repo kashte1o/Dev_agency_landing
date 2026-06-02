@@ -79,15 +79,6 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
           }}
           className="mb-12 flex flex-col items-center gap-5 text-center md:mb-14"
         >
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: 6 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE_OUT } },
-            }}
-            className="text-[1rem] font-semibold uppercase tracking-[0.15em] text-white/40 md:text-[1.4rem]"
-          >
-            Our Process
-          </motion.p>
           <motion.h2
             variants={{
               hidden: { opacity: 0, y: 14 },
