@@ -22,7 +22,7 @@ export function PainSection({ pain }: PainSectionProps) {
         {/* ── Heading ─────────────────────────────────────────── */}
         <motion.h2
           variants={fadeUp}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
           className="
@@ -40,7 +40,7 @@ export function PainSection({ pain }: PainSectionProps) {
         {/* ── Cards ───────────────────────────────────────────── */}
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
           className="
@@ -59,7 +59,7 @@ export function PainSection({ pain }: PainSectionProps) {
         {/* ── Cost callout ─────────────────────────────────────── */}
         <motion.p
           variants={fadeUp}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
           className="

@@ -70,7 +70,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
       <Container>
         {/* Heading */}
         <motion.div
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
           variants={{

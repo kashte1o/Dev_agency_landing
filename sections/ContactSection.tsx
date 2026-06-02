@@ -50,7 +50,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
           {/* Left: heading + trust signals */}
           <motion.div
             variants={staggerContainer}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={VIEWPORT}
             className="flex flex-col gap-8"
@@ -93,7 +93,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
           {/* Right: form */}
           <motion.div
             variants={fadeUp}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={VIEWPORT}
             className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-6 md:p-8 shadow-sm"

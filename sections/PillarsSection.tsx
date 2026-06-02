@@ -15,7 +15,7 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
       <Container>
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
           className="flex flex-col gap-10 md:gap-14"

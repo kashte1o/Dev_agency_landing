@@ -40,7 +40,7 @@ export function TrustStrip() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.1 } },
           }}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
           className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-10 md:gap-16"

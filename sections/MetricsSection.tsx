@@ -29,7 +29,7 @@ export function MetricsSection() {
       <Container>
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
         >

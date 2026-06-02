@@ -52,7 +52,7 @@ export function ProofSection() {
       <div className="mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-20">
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
           className="flex flex-col gap-14"

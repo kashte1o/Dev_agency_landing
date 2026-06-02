@@ -15,7 +15,7 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
       <Container>
         <motion.div
           variants={staggerContainer}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={VIEWPORT}
           className="flex flex-col gap-12"
