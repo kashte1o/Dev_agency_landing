@@ -37,7 +37,7 @@ export const pain = {
     {
       image: '/images/pain-clients.webp',
       title: 'Clients get a worse experience than they deserve',
-      description: 'Slow updates, manual follow-ups, and clunky processes lead to frustration — for your team and your clients.',
+      description: 'Slow updates, manual follow-ups, and clunky processes lead to frustration, for your team and your clients.',
     },
   ],
 }
@@ -78,7 +78,7 @@ export const whyDifferent = {
     },
     {
       title: 'Assembled for you',
-      body: 'We draw from a broad network of specialists and technologies, selecting the exact combination your project requires — not a fixed template, but a setup built around your needs.',
+      body: 'We draw from a broad network of specialists and technologies, selecting the exact combination your project requires. Not a fixed template, but a setup built around your needs.',
     },
   ],
 }
@@ -129,7 +129,7 @@ export const credibility = {
     {
       icon: '⇢',
       title: 'Workflow-first approach',
-      body: 'We design around your real processes — then build the right solution.',
+      body: 'We design around your real processes, then build the right solution.',
     },
     {
       icon: '⊡',

@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 const SITE_URL = 'https://dev-agency-landing.aleksandrkashtelo.workers.dev'
 const SITE_TITLE = `${STUDIO_NAME} — Custom Software for Growing Businesses`
 const SITE_DESCRIPTION =
-  'We build custom software shaped around how your business actually works — internal tools, workflow automation, and client portals for SMBs. Free consultation and prototype preview.'
+  'We build custom software shaped around how your business actually works: internal tools, workflow automation, and client portals for SMBs. Free consultation and prototype preview.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
