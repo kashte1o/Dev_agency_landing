@@ -70,7 +70,7 @@ export const whyDifferent = {
   cards: [
     {
       title: 'Product-minded',
-      body: 'Before writing a line of code, we map where your current process actually breaks. We\'ve caught scoping mistakes this way that would have cost clients months of rework.',
+      body: 'Our senior teams focus on your business outcomes. We think about the "why" not just the "how," and that ultimately leads to a better product.',
     },
     {
       title: '1 Project — 1 Team',
@@ -91,19 +91,19 @@ export const pillars = {
   cards: [
     {
       title: 'Internal tools & product systems',
-      description: 'If your team tracks orders, quotes, or inventory in spreadsheets — this is where to start.',
+      description: 'Software behind how your product, service, or operation works.',
       body: 'Internal portals, custom business logic, product-side software modules, control panels, quoting engines, pricing logic, planning tools, operational dashboards, and back-office systems built to support the real mechanics of your business.',
       href: '/internal-tools',
     },
     {
       title: 'Customer-facing platforms',
-      description: 'If your customers call or email for things they could do themselves in an app — this is for you.',
+      description: 'Digital products your customers use to take action.',
       body: 'Web platforms, mobile apps, client portals, booking systems, order flows, self-service products, and customer dashboards that help customers request, book, approve, pay, track, and come back without extra friction.',
       href: '/client-portals',
     },
     {
       title: 'Automation & integrations',
-      description: 'If your team copies data between tools by hand every day — this is what fixes that.',
+      description: 'The connective layer between your systems.',
       body: 'We connect your CRM, website, spreadsheets, messengers, payment tools, internal software, and third-party platforms so data moves automatically and your team stops chasing updates by hand.',
       href: '/workflow-automation',
     },
@@ -129,7 +129,7 @@ export const credibility = {
     {
       icon: '⇢',
       title: 'Workflow-first approach',
-      body: 'We spend time with the people who\'ll use the system — mapping the steps, the handoffs, and the workarounds. What we build reflects how your team actually works.',
+      body: 'We design around your real processes, then build the right solution.',
     },
     {
       icon: '⊡',
