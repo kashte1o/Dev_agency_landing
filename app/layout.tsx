@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Manrope, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { NavBar } from '@/components/layout/NavBar'
 import { Footer } from '@/components/layout/Footer'
 import { STUDIO_NAME } from '@/content/siteCopy'
 import { homepageFAQ } from '@/content/faq'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const manrope = Manrope({
+  variable: '--font-sans-runmade',
   subsets: ['latin'],
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-mono-runmade',
   subsets: ['latin'],
 })
 
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#070A12',
+  themeColor: '#0F1A2A',
   width: 'device-width',
   initialScale: 1,
 }
@@ -118,7 +118,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${manrope.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg-base text-text-primary">
         <script

@@ -59,14 +59,16 @@ html {
   --bg-base:          #F7F8FA;
   --bg-surface:       #FFFFFF;
   --bg-subtle:        #F1F5F9;
-  --bg-dark:          #070A12;
-  --bg-dark-soft:     #080E1E;
+  --bg-dark:          #0F1A2A;
+  --bg-dark-soft:     #142339;
   --text-primary:     #111827;
   --text-secondary:   #6B7280;
-  --accent:           #3B82F6;
+  --accent:           #C9923F;
   --accent-green:     #A3E635;
-  --cta:              #0057FF;
-  --cta-hover:        #1E40AF;
+  --cta:              #C9923F;
+  --cta-hover:        #B17F2D;
+  --cta-text:         #111827;
+  --steel:            #8FA3BD;
   --border-color:     #E5E7EB;
   --border-subtle:    #E2E8F0;
 }
@@ -74,8 +76,8 @@ html {
 /* ─── Tailwind v4 theme ─────────────────────────────────────── */
 @theme inline {
   /* Fonts */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans-runmade);
+  --font-mono: var(--font-mono-runmade);
 
   /* Colors */
   --color-bg-base:        var(--bg-base);
@@ -89,6 +91,8 @@ html {
   --color-accent-green:   var(--accent-green);
   --color-cta:            var(--cta);
   --color-cta-hover:      var(--cta-hover);
+  --color-cta-text:       var(--cta-text);
+  --color-steel:          var(--steel);
   --color-border:         var(--border-color);
   --color-border-subtle:  var(--border-subtle);
 
@@ -117,7 +121,7 @@ html {
 body {
   background: var(--bg-base);
   color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-sans-runmade), system-ui, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;

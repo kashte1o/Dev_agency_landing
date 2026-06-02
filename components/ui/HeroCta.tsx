@@ -15,12 +15,12 @@ export function HeroCta({ href, children, className }: HeroCtaProps) {
       className={cn(
         'hero-cta',
         'relative inline-flex items-center gap-3 select-none cursor-pointer',
-        'bg-cta text-white font-semibold',
+        'bg-cta text-cta-text font-semibold',
         'rounded-[var(--radius-btn)] md:rounded-[10px]',
         'px-7 py-[14px] text-[0.95rem]',
         'md:px-12 md:py-[26px] md:text-[1.1rem] md:font-semibold',
         'outline-none',
-        'focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#070A12]',
+        'focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-dark',
         className,
       )}
     >

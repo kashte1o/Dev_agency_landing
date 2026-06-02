@@ -15,6 +15,7 @@ const SUBHEADING = 'A few examples of what we built and why it mattered.'
 
 const CASES = [
   {
+    serial: 'CASE · MFG-2024',
     tag: 'Manufacturing · Internal system',
     title: 'From specialist-only calculations to regulator-ready reports',
     body: 'We built a guided wind-flow calculation system for a production facility where routine reports depended on engineering staff. Non-specialist employees can now enter facility data, run calculations, and prepare regulator-ready reports through a clear internal workflow.',
@@ -25,6 +26,7 @@ const CASES = [
     ],
   },
   {
+    serial: 'CASE · LOG-2024',
     tag: 'Logistics · Customer platform',
     title: 'From status calls to self-service shipment tracking',
     body: 'We built a customer platform, mobile app, and mini app for a logistics company whose clients had to call managers or use an outdated website to track shipments. Customers can now see delivery status, documents, and key order events without contacting support.',
@@ -35,6 +37,7 @@ const CASES = [
     ],
   },
   {
+    serial: 'CASE · RE-2025',
     tag: 'Real estate · Automation',
     title: 'From scattered operations to visible lead flow',
     body: 'We built an automation system for a real estate agency where leads, viewings, documents, and follow-ups were spread across disconnected tools. The team now manages lead intake, property matching, task assignment, document flow, and manager dashboards in one place.',
@@ -78,10 +81,15 @@ export function ProofSection() {
                 variants={fadeUp}
                 className="group flex h-full w-[86vw] min-w-[86vw] flex-shrink-0 snap-center flex-col gap-5 rounded-2xl border border-border bg-bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-[62vw] md:min-w-[62vw] md:gap-6 md:p-8 lg:w-auto lg:min-w-0 lg:flex-shrink lg:p-9 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
-                {/* Tag */}
-                <p className="font-mono text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-text-secondary md:text-[0.9rem]">
-                  {c.tag}
-                </p>
+                {/* Serial + tag */}
+                <div className="flex flex-col gap-1">
+                  <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-text-secondary/55 md:text-[0.78rem]">
+                    {c.serial}
+                  </p>
+                  <p className="font-mono text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-text-secondary md:text-[0.9rem]">
+                    {c.tag}
+                  </p>
+                </div>
 
                 {/* Title */}
                 <h3 className="text-[21px] font-bold leading-tight tracking-tight text-text-primary [text-wrap:balance] md:text-[28px]">

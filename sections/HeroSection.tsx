@@ -154,7 +154,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         className="pointer-events-none absolute bottom-0 left-0 right-0 z-10"
         style={{
           height: 'clamp(72px, 10vh, 140px)',
-          background: 'linear-gradient(to bottom, transparent, rgba(7,10,18,0.75))',
+          background: 'linear-gradient(to bottom, transparent, rgba(15,26,42,0.75))',
         }}
       />
     </section>
@@ -190,7 +190,7 @@ function PersonPhoto() {
           className="pointer-events-none absolute bottom-0 left-0 right-0"
           style={{
             height: 'clamp(56px, 7vw, 96px)',
-            background: 'linear-gradient(to bottom, transparent, #070A12)',
+            background: 'linear-gradient(to bottom, transparent, var(--bg-dark))',
           }}
         />
       </div>

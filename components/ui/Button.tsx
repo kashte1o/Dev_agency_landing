@@ -17,7 +17,7 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'rounded-[var(--radius-btn)] bg-accent text-white px-5 py-2.5 relative overflow-hidden duration-[200ms] ease-in-out hover:bg-[#60A5FA]',
+    'rounded-[var(--radius-btn)] bg-cta text-cta-text px-5 py-2.5 relative overflow-hidden duration-[200ms] ease-in-out hover:bg-cta-hover',
   secondary:
     'rounded-[var(--radius-btn)] border border-border bg-bg-surface text-text-primary hover:bg-bg-subtle px-5 py-2.5 duration-150',
   ghost:

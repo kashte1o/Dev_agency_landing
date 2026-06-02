@@ -139,8 +139,8 @@ export function NavBar({ heroDark = true }: NavBarProps) {
                 isDark
                   // over dark hero: stay in light family (dark hover would merge with hero)
                   ? 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#CBD5E1] hover:text-[#0F172A]'
-                  // scrolled white navbar: brand blue pill (matches hero CTA family, darker on hover)
-                  : 'bg-[#2563EB] text-white hover:bg-[#1D4ED8] hover:text-white',
+                  // scrolled white navbar: brass pill matches CTA tokens
+                  : 'bg-cta text-cta-text hover:bg-cta-hover',
               )}
             >
               <span style={{ display: 'inline-block', overflow: 'hidden', height: '1.25em' }}>

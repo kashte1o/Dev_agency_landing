@@ -12,12 +12,12 @@ export function CtaTransition() {
           <div className="flex flex-col items-center gap-2">
             <a
               href="/#start-project"
-              className="inline-flex shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-cta px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-cta-hover"
+              className="inline-flex shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-cta px-8 py-3.5 text-base font-semibold text-cta-text transition-colors duration-200 hover:bg-cta-hover"
             >
               Let&apos;s scope your project
             </a>
             <div className="flex flex-col items-center gap-1.5">
-              <p className="whitespace-nowrap text-center text-[14px] font-medium text-text-secondary md:text-[15px]">
+              <p className="whitespace-nowrap text-center font-mono text-[12px] uppercase tracking-[0.06em] text-text-secondary md:text-[13px]">
                 Free consultation + prototype preview
               </p>
               <span

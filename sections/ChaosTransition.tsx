@@ -136,7 +136,7 @@ function SvgChaosLine({
         d={d}
         pathLength={1}
         fill="none"
-        stroke="#3B82F6"
+        stroke="var(--accent)"
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeDasharray="0.06 0.94"
