@@ -125,7 +125,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </div>
                 <a
                   href={hero.primaryCta.href}
-                  className="trust-link group relative inline-block self-start text-[13px] md:text-[21px] leading-[1.3] text-white/35 no-underline transition-colors duration-200 hover:text-white/55"
+                  className="trust-link group relative inline-block self-start text-[13px] md:text-[21px] leading-[1.3] text-white/55 no-underline transition-colors duration-200 hover:text-white/75"
                 >
                   Talk directly with our software team
                   <span
@@ -217,7 +217,7 @@ function PersonPhoto() {
           &ldquo;I approach every project from the client&apos;s side: business first, budget protected, and software delivered fast.&rdquo;
         </p>
         <p
-          className="text-white/35 tracking-[0.025em]"
+          className="text-white/55 tracking-[0.025em]"
           style={{
             marginTop: 'clamp(8px, 0.7vw, 14px)',
             fontSize: 'clamp(1.05rem, 1.15vw, 1.4rem)',
