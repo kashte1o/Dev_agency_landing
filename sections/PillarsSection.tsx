@@ -32,24 +32,14 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
           </motion.div>
 
           <ul className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:flex-col md:gap-6 md:overflow-visible md:px-0 md:pb-0">
-            {pillars.cards.map((card, i) => (
+            {pillars.cards.map((card) => (
               <motion.li
                 key={card.title}
                 variants={fadeUp}
                 className="group relative grid w-[82vw] min-w-[82vw] flex-shrink-0 snap-center grid-cols-1 gap-4 rounded-[20px] border border-border bg-bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-auto md:min-w-0 md:flex-shrink md:gap-5 md:rounded-[24px] md:p-8 md:min-h-[220px] md:grid-cols-12 md:items-start md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
-                {/* Number */}
-                <div className="md:col-span-2">
-                  <span
-                    aria-hidden
-                    className="font-mono text-3xl md:text-[72px] font-semibold leading-none text-accent"
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                </div>
-
                 {/* Title + value line */}
-                <div className="flex flex-col gap-2.5 md:col-span-4 md:gap-3">
+                <div className="flex flex-col gap-2.5 md:col-span-6 md:gap-3">
                   <h3 className="text-[16px] md:text-[32px] font-bold leading-tight tracking-tight text-text-primary">
                     {card.title}
                   </h3>

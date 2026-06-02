@@ -260,7 +260,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
               >
                 {/* Mono label */}
                 <p className="mb-4 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent/80 md:mb-5 md:text-[1.08rem]">
-                  {String(i + 1).padStart(2, '0')} · {step.label}
+                  {step.label}
                 </p>
 
                 {/* Title */}
