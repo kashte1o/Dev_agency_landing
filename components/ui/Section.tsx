@@ -1,12 +1,13 @@
 import { cn } from '@/lib/utils'
 
-type SectionBackground = 'base' | 'surface' | 'subtle' | 'dark'
+type SectionBackground = 'base' | 'surface' | 'subtle' | 'dark' | 'dark-soft'
 
 const bgMap: Record<SectionBackground, string> = {
-  base:    'bg-bg-base',
-  surface: 'bg-bg-surface',
-  subtle:  'bg-bg-subtle',
-  dark:    'bg-bg-dark',
+  base:        'bg-bg-base',
+  surface:     'bg-bg-surface',
+  subtle:      'bg-bg-subtle',
+  dark:        'bg-bg-dark',
+  'dark-soft': 'bg-bg-dark-soft',
 }
 
 interface SectionProps {

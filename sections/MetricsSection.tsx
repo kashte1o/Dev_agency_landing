@@ -25,7 +25,7 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <Section id="metrics" background="surface" className="!pt-6 md:!pt-9 !pb-12 md:!pb-[72px]">
+    <Section id="metrics" background="dark-soft" className="!pt-6 md:!pt-9 !pb-12 md:!pb-[72px]">
       <Container>
         <motion.div
           variants={staggerContainer}
@@ -39,11 +39,11 @@ export function MetricsSection() {
                 <span className="font-mono text-[1.625rem] md:text-[2.5rem] font-bold leading-none tracking-tight text-accent">
                   {m.value}
                 </span>
-                <p className="text-sm leading-relaxed text-text-secondary">{m.label}</p>
+                <p className="text-sm leading-relaxed text-white/70">{m.label}</p>
               </motion.div>
             ))}
           </div>
-          <p className="mt-8 text-xs leading-relaxed text-text-secondary/70 md:mt-10">
+          <p className="mt-8 text-xs leading-relaxed text-white/50 md:mt-10">
             Based on 32 projects delivered between 2022 and 2025.
           </p>
         </motion.div>
