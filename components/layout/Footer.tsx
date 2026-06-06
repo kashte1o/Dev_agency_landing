@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { LogoMark } from './LogoMark'
 import { Modal } from '@/components/ui/Modal'
 import { CareersForm } from '@/components/forms/CareersForm'
+import { LegalDocument } from '@/components/ui/LegalDocument'
 import {
   footerTagline,
   footerCopyright,
@@ -11,7 +12,7 @@ import {
   supportContact,
   ongoingSupportPopup,
   careersPopup,
-  legalPopups,
+  legalDocuments,
   type FooterLink as FooterLinkType,
   type FooterModalKey,
 } from '@/content/siteCopy'
@@ -127,26 +128,22 @@ export function Footer() {
         <CareersForm onClose={close} />
       </Modal>
 
-      {/* Legal — placeholder copy until real documents land */}
+      {/* Legal documents */}
       <Modal
         open={modal === 'privacy'}
         onClose={close}
-        title={legalPopups.privacy.title}
+        title={legalDocuments.privacy.title}
         maxWidthClassName="max-w-2xl"
       >
-        <p className="mt-4 whitespace-pre-line text-[1rem] leading-relaxed text-text-secondary">
-          {legalPopups.privacy.body}
-        </p>
+        <LegalDocument doc={legalDocuments.privacy} />
       </Modal>
       <Modal
         open={modal === 'terms'}
         onClose={close}
-        title={legalPopups.terms.title}
+        title={legalDocuments.terms.title}
         maxWidthClassName="max-w-2xl"
       >
-        <p className="mt-4 whitespace-pre-line text-[1rem] leading-relaxed text-text-secondary">
-          {legalPopups.terms.body}
-        </p>
+        <LegalDocument doc={legalDocuments.terms} />
       </Modal>
     </footer>
   )
