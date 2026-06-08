@@ -49,6 +49,9 @@ export function MetricsSection() {
               </motion.div>
             ))}
           </div>
+          <p className="mt-8 text-xs leading-relaxed text-text-secondary/70 md:mt-10">
+            Based on 32 projects delivered between 2022 and 2025.
+          </p>
         </motion.div>
       </Container>
     </Section>
