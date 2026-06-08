@@ -1,6 +1,8 @@
 'use client'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
+import { CarouselDots } from '@/components/ui/CarouselDots'
 import { fadeUp, staggerContainer, VIEWPORT } from '@/lib/motion'
 
 /**
@@ -47,6 +49,7 @@ const CASES = [
 ]
 
 export function ProofSection() {
+  const scrollRef = useRef<HTMLDivElement>(null)
   return (
     <Section id="proof" background="base" className="!pt-8 md:!pt-12 !pb-10 md:!pb-14">
       <div className="mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-20">
@@ -71,12 +74,17 @@ export function ProofSection() {
           </div>
 
           {/* Case cards */}
-          <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:-mx-16 md:px-16 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
+          <div
+            ref={scrollRef}
+            role="group"
+            aria-label="Client case studies — scroll horizontally"
+            className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:-mx-16 md:px-16 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0"
+          >
             {CASES.map((c, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="group flex h-full w-[86vw] min-w-[86vw] flex-shrink-0 snap-center flex-col gap-5 rounded-2xl border border-border bg-bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-[62vw] md:min-w-[62vw] md:gap-6 md:p-8 lg:w-auto lg:min-w-0 lg:flex-shrink lg:p-9 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group flex h-full w-[86vw] min-w-[86vw] flex-shrink-0 snap-center flex-col gap-5 rounded-2xl border border-border bg-bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] active:border-accent/40 active:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-[62vw] md:min-w-[62vw] md:gap-6 md:p-8 lg:w-auto lg:min-w-0 lg:flex-shrink lg:p-9 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Tag */}
                 <p className="font-mono text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-text-secondary md:text-[0.9rem]">
@@ -117,10 +125,8 @@ export function ProofSection() {
             ))}
           </div>
 
-          {/* Swipe affordance — mobile only (cards scroll horizontally) */}
-          <p className="-mt-8 flex items-center justify-center gap-1.5 text-[12px] font-medium text-text-secondary/55 lg:hidden">
-            <span aria-hidden>←</span> Swipe <span aria-hidden>→</span>
-          </p>
+          {/* Position indicator — mobile/tablet only (cards scroll horizontally) */}
+          <CarouselDots scrollRef={scrollRef} count={CASES.length} className="-mt-6 lg:hidden" />
         </motion.div>
       </div>
     </Section>

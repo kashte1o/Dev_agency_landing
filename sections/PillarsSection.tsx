@@ -1,7 +1,9 @@
 'use client'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
+import { CarouselDots } from '@/components/ui/CarouselDots'
 import { staggerContainer, fadeUp, VIEWPORT } from '@/lib/motion'
 import type { pillars as PillarsType } from '@/content/home'
 
@@ -10,6 +12,7 @@ interface PillarsSectionProps {
 }
 
 export function PillarsSection({ pillars }: PillarsSectionProps) {
+  const scrollRef = useRef<HTMLUListElement>(null)
   return (
     <Section id="what-we-build" background="base" className="!pt-10 md:!pt-[60px]">
       <Container>
@@ -31,12 +34,16 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
             )}
           </motion.div>
 
-          <ul className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:flex-col md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+          <ul
+            ref={scrollRef}
+            aria-label="What we build — scroll horizontally"
+            className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:flex-col md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+          >
             {pillars.cards.map((card, i) => (
               <motion.li
                 key={card.title}
                 variants={fadeUp}
-                className="group relative grid w-[82vw] min-w-[82vw] flex-shrink-0 snap-center grid-cols-1 gap-4 rounded-[20px] border border-border bg-bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-auto md:min-w-0 md:flex-shrink md:gap-5 md:rounded-[24px] md:p-8 md:min-h-[220px] md:grid-cols-12 md:items-start md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group relative grid w-[82vw] min-w-[82vw] flex-shrink-0 snap-center grid-cols-1 gap-4 rounded-[20px] border border-border bg-bg-surface p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] active:border-accent/40 active:shadow-[0_8px_28px_-12px_rgba(59,130,246,0.18)] md:w-auto md:min-w-0 md:flex-shrink md:gap-5 md:rounded-[24px] md:p-8 md:min-h-[220px] md:grid-cols-12 md:items-start md:gap-10 md:p-12 motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 {/* Number */}
                 <div className="md:col-span-2">
@@ -68,10 +75,8 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
             ))}
           </ul>
 
-          {/* Swipe affordance — mobile only (cards scroll horizontally) */}
-          <p className="-mt-6 flex items-center justify-center gap-1.5 text-[12px] font-medium text-text-secondary/55 md:hidden">
-            <span aria-hidden>←</span> Swipe <span aria-hidden>→</span>
-          </p>
+          {/* Position indicator — mobile only (cards scroll horizontally) */}
+          <CarouselDots scrollRef={scrollRef} count={pillars.cards.length} className="-mt-4 md:hidden" />
 
           {/* CTA strip */}
           {pillars.cta && !pillars.cta.hidden && (

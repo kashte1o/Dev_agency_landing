@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { NavBar } from '@/components/layout/NavBar'
 import { Footer } from '@/components/layout/Footer'
+import { MobileStickyCta } from '@/components/layout/MobileStickyCta'
 import { STUDIO_NAME } from '@/content/siteCopy'
 import { homepageFAQ } from '@/content/faq'
 
@@ -136,6 +137,7 @@ export default function RootLayout({
         <NavBar heroDark />
         <main className="flex-1">{children}</main>
         <Footer />
+        <MobileStickyCta />
       </body>
     </html>
   )

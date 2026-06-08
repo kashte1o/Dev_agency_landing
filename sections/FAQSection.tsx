@@ -37,7 +37,7 @@ export function FAQSection() {
           </div>
 
           <motion.div variants={fadeUp} className="flex flex-col divide-y divide-border">
-            {homepageFAQ.map((item) =>
+            {homepageFAQ.map((item, i) =>
               item.cta ? (
                 <FAQContactTrigger
                   key={item.question}
@@ -46,7 +46,7 @@ export function FAQSection() {
                   onClick={() => setPopupOpen(true)}
                 />
               ) : (
-                <FAQAccordionItem key={item.question} item={item} />
+                <FAQAccordionItem key={item.question} item={item} defaultOpen={i === 0} />
               )
             )}
           </motion.div>
@@ -64,8 +64,8 @@ export function FAQSection() {
   )
 }
 
-function FAQAccordionItem({ item }: { item: FAQItem }) {
-  const [open, setOpen] = useState(false)
+function FAQAccordionItem({ item, defaultOpen = false }: { item: FAQItem; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen)
 
   return (
     <div>
@@ -283,7 +283,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                     placeholder={stillHaveQuestionsPopup.questionPlaceholder}
                     aria-invalid={errors.question ? true : undefined}
                     aria-describedby={errors.question ? 'popup-question-error' : undefined}
-                    className="resize-none rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-[0.95rem] text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                    className="resize-none rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-base text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                   />
                   {errors.question && (
                     <p id="popup-question-error" role="alert" className="text-xs text-red-500">
@@ -308,7 +308,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                       placeholder={stillHaveQuestionsPopup.emailPlaceholder}
                       aria-invalid={errors.email ? true : undefined}
                       aria-describedby={errors.email ? 'popup-email-error' : undefined}
-                      className="rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-[0.95rem] text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                      className="rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-base text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                     />
                     {errors.email && (
                       <p id="popup-email-error" role="alert" className="text-xs text-red-500">
@@ -332,7 +332,7 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                       placeholder={stillHaveQuestionsPopup.messengerPlaceholder}
                       aria-invalid={errors.messenger ? true : undefined}
                       aria-describedby={errors.messenger ? 'popup-messenger-error' : undefined}
-                      className="rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-[0.95rem] text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                      className="rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-base text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                     />
                     {errors.messenger && (
                       <p id="popup-messenger-error" role="alert" className="text-xs text-red-500">

@@ -35,11 +35,11 @@ export function MetricsSection() {
         >
           <motion.p
             variants={fadeUp}
-            className="mb-10 text-xs font-medium uppercase tracking-[0.18em] text-text-primary"
+            className="mb-7 text-xs font-medium uppercase tracking-[0.18em] text-text-primary md:mb-10"
           >
             Measured delivery outcomes
           </motion.p>
-          <div className="grid grid-cols-2 gap-x-12 gap-y-10 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-12 gap-y-8 lg:grid-cols-4 md:gap-y-10">
             {metrics.map((m) => (
               <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-3">
                 <span className="text-[1.625rem] md:text-[2.5rem] font-bold leading-none tracking-tight text-accent">
@@ -49,7 +49,7 @@ export function MetricsSection() {
               </motion.div>
             ))}
           </div>
-          <p className="mt-8 text-xs leading-relaxed text-text-secondary/70 md:mt-10">
+          <p className="mt-8 text-xs leading-relaxed text-text-secondary md:mt-10">
             Based on 32 projects delivered between 2022 and 2025.
           </p>
         </motion.div>

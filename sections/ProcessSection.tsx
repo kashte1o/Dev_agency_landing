@@ -2,6 +2,7 @@
 import { useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { Container } from '@/components/ui/Container'
+import { CarouselDots } from '@/components/ui/CarouselDots'
 import type { ProcessStep } from '@/content/types'
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const
@@ -58,6 +59,7 @@ interface ProcessSectionProps {
 export function ProcessSection({ heading, subheading, steps }: ProcessSectionProps) {
   const prefersReduced = useReducedMotion()
   const gridRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const inView = useInView(gridRef, { once: true, margin: '-80px' })
   const cardDelays = prefersReduced ? CARD_DELAYS_REDUCED : CARD_DELAYS_ANIMATED
 
@@ -254,7 +256,12 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
             </motion.div>
           )}
 
-          <div className="-mx-6 flex items-stretch snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+          <div
+            ref={scrollRef}
+            role="group"
+            aria-label="Our process — scroll horizontally"
+            className="-mx-6 flex items-stretch snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+          >
             {steps.map((step, i) => (
               <motion.div
                 key={step.number}
@@ -265,7 +272,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                   duration: prefersReduced ? 0.3 : 0.55,
                   ease: EASE_OUT,
                 }}
-                className="group flex h-full w-[82vw] min-w-[82vw] flex-shrink-0 snap-center flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-200 hover:border-accent/35 hover:bg-[rgba(59,130,246,0.05)] md:w-auto md:min-w-0 md:flex-shrink md:p-10 motion-reduce:transition-none"
+                className="group flex h-full w-[82vw] min-w-[82vw] flex-shrink-0 snap-center flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-200 hover:border-accent/35 hover:bg-[rgba(59,130,246,0.05)] active:border-accent/35 active:bg-[rgba(59,130,246,0.05)] md:w-auto md:min-w-0 md:flex-shrink md:p-10 motion-reduce:transition-none"
               >
                 {/* Mono label */}
                 <p className="mb-4 font-mono text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-accent/80 md:mb-5 md:text-[1.08rem]">
@@ -295,10 +302,8 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
             ))}
           </div>
 
-          {/* Swipe affordance — mobile only (cards scroll horizontally) */}
-          <p className="mt-5 flex items-center justify-center gap-1.5 text-[12px] font-medium text-white/40 md:hidden">
-            <span aria-hidden>←</span> Swipe <span aria-hidden>→</span>
-          </p>
+          {/* Position indicator — mobile only (cards scroll horizontally) */}
+          <CarouselDots scrollRef={scrollRef} count={steps.length} tone="light" className="mt-6 md:hidden" />
         </div>
       </Container>
     </section>

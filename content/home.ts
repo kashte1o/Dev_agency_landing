@@ -14,7 +14,7 @@ export const hero = {
   } satisfies CTAButton,
   secondaryCta: {
     label:   'See client results',
-    href:    '/#what-we-build',
+    href:    '/#proof',
     variant: 'ghost',
   } satisfies CTAButton,
 }
