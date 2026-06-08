@@ -271,82 +271,164 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
     title: 'Terms of Service',
     effectiveDate: '[DATE]',
     intro: [
-      { p: 'These Terms of Service (“Terms”) govern your access to and use of this website operated by [LEGAL NAME OR WEBSITE OPERATOR] (“Runmade”, “we”, “us”, “our”).' },
-      { p: 'By accessing or using this website, you agree to these Terms. If you do not agree, please do not use the website.' },
+      { p: 'These Terms of Service govern your use of the Runmade website.' },
+      { p: 'By using this website, you agree to these Terms.' },
     ],
     sections: [
       {
-        heading: 'About Runmade',
+        heading: 'Who we are',
         blocks: [
-          { p: 'Runmade is a custom software studio that designs and builds internal tools, customer-facing platforms, web applications, automation systems, dashboards, and related digital products.' },
-          { p: 'This website presents general information about our services and lets you contact us through forms.' },
+          { p: 'Runmade is a custom software studio that helps businesses design and build internal tools, customer-facing platforms, web applications, automation systems, dashboards, and related digital products.' },
+          { p: 'In these Terms, “Runmade”, “we”, “us”, and “our” refer to [LEGAL NAME OR WEBSITE OPERATOR].' },
         ],
       },
       {
         heading: 'Use of this website',
         blocks: [
-          { p: 'You agree to use this website lawfully and responsibly. In particular, you agree not to:' },
-          { ul: ['Use the website in a way that violates any applicable law or regulation', 'Attempt to disrupt, damage, overload, or gain unauthorized access to the website or its infrastructure', 'Submit false, misleading, or fraudulent information through our forms', 'Submit another person’s personal data without their permission', 'Use our forms or contact channels to send spam, advertising, or abusive content'] },
+          { p: 'You may use this website to learn about our services, submit a project inquiry, ask a question, contact us, or submit a careers-related inquiry.' },
+          { p: 'You agree not to use this website for:' },
+          { ul: ['Illegal activity', 'Spam or abusive messages', 'Attempts to disrupt, damage, overload, or interfere with the website', 'Misrepresentation of your identity, company, or intentions', 'Submitting content that infringes third-party rights', 'Copying, scraping, or reusing website content in a way that violates these Terms'] },
         ],
       },
       {
-        heading: 'Information on this website is not a binding offer',
+        heading: 'Our services',
         blocks: [
-          { p: 'The content on this website, including descriptions of services, timeframes, and pricing ranges, is provided for general information only and does not constitute a binding offer, quote, or contract.' },
-          { p: 'Any project we take on is governed by a separate written agreement between you and Runmade. If there is any conflict between this website and a signed agreement, the signed agreement prevails.' },
+          { p: 'Runmade provides custom software development and related services.' },
+          { p: 'These services may include:' },
+          { ul: ['Product discovery', 'Project scoping', 'UX/UI design', 'Web application development', 'Internal tools', 'Customer-facing platforms', 'Client portals', 'Booking and request systems', 'Dashboards', 'Workflow automation', 'CRM, website, spreadsheet, messenger, and payment integrations', 'Technical consulting', 'Post-launch support'] },
+          { p: 'Information on this website is general. It does not create a binding offer, guarantee, or obligation to provide services.' },
         ],
       },
       {
-        heading: 'Inquiries and form submissions',
+        heading: 'Project inquiries',
         blocks: [
-          { p: 'Submitting a project inquiry, careers, or FAQ form does not by itself create any contractual relationship or obligation for either party.' },
-          { p: 'We are under no obligation to respond to, accept, or act upon any submission.' },
+          { p: 'Submitting a form through this website does not create a client relationship.' },
+          { p: 'A client relationship begins only when both sides agree to specific project terms in writing.' },
+          { p: 'Specific project terms may be set out in a proposal, statement of work, contract, invoice, email confirmation, or another written agreement.' },
+        ],
+      },
+      {
+        heading: 'Separate project agreements',
+        blocks: [
+          { p: 'Any specific project scope, price, timeline, payment schedule, deliverables, ownership transfer, support period, confidentiality terms, or acceptance process must be agreed separately.' },
+          { p: 'If there is a conflict between these Terms and a separate written project agreement, the separate project agreement controls for that project.' },
+        ],
+      },
+      {
+        heading: 'Payments',
+        blocks: [
+          { p: 'Payment terms are governed by the applicable project agreement, proposal, invoice, or written arrangement.' },
+          { p: 'Unless separately agreed, we are not required to start, continue, deliver, transfer, or publish work before required payments are received.' },
+        ],
+      },
+      {
+        heading: 'Client responsibilities',
+        blocks: [
+          { p: 'If you work with us on a project, you are responsible for:' },
+          { ul: ['Providing accurate information', 'Giving timely feedback', 'Providing required access, content, materials, and approvals', 'Making sure you have the right to use any materials you provide', 'Reviewing deliverables before approval or launch', 'Complying with laws that apply to your business, users, data, and industry'] },
+          { p: 'Delays in feedback, access, content, payment, or approvals may affect project timelines.' },
+        ],
+      },
+      {
+        heading: 'Website content',
+        blocks: [
+          { p: 'All content on this website is provided for general informational purposes.' },
+          { p: 'We try to keep website content accurate and up to date, but we do not guarantee that all information will always be complete, current, or error-free.' },
+          { p: 'We may update, change, suspend, or remove any part of the website at any time.' },
+        ],
+      },
+      {
+        heading: 'Marketing metrics and results',
+        blocks: [
+          { p: 'This website may include performance metrics, averages, timelines, or examples based on past projects.' },
+          { p: 'These numbers are provided for general informational and marketing purposes only.' },
+          { p: 'They are not guarantees of future results.' },
+          { p: 'Actual results depend on many factors, including project scope, client input, business model, market conditions, technical requirements, team adoption, and implementation quality.' },
+          { p: 'We do not guarantee specific revenue growth, ROI, cost savings, conversion rates, rankings, speed improvements, or business outcomes unless expressly agreed in a separate written agreement.' },
         ],
       },
       {
         heading: 'Intellectual property',
         blocks: [
-          { p: 'All content on this website — including text, design, layout, graphics, logos, trademarks, and source code — is owned by Runmade or its licensors and is protected by applicable intellectual property laws.' },
-          { p: 'You may not copy, reproduce, republish, distribute, or reuse any part of this website without our prior written permission.' },
-          { p: 'Ownership of work produced in client projects is defined in the relevant project agreement, not by this website.' },
+          { p: 'All content on this website, including text, design, layout, branding, graphics, components, and code, belongs to Runmade or its licensors unless stated otherwise.' },
+          { p: 'You may not copy, reproduce, modify, distribute, or reuse website materials without written permission.' },
+          { p: 'For client projects, ownership of custom deliverables is handled in the applicable project agreement.' },
+          { p: 'Unless a project agreement says otherwise, we retain ownership of:' },
+          { ul: ['Pre-existing tools', 'Frameworks', 'Reusable components', 'Internal methods', 'General know-how', 'Templates', 'Libraries', 'Technical processes', 'Non-client-specific knowledge'] },
+          { p: 'Transfer of ownership of custom project deliverables, if agreed, usually occurs only after full payment.' },
+          { p: 'Third-party libraries, APIs, platforms, plugins, fonts, and tools remain subject to their own licenses and terms.' },
         ],
       },
       {
-        heading: 'Performance figures and statements',
+        heading: 'Portfolio and case studies',
         blocks: [
-          { p: 'Any metrics, timeframes, or results shown on this website (for example, delivery times or return-on-investment figures) are based on past work, are provided for illustration only, and are not a guarantee of future results.' },
+          { p: 'We do not claim the right to publicly use your name, logo, confidential information, or project details unless you give permission or this is agreed separately.' },
+        ],
+      },
+      {
+        heading: 'Confidentiality',
+        blocks: [
+          { p: 'If you share non-public business information with us through a form or during project discussions, we will treat it with reasonable care.' },
+          { p: 'A separate confidentiality agreement may be signed if stricter confidentiality terms are required.' },
         ],
       },
       {
         heading: 'Third-party services',
         blocks: [
-          { p: 'The website relies on third-party services such as hosting and infrastructure providers, and may reference or link to other third-party services.' },
-          { p: 'We are not responsible for the content, policies, or practices of third parties.' },
+          { p: 'This website or our services may rely on third-party platforms, hosting providers, APIs, infrastructure providers, communication tools, payment tools, software libraries, or other external services.' },
+          { p: 'We are not responsible for third-party services, their availability, security, performance, pricing, policies, or terms.' },
         ],
       },
       {
-        heading: 'Disclaimer of warranties',
+        heading: 'Website availability',
         blocks: [
-          { p: 'This website is provided on an “as is” and “as available” basis, without warranties of any kind, whether express or implied, including but not limited to fitness for a particular purpose, accuracy, or uninterrupted availability.' },
+          { p: 'We do not guarantee that the website will always be available, uninterrupted, secure, or error-free.' },
+          { p: 'We may suspend, update, or remove parts of the website at any time.' },
+        ],
+      },
+      {
+        heading: 'No professional advice',
+        blocks: [
+          { p: 'Content on this website does not constitute legal, financial, tax, security, compliance, or professional advice.' },
+          { p: 'You are responsible for obtaining professional advice where needed for your business, industry, data, users, or legal obligations.' },
+        ],
+      },
+      {
+        heading: 'Disclaimer',
+        blocks: [
+          { p: 'The website is provided “as is” and “as available”.' },
+          { p: 'To the maximum extent permitted by applicable law, we disclaim all warranties, whether express, implied, or statutory, including warranties of merchantability, fitness for a particular purpose, non-infringement, availability, and accuracy.' },
         ],
       },
       {
         heading: 'Limitation of liability',
         blocks: [
-          { p: 'To the maximum extent permitted by law, Runmade shall not be liable for any indirect, incidental, special, or consequential damages, or for any loss of data, profits, or business, arising from or related to your use of (or inability to use) this website.' },
+          { p: 'To the maximum extent permitted by applicable law, Runmade is not liable for indirect, incidental, special, consequential, punitive, or exemplary damages.' },
+          { p: 'This includes loss of profits, revenue, data, business opportunities, goodwill, or business interruption.' },
+          { p: 'Our total liability for any claim related to this website is limited to the amount you paid us for the specific service giving rise to the claim.' },
+          { p: 'If no payment was made, our liability is limited to the minimum amount permitted by applicable law.' },
+        ],
+      },
+      {
+        heading: 'Indemnity',
+        blocks: [
+          { p: 'You agree to hold Runmade harmless from claims, damages, losses, liabilities, costs, and expenses arising from:' },
+          { ul: ['Your misuse of the website', 'Your violation of these Terms', 'Your violation of third-party rights', 'Materials or information you provide to us', 'Your business, users, products, services, or legal obligations'] },
         ],
       },
       {
         heading: 'Changes to these Terms',
         blocks: [
-          { p: 'We may update these Terms from time to time. The updated version will be posted on this page with a new effective date.' },
-          { p: 'Your continued use of the website after changes take effect means you accept the updated Terms.' },
+          { p: 'We may update these Terms from time to time.' },
+          { p: 'The updated version will be posted on this page with a new effective date.' },
+          { p: 'Continued use of the website after changes are posted means you accept the updated Terms.' },
         ],
       },
       {
         heading: 'Governing law',
         blocks: [
-          { p: 'These Terms are governed by the laws of [GOVERNING LAW / JURISDICTION], without regard to its conflict-of-law rules. Any disputes arising from these Terms or your use of the website shall be subject to the courts of [JURISDICTION].' },
+          { p: 'These Terms are governed by the laws specified in the applicable project agreement.' },
+          { p: 'If no project agreement applies, these Terms are governed by the laws of [JURISDICTION].' },
         ],
       },
       {
