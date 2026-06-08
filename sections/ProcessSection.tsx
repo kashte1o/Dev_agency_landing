@@ -64,7 +64,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
   return (
     <section
       id="process"
-      className="pt-10 md:pt-14 pb-20 md:pb-[120px]"
+      className="pt-10 md:pt-14 pb-14 md:pb-[120px]"
       style={{ backgroundColor: 'var(--bg-dark-soft)' }}
     >
       <Container>
@@ -268,32 +268,37 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 className="group flex h-full w-[82vw] min-w-[82vw] flex-shrink-0 snap-center flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-200 hover:border-accent/35 hover:bg-[rgba(59,130,246,0.05)] md:w-auto md:min-w-0 md:flex-shrink md:p-10 motion-reduce:transition-none"
               >
                 {/* Mono label */}
-                <p className="mb-4 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent/80 md:mb-5 md:text-[1.08rem]">
+                <p className="mb-4 font-mono text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-accent/80 md:mb-5 md:text-[1.08rem]">
                   {String(i + 1).padStart(2, '0')} · {step.label}
                 </p>
 
                 {/* Title */}
-                <h3 className="mb-3 min-h-[3rem] text-[15px] font-semibold leading-snug text-white [text-wrap:balance] md:mb-4 md:min-h-[5rem] md:text-[26px]">
+                <h3 className="mb-3 min-h-[2.5rem] text-[16px] font-semibold leading-snug text-white [text-wrap:balance] md:mb-4 md:min-h-[5rem] md:text-[26px]">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="flex-1 text-[12px] leading-[1.6] text-white/75 md:text-base md:leading-[1.65]">
+                <p className="flex-1 text-[14px] leading-[1.6] text-white/75 md:text-base md:leading-[1.65]">
                   {step.description}
                 </p>
 
                 {/* Outcome */}
                 <div className="mt-auto flex flex-col gap-1 border-t border-white/10 pt-4 md:mt-10 md:gap-1.5 md:pt-6">
-                  <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white/50 md:text-[1.02rem]">
+                  <span className="font-mono text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-white/50 md:text-[1.02rem]">
                     Outcome
                   </span>
-                  <span className="text-[14px] font-medium leading-snug text-white/95 md:text-[23px]">
+                  <span className="text-[15px] font-medium leading-snug text-white/95 md:text-[23px]">
                     {step.tooltip.replace(/^Outcome:\s*/i, '')}
                   </span>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Swipe affordance — mobile only (cards scroll horizontally) */}
+          <p className="mt-5 flex items-center justify-center gap-1.5 text-[12px] font-medium text-white/40 md:hidden">
+            <span aria-hidden>←</span> Swipe <span aria-hidden>→</span>
+          </p>
         </div>
       </Container>
     </section>

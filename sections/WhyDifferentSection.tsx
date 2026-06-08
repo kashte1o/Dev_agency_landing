@@ -18,7 +18,7 @@ export function WhyDifferentSection({ whyDifferent }: WhyDifferentSectionProps) 
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          className="flex flex-col gap-12"
+          className="flex flex-col gap-8 md:gap-12"
         >
           <motion.h2
             variants={fadeUp}

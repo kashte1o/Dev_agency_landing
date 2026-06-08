@@ -21,11 +21,11 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
           className="flex flex-col gap-10 md:gap-14"
         >
           <motion.div variants={fadeUp} className="flex flex-col gap-4 max-w-3xl">
-            <h2 className="text-[1.35rem] font-bold tracking-tight text-text-primary md:text-5xl">
+            <h2 className="text-[1.5rem] font-bold tracking-tight text-text-primary md:text-5xl">
               {pillars.heading}
             </h2>
             {pillars.subline && (
-              <p className="text-[12px] md:text-xl leading-relaxed text-text-secondary">
+              <p className="text-[15px] md:text-xl leading-relaxed text-text-secondary">
                 {pillars.subline}
               </p>
             )}
@@ -50,23 +50,28 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
 
                 {/* Title + value line */}
                 <div className="flex flex-col gap-2.5 md:col-span-4 md:gap-3">
-                  <h3 className="text-[16px] md:text-[32px] font-bold leading-tight tracking-tight text-text-primary">
+                  <h3 className="text-[17px] md:text-[32px] font-bold leading-tight tracking-tight text-text-primary">
                     {card.title}
                   </h3>
-                  <p className="text-[12px] md:text-[19px] font-medium leading-snug text-accent">
+                  <p className="text-[14px] md:text-[19px] font-medium leading-snug text-accent">
                     {card.description}
                   </p>
                 </div>
 
                 {/* Body */}
                 <div className="md:col-span-6">
-                  <p className="text-[12px] md:text-[18px] leading-[1.6] text-text-primary/85">
+                  <p className="text-[15px] md:text-[18px] leading-[1.6] text-text-primary/85">
                     {card.body}
                   </p>
                 </div>
               </motion.li>
             ))}
           </ul>
+
+          {/* Swipe affordance — mobile only (cards scroll horizontally) */}
+          <p className="-mt-6 flex items-center justify-center gap-1.5 text-[12px] font-medium text-text-secondary/55 md:hidden">
+            <span aria-hidden>←</span> Swipe <span aria-hidden>→</span>
+          </p>
 
           {/* CTA strip */}
           {pillars.cta && !pillars.cta.hidden && (

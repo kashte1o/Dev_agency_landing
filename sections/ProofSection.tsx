@@ -55,17 +55,17 @@ export function ProofSection() {
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          className="flex flex-col gap-14"
+          className="flex flex-col gap-8 md:gap-14"
         >
           {/* Heading */}
           <div className="flex flex-col gap-4">
             <motion.h2
               variants={fadeUp}
-              className="max-w-2xl text-[1.3rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
+              className="max-w-2xl text-[1.5rem] font-bold tracking-tight text-text-primary sm:text-[2.25rem] md:text-[2.75rem]"
             >
               {HEADING}
             </motion.h2>
-            <motion.p variants={fadeUp} className="max-w-xl text-[0.8rem] text-text-secondary md:text-[1.1rem]">
+            <motion.p variants={fadeUp} className="max-w-xl text-[0.95rem] text-text-secondary md:text-[1.1rem]">
               {SUBHEADING}
             </motion.p>
           </div>
@@ -116,6 +116,11 @@ export function ProofSection() {
               </motion.div>
             ))}
           </div>
+
+          {/* Swipe affordance — mobile only (cards scroll horizontally) */}
+          <p className="-mt-8 flex items-center justify-center gap-1.5 text-[12px] font-medium text-text-secondary/55 lg:hidden">
+            <span aria-hidden>←</span> Swipe <span aria-hidden>→</span>
+          </p>
         </motion.div>
       </div>
     </Section>

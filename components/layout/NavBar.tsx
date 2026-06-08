@@ -157,7 +157,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             {/* Mobile hamburger */}
             <button
               className={cn(
-                'flex md:hidden items-center justify-center rounded-md p-2 transition-colors',
+                'flex md:hidden items-center justify-center rounded-md h-11 w-11 -mr-2 transition-colors',
                 isDark
                   ? 'text-white/70 hover:text-white hover:bg-white/10'
                   : 'text-text-secondary hover:text-text-primary hover:bg-bg-subtle',

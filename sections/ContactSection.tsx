@@ -12,7 +12,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="dark" className="relative pt-28 md:pt-36 pb-20 md:pb-[120px]">
+    <Section id="start-project" background="dark" className="relative pt-16 md:pt-36 pb-16 md:pb-[120px]">
       {/* Layer 1 — Horizon edge: surgical 1px line, cool blue-white core */}
       <div
         aria-hidden

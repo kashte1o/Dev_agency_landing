@@ -27,7 +27,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn('py-20 md:py-[120px]', bgMap[background], className)}
+      className={cn('py-14 md:py-[120px]', bgMap[background], className)}
       style={style}
     >
       {children}

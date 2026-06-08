@@ -15,14 +15,14 @@ export function FAQSection() {
   const triggerRef = useRef<HTMLButtonElement | null>(null)
 
   return (
-    <Section id="faq" background="base" className="pt-5 md:pt-7 lg:pt-8 pb-20 md:pb-28 lg:pb-32">
+    <Section id="faq" background="base" className="pt-5 md:pt-7 lg:pt-8 pb-14 md:pb-28 lg:pb-32">
       <Container>
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          className="flex flex-col gap-14"
+          className="flex flex-col gap-8 md:gap-14"
         >
           <div className="flex flex-col gap-4">
             <motion.h2

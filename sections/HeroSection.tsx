@@ -82,7 +82,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 {hero.bodyParagraphs.map((para, i) => (
                   <p
                     key={i}
-                    className="leading-[1.65] text-white/55 text-[0.9rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
+                    className="leading-[1.65] text-white/70 text-[0.95rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
                   >
                     {para}
                   </p>
@@ -91,7 +91,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
               {/* CTAs */}
               <div className="flex flex-col gap-3 pt-2">
-                <div className="flex flex-wrap items-center gap-4 md:gap-5">
+                <div className="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 md:gap-5">
                   <HeroCta href={hero.primaryCta.href}>
                     {hero.primaryCta.label}
                   </HeroCta>
@@ -125,7 +125,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </div>
                 <a
                   href={hero.primaryCta.href}
-                  className="trust-link group relative inline-block self-start text-[13px] md:text-[21px] leading-[1.3] text-white/35 no-underline transition-colors duration-200 hover:text-white/55"
+                  className="trust-link group relative inline-block self-start text-[14px] md:text-[21px] leading-[1.3] text-white/45 no-underline transition-colors duration-200 hover:text-white/65"
                 >
                   Talk directly with our software team
                   <span
@@ -137,6 +137,12 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                   </span>
                 </a>
               </div>
+
+              {/* Compact founder block — mobile only.
+                  Desktop renders the full PersonPhoto in the right column; on
+                  mobile that column is hidden, so we surface a condensed trust
+                  cue (face + name + role + short quote) below the CTAs. */}
+              <PersonPhotoCompact />
             </div>
 
             {/* ── RIGHT: portrait + caption as one connected block ───── */}
@@ -227,6 +233,35 @@ function PersonPhoto() {
           Founder &amp; CEO of Runmade
         </p>
       </div>
+    </div>
+  )
+}
+
+function PersonPhotoCompact() {
+  return (
+    <div className="md:hidden flex flex-col gap-3.5 pt-2">
+      <div className="flex items-center gap-3.5">
+        <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-white/[0.04] ring-1 ring-white/15">
+          <Image
+            src="/images/hero-person.webp"
+            alt="Aleksandr Sizov"
+            fill
+            sizes="56px"
+            className="object-cover object-top"
+          />
+        </div>
+        <div className="flex flex-col">
+          <p className="text-[15px] font-semibold leading-tight text-white/85">
+            Aleksandr Sizov
+          </p>
+          <p className="text-[13px] leading-tight text-white/45">
+            Founder &amp; CEO of Runmade
+          </p>
+        </div>
+      </div>
+      <p className="text-[14px] italic leading-[1.55] text-white/55">
+        &ldquo;I approach every project from the client&apos;s side: business first, budget protected, and software delivered fast.&rdquo;
+      </p>
     </div>
   )
 }
