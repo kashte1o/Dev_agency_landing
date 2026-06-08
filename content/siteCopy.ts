@@ -42,7 +42,7 @@ export const footerColumns: {
   },
   contact: {
     heading: 'Contact',
-    email: 'hello@yourstudio.com', // TODO: replace
+    email: 'hello@runmadeagency.com',
     phone: '',                     // TODO: replace or remove
     location: 'Remote · Worldwide',
   },
@@ -55,10 +55,10 @@ export const footerColumns: {
   },
 }
 
-// Placeholder direct-contact details surfaced in the "Ongoing Support" modal.
-// TODO: replace with real channels before launch.
+// Direct-contact details surfaced in the "Ongoing Support" modal.
+// TODO: replace remaining channels (WhatsApp) with real ones before launch.
 export const supportContact = {
-  email: 'support@runmade.com',
+  email: 'hello@runmadeagency.com',
   whatsappDisplay: '+971 50 123 4567',
   whatsappHref: 'https://wa.me/971501234567',
 }
