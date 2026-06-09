@@ -53,8 +53,8 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
           style={{
             paddingLeft: 'clamp(24px, 4vw, 80px)',
             paddingRight: 'clamp(24px, 4vw, 80px)',
-            paddingTop: 'clamp(24px, 3vh, 64px)',
-            paddingBottom: 'clamp(40px, 6vh, 96px)',
+            paddingTop: 'clamp(16px, 3vh, 64px)',
+            paddingBottom: 'clamp(24px, 6vh, 96px)',
           }}
         >
           <div
@@ -63,7 +63,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
           >
 
             {/* ── LEFT ──────────────────────────────────────── */}
-            <div className="flex flex-col gap-7 md:gap-8">
+            <div className="flex flex-col gap-5 md:gap-8">
 
               {isAvailable && availableText && (
                 <div>
@@ -78,7 +78,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               </h1>
 
               {/* Body paragraphs (replaces former subheading) */}
-              <div className="flex flex-col gap-5 max-w-[640px]">
+              <div className="flex flex-col gap-3 md:gap-5 max-w-[640px]">
                 {hero.bodyParagraphs.map((para, i) => (
                   <p
                     key={i}
@@ -239,7 +239,7 @@ function PersonPhoto() {
 
 function PersonPhotoCompact() {
   return (
-    <div className="md:hidden flex flex-col gap-3.5 pt-2">
+    <div className="md:hidden flex flex-col gap-3 pt-1">
       <div className="flex items-center gap-4">
         <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full bg-white/[0.04] ring-1 ring-white/15">
           <Image

@@ -15,7 +15,10 @@ import { isAvailable, availableText } from '@/content/siteCopy'
 
 export default function HomePage() {
   return (
-    <>
+    // Flex column so we can reorder the last two sections on mobile only.
+    // All non-reordered sections keep the default order (0) and render in
+    // source order; only Contact/FAQ get explicit orders.
+    <div className="flex flex-col">
       <HeroSection
         hero={hero}
         availableText={availableText}
@@ -28,8 +31,13 @@ export default function HomePage() {
       <PillarsSection pillars={pillars} />
       <ProcessSection heading={processHeading} subheading={processSubheading} steps={processSteps} />
       <CtaTransition />
-      <FAQSection />
-      <ContactSection contactSection={contactSection} />
-    </>
+      {/* Mobile: Contact form sits above FAQ. Desktop: original order (FAQ → Contact). */}
+      <div className="order-2 md:order-1">
+        <FAQSection />
+      </div>
+      <div className="order-1 md:order-2">
+        <ContactSection contactSection={contactSection} />
+      </div>
+    </div>
   )
 }

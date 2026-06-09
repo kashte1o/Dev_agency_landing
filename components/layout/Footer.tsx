@@ -27,7 +27,7 @@ export function Footer() {
       <div className="mx-auto w-full max-w-[1100px] px-6">
         <div aria-hidden className="mx-auto h-px w-full max-w-[960px] bg-white/10" />
         {/* Top grid */}
-        <div className="grid grid-cols-2 gap-8 py-16 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-7 py-10 md:gap-8 md:py-16 md:grid-cols-4">
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
             <LogoMark variant="light" className="self-center" />
@@ -90,7 +90,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 py-6 text-[0.9rem] text-white/45">
+        <div className="border-t border-white/10 py-5 md:py-6 text-[0.8rem] md:text-[0.9rem] text-white/45">
           {footerCopyright}
         </div>
       </div>

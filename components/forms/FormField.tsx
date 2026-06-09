@@ -15,7 +15,7 @@ export function FieldWrapper({ field, children, error }: FieldWrapperProps) {
       <div className="flex items-center gap-2">
         <label
           htmlFor={field.id}
-          className="text-[1.15rem] font-medium text-text-primary"
+          className="text-[0.95rem] md:text-[1.15rem] font-medium text-text-primary"
         >
           {field.label}
           {field.required && (
@@ -26,10 +26,10 @@ export function FieldWrapper({ field, children, error }: FieldWrapperProps) {
       </div>
       {children}
       {field.helperText && !error && (
-        <p className="text-[0.9rem] text-text-secondary">{field.helperText}</p>
+        <p className="text-[0.8rem] md:text-[0.9rem] text-text-secondary">{field.helperText}</p>
       )}
       {error && (
-        <p id={errorId} role="alert" className="text-[0.9rem] text-red-500">
+        <p id={errorId} role="alert" className="text-[0.8rem] md:text-[0.9rem] text-red-500">
           {error}
         </p>
       )}
