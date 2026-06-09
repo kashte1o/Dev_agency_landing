@@ -12,7 +12,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="dark" className="relative pt-12 md:pt-36 pb-14 md:pb-[120px]">
+    <Section id="start-project" background="dark" className="relative pt-10 md:pt-36 pb-12 md:pb-[120px]">
       {/* Layer 1 — Horizon edge: surgical 1px line, cool blue-white core */}
       <div
         aria-hidden
@@ -46,14 +46,14 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
         }}
       />
       <Container>
-        <div className="grid gap-8 md:grid-cols-2 md:gap-16 lg:gap-20">
+        <div className="grid gap-6 md:grid-cols-2 md:gap-16 lg:gap-20">
           {/* Left: heading + trust signals */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT}
-            className="flex flex-col gap-6 md:gap-8"
+            className="flex flex-col gap-5 md:gap-8"
           >
             <div>
               <motion.h2
@@ -71,7 +71,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             </div>
 
             {/* Trust signals */}
-            <div className="flex flex-col gap-4 md:gap-5">
+            <div className="flex flex-col gap-3 md:gap-5">
               {contactSection.trustSignals.map((signal) => (
                 <motion.div
                   key={signal.title}
@@ -96,7 +96,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT}
-            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-5 md:p-8 shadow-sm"
+            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-4 md:p-8 shadow-sm"
           >
             <LeadForm />
           </motion.div>

@@ -38,7 +38,7 @@ export function FieldWrapper({ field, children, error }: FieldWrapperProps) {
 }
 
 const inputBase =
-  'w-full rounded-[var(--radius-input)] border border-border bg-bg-surface px-3 py-2 text-[1rem] text-text-primary placeholder:text-text-secondary/60 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-50'
+  'w-full rounded-[var(--radius-input)] border border-border bg-bg-surface px-3 py-1.5 md:py-2 text-[1rem] text-text-primary placeholder:text-text-secondary/60 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-50'
 
 const inputError =
   'border-red-400 focus:border-red-400 focus:ring-red-400'
@@ -87,7 +87,7 @@ export function TextareaInput({ field, error, ...props }: TextareaInputProps) {
         rows={field.rows ?? 4}
         aria-describedby={error ? errorId : undefined}
         aria-invalid={error ? true : undefined}
-        className={cn(inputBase, 'resize-y min-h-[100px]', error && inputError)}
+        className={cn(inputBase, 'resize-y min-h-[80px] md:min-h-[100px]', error && inputError)}
         {...props}
       />
     </FieldWrapper>

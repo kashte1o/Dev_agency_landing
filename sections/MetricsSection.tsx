@@ -1,5 +1,6 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { animate, motion, useInView, useReducedMotion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { staggerContainer, fadeUp, VIEWPORT } from '@/lib/motion'
@@ -23,6 +24,47 @@ const metrics = [
   },
 ]
 
+// Split a metric like "180%+" into its leading number (180) and the trailing
+// unit/suffix ("%+") so we can count the number up while keeping the unit.
+function parseMetric(value: string) {
+  const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/)
+  if (!match) return { target: null as number | null, suffix: value, decimals: 0 }
+  const decimals = match[1].includes('.') ? match[1].split('.')[1].length : 0
+  return { target: parseFloat(match[1]), suffix: match[2], decimals }
+}
+
+function CountUpValue({ value }: { value: string }) {
+  const { target, suffix, decimals } = parseMetric(value)
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const reduce = useReducedMotion()
+  const [n, setN] = useState(0)
+
+  useEffect(() => {
+    if (target == null) return
+    if (reduce) {
+      setN(target)
+      return
+    }
+    if (!inView) return
+    const controls = animate(0, target, {
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => setN(v),
+    })
+    return () => controls.stop()
+  }, [inView, target, reduce])
+
+  if (target == null) return <span ref={ref}>{value}</span>
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {n.toFixed(decimals)}
+      {suffix}
+    </span>
+  )
+}
+
 export function MetricsSection() {
   return (
     <Section id="metrics" background="surface" className="!pt-6 md:!pt-9 !pb-12 md:!pb-[72px]">
@@ -43,7 +85,7 @@ export function MetricsSection() {
             {metrics.map((m) => (
               <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-3">
                 <span className="text-[1.625rem] md:text-[2.5rem] font-bold leading-none tracking-tight text-accent">
-                  {m.value}
+                  <CountUpValue value={m.value} />
                 </span>
                 <p className="text-sm leading-relaxed text-text-secondary">{m.label}</p>
               </motion.div>

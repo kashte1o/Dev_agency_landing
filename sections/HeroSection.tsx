@@ -63,7 +63,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
           >
 
             {/* ── LEFT ──────────────────────────────────────── */}
-            <div className="flex flex-col gap-5 md:gap-8">
+            <div className="flex flex-col gap-6 md:gap-8">
 
               {isAvailable && availableText && (
                 <div>
@@ -72,17 +72,17 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               )}
 
               <h1
-                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[1.625rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
+                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[1.85rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
               >
                 {hero.heading}
               </h1>
 
               {/* Body paragraphs (replaces former subheading) */}
-              <div className="flex flex-col gap-3 md:gap-5 max-w-[640px]">
+              <div className="flex flex-col gap-4 md:gap-5 max-w-[640px]">
                 {hero.bodyParagraphs.map((para, i) => (
                   <p
                     key={i}
-                    className="leading-[1.65] text-white/70 text-[0.95rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
+                    className="leading-[1.65] text-white/70 text-[1.05rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
                   >
                     {para}
                   </p>
@@ -239,27 +239,25 @@ function PersonPhoto() {
 
 function PersonPhotoCompact() {
   return (
-    <div className="md:hidden flex flex-col gap-3 pt-1">
-      <div className="flex items-center gap-4">
-        <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full bg-white/[0.04] ring-1 ring-white/15">
-          <Image
-            src="/images/hero-person.webp"
-            alt="Aleksandr Sizov"
-            fill
-            sizes="96px"
-            className="object-cover object-top"
-          />
-        </div>
-        <div className="flex flex-col">
-          <p className="text-[17px] font-semibold leading-tight text-white/85">
-            Aleksandr Sizov
-          </p>
-          <p className="text-[14px] leading-tight text-white/45">
-            Founder &amp; CEO of Runmade
-          </p>
-        </div>
+    <div className="md:hidden flex flex-col items-center text-center gap-5 pt-6">
+      <div className="relative h-44 w-44 flex-shrink-0 overflow-hidden rounded-full bg-white/[0.04] ring-1 ring-white/15">
+        <Image
+          src="/images/hero-person.webp"
+          alt="Aleksandr Sizov"
+          fill
+          sizes="176px"
+          className="object-cover object-top"
+        />
       </div>
-      <p className="text-[14px] italic leading-[1.55] text-white/55">
+      <div className="flex flex-col gap-1">
+        <p className="text-[19px] font-semibold leading-tight text-white/90">
+          Aleksandr Sizov
+        </p>
+        <p className="text-[14px] leading-tight text-white/45">
+          Founder &amp; CEO of Runmade
+        </p>
+      </div>
+      <p className="max-w-[460px] text-[16px] italic leading-[1.6] text-white/65">
         &ldquo;I approach every project from the client&apos;s side: business first, budget protected, and software delivered fast.&rdquo;
       </p>
     </div>
