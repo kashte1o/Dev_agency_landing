@@ -95,8 +95,8 @@ export const careersPopup = {
 }
 
 // ─── Legal documents (rendered in scrollable modals) ────────────
-// Placeholders [DATE], [LEGAL NAME ...], [CONTACT EMAIL], and
-// [GOVERNING LAW / JURISDICTION] are intentional — fill before launch.
+// Remaining placeholder [GOVERNING LAW / JURISDICTION] is intentional —
+// fill in the governing jurisdiction before/at launch.
 export type LegalBlock = { p: string } | { ul: string[] }
 export type LegalSection = { heading: string; blocks: LegalBlock[] }
 export type LegalDoc = {
@@ -109,7 +109,7 @@ export type LegalDoc = {
 export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
   privacy: {
     title: 'Privacy Policy',
-    effectiveDate: '[DATE]',
+    effectiveDate: 'June 1, 2026',
     intro: [
       { p: 'This Privacy Policy explains how Runmade collects, uses, stores, and protects information submitted through this website.' },
       { p: 'By using this website or submitting a form, you agree to the practices described below.' },
@@ -119,7 +119,7 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
         heading: 'Who we are',
         blocks: [
           { p: 'Runmade is a custom software studio that helps businesses design and build internal tools, customer-facing platforms, web applications, automation systems, dashboards, and related digital products.' },
-          { p: 'In this Privacy Policy, “Runmade”, “we”, “us”, and “our” refer to [LEGAL NAME OR WEBSITE OPERATOR].' },
+          { p: 'In this Privacy Policy, “Runmade”, “we”, “us”, and “our” refer to Runmade, the operator of runmadeagency.com.' },
         ],
       },
       {
@@ -219,7 +219,7 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
           { p: 'Project inquiries may be kept for 12 months to manage communication, follow-ups, project discussions, and business records.' },
           { p: 'Careers inquiries may be kept for 12 months to review current or future collaboration opportunities.' },
           { p: 'FAQ questions may be kept for 12 months to respond to the question and improve future website content.' },
-          { p: 'You may request deletion of your personal information by contacting us at [CONTACT EMAIL].' },
+          { p: 'You may request deletion of your personal information by contacting us at hello@runmadeagency.com.' },
         ],
       },
       {
@@ -227,7 +227,7 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
         blocks: [
           { p: 'Depending on where you live, you may have the right to:' },
           { ul: ['Request access to your personal information', 'Request correction of inaccurate information', 'Request deletion of your information', 'Object to certain processing', 'Withdraw consent where processing is based on consent', 'Request a copy of your information'] },
-          { p: 'To make a request, contact us at [CONTACT EMAIL].' },
+          { p: 'To make a request, contact us at hello@runmadeagency.com.' },
         ],
       },
       {
@@ -261,7 +261,7 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
       {
         heading: 'Contact',
         blocks: [
-          { p: 'For privacy-related questions or requests, contact us at [CONTACT EMAIL].' },
+          { p: 'For privacy-related questions or requests, contact us at hello@runmadeagency.com.' },
         ],
       },
     ],
@@ -269,7 +269,7 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
 
   terms: {
     title: 'Terms of Service',
-    effectiveDate: '[DATE]',
+    effectiveDate: 'June 1, 2026',
     intro: [
       { p: 'These Terms of Service govern your use of the Runmade website.' },
       { p: 'By using this website, you agree to these Terms.' },
@@ -279,7 +279,7 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
         heading: 'Who we are',
         blocks: [
           { p: 'Runmade is a custom software studio that helps businesses design and build internal tools, customer-facing platforms, web applications, automation systems, dashboards, and related digital products.' },
-          { p: 'In these Terms, “Runmade”, “we”, “us”, and “our” refer to [LEGAL NAME OR WEBSITE OPERATOR].' },
+          { p: 'In these Terms, “Runmade”, “we”, “us”, and “our” refer to Runmade, the operator of runmadeagency.com.' },
         ],
       },
       {
@@ -434,7 +434,7 @@ export const legalDocuments: Record<'privacy' | 'terms', LegalDoc> = {
       {
         heading: 'Contact',
         blocks: [
-          { p: 'For questions about these Terms, contact us at [CONTACT EMAIL].' },
+          { p: 'For questions about these Terms, contact us at hello@runmadeagency.com.' },
         ],
       },
     ],

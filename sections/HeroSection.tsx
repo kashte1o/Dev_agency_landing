@@ -240,21 +240,21 @@ function PersonPhoto() {
 function PersonPhotoCompact() {
   return (
     <div className="md:hidden flex flex-col gap-3.5 pt-2">
-      <div className="flex items-center gap-3.5">
-        <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-white/[0.04] ring-1 ring-white/15">
+      <div className="flex items-center gap-4">
+        <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full bg-white/[0.04] ring-1 ring-white/15">
           <Image
             src="/images/hero-person.webp"
             alt="Aleksandr Sizov"
             fill
-            sizes="56px"
+            sizes="96px"
             className="object-cover object-top"
           />
         </div>
         <div className="flex flex-col">
-          <p className="text-[15px] font-semibold leading-tight text-white/85">
+          <p className="text-[17px] font-semibold leading-tight text-white/85">
             Aleksandr Sizov
           </p>
-          <p className="text-[13px] leading-tight text-white/45">
+          <p className="text-[14px] leading-tight text-white/45">
             Founder &amp; CEO of Runmade
           </p>
         </div>
