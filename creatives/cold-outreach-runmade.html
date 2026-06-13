@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Runmade — Cold Outreach</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; }
+
   body {
     margin: 0;
-    padding: 40px 20px;
+    padding: 60px 24px;
     background: #E8E3D6;
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     color: #141414;
@@ -17,142 +21,148 @@
     max-width: 600px;
     margin: 0 auto;
     background: #F3EFE6;
-    padding: 48px 44px;
+    padding: 56px 52px 48px;
     border: 2px solid #141414;
-    box-shadow: 8px 8px 0 #141414;
+    box-shadow: 10px 10px 0 #141414;
+    position: relative;
+    overflow: hidden;
   }
-  .rule {
-    border: 0;
-    border-top: 2px solid #141414;
-    margin: 28px 0;
+
+  /* Riso splash behind headline */
+  .blob {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 240px;
+    height: 240px;
+    background: #FF4D2E;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+    opacity: 0.92;
+    z-index: 0;
   }
+  .blob.blue {
+    top: auto;
+    bottom: -90px;
+    left: -80px;
+    right: auto;
+    width: 200px;
+    height: 200px;
+    background: #1B49C2;
+    opacity: 0.85;
+  }
+
+  .content { position: relative; z-index: 1; }
+
   .eyebrow {
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 12px;
-    letter-spacing: 0.14em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #1B49C2;
-    margin: 0 0 18px 0;
-  }
-  h1 {
-    font-size: 38px;
-    line-height: 1.08;
-    font-weight: 700;
-    margin: 0 0 24px 0;
-    letter-spacing: -0.02em;
-  }
-  h1 .num {
-    color: #FF4D2E;
-  }
-  p {
-    font-size: 17px;
-    line-height: 1.55;
-    margin: 0 0 20px 0;
-  }
-  .hl {
-    background: #FFE9B0;
-    padding: 2px 6px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-  }
-  .accent {
-    color: #FF4D2E;
-    font-weight: 600;
-  }
-  .blue {
-    color: #1B49C2;
-    font-weight: 600;
-  }
-  .signature {
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.6;
     color: #141414;
+    margin: 0 0 56px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .signature .brand {
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #141414;
+    border-radius: 50%;
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 40px 0;
+  }
+  h1 em {
+    font-style: italic;
     color: #1B49C2;
-    font-weight: 700;
   }
+  h1 .big {
+    display: block;
+    font-size: 96px;
+    line-height: 0.95;
+    color: #141414;
+    margin-bottom: 4px;
+  }
+
+  .sub {
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 0 0 44px 0;
+    max-width: 420px;
+    color: #1f1f1f;
+  }
+  .sub strong {
+    background: #FFE9B0;
+    padding: 1px 4px;
+    font-weight: 600;
+  }
+
   .cta {
     display: inline-block;
-    background: #FF4D2E;
-    color: #141414 !important;
+    background: #141414;
+    color: #F3EFE6 !important;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 14px 22px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    padding: 16px 26px;
     border: 2px solid #141414;
-    box-shadow: 4px 4px 0 #141414;
-    margin: 8px 0 12px 0;
+    box-shadow: 5px 5px 0 #FF4D2E;
   }
-  .meta {
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
+
+  .foot {
+    margin-top: 56px;
+    padding-top: 22px;
+    border-top: 2px solid #141414;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #6b6b6b;
-    margin-top: 28px;
+    color: #141414;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+  .foot .brand { font-weight: 700; }
 </style>
 </head>
 <body>
   <div class="wrap">
+    <div class="blob"></div>
+    <div class="blob blue"></div>
 
-    <p class="eyebrow">Runmade × (placeholder)</p>
+    <div class="content">
+      <p class="eyebrow">Runmade × {{company}}</p>
 
-    <h1>
-      <span class="num">5 minutes</span> to reach out to past clients —
-      and unlock extra revenue from new software projects.
-    </h1>
+      <h1>
+        <span class="big">5 min.</span>
+        to <em>unlock</em> revenue<br/>
+        already in your inbox.
+      </h1>
 
-    <hr class="rule" />
+      <p class="sub">
+        <strong>Your existing clients need software.</strong>
+        We build it under your brand. You keep the relationship — and a share.
+      </p>
 
-    <p>
-      Hey {{first_name}},
-    </p>
+      <a href="https://cal.com/runmade/intro" class="cta">Book 15 min →</a>
 
-    <p>
-      <span class="hl">Some of your existing clients already need custom software.</span>
-      They just aren't asking <em>you</em> for it — because it isn't what
-      {{company}} is known for.
-    </p>
-
-    <p>
-      <span class="blue">Your competitor</span> has been working with us
-      for <span class="accent">two years</span> on the same kind of client
-      expansion. Quietly. Profitably.
-    </p>
-
-    <p>
-      We're <strong>Runmade</strong> — a software studio that white-labels
-      under your brand. You introduce, we deliver, you keep the client
-      relationship and a share of the revenue.
-    </p>
-
-    <p>
-      No pitch deck, no &quot;synergies.&quot; A transparent, long-term
-      partnership built on mutual value.
-    </p>
-
-    <a href="https://cal.com/runmade/intro" class="cta">→ Book a 15-min call</a>
-
-    <p style="font-size:14px; color:#444; margin-top: 8px;">
-      Or just reply &quot;tell me more&quot; and I'll send a one-pager.
-    </p>
-
-    <hr class="rule" />
-
-    <div class="signature">
-      — {{sender_first_name}}<br/>
-      <span class="brand">Runmade</span> · partnerships<br/>
-      runmade.com
+      <div class="foot">
+        <span class="brand">RUNMADE</span>
+        <span>runmade.com</span>
+      </div>
     </div>
-
-    <p class="meta">
-      Sent because we saw {{company}} ships {{trigger}}. <br/>
-      Not relevant? Reply &quot;no&quot; — I won't follow up.
-    </p>
-
   </div>
 </body>
 </html>
