@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Runmade — Cold Outreach</title>
+<style>
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    background: #E8E3D6;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: #141414;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #F3EFE6;
+    padding: 48px 44px;
+    border: 2px solid #141414;
+    box-shadow: 8px 8px 0 #141414;
+  }
+  .rule {
+    border: 0;
+    border-top: 2px solid #141414;
+    margin: 28px 0;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #1B49C2;
+    margin: 0 0 18px 0;
+  }
+  h1 {
+    font-size: 38px;
+    line-height: 1.08;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    letter-spacing: -0.02em;
+  }
+  h1 .num {
+    color: #FF4D2E;
+  }
+  p {
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0 0 20px 0;
+  }
+  .hl {
+    background: #FFE9B0;
+    padding: 2px 6px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .accent {
+    color: #FF4D2E;
+    font-weight: 600;
+  }
+  .blue {
+    color: #1B49C2;
+    font-weight: 600;
+  }
+  .signature {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #141414;
+  }
+  .signature .brand {
+    color: #1B49C2;
+    font-weight: 700;
+  }
+  .cta {
+    display: inline-block;
+    background: #FF4D2E;
+    color: #141414 !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 22px;
+    border: 2px solid #141414;
+    box-shadow: 4px 4px 0 #141414;
+    margin: 8px 0 12px 0;
+  }
+  .meta {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b6b6b;
+    margin-top: 28px;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <p class="eyebrow">Runmade × (placeholder)</p>
+
+    <h1>
+      <span class="num">5 minutes</span> to reach out to past clients —
+      and unlock extra revenue from new software projects.
+    </h1>
+
+    <hr class="rule" />
+
+    <p>
+      Hey {{first_name}},
+    </p>
+
+    <p>
+      <span class="hl">Some of your existing clients already need custom software.</span>
+      They just aren't asking <em>you</em> for it — because it isn't what
+      {{company}} is known for.
+    </p>
+
+    <p>
+      <span class="blue">Your competitor</span> has been working with us
+      for <span class="accent">two years</span> on the same kind of client
+      expansion. Quietly. Profitably.
+    </p>
+
+    <p>
+      We're <strong>Runmade</strong> — a software studio that white-labels
+      under your brand. You introduce, we deliver, you keep the client
+      relationship and a share of the revenue.
+    </p>
+
+    <p>
+      No pitch deck, no &quot;synergies.&quot; A transparent, long-term
+      partnership built on mutual value.
+    </p>
+
+    <a href="https://cal.com/runmade/intro" class="cta">→ Book a 15-min call</a>
+
+    <p style="font-size:14px; color:#444; margin-top: 8px;">
+      Or just reply &quot;tell me more&quot; and I'll send a one-pager.
+    </p>
+
+    <hr class="rule" />
+
+    <div class="signature">
+      — {{sender_first_name}}<br/>
+      <span class="brand">Runmade</span> · partnerships<br/>
+      runmade.com
+    </div>
+
+    <p class="meta">
+      Sent because we saw {{company}} ships {{trigger}}. <br/>
+      Not relevant? Reply &quot;no&quot; — I won't follow up.
+    </p>
+
+  </div>
+</body>
+</html>
