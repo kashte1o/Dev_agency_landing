@@ -9,7 +9,7 @@ export const availableText = ''
 
 export const footerTagline = 'Custom software that helps businesses run better'
 
-export const footerCopyright = `© ${new Date().getFullYear()} ${STUDIO_NAME}. All rights reserved.`
+export const footerCopyright = `© 2022 – ${new Date().getFullYear()} ${STUDIO_NAME}. All rights reserved.`
 
 // Keys for footer items that open a modal instead of navigating.
 export type FooterModalKey = 'careers' | 'support' | 'privacy' | 'terms'
