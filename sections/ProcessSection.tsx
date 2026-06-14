@@ -66,7 +66,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
   return (
     <section
       id="process"
-      className="pt-10 md:pt-14 pb-14 md:pb-[120px]"
+      className="pt-5 md:pt-7 pb-14 md:pb-[120px]"
       style={{ backgroundColor: 'var(--bg-dark-soft)' }}
     >
       <Container>

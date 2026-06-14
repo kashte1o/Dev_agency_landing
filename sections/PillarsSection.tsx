@@ -14,7 +14,7 @@ interface PillarsSectionProps {
 export function PillarsSection({ pillars }: PillarsSectionProps) {
   const scrollRef = useRef<HTMLUListElement>(null)
   return (
-    <Section id="what-we-build" background="base" className="!pt-10 md:!pt-[60px]">
+    <Section id="what-we-build" background="base" className="!pt-10 md:!pt-[60px] !pb-7 md:!pb-[60px]">
       <Container>
         <motion.div
           variants={staggerContainer}
