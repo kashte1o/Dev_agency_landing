@@ -39,7 +39,7 @@ html {
 /* Services — scroll slightly further down */
 #what-we-build { scroll-margin-top: 35px; }
 /* Process — moderate scroll, capture "Our Process" eyebrow */
-#process       { scroll-margin-top: -30px; }
+#process       { scroll-margin-top: -10px; }
 /* FAQ — small peek above */
 #faq           { scroll-margin-top: 140px; }
 /* Let's talk / contact — scroll well past, no white peek */
@@ -49,7 +49,7 @@ html {
   #why-different { scroll-margin-top: 170px; }
   #proof         { scroll-margin-top: 0px; }
   #what-we-build { scroll-margin-top: 50px; }
-  #process       { scroll-margin-top: -15px; }
+  #process       { scroll-margin-top: 15px; }
   #faq           { scroll-margin-top: 170px; }
   #start-project { scroll-margin-top: 20px; }
 }
