@@ -285,7 +285,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
                 </h3>
 
                 {/* Description */}
-                <p className="flex-1 text-[14px] leading-[1.6] text-white/75 md:text-base md:leading-[1.65]">
+                <p className="flex-1 text-[15px] leading-[1.55] text-white/75 md:text-[19px] md:leading-[1.6]">
                   {step.description}
                 </p>
 
