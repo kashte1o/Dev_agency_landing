@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-
-export const runtime = 'edge'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 
 interface LeadPayload {
   name?: string
@@ -26,11 +25,21 @@ function row(label: string, value?: string) {
 }
 
 export async function POST(request: Request) {
-  const apiKey = process.env.RESEND_API_KEY
-  const toEmail = process.env.CONTACT_TO_EMAIL ?? 'hello@runmadeagency.com'
-  const fromEmail = process.env.CONTACT_FROM_EMAIL ?? 'Runmade Website <onboarding@resend.dev>'
+  const { env } = getCloudflareContext()
+  const apiKey =
+    (env as unknown as Record<string, string | undefined>).RESEND_API_KEY ??
+    process.env.RESEND_API_KEY
+  const toEmail =
+    (env as unknown as Record<string, string | undefined>).CONTACT_TO_EMAIL ??
+    process.env.CONTACT_TO_EMAIL ??
+    'hello@runmadeagency.com'
+  const fromEmail =
+    (env as unknown as Record<string, string | undefined>).CONTACT_FROM_EMAIL ??
+    process.env.CONTACT_FROM_EMAIL ??
+    'Runmade Website <onboarding@resend.dev>'
 
   if (!apiKey) {
+    console.error('Contact form: RESEND_API_KEY is not set')
     return NextResponse.json({ error: 'Email service not configured.' }, { status: 500 })
   }
 
@@ -86,27 +95,35 @@ export async function POST(request: Request) {
     .filter(Boolean)
     .join('\n')
 
-  const resendRes = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: [toEmail],
-      subject,
-      html,
-      text,
-      reply_to: email || undefined,
-    }),
-  })
+  try {
+    const resendRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: [toEmail],
+        subject,
+        html,
+        text,
+        reply_to: email || undefined,
+      }),
+    })
 
-  if (!resendRes.ok) {
-    const detail = await resendRes.text().catch(() => '')
-    console.error('Resend error', resendRes.status, detail)
-    return NextResponse.json({ error: 'Email delivery failed.' }, { status: 502 })
+    if (!resendRes.ok) {
+      const detail = await resendRes.text().catch(() => '')
+      console.error('Resend error', resendRes.status, detail)
+      return NextResponse.json(
+        { error: 'Email delivery failed.', detail },
+        { status: 502 },
+      )
+    }
+
+    return NextResponse.json({ ok: true })
+  } catch (err) {
+    console.error('Contact form unexpected error', err)
+    return NextResponse.json({ error: 'Unexpected server error.' }, { status: 500 })
   }
-
-  return NextResponse.json({ ok: true })
 }
