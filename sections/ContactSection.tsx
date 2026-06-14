@@ -12,7 +12,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="dark" className="relative pt-10 md:pt-36 pb-12 md:pb-[120px]">
+    <Section id="start-project" background="dark" className="relative pt-10 md:pt-[clamp(3rem,9vh,9rem)] pb-12 md:pb-[clamp(3rem,8vh,7.5rem)]">
       {/* Layer 1 — Horizon edge: surgical 1px line, cool blue-white core */}
       <div
         aria-hidden
@@ -58,7 +58,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="text-[1.5rem] font-bold tracking-tight text-white md:text-[2.9rem]"
+                className="text-[1.5rem] font-bold tracking-tight text-white md:text-[clamp(1.9rem,4.6vh,2.9rem)]"
               >
                 {contactSection.heading}
               </motion.h2>
@@ -96,7 +96,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT}
-            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-4 md:p-8 shadow-sm"
+            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-4 md:p-[clamp(1rem,2.2vh,2rem)] shadow-sm"
           >
             <LeadForm />
           </motion.div>

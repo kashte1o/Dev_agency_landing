@@ -96,7 +96,7 @@ export function LeadForm() {
             exit={{ opacity: 0 }}
             onSubmit={handleSubmit}
             noValidate
-            className="flex flex-col gap-2.5 md:gap-3.5"
+            className="flex flex-col gap-2.5 md:gap-[clamp(0.5rem,1.4vh,0.875rem)]"
           >
             {state === 'error' && (
               <motion.div
