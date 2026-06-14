@@ -58,10 +58,12 @@ export function LeadForm() {
     const data = Object.fromEntries(formData.entries())
 
     try {
-      // TODO: replace with real API endpoint
-      await new Promise((res) => setTimeout(res, 1200))
-      // const res = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
-      void data
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('Request failed')
       setState('success')
     } catch {
       setErrorMsg(leadFormError)
