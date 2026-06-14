@@ -160,6 +160,8 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
   const [messenger, setMessenger] = useState('')
   const [errors, setErrors] = useState<PopupErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!open) return
@@ -187,10 +189,12 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
       setEmail('')
       setMessenger('')
       setErrors({})
+      setSubmitting(false)
+      setSubmitError(null)
     }
   }, [open])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     const next: PopupErrors = {}
@@ -210,8 +214,26 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
     setErrors(next)
     if (Object.keys(next).length > 0) return
 
-    // TODO: wire up to backend
-    setSubmitted(true)
+    setSubmitting(true)
+    setSubmitError(null)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'faq',
+          problem: q,
+          email: em,
+          whatsapp: ms,
+        }),
+      })
+      if (!res.ok) throw new Error('Request failed')
+      setSubmitted(true)
+    } catch {
+      setSubmitError('Something went wrong — please try again or email us directly.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -352,11 +374,17 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
                   )}
                 </div>
 
+                {submitError && (
+                  <p role="alert" className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-[0.85rem] text-red-700">
+                    {submitError}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="mt-1 rounded-lg bg-accent px-5 py-3 text-[0.95rem] font-medium text-white transition-opacity hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  disabled={submitting}
+                  className="mt-1 rounded-lg bg-accent px-5 py-3 text-[0.95rem] font-medium text-white transition-opacity hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {stillHaveQuestionsPopup.submitLabel}
+                  {submitting ? 'Sending…' : stillHaveQuestionsPopup.submitLabel}
                 </button>
 
                 <p className="text-[0.8rem] leading-relaxed text-text-secondary">

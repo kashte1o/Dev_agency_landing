@@ -8,6 +8,7 @@ interface LeadPayload {
   problem?: string
   businessIndustry?: string
   budget?: string
+  source?: 'contact' | 'faq'
 }
 
 function escapeHtml(value: string) {
@@ -50,6 +51,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
+  const source = payload.source === 'faq' ? 'faq' : 'contact'
   const name = payload.name?.trim() ?? ''
   const email = payload.email?.trim() ?? ''
   const whatsapp = payload.whatsapp?.trim() ?? ''
@@ -57,39 +59,52 @@ export async function POST(request: Request) {
   const industry = payload.businessIndustry?.trim() ?? ''
   const budget = payload.budget?.trim() ?? ''
 
-  if (!name || !problem || (!email && !whatsapp)) {
+  if (!problem || (!email && !whatsapp)) {
+    return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
+  }
+  if (source === 'contact' && !name) {
     return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
   }
 
-  const subject = `New lead from runmadeagency.com — ${name}`
+  const displayName = name || (source === 'faq' ? 'FAQ visitor' : 'Anonymous')
+  const subject =
+    source === 'faq'
+      ? `New FAQ question from runmadeagency.com — ${displayName}`
+      : `New lead from runmadeagency.com — ${displayName}`
+  const headerLabel = source === 'faq' ? 'Runmade · FAQ question' : 'Runmade · New lead'
+  const problemLabel = source === 'faq' ? 'Question' : 'What to fix / build'
+
   const html = `
     <div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f7f8fa;padding:24px">
       <div style="max-width:560px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">
         <div style="padding:20px 24px;background:#070A12;color:#fff">
-          <div style="font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:#9ca3af">Runmade · New lead</div>
-          <div style="font-size:18px;font-weight:600;margin-top:4px">${escapeHtml(name)}</div>
+          <div style="font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:#9ca3af">${headerLabel}</div>
+          <div style="font-size:18px;font-weight:600;margin-top:4px">${escapeHtml(displayName)}</div>
         </div>
         <table style="width:100%;border-collapse:collapse">
           ${row('Email', email)}
-          ${row('WhatsApp', whatsapp)}
+          ${source === 'faq' ? row('Telegram / Phone', whatsapp) : row('WhatsApp', whatsapp)}
           ${row('Industry', industry)}
           ${row('Budget', budget)}
-          ${row('What to fix / build', problem)}
+          ${row(problemLabel, problem)}
         </table>
       </div>
     </div>
   `
 
   const text = [
-    `New lead from runmadeagency.com`,
+    source === 'faq'
+      ? `New FAQ question from runmadeagency.com`
+      : `New lead from runmadeagency.com`,
     ``,
-    `Name: ${name}`,
+    name && `Name: ${name}`,
     email && `Email: ${email}`,
-    whatsapp && `WhatsApp: ${whatsapp}`,
+    whatsapp &&
+      (source === 'faq' ? `Telegram / Phone: ${whatsapp}` : `WhatsApp: ${whatsapp}`),
     industry && `Industry: ${industry}`,
     budget && `Budget: ${budget}`,
     ``,
-    `What to fix / build:`,
+    `${problemLabel}:`,
     problem,
   ]
     .filter(Boolean)
