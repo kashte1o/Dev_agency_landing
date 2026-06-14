@@ -141,7 +141,7 @@ export default function RootLayout({
         <MobileStickyCta />
         <Script
           src="https://code.tidio.co/rutgwh42zrdlsysprgyp5yge1s6sscd6.js"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
       </body>
     </html>
