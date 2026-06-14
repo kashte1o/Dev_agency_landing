@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Manrope, JetBrains_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { NavBar } from '@/components/layout/NavBar'
 import { Footer } from '@/components/layout/Footer'
@@ -136,6 +137,10 @@ export default function RootLayout({
         <NavBar heroDark />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Script
+          src="https://code.tidio.co/rutgwh42zrdlsysprgyp5yge1s6sscd6.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   )
