@@ -81,13 +81,13 @@ export function MetricsSection() {
           >
             Measured delivery outcomes
           </motion.p>
-          <div className="grid grid-cols-2 gap-x-12 gap-y-8 lg:grid-cols-4 md:gap-y-10">
+          <div className="grid grid-cols-2 gap-x-12 gap-y-10 lg:grid-cols-4 md:gap-y-12">
             {metrics.map((m) => (
-              <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-3">
-                <span className="text-[1.625rem] md:text-[2.5rem] font-bold leading-none tracking-tight text-accent">
+              <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-4">
+                <span className="text-[2.125rem] md:text-[3.25rem] font-bold leading-none tracking-tight text-accent">
                   <CountUpValue value={m.value} />
                 </span>
-                <p className="text-sm leading-relaxed text-text-secondary">{m.label}</p>
+                <p className="text-lg leading-relaxed text-text-secondary">{m.label}</p>
               </motion.div>
             ))}
           </div>
