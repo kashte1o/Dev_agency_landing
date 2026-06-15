@@ -30,7 +30,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-6 py-7 md:gap-8 md:py-16 md:grid-cols-4">
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-center gap-2 md:items-stretch md:gap-4">
-            <LogoMark variant="light" size="sm" className="scale-90 md:self-start md:scale-100" />
+            <LogoMark variant="light" size="sm" className="scale-[1.5] -mt-2 mb-1 md:scale-100 md:mt-0 md:mb-0 md:self-start" />
             <p className="text-[0.7rem] md:text-[1.05rem] leading-snug text-white/60 text-center md:text-left whitespace-nowrap md:whitespace-normal md:max-w-[260px]">
               {footerTagline}
             </p>
