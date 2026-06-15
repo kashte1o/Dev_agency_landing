@@ -15,7 +15,7 @@ export function FieldWrapper({ field, children, error }: FieldWrapperProps) {
       <div className="flex items-center gap-2">
         <label
           htmlFor={field.id}
-          className="text-[0.95rem] md:text-[1.15rem] font-medium text-text-primary"
+          className="text-[0.95rem] md:text-[1rem] font-medium text-text-primary"
         >
           {field.label}
           {field.required && (
@@ -26,10 +26,10 @@ export function FieldWrapper({ field, children, error }: FieldWrapperProps) {
       </div>
       {children}
       {field.helperText && !error && (
-        <p className="text-[0.8rem] md:text-[0.9rem] text-text-secondary">{field.helperText}</p>
+        <p className="text-[0.8rem] md:text-[0.82rem] text-text-secondary">{field.helperText}</p>
       )}
       {error && (
-        <p id={errorId} role="alert" className="text-[0.8rem] md:text-[0.9rem] text-red-500">
+        <p id={errorId} role="alert" className="text-[0.8rem] md:text-[0.82rem] text-red-500">
           {error}
         </p>
       )}
@@ -38,7 +38,7 @@ export function FieldWrapper({ field, children, error }: FieldWrapperProps) {
 }
 
 const inputBase =
-  'w-full rounded-[var(--radius-input)] border border-border bg-bg-surface px-3 py-1.5 md:py-2 text-[1rem] text-text-primary placeholder:text-text-secondary/60 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-50'
+  'w-full rounded-[var(--radius-input)] border border-border bg-bg-surface px-3 py-1.5 md:py-[clamp(4px,0.9vh,8px)] text-[1rem] md:text-[0.95rem] text-text-primary placeholder:text-text-secondary/60 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-50'
 
 const inputError =
   'border-red-400 focus:border-red-400 focus:ring-red-400'
@@ -87,7 +87,7 @@ export function TextareaInput({ field, error, ...props }: TextareaInputProps) {
         rows={field.rows ?? 4}
         aria-describedby={error ? errorId : undefined}
         aria-invalid={error ? true : undefined}
-        className={cn(inputBase, 'resize-y min-h-[64px] md:min-h-[clamp(70px,9vh,100px)]', error && inputError)}
+        className={cn(inputBase, 'resize-y min-h-[64px] md:min-h-[clamp(52px,7vh,96px)]', error && inputError)}
         {...props}
       />
     </FieldWrapper>

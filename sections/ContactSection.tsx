@@ -96,7 +96,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT}
-            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-3 md:p-[clamp(1rem,2.2vh,2rem)] shadow-sm"
+            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-3 md:p-[clamp(0.75rem,1.8vh,1.75rem)] shadow-sm"
           >
             <LeadForm />
           </motion.div>

@@ -96,7 +96,7 @@ export function LeadForm() {
             exit={{ opacity: 0 }}
             onSubmit={handleSubmit}
             noValidate
-            className="flex flex-col gap-1.5 md:gap-[clamp(0.5rem,1.4vh,0.875rem)]"
+            className="flex flex-col gap-1.5 md:gap-[clamp(0.35rem,1.2vh,0.75rem)]"
           >
             {state === 'error' && (
               <motion.div
@@ -116,7 +116,7 @@ export function LeadForm() {
             <div className="flex flex-col gap-1">
               {/* Group label */}
               <div className="flex items-center gap-2">
-                <span className="text-[0.95rem] md:text-[1.15rem] font-medium text-text-primary">
+                <span className="text-[0.95rem] md:text-[1rem] font-medium text-text-primary">
                   Contact details
                   <span className="ml-1 text-accent" aria-hidden>*</span>
                 </span>
@@ -128,11 +128,11 @@ export function LeadForm() {
               </div>
               {/* Helper / validation */}
               {fieldErrors.contact ? (
-                <p role="alert" className="text-[0.85rem] md:text-[1.05rem] text-red-500">
+                <p role="alert" className="text-[0.85rem] md:text-[0.9rem] text-red-500">
                   {fieldErrors.contact}
                 </p>
               ) : (
-                <p className="text-[0.85rem] md:text-[1.05rem] leading-snug text-text-primary/70">
+                <p className="text-[0.85rem] md:text-[0.9rem] leading-snug text-text-primary/70">
                   Leave either email or WhatsApp. One contact method is enough.
                 </p>
               )}
@@ -151,7 +151,7 @@ export function LeadForm() {
               type="submit"
               variant="primary"
               loading={state === 'loading'}
-              className="mt-2 w-full justify-center py-2.5 text-[1rem] md:text-[1.2rem]"
+              className="mt-2 w-full justify-center py-2.5 md:py-2 text-[1rem] md:text-[1.05rem]"
             >
               {leadFormCta}
             </Button>
