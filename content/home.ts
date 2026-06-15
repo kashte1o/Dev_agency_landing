@@ -5,7 +5,7 @@ export const hero = {
   heading: 'Custom software built to improve business performance',
   bodyParagraphs: [
     'We build custom software for the systems your team uses internally and the digital products your customers interact with.',
-    'We help companies replace manual workflows, reduce operational friction, and improve business performance within 6–12 weeks of deployment.',
+    'The systems we build replace manual workflows, reduce operational friction, and improve business performance within 6–12 weeks of deployment.',
   ],
   primaryCta: {
     label:   "Let's scope your project",

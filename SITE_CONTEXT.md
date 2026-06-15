@@ -54,7 +54,7 @@ SMB, 27–60 лет. Они понимают свой бизнес, не пон�
 - **Подзаголовок (2 абзаца):**
   - "We build custom software for the systems your team uses internally
     and the digital products your customers interact with."
-  - "We help companies replace manual workflows, reduce operational
+  - "The systems we build replace manual workflows, reduce operational
     friction, and improve business performance within 6–12 weeks of
     deployment."
 - **Primary CTA:** "Let's scope your project" → `/#start-project`

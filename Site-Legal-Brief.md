@@ -34,7 +34,7 @@ _Дата подготовки брифа: 2026-06-06. Источник — ис
 **Заголовок (Hero):**
 > "Custom software built to improve business performance."
 > "We build custom software for the systems your team uses internally and the digital products your customers interact with."
-> "We help companies replace manual workflows, reduce operational friction, and improve business performance within 6–12 weeks of deployment."
+> "The systems we build replace manual workflows, reduce operational friction, and improve business performance within 6–12 weeks of deployment."
 
 **Что строим (What we build):**
 - Internal tools & product systems — внутренние инструменты, порталы, бизнес-логика, дашборды, back-office.
