@@ -51,14 +51,14 @@ const CASES = [
 export function ProofSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
   return (
-    <Section id="proof" background="base" className="!pt-8 md:!pt-12 !pb-10 md:!pb-14">
+    <Section id="proof" background="base" className="!pt-8 md:!pt-8 !pb-10 md:!pb-14">
       <div className="mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-20">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          className="flex flex-col gap-8 md:gap-14"
+          className="flex flex-col gap-8 md:gap-10"
         >
           {/* Heading */}
           <div className="flex flex-col gap-4 items-center text-center md:items-start md:text-left">

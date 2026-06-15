@@ -73,6 +73,12 @@ html {
   #faq           { scroll-margin-top: 170px; }
   #start-project { scroll-margin-top: 20px; }
 }
+@media (min-width: 1280px) {
+  /* Work — pull the section closer to the top of the viewport on
+     desktop so the heading sits just below the navbar instead of
+     leaving a noticeable strip of the previous section visible. */
+  #proof         { scroll-margin-top: -50px; }
+}
 
 /* ─── Design tokens ─────────────────────────────────────────── */
 :root {
