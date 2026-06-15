@@ -6,7 +6,7 @@
    so logo→nav and nav→CTA gaps are always identical. This token only
    acts as a safety floor on narrower viewports. */
 :root {
-  --nav-side-gap: 48px;
+  --nav-side-gap: clamp(48px, 6vw, 110px);
 }
 
 /* ─── Anchor scroll offset ──────────────────────────────────── */
@@ -17,17 +17,37 @@
 html {
   scroll-padding-top: 80px;
 }
+@media (min-width: 400px) {
+  html {
+    scroll-padding-top: 110px;
+  }
+}
 @media (min-width: 768px) {
   html {
-    scroll-padding-top: 100px;
+    scroll-padding-top: 120px;
+  }
+}
+@media (min-width: 1280px) {
+  html {
+    scroll-padding-top: 130px;
   }
 }
 [id] {
   scroll-margin-top: 80px;
 }
+@media (min-width: 400px) {
+  [id] {
+    scroll-margin-top: 110px;
+  }
+}
 @media (min-width: 768px) {
   [id] {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 120px;
+  }
+}
+@media (min-width: 1280px) {
+  [id] {
+    scroll-margin-top: 130px;
   }
 }
 

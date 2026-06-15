@@ -7,9 +7,12 @@ import { Button } from '@/components/ui/Button'
 import { navLinks, navCta } from '@/content/navigation'
 import { cn } from '@/lib/utils'
 
-// Desktop navbar height constants — keep in sync with HeroSection top-padding
-export const NAV_H_MOBILE  = 80   // px
-export const NAV_H_DESKTOP = 130  // px (md+)
+// Navbar heights at each breakpoint — keep in sync with HeroSection
+// top-padding and globals.css scroll-padding-top.
+export const NAV_H_MOBILE      = 80   // px (<400)
+export const NAV_H_MOBILE_LG   = 110  // px (>=400)
+export const NAV_H_TABLET      = 120  // px (md+)
+export const NAV_H_DESKTOP     = 130  // px (xl+)
 
 interface NavBarProps {
   heroDark?: boolean
@@ -77,21 +80,29 @@ export function NavBar({ heroDark = true }: NavBarProps) {
           className="
             relative mx-auto w-full max-w-[1440px]
             px-6 xl:px-16 2xl:px-20
-            h-[80px] xl:h-[130px]
+            h-[80px] min-[400px]:h-[110px] md:h-[120px] xl:h-[130px]
             flex xl:grid xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-center xl:justify-between
           "
         >
           {/* Left — Logo (intro animation plays once on initial mount).
-              `justify-self-end + mr-[var(--nav-side-gap)]` anchors the logo's
-              right edge to the inner edge of the left column, then pushes it
-              leftward by the shared gap token. Result: gap(logo→nav) equals
-              gap(nav→CTA) exactly. */}
+              At xl-2xl we use the `md` LogoMark size so the desktop nav
+              actually fits in 1280-1535px viewports; at 2xl+ (1536+) we
+              switch to the larger `lg` mark. The symmetric side gaps come
+              from `--nav-side-gap`, applied identically to both the logo's
+              `mr` and the CTA's `ml`, so the empty space around the centred
+              nav links is balanced (logo→Approach == FAQ→Let's talk). */}
           <div className="flex items-center min-w-0 xl:justify-self-end xl:mr-[var(--nav-side-gap)]">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="lg"
               intro
-              className="hidden xl:inline-flex xl:-translate-y-[2px]"
+              className="hidden 2xl:inline-flex 2xl:-translate-y-[2px]"
+            />
+            <LogoMark
+              variant={isDark ? 'light' : 'dark'}
+              size="md"
+              intro
+              className="hidden xl:inline-flex 2xl:hidden xl:-translate-y-[2px]"
             />
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
@@ -129,7 +140,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               than on the left. Bumping the CTA's left margin compensates
               for the logo's visual padding so RUNMADE→Approach reads
               equal to FAQ→Let's talk. */}
-          <div className="absolute right-6 top-0 bottom-0 flex items-center xl:static xl:right-auto xl:top-auto xl:bottom-auto xl:justify-self-start xl:ml-[calc(var(--nav-side-gap)+40px)] justify-end">
+          <div className="absolute right-6 top-0 bottom-0 flex items-center xl:static xl:right-auto xl:top-auto xl:bottom-auto xl:justify-self-start xl:ml-[var(--nav-side-gap)] justify-end">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
