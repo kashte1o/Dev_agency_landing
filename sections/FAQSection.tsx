@@ -46,7 +46,7 @@ export function FAQSection() {
                   onClick={() => setPopupOpen(true)}
                 />
               ) : (
-                <FAQAccordionItem key={item.question} item={item} defaultOpen={i === 0} />
+                <FAQAccordionItem key={item.question} item={item} />
               )
             )}
           </motion.div>
