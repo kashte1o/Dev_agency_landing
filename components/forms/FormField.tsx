@@ -87,7 +87,7 @@ export function TextareaInput({ field, error, ...props }: TextareaInputProps) {
         rows={field.rows ?? 4}
         aria-describedby={error ? errorId : undefined}
         aria-invalid={error ? true : undefined}
-        className={cn(inputBase, 'resize-y min-h-[80px] md:min-h-[clamp(70px,9vh,100px)]', error && inputError)}
+        className={cn(inputBase, 'resize-y min-h-[64px] md:min-h-[clamp(70px,9vh,100px)]', error && inputError)}
         {...props}
       />
     </FieldWrapper>

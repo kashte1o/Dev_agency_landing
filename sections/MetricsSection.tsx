@@ -77,22 +77,22 @@ export function MetricsSection() {
         >
           <motion.p
             variants={fadeUp}
-            className="mb-7 text-xs font-medium uppercase tracking-[0.18em] text-text-primary md:mb-10"
+            className="mb-6 text-center text-xs font-medium uppercase tracking-[0.18em] text-text-primary md:mb-10 md:text-left"
           >
             Measured delivery outcomes
           </motion.p>
-          <div className="grid grid-cols-2 gap-x-12 gap-y-10 lg:grid-cols-4 md:gap-y-12">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-7 md:gap-x-12 md:gap-y-12 lg:grid-cols-4">
             {metrics.map((m) => (
-              <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-4">
-                <span className="text-[2.125rem] md:text-[3.25rem] font-bold leading-none tracking-tight text-accent">
+              <motion.div key={m.label} variants={fadeUp} className="flex flex-col gap-3 md:gap-4">
+                <span className="text-[1.625rem] md:text-[3.25rem] font-bold leading-none tracking-tight text-accent">
                   <CountUpValue value={m.value} />
                 </span>
-                <p className="text-lg leading-relaxed text-text-secondary">{m.label}</p>
+                <p className="text-sm md:text-lg leading-relaxed text-text-secondary">{m.label}</p>
               </motion.div>
             ))}
           </div>
-          <p className="mt-8 text-2xl leading-relaxed text-text-secondary md:mt-10">
-            Based on 32 projects delivered between 2022 and 2025.
+          <p className="mt-6 text-center text-sm leading-relaxed text-text-secondary md:mt-10 md:text-left md:text-2xl">
+            Based on 32 projects delivered between 2022 and 2025
           </p>
         </motion.div>
       </Container>

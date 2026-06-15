@@ -72,17 +72,17 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               )}
 
               <h1
-                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[1.85rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
+                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[2.1rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
               >
                 {hero.heading}
               </h1>
 
               {/* Body paragraphs (replaces former subheading) */}
-              <div className="flex flex-col gap-4 md:gap-5 max-w-[640px]">
+              <div className="flex flex-col gap-3.5 md:gap-5 max-w-[640px]">
                 {hero.bodyParagraphs.map((para, i) => (
                   <p
                     key={i}
-                    className="leading-[1.65] text-white/70 text-[1.05rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
+                    className="leading-[1.6] text-white/70 text-[1.05rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
                   >
                     {para}
                   </p>
@@ -138,11 +138,6 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
                 </a>
               </div>
 
-              {/* Compact founder block — mobile only.
-                  Desktop renders the full PersonPhoto in the right column; on
-                  mobile that column is hidden, so we surface a condensed trust
-                  cue (face + name + role + short quote) below the CTAs. */}
-              <PersonPhotoCompact />
             </div>
 
             {/* ── RIGHT: portrait + caption as one connected block ───── */}
@@ -152,6 +147,13 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
 
           </div>
         </div>
+      </div>
+
+      {/* Mobile founder block — sits BELOW the first viewport so the hero
+          above feels uncluttered and only reveals on scroll. Desktop renders
+          PersonPhoto in the right column above instead. */}
+      <div className="md:hidden relative z-10 px-6 pb-14 pt-2">
+        <PersonPhotoCompact />
       </div>
 
       {/* ── Bottom fade ──────────────────────────────────────── */}

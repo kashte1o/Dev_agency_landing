@@ -27,11 +27,11 @@ export function Footer() {
       <div className="mx-auto w-full max-w-[1100px] px-6">
         <div aria-hidden className="mx-auto h-px w-full max-w-[960px] bg-white/10" />
         {/* Top grid */}
-        <div className="grid grid-cols-2 gap-x-8 gap-y-5 py-7 md:gap-8 md:py-16 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-6 py-7 md:gap-8 md:py-16 md:grid-cols-4">
           {/* Brand col */}
-          <div className="col-span-2 md:col-span-1 flex flex-col gap-2.5 md:gap-4">
-            <LogoMark variant="light" size="sm" className="self-center scale-90 md:scale-100" />
-            <p className="text-[0.8rem] md:text-[1.05rem] leading-snug text-white/60 max-w-[260px] self-center text-center">
+          <div className="col-span-2 md:col-span-1 flex flex-col items-center gap-2 md:items-stretch md:gap-4">
+            <LogoMark variant="light" size="sm" className="scale-90 md:self-start md:scale-100" />
+            <p className="text-[0.7rem] md:text-[1.05rem] leading-snug text-white/60 text-center md:text-left whitespace-nowrap md:whitespace-normal md:max-w-[260px]">
               {footerTagline}
             </p>
             {socialLinks.length > 0 && (
@@ -65,13 +65,13 @@ export function Footer() {
             ))}
           </FooterColumn>
 
-          {/* Contact + Legal */}
-          <div className="flex flex-col gap-4 md:gap-6">
+          {/* Contact + Legal — side by side on mobile (row 3), stacked on desktop (col 4) */}
+          <div className="col-span-2 grid grid-cols-2 gap-x-6 md:col-span-1 md:flex md:flex-col md:gap-6">
             <FooterColumn heading={contact.heading}>
               {contact.email && (
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-[0.8rem] md:text-[1.1rem] font-medium leading-relaxed text-white hover:text-white/80 transition-colors"
+                  className="text-[0.8rem] md:text-[1.1rem] font-medium leading-relaxed text-white hover:text-white/80 transition-colors break-all"
                 >
                   {contact.email}
                 </a>
@@ -80,7 +80,6 @@ export function Footer() {
                 <span className="text-[0.8rem] md:text-[1.1rem] leading-relaxed text-white/55">{contact.location}</span>
               )}
             </FooterColumn>
-
             <FooterColumn heading={legal.heading}>
               {legal.links.map((l) => (
                 <FooterItem key={l.label} link={l} onOpenModal={setModal} />
@@ -152,12 +151,14 @@ export function Footer() {
 function FooterColumn({
   heading,
   children,
+  className,
 }: {
   heading: string
   children: React.ReactNode
+  className?: string
 }) {
   return (
-    <div className="flex flex-col gap-2 md:gap-3">
+    <div className={`flex flex-col gap-2 md:gap-3 ${className ?? ''}`}>
       <p className="text-[0.95rem] font-semibold uppercase tracking-wider text-white/60">
         {heading}
       </p>

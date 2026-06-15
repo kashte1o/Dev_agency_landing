@@ -75,10 +75,10 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         */}
         <div
           className="
-            mx-auto w-full max-w-[1440px]
+            relative mx-auto w-full max-w-[1440px]
             px-6 md:px-16 lg:px-20
             h-[80px] md:h-[130px]
-            flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-between
+            flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-center md:justify-between
           "
         >
           {/* Left — Logo (intro animation plays once on initial mount).
@@ -129,7 +129,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               than on the left. Bumping the CTA's left margin compensates
               for the logo's visual padding so RUNMADE→Approach reads
               equal to FAQ→Let's talk. */}
-          <div className="flex items-center justify-end md:justify-self-start md:ml-[calc(var(--nav-side-gap)+40px)]">
+          <div className="absolute right-6 top-0 bottom-0 flex items-center md:static md:right-auto md:top-auto md:bottom-auto md:justify-self-start md:ml-[calc(var(--nav-side-gap)+40px)] justify-end">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
@@ -196,10 +196,10 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               aria-modal="true"
               aria-label="Mobile navigation"
             >
-              <div className="flex items-center justify-between border-b border-border px-6 py-4">
-                <LogoMark variant="dark" size="sm" />
+              <div className="relative flex items-center justify-center border-b border-border px-6 py-4">
+                <LogoMark variant="dark" size="md" />
                 <button
-                  className="rounded-md p-2 text-text-secondary hover:text-text-primary"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-2 text-text-secondary hover:text-text-primary"
                   aria-label="Close menu"
                   onClick={() => setOpen(false)}
                 >

@@ -12,7 +12,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ contactSection }: ContactSectionProps) {
   return (
-    <Section id="start-project" background="dark" className="relative pt-10 md:pt-[clamp(3rem,9vh,9rem)] pb-12 md:pb-[clamp(3rem,8vh,7.5rem)]">
+    <Section id="start-project" background="dark" className="relative pt-7 md:pt-[clamp(3rem,9vh,9rem)] pb-8 md:pb-[clamp(3rem,8vh,7.5rem)]">
       {/* Layer 1 — Horizon edge: surgical 1px line, cool blue-white core */}
       <div
         aria-hidden
@@ -46,32 +46,32 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
         }}
       />
       <Container>
-        <div className="grid gap-6 md:grid-cols-2 md:gap-16 lg:gap-20">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-16 lg:gap-20">
           {/* Left: heading + trust signals */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT}
-            className="flex flex-col gap-5 md:gap-8"
+            className="flex flex-col gap-4 md:gap-8"
           >
             <div>
               <motion.h2
                 variants={fadeUp}
-                className="text-[1.5rem] font-bold tracking-tight text-white md:text-[clamp(1.9rem,4.6vh,2.9rem)]"
+                className="text-[1.35rem] font-bold tracking-tight text-white md:text-[clamp(1.9rem,4.6vh,2.9rem)]"
               >
                 {contactSection.heading}
               </motion.h2>
               <motion.p
                 variants={fadeUp}
-                className="mt-3 md:mt-5 text-[0.875rem] md:text-[1.3rem] leading-relaxed text-white/65"
+                className="mt-2 md:mt-5 text-[0.85rem] md:text-[1.3rem] leading-snug md:leading-relaxed text-white/65"
               >
                 {contactSection.subheading}
               </motion.p>
             </div>
 
             {/* Trust signals */}
-            <div className="flex flex-col gap-3 md:gap-5">
+            <div className="flex flex-col gap-2.5 md:gap-5">
               {contactSection.trustSignals.map((signal) => (
                 <motion.div
                   key={signal.title}
@@ -96,7 +96,7 @@ export function ContactSection({ contactSection }: ContactSectionProps) {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT}
-            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-4 md:p-[clamp(1rem,2.2vh,2rem)] shadow-sm"
+            className="rounded-[var(--radius-frame)] border border-border bg-bg-surface p-3 md:p-[clamp(1rem,2.2vh,2rem)] shadow-sm"
           >
             <LeadForm />
           </motion.div>
