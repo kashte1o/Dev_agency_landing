@@ -91,7 +91,7 @@ export function MetricsSection() {
               </motion.div>
             ))}
           </div>
-          <p className="mt-6 text-center text-sm leading-relaxed text-text-secondary md:mt-10 md:text-left md:text-2xl">
+          <p className="mt-6 text-center text-sm leading-relaxed text-text-secondary md:mt-10 md:text-2xl">
             Based on 32 projects delivered between 2022 and 2025
           </p>
         </motion.div>

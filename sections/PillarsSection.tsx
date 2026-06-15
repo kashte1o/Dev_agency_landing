@@ -23,12 +23,12 @@ export function PillarsSection({ pillars }: PillarsSectionProps) {
           viewport={VIEWPORT}
           className="flex flex-col gap-10 md:gap-14"
         >
-          <motion.div variants={fadeUp} className="flex flex-col gap-4 max-w-3xl">
-            <h2 className="text-[1.8rem] font-bold tracking-tight text-text-primary md:text-5xl">
+          <motion.div variants={fadeUp} className="flex flex-col gap-4 max-w-3xl items-center text-center md:items-start md:text-left">
+            <h2 className="text-[1.35rem] font-bold tracking-tight text-text-primary md:text-5xl">
               {pillars.heading}
             </h2>
             {pillars.subline && (
-              <p className="text-[18px] md:text-xl leading-relaxed text-text-secondary">
+              <p className="text-[14px] md:text-xl leading-relaxed text-text-secondary">
                 {pillars.subline}
               </p>
             )}

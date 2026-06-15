@@ -44,17 +44,16 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         }}
       />
 
-      {/* ── First viewport: main content occupies at least 100vh on mobile
-          and desktop, so any sibling block rendered AFTER it (the mobile
-          founder block) lives below the fold. At md (tablet portrait) we
-          drop min-h so the centred grid doesn't pad the hero with empty
-          vertical space on 768x1024-style devices. The two-column grid
-          activates at md (768) so the founder photo sits inside the hero
-          on tablets and desktops alike. */}
+      {/* ── First viewport: always at least 100vh so the next section sits
+          below the fold on every device. At md (tablet portrait) we anchor
+          the content to the top so the empty vertical space lands below
+          the content as a natural transition rather than padding the hero
+          symmetrically (which felt like wasted air on 768x1024). At lg+
+          the content is vertically centred for the desktop hero feel. */}
       <div
         className="
-          relative z-10 flex items-center w-full
-          min-h-screen md:min-h-0 lg:min-h-screen
+          relative z-10 flex w-full min-h-screen
+          items-start lg:items-center
           pt-[80px] min-[400px]:pt-[110px] md:pt-[120px] xl:pt-[130px]
         "
       >
