@@ -96,18 +96,21 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               variant={isDark ? 'light' : 'dark'}
               size="lg"
               intro
+              priority
               className="hidden 2xl:inline-flex 2xl:-translate-y-[2px]"
             />
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="md"
               intro
+              priority
               className="hidden xl:inline-flex 2xl:hidden xl:-translate-y-[2px]"
             />
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="sm"
               intro
+              priority
               className="inline-flex xl:hidden"
             />
           </div>

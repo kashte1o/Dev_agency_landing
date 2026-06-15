@@ -7,6 +7,13 @@ interface LogoMarkProps {
   className?: string
   pulse?: boolean
   intro?: boolean
+  /**
+   * Set true only when this LogoMark is above the fold on initial render
+   * (i.e. the navbar). Other usages (footer, mobile drawer) should leave
+   * it false so Next.js can lazy-load the variant instead of emitting a
+   * preload hint for every instance.
+   */
+  priority?: boolean
 }
 
 // Width/height pairs — aspect ratio ~5.3:1 matches the logo file
@@ -22,6 +29,7 @@ export function LogoMark({
   pulse = false,
   intro = false,
   className,
+  priority = false,
 }: LogoMarkProps) {
   const { width, height } = sizeMap[size]
 
@@ -41,7 +49,7 @@ export function LogoMark({
         alt="Runmade"
         width={width}
         height={height}
-        priority
+        priority={priority}
         className="object-contain object-left relative z-[1]"
       />
       {intro && (
