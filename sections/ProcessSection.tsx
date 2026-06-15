@@ -79,7 +79,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
             hidden: {},
             visible: { transition: { staggerChildren: 0.08 } },
           }}
-          className="mb-12 flex flex-col items-center gap-5 text-center md:mb-14"
+          className="mb-7 flex flex-col items-center gap-5 text-center md:mb-9"
         >
           <motion.p
             variants={{
@@ -260,7 +260,7 @@ export function ProcessSection({ heading, subheading, steps }: ProcessSectionPro
             ref={scrollRef}
             role="group"
             aria-label="Our process — scroll horizontally"
-            className="-mx-6 flex items-stretch snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+            className="-mx-6 flex items-stretch snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0"
           >
             {steps.map((step, i) => (
               <motion.div
