@@ -18,7 +18,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full overflow-hidden bg-bg-dark flex flex-col"
+      className="relative w-full overflow-hidden bg-bg-dark"
       aria-label="Hero"
     >
 
@@ -43,11 +43,11 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         }}
       />
 
-      {/* ── Content — vertically centered between header and bottom.
-          The section keeps `min-h-screen` so the dark fill extends from y=0
-          and the fixed navbar's 55% tint sits over `#070A12`, not over the
-          light body bg. The inner pt-[130px] clears the navbar visually. */}
-      <div className="relative z-10 flex flex-1 items-center w-full pt-[80px] md:pt-[130px]">
+      {/* ── First viewport: main content occupies at least 100vh, so any
+          block placed AFTER this div lives below the fold on every screen.
+          The grid switches to two columns at lg+ (1024) — below that the
+          left column gets the full width to prevent text clipping. */}
+      <div className="relative z-10 flex min-h-screen items-center w-full pt-[80px] xl:pt-[130px]">
         <div
           className="mx-auto w-full max-w-[1320px]"
           style={{
@@ -58,7 +58,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
           }}
         >
           <div
-            className="grid grid-cols-1 items-center md:grid-cols-[1.35fr_1fr]"
+            className="grid grid-cols-1 items-center lg:grid-cols-[1.35fr_1fr]"
             style={{ columnGap: 'clamp(40px, 5vw, 96px)', rowGap: 'clamp(32px, 5vw, 64px)' }}
           >
 
@@ -72,17 +72,17 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
               )}
 
               <h1
-                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[2.1rem] md:text-[clamp(2.5rem,3.6vw,4.5rem)]"
+                className="font-bold text-white tracking-[-0.025em] leading-[1.05] text-[2.1rem] lg:text-[clamp(2.5rem,3.6vw,4.5rem)]"
               >
                 {hero.heading}
               </h1>
 
               {/* Body paragraphs (replaces former subheading) */}
-              <div className="flex flex-col gap-3.5 md:gap-5 max-w-[640px]">
+              <div className="flex flex-col gap-3.5 lg:gap-5 max-w-[640px]">
                 {hero.bodyParagraphs.map((para, i) => (
                   <p
                     key={i}
-                    className="leading-[1.6] text-white/70 text-[1.05rem] md:text-[clamp(1.1rem,1.05vw,1.3rem)]"
+                    className="leading-[1.6] text-white/70 text-[1.05rem] lg:text-[clamp(1.1rem,1.05vw,1.3rem)]"
                   >
                     {para}
                   </p>
@@ -141,7 +141,7 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
             </div>
 
             {/* ── RIGHT: portrait + caption as one connected block ───── */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <PersonPhoto />
             </div>
 
@@ -149,10 +149,10 @@ export function HeroSection({ hero, availableText, isAvailable }: HeroSectionPro
         </div>
       </div>
 
-      {/* Mobile founder block — sits BELOW the first viewport so the hero
-          above feels uncluttered and only reveals on scroll. Desktop renders
-          PersonPhoto in the right column above instead. */}
-      <div className="md:hidden relative z-10 px-6 pb-14 pt-2">
+      {/* Mobile + tablet founder block — sits BELOW the first viewport so the
+          hero above feels uncluttered and only reveals on scroll. From lg+
+          the portrait is rendered inside the right grid column instead. */}
+      <div className="lg:hidden relative z-10 px-6 pb-14 pt-4">
         <PersonPhotoCompact />
       </div>
 
@@ -241,7 +241,7 @@ function PersonPhoto() {
 
 function PersonPhotoCompact() {
   return (
-    <div className="md:hidden flex flex-col items-center text-center gap-5 pt-6">
+    <div className="lg:hidden flex flex-col items-center text-center gap-5 pt-6">
       <div className="relative h-44 w-44 flex-shrink-0 overflow-hidden rounded-full bg-white/[0.04] ring-1 ring-white/15">
         <Image
           src="/images/hero-person.webp"

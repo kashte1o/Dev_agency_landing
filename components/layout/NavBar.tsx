@@ -76,9 +76,9 @@ export function NavBar({ heroDark = true }: NavBarProps) {
         <div
           className="
             relative mx-auto w-full max-w-[1440px]
-            px-6 md:px-16 lg:px-20
-            h-[80px] md:h-[130px]
-            flex md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-center md:justify-between
+            px-6 xl:px-16 2xl:px-20
+            h-[80px] xl:h-[130px]
+            flex xl:grid xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-center xl:justify-between
           "
         >
           {/* Left — Logo (intro animation plays once on initial mount).
@@ -86,24 +86,24 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               right edge to the inner edge of the left column, then pushes it
               leftward by the shared gap token. Result: gap(logo→nav) equals
               gap(nav→CTA) exactly. */}
-          <div className="flex items-center min-w-0 md:justify-self-end md:mr-[var(--nav-side-gap)]">
+          <div className="flex items-center min-w-0 xl:justify-self-end xl:mr-[var(--nav-side-gap)]">
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="lg"
               intro
-              className="hidden md:inline-flex md:-translate-y-[2px]"
+              className="hidden xl:inline-flex xl:-translate-y-[2px]"
             />
             <LogoMark
               variant={isDark ? 'light' : 'dark'}
               size="sm"
               intro
-              className="inline-flex md:hidden"
+              className="inline-flex xl:hidden"
             />
           </div>
 
           {/* Center — Nav links (desktop only), centered in the auto column */}
           <nav
-            className="hidden md:flex items-center gap-8 lg:gap-9 whitespace-nowrap md:justify-self-center"
+            className="hidden xl:flex items-center gap-8 2xl:gap-9 whitespace-nowrap xl:justify-self-center"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (
@@ -129,13 +129,13 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               than on the left. Bumping the CTA's left margin compensates
               for the logo's visual padding so RUNMADE→Approach reads
               equal to FAQ→Let's talk. */}
-          <div className="absolute right-6 top-0 bottom-0 flex items-center md:static md:right-auto md:top-auto md:bottom-auto md:justify-self-start md:ml-[calc(var(--nav-side-gap)+40px)] justify-end">
+          <div className="absolute right-6 top-0 bottom-0 flex items-center xl:static xl:right-auto xl:top-auto xl:bottom-auto xl:justify-self-start xl:ml-[calc(var(--nav-side-gap)+40px)] justify-end">
             {/* Desktop Let's talk — masked text scroll on hover, contrasting bg invert */}
             <a
               href={navCta.href}
               className={cn(
                 'nav-cta',
-                'hidden md:inline-flex items-center px-[22px] py-[10px] text-[1.3rem] font-medium rounded-[var(--radius-btn)] select-none cursor-pointer',
+                'hidden xl:inline-flex items-center px-[22px] py-[10px] text-[1.3rem] font-medium rounded-[var(--radius-btn)] select-none cursor-pointer',
                 isDark
                   // over dark hero: stay in light family (dark hover would merge with hero)
                   ? 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#CBD5E1] hover:text-[#0F172A]'
@@ -154,10 +154,10 @@ export function NavBar({ heroDark = true }: NavBarProps) {
               </span>
             </a>
 
-            {/* Mobile hamburger */}
+            {/* Mobile/tablet hamburger — full nav shown only at xl+ */}
             <button
               className={cn(
-                'flex md:hidden items-center justify-center rounded-md h-11 w-11 -mr-2 transition-colors',
+                'flex xl:hidden items-center justify-center rounded-md h-11 w-11 -mr-2 transition-colors',
                 isDark
                   ? 'text-white/70 hover:text-white hover:bg-white/10'
                   : 'text-text-secondary hover:text-text-primary hover:bg-bg-subtle',
@@ -179,7 +179,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
           <>
             <motion.div
               key="backdrop"
-              className="fixed inset-0 z-40 bg-black/40 md:hidden"
+              className="fixed inset-0 z-40 bg-black/40 xl:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -187,7 +187,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
             <motion.div
               key="drawer"
-              className="fixed top-0 right-0 z-50 flex h-full w-72 flex-col bg-bg-surface shadow-xl md:hidden"
+              className="fixed top-0 right-0 z-50 flex h-full w-72 flex-col bg-bg-surface shadow-xl xl:hidden"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
