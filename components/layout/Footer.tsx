@@ -71,7 +71,7 @@ export function Footer() {
               {contact.email && (
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-[0.8rem] md:text-[1.1rem] font-medium leading-relaxed text-white hover:text-white/80 transition-colors break-all"
+                  className="text-[0.72rem] md:text-[1.1rem] font-medium leading-relaxed text-white hover:text-white/80 transition-colors whitespace-nowrap"
                 >
                   {contact.email}
                 </a>
