@@ -34,3 +34,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 **Live:** https://dev-agency-landing.vercel.app
 
 Auto-deploys on every push to `main`.
+
+## Contact forms
+
+Project and careers forms submit to `/api/contact` and are delivered through Resend.
+Before deploying, add these server-side environment variables in the deployment provider:
+
+```text
+RESEND_API_KEY=re_...
+RESEND_FROM_EMAIL=Runmade <hello@runmadeagency.com>
+CONTACT_RECIPIENT_EMAIL=your-inbox@example.com
+```
+
+`RESEND_FROM_EMAIL` must use a domain verified in Resend. Keep the API key out of `.env` files committed to Git; `.env.example` contains placeholders only.

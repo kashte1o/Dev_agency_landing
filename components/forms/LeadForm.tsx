@@ -58,13 +58,18 @@ export function LeadForm() {
     const data = Object.fromEntries(formData.entries())
 
     try {
-      // TODO: replace with real API endpoint
-      await new Promise((res) => setTimeout(res, 1200))
-      // const res = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
-      void data
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kind: 'project', ...data }),
+      })
+      if (!response.ok) {
+        const result = await response.json().catch(() => null) as { error?: string } | null
+        throw new Error(result?.error ?? leadFormError)
+      }
       setState('success')
-    } catch {
-      setErrorMsg(leadFormError)
+    } catch (error) {
+      setErrorMsg(error instanceof Error ? error.message : leadFormError)
       setState('error')
     }
   }
@@ -96,6 +101,7 @@ export function LeadForm() {
             noValidate
             className="flex flex-col gap-3.5"
           >
+            <input name="website" tabIndex={-1} autoComplete="off" className="sr-only" aria-hidden="true" />
             {state === 'error' && (
               <motion.div
                 variants={fadeUp}
