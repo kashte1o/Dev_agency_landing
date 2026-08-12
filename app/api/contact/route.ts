@@ -8,7 +8,11 @@ interface LeadPayload {
   problem?: string
   businessIndustry?: string
   budget?: string
-  source?: 'contact' | 'faq'
+  role?: string
+  experience?: string
+  salary?: string
+  message?: string
+  source?: 'contact' | 'faq' | 'career'
 }
 
 function escapeHtml(value: string) {
@@ -27,20 +31,25 @@ function row(label: string, value?: string) {
 
 export async function POST(request: Request) {
   const { env } = getCloudflareContext()
+  const variables = env as unknown as Record<string, string | undefined>
   const apiKey =
-    (env as unknown as Record<string, string | undefined>).RESEND_API_KEY ??
+    variables.RESEND_API_KEY ??
     process.env.RESEND_API_KEY
   const toEmail =
-    (env as unknown as Record<string, string | undefined>).CONTACT_TO_EMAIL ??
+    variables.CONTACT_RECIPIENT_EMAIL ??
+    process.env.CONTACT_RECIPIENT_EMAIL ??
+    variables.CONTACT_TO_EMAIL ??
     process.env.CONTACT_TO_EMAIL ??
-    'hello@runmadeagency.com'
+    ''
   const fromEmail =
-    (env as unknown as Record<string, string | undefined>).CONTACT_FROM_EMAIL ??
+    variables.RESEND_FROM_EMAIL ??
+    process.env.RESEND_FROM_EMAIL ??
+    variables.CONTACT_FROM_EMAIL ??
     process.env.CONTACT_FROM_EMAIL ??
-    'Runmade Website <onboarding@resend.dev>'
+    ''
 
-  if (!apiKey) {
-    console.error('Contact form: RESEND_API_KEY is not set')
+  if (!apiKey || !toEmail || !fromEmail) {
+    console.error('Contact form: Resend configuration is incomplete')
     return NextResponse.json({ error: 'Email service not configured.' }, { status: 500 })
   }
 
@@ -51,15 +60,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
-  const source = payload.source === 'faq' ? 'faq' : 'contact'
+  const source = payload.source === 'faq' ? 'faq' : payload.source === 'career' ? 'career' : 'contact'
   const name = payload.name?.trim() ?? ''
   const email = payload.email?.trim() ?? ''
   const whatsapp = payload.whatsapp?.trim() ?? ''
   const problem = payload.problem?.trim() ?? ''
   const industry = payload.businessIndustry?.trim() ?? ''
   const budget = payload.budget?.trim() ?? ''
+  const role = payload.role?.trim() ?? ''
+  const experience = payload.experience?.trim() ?? ''
+  const salary = payload.salary?.trim() ?? ''
+  const message = payload.message?.trim() ?? ''
 
-  if (!problem || (!email && !whatsapp)) {
+  if (source === 'career' && (!name || !email || !role)) {
+    return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
+  }
+  if (source !== 'career' && (!problem || (!email && !whatsapp))) {
     return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
   }
   if (source === 'contact' && !name) {
@@ -70,9 +86,14 @@ export async function POST(request: Request) {
   const subject =
     source === 'faq'
       ? `New FAQ question from runmadeagency.com — ${displayName}`
+      : source === 'career'
+        ? `New careers inquiry from runmadeagency.com — ${displayName}`
       : `New lead from runmadeagency.com — ${displayName}`
-  const headerLabel = source === 'faq' ? 'Runmade · FAQ question' : 'Runmade · New lead'
+  const headerLabel = source === 'faq' ? 'Runmade · FAQ question' : source === 'career' ? 'Runmade · Careers inquiry' : 'Runmade · New lead'
   const problemLabel = source === 'faq' ? 'Question' : 'What to fix / build'
+  const rows = source === 'career'
+    ? `${row('Email', email)}${row('Role', role)}${row('Experience', experience)}${row('Salary expectations', salary)}${row('Message', message)}`
+    : `${row('Email', email)}${source === 'faq' ? row('Telegram / Phone', whatsapp) : row('WhatsApp', whatsapp)}${row('Industry', industry)}${row('Budget', budget)}${row(problemLabel, problem)}`
 
   const html = `
     <div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f7f8fa;padding:24px">
@@ -82,11 +103,7 @@ export async function POST(request: Request) {
           <div style="font-size:18px;font-weight:600;margin-top:4px">${escapeHtml(displayName)}</div>
         </div>
         <table style="width:100%;border-collapse:collapse">
-          ${row('Email', email)}
-          ${source === 'faq' ? row('Telegram / Phone', whatsapp) : row('WhatsApp', whatsapp)}
-          ${row('Industry', industry)}
-          ${row('Budget', budget)}
-          ${row(problemLabel, problem)}
+          ${rows}
         </table>
       </div>
     </div>
@@ -95,17 +112,23 @@ export async function POST(request: Request) {
   const text = [
     source === 'faq'
       ? `New FAQ question from runmadeagency.com`
+      : source === 'career'
+        ? `New careers inquiry from runmadeagency.com`
       : `New lead from runmadeagency.com`,
     ``,
     name && `Name: ${name}`,
     email && `Email: ${email}`,
-    whatsapp &&
+    source === 'career' && role && `Role: ${role}`,
+    source === 'career' && experience && `Experience: ${experience}`,
+    source === 'career' && salary && `Salary expectations: ${salary}`,
+    source === 'career' && message && `Message: ${message}`,
+    source !== 'career' && whatsapp &&
       (source === 'faq' ? `Telegram / Phone: ${whatsapp}` : `WhatsApp: ${whatsapp}`),
     industry && `Industry: ${industry}`,
     budget && `Budget: ${budget}`,
     ``,
-    `${problemLabel}:`,
-    problem,
+    source !== 'career' && `${problemLabel}:`,
+    source !== 'career' && problem,
   ]
     .filter(Boolean)
     .join('\n')

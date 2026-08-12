@@ -7,6 +7,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const f = careersPopup.fields
 
 type Errors = { name?: string; email?: string; role?: string }
+type FormState = 'idle' | 'loading' | 'error'
 
 const inputClass =
   'rounded-md border border-border bg-bg-base px-3.5 py-2.5 text-[0.95rem] text-text-primary placeholder:text-text-secondary/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30'
@@ -15,8 +16,10 @@ const labelClass = 'text-[0.95rem] font-medium text-text-primary'
 export function CareersForm({ onClose }: { onClose: () => void }) {
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
+  const [state, setState] = useState<FormState>('idle')
+  const [errorMessage, setErrorMessage] = useState('Something went wrong. Please try again shortly.')
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
     const name = String(data.get('name') ?? '').trim()
@@ -31,10 +34,22 @@ export function CareersForm({ onClose }: { onClose: () => void }) {
     setErrors(next)
     if (Object.keys(next).length > 0) return
 
-    // TODO: wire up to backend — should email the application to the team.
-    // const payload = Object.fromEntries(data)
-    // await fetch('/api/careers', { method: 'POST', body: JSON.stringify(payload) })
-    setSubmitted(true)
+    setState('loading')
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: 'career', ...Object.fromEntries(data.entries()) }),
+      })
+      if (!response.ok) {
+        const result = await response.json().catch(() => null) as { error?: string } | null
+        throw new Error(result?.error ?? errorMessage)
+      }
+      setSubmitted(true)
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again shortly.')
+      setState('error')
+    }
   }
 
   if (submitted) {
@@ -80,6 +95,7 @@ export function CareersForm({ onClose }: { onClose: () => void }) {
     <>
       <p className="mt-3 text-[1.1rem] leading-relaxed text-text-secondary">{careersPopup.body}</p>
       <form onSubmit={handleSubmit} noValidate className="mt-5 flex flex-col gap-4">
+        {state === 'error' && <p role="alert" className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{errorMessage}</p>}
         <Field id="name" name="name" label={f.name.label} placeholder={f.name.placeholder} error={errors.name} />
         <Field id="email" name="email" type="email" label={f.email.label} placeholder={f.email.placeholder} error={errors.email} />
         <Field id="role" name="role" label={f.role.label} placeholder={f.role.placeholder} error={errors.role} />
@@ -107,9 +123,10 @@ export function CareersForm({ onClose }: { onClose: () => void }) {
 
         <button
           type="submit"
+          disabled={state === 'loading'}
           className="mt-1 rounded-lg bg-accent px-5 py-3 text-[0.95rem] font-medium text-white transition-opacity hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
-          {careersPopup.submitLabel}
+          {state === 'loading' ? 'Sending…' : careersPopup.submitLabel}
         </button>
         <p className="text-[0.8rem] leading-relaxed text-text-secondary">{careersPopup.note}</p>
       </form>
