@@ -1,16 +1,15 @@
 import { ProofLine } from './ProofLine'
 
 const logos = [
-  { src: "/images/logos/lava.svg",                   alt: "Lava" },
-  { src: "/images/logos/Gymshark_idjQqXJS_o_1.svg",  alt: "Gymshark" },
-  { src: "/images/logos/Huel_idf70Rt9LQ_0.svg",      alt: "Huel" },
-  { src: "/images/logos/hubspot.svg",                alt: "HubSpot" },
-  { src: "/images/logos/monzo-logo.svg",             alt: "Monzo" },
-  { src: "/images/logos/shopify-2.svg",              alt: "Shopify" },
-  { src: "/images/logos/trustpilot-1.svg",           alt: "Trustpilot" },
-  { src: "/images/logos/rwelogo.svg",                alt: "RWE" },
-  { src: "/images/logos/Symbol.svg",                 alt: "Symbol" },
-  { src: "/images/logos/idBbC2W5qu_logos.svg",       alt: "Partner" },
+  { src: "/images/logos/the-shade-store.svg",        alt: "The Shade Store" },
+  { src: "/images/logos/restore-hyper-wellness.svg", alt: "Restore Hyper Wellness" },
+  { src: "/images/logos/dogtopia.png",               alt: "Dogtopia" },
+  { src: "/images/logos/college-hunks.svg",          alt: "College HUNKS" },
+  { src: "/images/logos/rebag.png",                  alt: "Rebag" },
+  { src: "/images/logos/nutrafol.png",               alt: "Nutrafol" },
+  { src: "/images/logos/fleet-feet.png",             alt: "Fleet Feet" },
+  { src: "/images/logos/orangetheory.svg",           alt: "Orangetheory Fitness" },
+  { src: "/images/logos/1800-got-junk.svg",          alt: "1-800-GOT-JUNK?" },
 ]
 
 // Item box and right-gap kept in sync via clamp; per-item margin (not CSS `gap`)
