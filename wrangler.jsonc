@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "dev-agency-landing-v1",
+  "name": "dev-agency-landing",
   "compatibility_date": "2026-05-28",
   "compatibility_flags": [
     "nodejs_compat"
@@ -13,7 +13,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "dev-agency-landing-v1"
+      "service": "dev-agency-landing"
     }
   ],
   "images": {
