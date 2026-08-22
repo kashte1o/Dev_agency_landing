@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 interface LogoMarkProps {
@@ -34,7 +35,7 @@ export function LogoMark({
   const { width, height } = sizeMap[size]
 
   return (
-    <a
+    <Link
       href="/"
       aria-label="Runmade — home"
       className={cn(
@@ -50,6 +51,7 @@ export function LogoMark({
         width={width}
         height={height}
         priority={priority}
+        sizes="(min-width: 1536px) 468px, (min-width: 1280px) 312px, 180px"
         className="object-contain object-left relative z-[1]"
       />
       {intro && (
@@ -58,6 +60,6 @@ export function LogoMark({
           <span aria-hidden className="logo-intro-flash" />
         </>
       )}
-    </a>
+    </Link>
   )
 }

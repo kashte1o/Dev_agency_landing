@@ -184,13 +184,16 @@ function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void })
 
   useEffect(() => {
     if (!open) {
-      setSubmitted(false)
-      setQuestion('')
-      setEmail('')
-      setMessenger('')
-      setErrors({})
-      setSubmitting(false)
-      setSubmitError(null)
+      const id = window.setTimeout(() => {
+        setSubmitted(false)
+        setQuestion('')
+        setEmail('')
+        setMessenger('')
+        setErrors({})
+        setSubmitting(false)
+        setSubmitError(null)
+      }, 0)
+      return () => window.clearTimeout(id)
     }
   }, [open])
 

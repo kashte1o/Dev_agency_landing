@@ -1,5 +1,6 @@
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
+import Link from 'next/link'
 
 export function CtaTransition() {
   return (
@@ -10,12 +11,12 @@ export function CtaTransition() {
             Enough theory. Let&apos;s discuss your case.
           </p>
           <div className="flex flex-col items-center gap-2">
-            <a
+            <Link
               href="/#start-project"
               className="inline-flex shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-[#0057FF] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-[#1E40AF]"
             >
               Let&apos;s scope your project
-            </a>
+            </Link>
             <div className="flex flex-col items-center gap-1.5">
               <p className="whitespace-nowrap text-center text-[14px] font-medium text-text-secondary md:text-[15px]">
                 Free consultation + prototype preview

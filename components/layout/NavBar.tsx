@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { LogoMark } from './LogoMark'
@@ -21,6 +21,7 @@ interface NavBarProps {
 export function NavBar({ heroDark = true }: NavBarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const drawerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40)
@@ -31,9 +32,37 @@ export function NavBar({ heroDark = true }: NavBarProps) {
 
   useEffect(() => {
     if (!open) return
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    const previousFocus = document.activeElement as HTMLElement | null
+    const drawer = drawerRef.current
+    const focusable = () => Array.from(
+      drawer?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [],
+    )
+    const first = focusable()[0]
+    first?.focus()
+
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        return
+      }
+      if (event.key !== 'Tab') return
+      const items = focusable()
+      if (!items.length) return
+      const firstItem = items[0]
+      const lastItem = items[items.length - 1]
+      if (event.shiftKey && document.activeElement === firstItem) {
+        event.preventDefault()
+        lastItem.focus()
+      } else if (!event.shiftKey && document.activeElement === lastItem) {
+        event.preventDefault()
+        firstItem.focus()
+      }
+    }
     document.addEventListener('keydown', handler)
-    return () => document.removeEventListener('keydown', handler)
+    return () => {
+      document.removeEventListener('keydown', handler)
+      previousFocus?.focus()
+    }
   }, [open])
 
   useEffect(() => {
@@ -201,6 +230,7 @@ export function NavBar({ heroDark = true }: NavBarProps) {
             />
             <motion.div
               key="drawer"
+              ref={drawerRef}
               className="fixed top-0 right-0 z-50 flex h-full w-72 flex-col bg-bg-surface shadow-xl xl:hidden"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}

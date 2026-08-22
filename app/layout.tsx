@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 import { NavBar } from '@/components/layout/NavBar'
 import { Footer } from '@/components/layout/Footer'
 import { MobileStickyCta } from '@/components/layout/MobileStickyCta'
+import { DeferredChat } from '@/components/layout/DeferredChat'
 import { STUDIO_NAME } from '@/content/siteCopy'
 import { homepageFAQ } from '@/content/faq'
 
@@ -139,10 +139,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <MobileStickyCta />
-        <Script
-          src="https://code.tidio.co/rutgwh42zrdlsysprgyp5yge1s6sscd6.js"
-          strategy="afterInteractive"
-        />
+        <DeferredChat />
       </body>
     </html>
   )

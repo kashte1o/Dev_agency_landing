@@ -17,10 +17,12 @@ export function ProofLine() {
   useEffect(() => {
     if (!inView) return
     if (reduce) {
-      setVal(TARGET)
-      setRevealed(true)
-      setTyped(TAIL.length)
-      return
+      const id = window.setTimeout(() => {
+        setVal(TARGET)
+        setRevealed(true)
+        setTyped(TAIL.length)
+      }, 0)
+      return () => window.clearTimeout(id)
     }
     const controls = animate(0, TARGET, {
       duration: 1.4,

@@ -43,8 +43,8 @@ function CountUpValue({ value }: { value: string }) {
   useEffect(() => {
     if (target == null) return
     if (reduce) {
-      setN(target)
-      return
+      const id = window.setTimeout(() => setN(target), 0)
+      return () => window.clearTimeout(id)
     }
     if (!inView) return
     const controls = animate(0, target, {
