@@ -7,7 +7,7 @@ const logos = [
   { src: "/images/logos/college-hunks.svg",          alt: "College HUNKS" },
   { src: "/images/logos/rebag.png",                  alt: "Rebag" },
   { src: "/images/logos/nutrafol.png",               alt: "Nutrafol" },
-  { src: "/images/logos/fleet-feet.png",             alt: "Fleet Feet" },
+  { src: "/images/logos/fleet-feet.png",             alt: "Fleet Feet", className: "brightness-0" },
   { src: "/images/logos/orangetheory.svg",           alt: "Orangetheory Fitness" },
   { src: "/images/logos/1800-got-junk.svg",          alt: "1-800-GOT-JUNK?" },
 ]
@@ -59,7 +59,7 @@ export function LogoStrip() {
                   <img
                     src={logo.src}
                     alt={i < logos.length ? logo.alt : ''}
-                    className="max-h-full max-w-full object-contain opacity-40 grayscale"
+                    className={`max-h-full max-w-full object-contain opacity-40 grayscale ${logo.className ?? ''}`}
                   />
                 </div>
               ))}
